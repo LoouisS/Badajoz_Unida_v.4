@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+/*======Variables======*/
+:root{
+  --bg-color: white;
+  --primary-color: #D10000;
+  --primary-color-hover: #c40000;
+  --secondary-color: #939393;
+  --text-base-color: black;
+}
+
+/*======General======*/
+
+
+/*======Imagen======*/
+.grid-form-image{
+  display: none;
+}
+
+/*======Media Queries======*/
+@media screen and (min-width: 750px) {
+  .grid-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid-form-image {
+    display: flex;
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+  }
+
+  .grid-form-image img {
+    width: 90%;
+    margin: auto;
+  }
+
+  .grid-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
