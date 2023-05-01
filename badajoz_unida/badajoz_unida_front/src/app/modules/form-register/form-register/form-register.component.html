@@ -1,0 +1,56 @@
+ <div class="grid-form">
+    <form [formGroup]="forma" (ngSubmit)="guardar(forma)">
+      <h1>Regístrate</h1>
+      <div class="separador"></div>
+
+      <div class="input-group">
+        <input type="text" formControlName="nombre" maxlength="60" name="nombre" id="iNombre" placeholder="Nombre" />
+      </div>
+      <small *ngIf="!validar('nombre')" class="error">El nombre es un campo requerido.</small>
+      <div class="input-group">
+        <input type="text" formControlName="apellidos" maxlength="60" name="apellidos" id="iApellidos" placeholder="Apellidos" />
+      </div>
+      <small *ngIf="!validar('apellidos')" class="error">El apellido es un campo requerido.</small>
+
+      <div class="input-group">
+        <input type="email" formControlName="email" maxlength="100"  name="mail" id="iMail" placeholder="Correo Electrónico" />
+      </div>
+      <small *ngIf="!validar('email')" class="error">El formato del correo electrónico es incorrecto. El formato es: ejemplo@ejemplo.com</small>
+
+      <div class="input-group">
+        <input type="text" formControlName="usuario" maxlength="60" name="usuario" id="iUsuario" placeholder="Nombre de usuario" />
+      </div>
+      <small *ngIf="!validar('usuario')" class="error">El usuario es un campo requerido.</small>
+
+      <div class="input-group password">
+        <input type="password" formControlName="password" name="password" id="iPassword" placeholder="Contraseña" oncopy="return false" onpaste="return false"/>
+        <i id="ieye"class="bi bi-eye-fill float-end mb-2" (click)="showHide()"></i>
+      </div>
+      <small *ngIf="!validar('password')" class="error">
+        La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
+        un número y un caracter especial. No se permiten espacios en blanco.
+      </small>
+
+      <div class="input-group password">
+        <input type="password" formControlName="password2" name="passwordRepeat" id="iPasswordRepeat" placeholder="Repite tu contraseña" oncopy="return false" onpaste="return false"/>
+        <i id="ieye2"class="bi bi-eye-fill float-end mb-2" (click)="showHide2()"></i>
+      </div>
+      <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
+
+      <div class="input-group">
+        <label for="ifechaNacimiento">Fecha de nacimiento </label><input type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" />
+      </div>
+      <small *ngIf="!comprobarEdad || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años.</small>
+
+      <div class="input-group">
+        <input type="text" formControlName="telefono" maxlength="9" name="telefono" id="iTelefono" placeholder="Teléfono de contacto" />
+      </div>
+      <small *ngIf="!validar('telefono')" class="error">El teléfono es un campo necesario, debe tener 9 digitos.</small>
+
+      <div class="input-group">
+        <input type="submit" class="button" value="Continuar" />
+        <small>¿Ya tienes cuenta? Inicia sesión.</small>
+        <button class="button" (click)="goToLogin()">Iniciar sesión</button>
+      </div>
+    </form>
+  </div>

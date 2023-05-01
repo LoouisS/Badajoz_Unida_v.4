@@ -1,0 +1,93 @@
+form {
+  width: 100%;
+}
+
+form h1{
+  color: var(--primary-color);
+  padding: 0 7rem;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+}
+
+form .separador{
+  width: 100%;
+  height: 1px;
+  margin: 1rem auto;
+  background-color: var(--secondary-color);
+}
+
+form .input-group{
+  width: 100%;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+form .input-group.password{
+  position: relative;
+}
+
+form .input-group.password i{
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+  cursor: pointer;
+}
+
+form input{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  padding: .2rem .5rem;
+  font-size: 1rem;
+}
+
+form label{
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--secondary-color);
+}
+
+form input:focus{
+  outline: none;
+  border-bottom: 2px solid var(--text-base-color);
+}
+
+form > small{
+  width: 80%;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--primary-color);
+}
+
+.input-group small{
+  display: block;
+  font-weight: bold;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.button{
+  width: 100%;
+  padding: .6rem 1rem !important;
+  color: var(--bg-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: .3 ease-in-out;
+  margin-bottom: 1rem;
+}
+
+input.button{
+  background-color: var(--primary-color);
+}
+
+button.button{
+  border: 0;
+  background-color: var(--secondary-color);
+}
+
+form a{
+  font-size: .8rem;
+  text-decoration: none;
+}

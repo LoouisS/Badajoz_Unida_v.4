@@ -1,0 +1,103 @@
+form {
+  width: 100%;
+}
+
+form h1{
+  margin-top: 5px;
+  padding: 0 3rem;
+  color: var(--primary-color);
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+form h2{
+  margin-bottom: 2px;
+  color: var(--secondary-color);
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+form .separador{
+  width: 100%;
+  height: 1px;
+  margin: 1rem auto;
+  background-color: var(--secondary-color);
+}
+
+form .input-group{
+  width: 100%;
+  display: block;
+  margin: 2rem auto;
+}
+
+form .input-group.password{
+  position: relative;
+}
+
+form .input-group.password i{
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+  cursor: pointer;
+}
+
+form input{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  padding: .5rem;
+  font-size: 1rem;
+}
+
+form input:focus{
+  outline: none;
+  border-bottom: 2px solid var(--text-base-color);
+}
+
+form > small{
+  width: 80%;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--primary-color);
+}
+
+.input-group small{
+  display: block;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.button{
+  width: 100%;
+  padding: .6rem 1rem;
+  color: var(--bg-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: .3 ease-in-out;
+  margin-bottom: 1rem;
+}
+
+input.button{
+  background-color: var(--primary-color);
+}
+
+button.button{
+  border: 0;
+  background-color: var(--secondary-color);
+}
+
+form input[type="submit"]:hover{
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
+}
+
+form a{
+  font-size: .8rem;
+  text-decoration: none;
+}
+
