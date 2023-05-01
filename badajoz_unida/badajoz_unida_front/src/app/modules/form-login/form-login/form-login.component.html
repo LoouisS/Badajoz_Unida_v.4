@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="guardar(loginForm)">
+<!--<form>-->
+  <h2>Bienvenido a</h2>
+  <h1>Badajoz Unida</h1>
+  <div class="separador"></div>
+
+  <div class="input-group">
+    <input type="email" maxlength="100" formControlName="email" name="mail" id="iMail" placeholder="Correo Electrónico" />
+  </div>
+  <small *ngIf="!validar('email')" class="error">Ajústese al formato del correo.</small>
+
+  <div class="input-group password">
+    <input type="password" formControlName="password" name="password" id="iPassword" placeholder="Contraseña" />
+    <i id="ieye"class="bi bi-eye-fill float-end mb-2" (click)="showHide()"></i>
+  </div>
+  <small *ngIf="!validar('password')" class="error">La contraseña debe incluir 8 caracteres.</small>
+
+  <div class="input-group">
+    <input type="submit" class="button" value="Iniciar sesión" />
+    <small>¿No tienes cuenta? Crea una ahora.</small>
+    <button class="button" (click)="goToRegistro()">Crear mi cuenta</button>
+  </div>
+</form>
