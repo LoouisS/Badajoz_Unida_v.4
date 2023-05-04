@@ -21,7 +21,7 @@ export class FormLoginComponent implements OnInit{
     // private usuarioService: UsuarioService
   ) {
     // this.usuarioService.removeSesionActual();
-    this.crearFormulario();
+
   }
 
 
@@ -29,6 +29,7 @@ export class FormLoginComponent implements OnInit{
    * @ignore
    */
   ngOnInit(): void {
+    this.crearFormulario();
   }
   /**
    * Añade los validadores del formulario.
