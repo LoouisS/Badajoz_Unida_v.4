@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+import {Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
+
+
 
 @Component({
   selector: 'app-form-login',
@@ -10,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class FormLoginComponent implements OnInit{
 
   loginForm!: FormGroup;
+  formu!: FormGroup;
   // modal = new ModalComponent();
   /**
    * @ignore
@@ -21,7 +26,10 @@ export class FormLoginComponent implements OnInit{
     // private usuarioService: UsuarioService
   ) {
     // this.usuarioService.removeSesionActual();
-    this.crearFormulario();
+    this.formu = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
 
@@ -29,6 +37,7 @@ export class FormLoginComponent implements OnInit{
    * @ignore
    */
   ngOnInit(): void {
+    this.crearFormulario();
   }
   /**
    * Añade los validadores del formulario.
@@ -36,7 +45,7 @@ export class FormLoginComponent implements OnInit{
   crearFormulario() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
