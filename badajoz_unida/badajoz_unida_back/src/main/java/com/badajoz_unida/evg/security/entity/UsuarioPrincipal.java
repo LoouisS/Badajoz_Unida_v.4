@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.security.entity;
 
+import com.badajoz_unida.evg.entity.Usuarios;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +27,7 @@ public class UsuarioPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UsuarioPrincipal build(Usuario usuario){
+    public static UsuarioPrincipal build(Usuarios usuario){
         List<GrantedAuthority> authorities=usuario.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol
                 .getRolNombre().name())).collect(Collectors.toList());
 

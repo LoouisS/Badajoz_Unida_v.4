@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,10 +30,10 @@ public class Usuarios {
     private String email;
 
     @Column(name="password")
-    private String psw;
+    private String password;
 
     @Column(name="usuario")
-    private String usuario;
+    private String nombreUsuario;
 
     @Column(name="fecha_nacimiento")
     private Date fchNacimiento;
@@ -51,4 +53,30 @@ public class Usuarios {
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Eventos> eventos;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name="usuarios_roles",joinColumns = @JoinColumn(name="usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Roles> roles=new HashSet<>();
+
+    public Usuarios() {
+    }
+
+    public Usuarios(String nombre, String apellidos, String email, String password, String nombreUsuario, Date fchNacimiento, String tlf, Idiomas idioma) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.password = password;
+        this.nombreUsuario = nombreUsuario;
+        this.fchNacimiento = fchNacimiento;
+        this.tlf = tlf;
+        this.idioma = idioma;
+    }
+
+    /*public Usuarios(String nombre, String nombreUsuario, String email, String password) {
+        this.nombre = nombre;
+        this.nombreUsuario = nombreUsuario;
+        this.email = email;
+        this.password = password;
+    }*/
 }

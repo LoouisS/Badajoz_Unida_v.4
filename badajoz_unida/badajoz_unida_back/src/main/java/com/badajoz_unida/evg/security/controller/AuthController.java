@@ -1,11 +1,11 @@
 package com.badajoz_unida.evg.security.controller;
 
 import com.badajoz_unida.evg.dto.Mensaje;
+import com.badajoz_unida.evg.entity.Roles;
+import com.badajoz_unida.evg.entity.Usuarios;
 import com.badajoz_unida.evg.security.dto.JwtDTO;
 import com.badajoz_unida.evg.security.dto.LoginUsuario;
 import com.badajoz_unida.evg.security.dto.NuevoUsuario;
-import com.badajoz_unida.evg.security.entity.Rol;
-import com.badajoz_unida.evg.security.entity.Usuario;
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.security.jwt.JwtProvider;
 import com.badajoz_unida.evg.security.service.RolService;
@@ -48,7 +48,7 @@ public class AuthController {
     JwtProvider jwtProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<?> nuevo (@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
+    public ResponseEntity<?> nuevo (@Valid @RequestBody Usuarios nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos erróneos o email inválido"), HttpStatus.BAD_REQUEST);
         if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
@@ -56,12 +56,12 @@ public class AuthController {
         if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("El email ya existe"),HttpStatus.BAD_REQUEST);
 
-        Usuario usuario=
-                new Usuario(nuevoUsuario.getNombre(),nuevoUsuario.getNombreUsuario(),nuevoUsuario.getEmail(),passwordEncoder.encode(nuevoUsuario.getPassword()));
-        Set<Rol> roles=new HashSet<>();
-        roles.add(rolService.findByRolNombre(RolNombre.ROLE_USER).get());
+        Usuarios usuario=
+                new Usuarios(nuevoUsuario.getNombre(),nuevoUsuario.getApellidos(),nuevoUsuario.getEmail(),passwordEncoder.encode(nuevoUsuario.getPassword()),nuevoUsuario.getNombreUsuario(),nuevoUsuario.getFchNacimiento(),nuevoUsuario.getTlf(), nuevoUsuario.getIdioma() );
+        Set<Roles> roles=new HashSet<>();
+        roles.add(rolService.findByTitulo(RolNombre.ROLE_USER).get());
         if(nuevoUsuario.getRoles().contains("admin"))
-            roles.add(rolService.findByRolNombre(RolNombre.ROLE_ADMIN).get());
+            roles.add(rolService.findByTitulo(RolNombre.ROLE_ADMIN).get());
         usuario.setRoles(roles);
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("Usuario creado correctamente"),HttpStatus.CREATED);

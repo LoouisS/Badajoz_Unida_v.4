@@ -1,4 +1,4 @@
-package com.badajoz_unida.evg.security.entity;
+package com.badajoz_unida.evg.entity;
 
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import lombok.Getter;
@@ -10,19 +10,20 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Setter
-public class Rol {
+@Table(name="roles")
+public class Roles {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
+    @Column(name="titulo")
+    private String titulo;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name="rol_nombre")
     private RolNombre rolNombre;
 
-    public Rol() {
-    }
-
-    public Rol(RolNombre rolNombre) {
-        this.rolNombre = rolNombre;
-    }
 }

@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.security.entity;
 
+import com.badajoz_unida.evg.entity.Roles;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +35,7 @@ public class Usuario {
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="usuario_rol",joinColumns = @JoinColumn(name="usuario_id"),
                 inverseJoinColumns = @JoinColumn(name = "rol_id"))
-   private Set<Rol> roles=new HashSet<>();
+   private Set<Roles> roles=new HashSet<>();
 
     public Usuario() {
     }
