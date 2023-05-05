@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {IdiomasService} from "../../../services/idiomas.service";
+import {AuthService} from "../../../security/services/auth/auth.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-form-register',
@@ -11,12 +14,22 @@ export class FormRegisterComponent {
 
   forma!: FormGroup;
   // modal = new ModalComponent();
+  idiomas: any[] = [];
+  categorias: any[] = []
+  formIntereses: boolean = false;
+  interesesList: any[] = [];
+  interesesSelected: any[] = [];
+  addIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  removeIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+
   /**
    * @ignore
    */
   constructor(
     private formBuilder: FormBuilder,
+    private _authService: AuthService,
     // private appService: AppService,
+    private _idiomasService: IdiomasService,
     private router: Router
   ) {}
 
@@ -25,6 +38,17 @@ export class FormRegisterComponent {
    */
   ngOnInit(): void {
     this.crearFormulario();
+    this.idiomas = this._idiomasService.getIdiomas();
+    this.categorias = this.getCategoriasAndIntereses();
+    console.log(this.categorias);
+    this.addIntereses.subscribe((data: any) => {
+      for(let interes of data){
+        this.interesesList.push(interes);
+      }
+    })
+    this.removeIntereses.subscribe((data: any) => {
+      this.interesesList = data;
+    });
   }
 
   /**
@@ -71,7 +95,8 @@ export class FormRegisterComponent {
       password2: ['', [Validators.required]],
       fechaNacimiento: [null, [Validators.required]],
       telefono: ['', [Validators.required, Validators.minLength(9)]],
-      usuario: ['', [Validators.required]]
+      usuario: ['', [Validators.required]],
+      idioma: [-1, [Validators.required]]
     });
   }
   /**
@@ -82,6 +107,7 @@ export class FormRegisterComponent {
    */
   guardar(forma: FormGroup) {
     if (forma.invalid || forma.pending) {
+      this.formIntereses = false;
       Object.values(forma.controls).forEach((control) => {
         if (control instanceof FormGroup) this.guardar(control);
         control.markAsTouched();
@@ -192,6 +218,56 @@ export class FormRegisterComponent {
 
   goToLogin(){
     this.router.navigate(['/auth', '/login'])
+  }
+
+  goToIntereses(){
+    this.formIntereses = true;
+  }
+
+  goToRegistro(){
+    this.formIntereses = false
+  }
+
+  getCategoriasAndIntereses(){
+    return this._authService.getCategorias();
+  }
+
+  selectCategoria(categoria: any){
+    categoria.activo = categoria.activo ? false : true;
+    if(categoria.activo){
+      this.addInteresesFromCategoria(categoria.id);
+    } else {
+      this.removeInteresesFromInteresesList(categoria.id);
+    }
+  }
+
+  addInteresesFromCategoria(categoriaId: number){
+    for(let categoria of this.categorias){
+      if(categoriaId == categoria.categoria.id){
+        this.addIntereses.next(categoria.intereses);
+      }
+    }
+
+  }
+
+  removeInteresesFromInteresesList(categoriaId: number){
+    let nuevosIntereses: any[] = [];
+    for(let interes of this.interesesList){
+      if(interes.categoria_id != categoriaId){
+        nuevosIntereses.push(interes);
+      }
+    }
+    this.removeIntereses.next(nuevosIntereses);
+  }
+
+  selectInteres(interes: any){
+    interes.activo = interes.activo ? false : true;
+    if(interes.activo){
+      this.interesesSelected.push(interes.id);
+    } else {
+      this.interesesSelected.splice(this.interesesSelected.indexOf(interes.id), 1);
+    }
+    console.log(this.interesesSelected);
   }
 
 }

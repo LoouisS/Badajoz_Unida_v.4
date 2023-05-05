@@ -78,16 +78,31 @@ form > small{
   margin-bottom: 1rem;
 }
 
-input.button{
-  background-color: var(--primary-color);
-}
 
 button.button{
   border: 0;
   background-color: var(--secondary-color);
 }
 
+input.button, button.continuar{
+  background-color: var(--primary-color);
+}
+
 form a{
   font-size: .8rem;
   text-decoration: none;
+}
+
+.categoria, .interes{
+  padding: 2px 5px;
+  display: inline-block !important;
+  cursor: pointer;
+}
+
+.badge{
+  transition: background-color .5s ease-in;
+}
+
+.badge:hover, .selected{
+  background-color: var(--primary-color) !important;
 }

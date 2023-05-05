@@ -2,7 +2,7 @@ export class JwtDto {
   token: string;
 
 
-  constructor(token: string | null) {
+  constructor(token: string) {
     this.token = token;
   }
 }
