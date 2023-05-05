@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +24,10 @@ public class Categorias {
     private String descripcion;
     @Column(name = "activo")
     private boolean activo;
+
+    @OneToMany(mappedBy = "categoria")
+    @JsonIgnoreProperties("categoria")
+    private List<Intereses> intereses;
+
 
 }

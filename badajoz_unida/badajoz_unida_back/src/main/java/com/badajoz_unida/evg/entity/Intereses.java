@@ -25,9 +25,14 @@ public class Intereses {
     @Column(name="activo")
     private boolean activo;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categorias categoria;
+
     @ManyToMany(mappedBy = "intereses")
     private List<Usuarios> usuarios;
 
     @ManyToMany(mappedBy = "intereses")
     private List<Eventos> eventos;
+
 }
