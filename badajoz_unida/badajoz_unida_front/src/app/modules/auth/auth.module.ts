@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth/auth.component';
-import {ReactiveFormsModule} from "@angular/forms";
 import {FormLoginModule} from "../form-login/form-login.module";
 import {FormRegisterModule} from "../form-register/form-register.module";
 

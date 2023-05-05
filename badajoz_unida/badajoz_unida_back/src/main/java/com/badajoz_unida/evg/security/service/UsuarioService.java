@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.security.service;
 
+import com.badajoz_unida.evg.entity.Usuarios;
 import com.badajoz_unida.evg.security.entity.Usuario;
 import com.badajoz_unida.evg.security.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Optional<Usuario> getByNombreUsuario(String nombreUsuario){
+    public Optional<Usuarios> getByNombreUsuario(String nombreUsuario){
         return usuarioRepository.findByNombreUsuario(nombreUsuario);
     }
     public boolean existsByNombreUsuario(String nombreUsuario){
@@ -25,7 +26,7 @@ public class UsuarioService {
         return usuarioRepository.existsByEmail(email);
     }
 
-    public void save(Usuario usuario){
+    public void save(Usuarios usuario){
         usuarioRepository.save(usuario);
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {IdiomasService} from "../../../services/idiomas.service";
@@ -10,7 +10,7 @@ import {BehaviorSubject} from "rxjs";
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.css']
 })
-export class FormRegisterComponent {
+export class FormRegisterComponent implements OnInit{
 
   forma!: FormGroup;
   // modal = new ModalComponent();

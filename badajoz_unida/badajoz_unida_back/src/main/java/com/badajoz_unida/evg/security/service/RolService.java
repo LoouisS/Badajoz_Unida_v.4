@@ -1,6 +1,6 @@
 package com.badajoz_unida.evg.security.service;
 
-import com.badajoz_unida.evg.security.entity.Rol;
+import com.badajoz_unida.evg.entity.Roles;
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.security.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class RolService {
     @Autowired
     private RolRepository rolRepository;
 
-    public Optional<Rol> findByRolNombre(RolNombre rolNombre){
+    public Optional<Roles> findByTitulo(RolNombre rolNombre){
         return rolRepository.findByRolNombre(rolNombre);
     }
 
-    public void save(Rol rol){
+    public void save(Roles rol){
         rolRepository.save(rol);
     }
 }
