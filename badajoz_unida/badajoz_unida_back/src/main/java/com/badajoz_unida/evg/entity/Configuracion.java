@@ -13,7 +13,7 @@ public class Configuracion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private int configuracionId;
 
     @Column(name = "telefono_contacto")
     private int telefonoContacto;
