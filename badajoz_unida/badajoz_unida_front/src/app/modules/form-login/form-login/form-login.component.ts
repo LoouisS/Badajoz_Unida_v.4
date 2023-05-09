@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../security/services/auth/auth.service";
+import {LoginUsuario} from "../../../security/models/auth/login-usuario";
+import {TokenService} from "../../../security/services/auth/token.service";
 
 @Component({
   selector: 'app-form-login',
@@ -17,6 +20,8 @@ export class FormLoginComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     // private appService: AppService,
+    private _authService: AuthService,
+    private _tokenService: TokenService,
     private router: Router,
     // private usuarioService: UsuarioService
   ) {
@@ -29,6 +34,7 @@ export class FormLoginComponent implements OnInit{
    * @ignore
    */
   ngOnInit(): void {
+    this._authService.changeAuthMessage(false);
     this.crearFormulario();
   }
   /**
@@ -36,7 +42,7 @@ export class FormLoginComponent implements OnInit{
    */
   crearFormulario() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      user: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
@@ -55,7 +61,7 @@ export class FormLoginComponent implements OnInit{
       });
       return;
     }
-    // this.ComprobarUsuario(forma);
+    this.ComprobarUsuario(forma);
   }
 
   /**
@@ -73,31 +79,22 @@ export class FormLoginComponent implements OnInit{
    *
    * @param loginForm - Campos del formulario
    */
-  // ComprobarUsuario(loginForm: FormGroup) {
-  //   let datos = loginForm.value;
-  //   datos.tipo = 'login';
-  //   this.appService.postQuery(datos).subscribe(
-  //     (data) => {
-  //       if (data['status'] != 'error') {
-  //         this.usuarioService.recogerUsuario(
-  //           data[0]
-  //         );
-  //         this.router.navigate(['home']);
-  //       } else {
-  //         this.modal.generateModal(
-  //           `Algo salió mal`,
-  //           `${data['result']['error_msg']}`,
-  //           'De acuerdo',
-  //           'error'
-  //         );
-  //       }
-  //     },
-  //     async (errorServicio) => {
-  //       console.log('fallo al conectar con el servidor');
-  //       console.log(errorServicio);
-  //     }
-  //   );
-  // }
+  ComprobarUsuario(loginForm: FormGroup) {
+    let usuario:any = this.loginForm.get('user')?.value;
+    let clave:any = this.loginForm.get('password')?.value;
+    let user: LoginUsuario = new LoginUsuario(usuario, clave);
+    this._authService.login(user).subscribe(
+      (data) => {
+        this._tokenService.setToken(data.token);
+        console.log("Se ha iniciado sesión exitosamente");
+        this.router.navigate(['/']);
+      },
+      async (errorServicio) => {
+        console.log('fallo al conectar con el servidor');
+        console.log(errorServicio);
+      }
+    );
+  }
 
   /**
    * Permite visualizar tu contraseña.
@@ -112,10 +109,6 @@ export class FormLoginComponent implements OnInit{
       input.type = 'password';
       i.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
     }
-  }
-
-  goToRegistro(){
-    this.router.navigate(['/auth/registro']);
   }
 
 }

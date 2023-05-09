@@ -1,5 +1,8 @@
 form {
-  width: 100%;
+  background-color: white;
+  padding: 2rem .5rem;
+  flex-grow: 1;
+  box-sizing: border-box;
 }
 
 form h1{
@@ -11,16 +14,15 @@ form h1{
 }
 
 form .separador{
-  width: 100%;
-  height: 1px;
-  margin: 1rem auto;
-  background-color: var(--secondary-color);
+  width: 90%;
+  height: .5px;
+  margin: 10px auto;
+  border-radius: 12px;
+  background-color: var(--secondary-color-opacity);
 }
 
 form .input-group{
-  width: 100%;
   display: block;
-  margin: 1.5rem auto;
 }
 
 form .input-group.password{
@@ -36,10 +38,12 @@ form .input-group.password i{
 
 form input{
   width: 100%;
-  border: none;
-  border-bottom: 1px solid var(--secondary-color);
-  padding: .2rem .5rem;
+  padding: .5rem;
   font-size: 1rem;
+}
+
+input, select{
+  border-radius: .3rem !important;
 }
 
 form label{
@@ -60,22 +64,22 @@ form > small{
 }
 
 .input-group small{
+  font-size: .7rem;
+  color: var(--primary-color);
   display: block;
-  font-weight: bold;
-  font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .button{
   width: 100%;
-  padding: .6rem 1rem !important;
+  padding: .6rem 1rem;
   color: var(--bg-color);
   font-weight: bold;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: .3 ease-in-out;
-  margin-bottom: 1rem;
+  transition: all .3s ease-in-out;
+  margin-bottom: 5px;
 }
 
 
@@ -86,11 +90,23 @@ button.button{
 
 input.button, button.continuar{
   background-color: var(--primary-color);
+  border: 0;
+  transition: transform .5s ease-out;
+  height: 100%;
+}
+
+input.button:hover, button.continuar:hover{
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
 }
 
 form a{
-  font-size: .8rem;
-  text-decoration: none;
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
+}
+
+#idioma{
+  width: 100%;
 }
 
 .categoria, .interes{

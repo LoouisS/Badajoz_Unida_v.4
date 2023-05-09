@@ -1,90 +1,100 @@
- <div class="grid-form">
-    <form [formGroup]="forma" (ngSubmit)="guardar(forma)">
-      <div *ngIf="!formIntereses">
-        <h1>Regístrate</h1>
-        <div class="separador"></div>
-
-        <div class="input-group">
-          <input type="text" formControlName="nombre" maxlength="60" name="nombre" id="iNombre" placeholder="Nombre" />
-        </div>
+<form [formGroup]="forma" (ngSubmit)="guardar(forma)" class="col-12 rounded-4 d-flex flex-column align-items-center justify-content-between">
+  <div *ngIf="!formIntereses" class="col-12 px-5">
+    <h1 class="col-12 mb-2 p-0">Cuéntanos sobre ti</h1>
+    <div class="separador mt-1 mb-4"></div>
+    <div class="d-flex mt-3 mb-2">
+      <div class="input-group pe-1">
+        <label for="iNombre">Nombre</label>
+        <input class="form-control" type="text" formControlName="nombre" maxlength="60" name="nombre" id="iNombre" placeholder="Nombre" />
         <small *ngIf="!validar('nombre')" class="error">El nombre es un campo requerido.</small>
-        <div class="input-group">
-          <input type="text" formControlName="apellidos" maxlength="60" name="apellidos" id="iApellidos" placeholder="Apellidos" />
-        </div>
+      </div>
+      <div class="input-group ps-1">
+        <label for="iApellidos">Apellidos</label>
+        <input class="form-control" type="text" formControlName="apellidos" maxlength="60" name="apellidos" id="iApellidos" placeholder="Apellidos" />
         <small *ngIf="!validar('apellidos')" class="error">El apellido es un campo requerido.</small>
+      </div>
+    </div>
 
-        <div class="input-group">
-          <input type="email" formControlName="email" maxlength="100"  name="mail" id="iMail" placeholder="Correo Electrónico" />
-        </div>
-        <small *ngIf="!validar('email')" class="error">El formato del correo electrónico es incorrecto. El formato es: ejemplo@ejemplo.com</small>
-
-        <div class="input-group">
-          <input type="text" formControlName="usuario" maxlength="60" name="usuario" id="iUsuario" placeholder="Nombre de usuario" />
-        </div>
+    <div class="d-flex my-2">
+      <div class="input-group pe-1">
+        <label for="iMail">Email</label>
+        <input class="form-control" type="email" formControlName="email" maxlength="100"  name="mail" id="iMail" placeholder="Correo Electrónico" />
+        <small *ngIf="!validar('email')" class="error">El formato del email debe ser: ejemplo@ejemplo.com</small>
+      </div>
+      <div class="input-group ps-1">
+        <label for="iUsuario">Nombre de usuario</label>
+        <input class="form-control" type="text" formControlName="usuario" maxlength="60" name="usuario" id="iUsuario" placeholder="Nombre de usuario" />
         <small *ngIf="!validar('usuario')" class="error">El usuario es un campo requerido.</small>
+      </div>
+    </div>
 
-        <div class="input-group password">
-          <input type="password" formControlName="password" name="password" id="iPassword" placeholder="Contraseña" oncopy="return false" onpaste="return false"/>
-          <i id="ieye"class="bi bi-eye-fill float-end mb-2" (click)="showHide()"></i>
-        </div>
-        <small *ngIf="!validar('password')" class="error">
-          La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
-          un número y un caracter especial. No se permiten espacios en blanco.
-        </small>
+    <div class="input-group password my-2">
+      <label for="iPassword">Contraseña</label>
+      <input class="form-control" type="password" formControlName="password" name="password" id="iPassword" placeholder="Contraseña" oncopy="return false" onpaste="return false"/>
+      <i id="ieye"class="bi bi-eye-fill" (click)="showHide()"></i>
+      <small *ngIf="!validar('password')" class="error">
+        La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
+        un número y un caracter especial. No se permiten espacios en blanco.
+      </small>
+    </div>
 
-        <div class="input-group password">
-          <input type="password" formControlName="password2" name="passwordRepeat" id="iPasswordRepeat" placeholder="Repite tu contraseña" oncopy="return false" onpaste="return false"/>
-          <i id="ieye2"class="bi bi-eye-fill float-end mb-2" (click)="showHide2()"></i>
-        </div>
-        <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
+    <div class="input-group password my-2">
+      <label for="iPasswordRepeat">Email</label>
+      <input class="form-control" type="password" formControlName="password2" name="passwordRepeat" id="iPasswordRepeat" placeholder="Repite tu contraseña" oncopy="return false" onpaste="return false"/>
+      <i id="ieye2"class="bi bi-eye-fill" (click)="showHide2()"></i>
+      <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
+    </div>
 
-        <div class="input-group">
-          <label for="ifechaNacimiento">Fecha de nacimiento </label><input type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" />
-        </div>
-        <small *ngIf="!comprobarEdad || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años.</small>
-
-        <div class="input-group">
-          <input type="text" formControlName="telefono" maxlength="9" name="telefono" id="iTelefono" placeholder="Teléfono de contacto" />
-        </div>
+    <div class="d-flex my-2">
+      <div class="input-group pe-1">
+        <label for="ifechaNacimiento">Fecha de nacimiento </label>
+        <input class="form-control" type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" />
+        <small *ngIf="!comprobarEdad || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
+      </div>
+      <div class="input-group ps-1">
+        <label for="iTelefono">Teléfono de contacto </label>
+        <input class="form-control" type="text" formControlName="telefono" maxlength="9" name="telefono" id="iTelefono" placeholder="Teléfono de contacto" />
         <small *ngIf="!validar('telefono')" class="error">El teléfono es un campo necesario, debe tener 9 digitos.</small>
+      </div>
+    </div>
 
-        <select class="form-select" id="idioma" formControlName="idioma">
-          <option value="-1" disabled selected>Selecciona un idioma</option>
-          <option
-            *ngFor="let idioma of idiomas"
-            [value]="idioma.id">
-            {{idioma.titulo}}
-          </option>
-        </select>
-        <small *ngIf="!validar('idioma')" class="error">El idioma es un campo requerido.</small>
+    <div class="input-group ps-1 mb-3">
+      <label for="idioma">Idioma de preferencia</label>
+      <select class="form-select" id="idioma" formControlName="idioma">
+        <option value="-1" disabled selected>Selecciona un idioma</option>
+        <option
+          *ngFor="let idioma of idiomas"
+          [value]="idioma.id">
+          {{idioma.titulo}}
+        </option>
+      </select>
+      <small *ngIf="!validar('idioma')" class="error">Tienes que seleccionar un idioma.</small>
+    </div>
 
-        <div class="input-group">
+    <div class="input-group">
 <!--          <input type="submit" class="button" value="Continuar" />-->
-          <button class="button continuar" (click)="goToIntereses()">Continuar</button>
-          <small>¿Ya tienes cuenta? Inicia sesión.</small>
-          <button class="button" (click)="goToLogin()">Iniciar sesión</button>
-        </div>
-      </div>
-      <div *ngIf="formIntereses">
-        <h1 class="py-3">Categorias</h1>
-        <div class="d-flex flex-wrap">
-          <h3 *ngFor="let categoria of categorias" class="categoria">
-            <span class="badge bg-secondary" (click)="selectCategoria(categoria.categoria)" [ngClass]="{'selected' : categoria.categoria.activo}">{{categoria.categoria.titulo}}</span>
-          </h3>
-        </div>
-        <h1 class="py-3">Intereses</h1>
-        <h5 *ngIf="interesesList.length == 0">Selecciona una categoría</h5>
-        <div *ngIf="interesesList.length > 0" class="d-flex flex-wrap">
-          <h5 *ngFor="let interes of interesesList" class="interes">
-            <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.titulo}}</span>
-          </h5>
-        </div>
-        <div class="separador"></div>
-        <div class="input-group">
-          <input type="submit" class="button" value="Registrarme" />
-          <small>¿Aún no has rellenado el formulario?.</small>
-          <button class="button" (click)="goToRegistro()">Regresar</button>
-        </div>
-      </div>
-    </form>
+      <button class="button continuar rounded-pill mt-3" (click)="goToIntereses()">Continuar</button>
+    </div>
   </div>
+  <div *ngIf="formIntereses">
+    <h1 class="py-3">Categorias</h1>
+    <div class="d-flex flex-wrap">
+      <h3 *ngFor="let categoria of categorias" class="categoria">
+        <span class="badge bg-secondary" (click)="selectCategoria(categoria.categoria)" [ngClass]="{'selected' : categoria.categoria.activo}">{{categoria.categoria.titulo}}</span>
+      </h3>
+    </div>
+    <h1 class="py-3">Intereses</h1>
+    <h5 *ngIf="interesesList.length == 0">Selecciona una categoría</h5>
+    <div *ngIf="interesesList.length > 0" class="d-flex flex-wrap">
+      <h5 *ngFor="let interes of interesesList" class="interes">
+        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.titulo}}</span>
+      </h5>
+    </div>
+    <div class="separador"></div>
+    <div class="input-group">
+      <input type="submit" class="button" value="Registrarme" />
+      <small>¿Aún no has rellenado el formulario?.</small>
+      <button class="button" (click)="goToRegistro()">Regresar</button>
+    </div>
+  </div>
+</form>

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {IdiomasService} from "../../../services/idiomas.service";
 import {AuthService} from "../../../security/services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
+import {NuevoUsuario} from "../../../security/models/auth/nuevo-usuario";
 
 @Component({
   selector: 'app-form-register',
@@ -37,6 +38,7 @@ export class FormRegisterComponent implements OnInit{
    * @ignore
    */
   ngOnInit(): void {
+    this._authService.changeAuthMessage(true);
     this.crearFormulario();
     this.idiomas = this._idiomasService.getIdiomas();
     this.categorias = this.getCategoriasAndIntereses();
@@ -115,44 +117,56 @@ export class FormRegisterComponent implements OnInit{
 
       return;
     }
-    // this.registro(forma);
+    this.registro(forma);
   }
 
   /**
    * Llama a la API para dar de alta a un usuario.
    * @param loginForm - Campos del formulario
    */
-  // registro(loginForm: FormGroup) {
-  //   let datos = loginForm.value;
-  //   datos.tipo = 'registro';
-  //   this.appService.postQuery(datos).subscribe(
-  //     (data) => {
-  //       if (data['status'] != 'error') {
-  //         this.modal.generateModal(
-  //           'Éxito',
-  //           `Cuenta creada con éxito.`,
-  //           'De acuerdo',
-  //           'success'
-  //         );
-  //         setTimeout(() => {
-  //           this.router.navigate(['login']);
-  //         }, 2000);
-  //       } else {
-  //         this.modal.generateModal(
-  //           'Algo salió mal',
-  //           `${data['result']['error_msg']}`,
-  //           'De acuerdo',
-  //           'error'
-  //         );
-  //       }
-  //     },
-  //     async (errorServicio) => {
-  //       console.log('he fallado');
-  //       console.log(errorServicio);
-  //       //this.toast=true;
-  //     }
-  //   );
-  // }
+  registro(loginForm: FormGroup) {
+    // let datos = loginForm.value;
+    // datos.tipo = 'registro';
+    let controles:any = Object.keys(this.forma.controls);
+    let datos:any = {};
+    Object.values(this.forma.controls).forEach((control, index) => {
+      if(controles[index] != "password2"){
+        datos[controles[index]] = control.value;
+      }
+    });
+
+    let user: NuevoUsuario = new NuevoUsuario(datos.nombre, datos.apellidos, datos.usuario, datos.email, datos.password, datos.telefono, datos.fechaNacimiento, datos.idioma);
+
+    this._authService.nuevo(user).subscribe(
+      (data: any) => {
+        if (data['status'] != 'error') {
+          // this.modal.generateModal(
+          //   'Éxito',
+          //   `Cuenta creada con éxito.`,
+          //   'De acuerdo',
+          //   'success'
+          // );
+          console.log("Usuario creado");
+          this.router.navigate(['/auth']);
+          // setTimeout(() => {
+          //   this.router.navigate(['login']);
+          // }, 2000);
+        } else {
+          // this.modal.generateModal(
+          //   'Algo salió mal',
+          //   `${data['result']['error_msg']}`,
+          //   'De acuerdo',
+          //   'error'
+          // );
+        }
+      },
+      async (errorServicio: any) => {
+        console.log('he fallado');
+        console.log(errorServicio);
+        //this.toast=true;
+      }
+    );
+  }
 
   /**
    * Valida que un campo del formulario sea correcto.

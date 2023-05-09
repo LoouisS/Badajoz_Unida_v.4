@@ -1,11 +1,27 @@
-<div class="grid-form-container">
-  <div class="grid-form-image">
-    <div class="grid-form-background"></div>
-    <img src="assets/Logo_Badajoz_Unida2.png" alt="">
+<div class="grid-form-image col-12 d-flex justify-content-center align-items-center">
+  <div class="grid-form-background">
   </div>
-  <div class="grid-form">
-    <div>
-      <router-outlet></router-outlet>
+  <div class="container d-flex col-12 m-0 justify-content-center align-items-center">
+    <div *ngIf="!isFormRegistro" class="col-6 fadeIn animated">
+      <h1 class="pb-3">¿Qué tal?</h1>
+      <div class="px-3">
+        <h2 class="pb-4">Nos encanta tenerte por aquí de nuevo</h2>
+        <h4>Y si es tu primera vez,</h4>
+        <h4>¡Unete a nuestra comunidad!</h4>
+        <button class="col-4 button rounded-pill mt-3" (click)="goToRegistro()">Crear mi cuenta</button>
+      </div>
+    </div>
+    <div *ngIf="isFormRegistro" class="col-5 fadeIn animated">
+      <h1 class="pb-3">¿Te nos unes?</h1>
+      <div class="px-3">
+        <h3 class="pb-4">En nuestra plataforma podrás conocer a varias personas con tus mismos intereses</h3>
+        <h4>¿Ya estas registrado?</h4>
+        <h4>¡Pues vamos a iniciar sesión!</h4>
+        <button class="col-6 button rounded-pill mt-3" (click)="goToLogin()">Regresar al login</button>
+      </div>
+    </div>
+    <div class="fadeIn animated grid-form" [class.col-6]="!isFormRegistro" [class.col-7]="isFormRegistro">
+        <router-outlet class="col-12"></router-outlet>
     </div>
   </div>
 </div>

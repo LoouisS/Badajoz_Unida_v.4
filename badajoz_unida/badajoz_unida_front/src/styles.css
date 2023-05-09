@@ -1,8 +1,11 @@
 /*======Variables======*/
 :root{
   --bg-color: white;
-  --primary-color: #D10000;
+  --primary-color: hsl(0, 100%, 41%);
+  --primary-color-opacity: hsla(0, 100%, 41%, .4);
+  --primary-color-opacity-2: hsla(0, 100%, 41%, .7);
   --primary-color-hover: #c40000;
+  --secondary-color-opacity: hsla(0, 0%, 57%, .8);
   --secondary-color: hsl(0, 0%, 57%);
   --secondary-color-opacity: hsla(0, 0%, 57%, .8);
   --text-base-color: black;
@@ -17,6 +20,34 @@
 body{
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
 }
 
 /*======Media Queries======*/
@@ -38,7 +69,6 @@ body{
   }
 
   .grid-form{
-    max-width: 600px;
     margin: 0 auto;
   }
 }
