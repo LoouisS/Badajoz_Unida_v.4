@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,12 +28,15 @@ public class Intereses {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnore
     private Categorias categoria;
 
     @ManyToMany(mappedBy = "intereses")
+    @JsonIgnore
     private List<Usuarios> usuarios;
 
     @ManyToMany(mappedBy = "intereses")
+    @JsonIgnore
     private List<Eventos> eventos;
 
 }

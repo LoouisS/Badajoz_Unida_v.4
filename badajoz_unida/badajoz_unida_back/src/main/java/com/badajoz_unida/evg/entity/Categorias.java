@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,7 @@ public class Categorias {
     private boolean activo;
 
     @OneToMany(mappedBy = "categoria")
-    @JsonIgnoreProperties("categoria")
+    @JsonIgnoreProperties
     private List<Intereses> intereses;
 
 
