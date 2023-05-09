@@ -16,7 +16,7 @@ public class InteresesEventos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Long intEventid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interes_id", nullable = false)
