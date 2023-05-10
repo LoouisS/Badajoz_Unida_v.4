@@ -42,7 +42,7 @@ form input{
   font-size: 1rem;
 }
 
-input, select{
+input[type="text"], input[type="email"], input[type="password"], select{
   border-radius: .3rem !important;
 }
 

@@ -15,8 +15,10 @@ export class AuthComponent implements OnInit{
   }
 
   ngOnInit() {
-    this._authService.getAuthMessage().subscribe((data: any) => {
-      this.isFormRegistro = data;
+    this._authService.getAuthMessage().subscribe((data: boolean) => {
+      setTimeout(() => {
+        this.isFormRegistro = data;
+      });
     });
   }
 

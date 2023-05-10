@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {IdiomasService} from "../../../services/idiomas.service";
 import {AuthService} from "../../../security/services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
 import {NuevoUsuario} from "../../../security/models/auth/nuevo-usuario";
+import {CategoriasService} from "../../../services/categorias.service";
 
 @Component({
   selector: 'app-form-register',
@@ -29,7 +30,7 @@ export class FormRegisterComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private _authService: AuthService,
-    // private appService: AppService,
+    private _categoriaService: CategoriasService,
     private _idiomasService: IdiomasService,
     private router: Router
   ) {}
@@ -43,14 +44,39 @@ export class FormRegisterComponent implements OnInit{
     this.idiomas = this._idiomasService.getIdiomas();
     this.categorias = this.getCategoriasAndIntereses();
     console.log(this.categorias);
-    this.addIntereses.subscribe((data: any) => {
-      for(let interes of data){
+    for(let categoria of this.categorias){
+      for(let interes of categoria.intereses){
+        switch (interes.categoria_id){
+          case 1:
+            interes.emoji = '⚽';
+            break;
+          case 2:
+            interes.emoji = '🎭';
+            break;
+          case 3:
+            interes.emoji = '📚';
+            break;
+          case 4:
+            interes.emoji = '🎵';
+            break;
+          case 5:
+            interes.emoji = '🍲';
+            break;
+          default:
+            interes.emoji = '🔥';
+        }
         this.interesesList.push(interes);
       }
-    })
-    this.removeIntereses.subscribe((data: any) => {
-      this.interesesList = data;
-    });
+    }
+    this.interesesList.sort(this.compareRandom);
+    // this.addIntereses.subscribe((data: any) => {
+    //   for(let interes of data){
+    //     this.interesesList.push(interes);
+    //   }
+    // })
+    // this.removeIntereses.subscribe((data: any) => {
+    //   this.interesesList = data;
+    // });
   }
 
   /**
@@ -181,7 +207,7 @@ export class FormRegisterComponent implements OnInit{
   /**
    * Verifica que ambas contraseñas coincidan.
    */
-  get comprobarPasswords() {
+  comprobarPasswords() {
     let pass1 = this.forma.get('password')?.value;
     let pass2 = this.forma.get('password2')?.value;
     return pass1 === pass2 ? true : false;
@@ -190,7 +216,7 @@ export class FormRegisterComponent implements OnInit{
   /**
    * Comprueba que el usuario sea mayor de 16 años.
    */
-  get comprobarEdad() {
+  comprobarEdad() {
     if (this.forma.get('fechaNacimiento') != null) {
       let fechaNacimiento = this.forma.get('fechaNacimiento')?.value;
       let convertirFecha = new Date(fechaNacimiento).getTime();
@@ -199,6 +225,10 @@ export class FormRegisterComponent implements OnInit{
       return edad >= 16 ? true : false;
     }
     return true;
+  }
+
+  comprobarIdioma(){
+    return this.forma.get('idioma')?.value == -1 ? true : false;
   }
 
   /**
@@ -282,6 +312,17 @@ export class FormRegisterComponent implements OnInit{
       this.interesesSelected.splice(this.interesesSelected.indexOf(interes.id), 1);
     }
     console.log(this.interesesSelected);
+  }
+
+  verificarFormulario(){
+    if (this.forma.invalid) {
+      return true;
+    }
+    return false;
+  }
+
+  compareRandom(a: any, b: any) {
+    return Math.random() - 0.5;
   }
 
 }

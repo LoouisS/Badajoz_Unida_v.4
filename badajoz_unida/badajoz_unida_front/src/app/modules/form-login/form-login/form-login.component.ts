@@ -13,6 +13,7 @@ import {TokenService} from "../../../security/services/auth/token.service";
 export class FormLoginComponent implements OnInit{
 
   loginForm!: FormGroup;
+  showAlert: boolean = false;
   // modal = new ModalComponent();
   /**
    * @ignore
@@ -88,8 +89,10 @@ export class FormLoginComponent implements OnInit{
         this._tokenService.setToken(data.token);
         console.log("Se ha iniciado sesión exitosamente");
         this.router.navigate(['/']);
+        this.showAlert = false;
       },
       async (errorServicio) => {
+        this.showAlert = true;
         console.log('fallo al conectar con el servidor');
         console.log(errorServicio);
       }

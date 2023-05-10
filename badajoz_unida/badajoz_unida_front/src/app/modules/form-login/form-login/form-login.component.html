@@ -5,8 +5,11 @@
   <div class="col-6 pt-3 d-flex justify-content-center">
     <img src="assets/logo.png">
   </div>
+  <div *ngIf="showAlert" class="alert alert-danger col-10 mt-2" role="alert">
+    Nombre de usuario o contraseña incorrectos
+  </div>
   <div class="input-group">
-    <input type="text" class="form-control" maxlength="100" formControlName="user" name="user" id="input-user" placeholder="Correo electrónico"/>
+    <input type="text" class="form-control" maxlength="100" formControlName="user" name="user" id="input-user" placeholder="Nombre de usuario"/>
   </div>
   <div class="input-group password">
     <input type="password" class="form-control" formControlName="password" name="password" id="iPassword" placeholder="Contraseña"/>

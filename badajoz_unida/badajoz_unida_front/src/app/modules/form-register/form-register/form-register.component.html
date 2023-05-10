@@ -73,28 +73,31 @@
 
     <div class="input-group">
 <!--          <input type="submit" class="button" value="Continuar" />-->
-      <button class="button continuar rounded-pill mt-3" (click)="goToIntereses()">Continuar</button>
+      <button [attr.disabled]="verificarFormulario()? true : null"
+              [ngClass]="{'btn btn-secondary col-12': (verificarFormulario()), 'button continuar': !verificarFormulario()}"
+              class="rounded-pill mt-3"
+              (click)="goToIntereses()">
+        Continuar
+      </button>
     </div>
   </div>
-  <div *ngIf="formIntereses">
-    <h1 class="py-3">Categorias</h1>
-    <div class="d-flex flex-wrap">
-      <h3 *ngFor="let categoria of categorias" class="categoria">
-        <span class="badge bg-secondary" (click)="selectCategoria(categoria.categoria)" [ngClass]="{'selected' : categoria.categoria.activo}">{{categoria.categoria.titulo}}</span>
+  <div *ngIf="formIntereses" class="px-5">
+    <h1 class="py-3 px-0">¿Qué es lo que te gusta?</h1>
+    <div class="separador mt-1 mb-4"></div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <h3 *ngFor="let interes of interesesList" class="interes">
+        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.emoji}} {{interes.titulo}}</span>
       </h3>
     </div>
-    <h1 class="py-3">Intereses</h1>
-    <h5 *ngIf="interesesList.length == 0">Selecciona una categoría</h5>
-    <div *ngIf="interesesList.length > 0" class="d-flex flex-wrap">
-      <h5 *ngFor="let interes of interesesList" class="interes">
-        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.titulo}}</span>
-      </h5>
-    </div>
-    <div class="separador"></div>
+<!--    <h1 class="py-3">Intereses</h1>-->
+<!--    <h5 *ngIf="interesesList.length == 0">Selecciona una categoría</h5>-->
+<!--    <div *ngIf="interesesList.length > 0" class="d-flex flex-wrap">-->
+<!--      <h5 *ngFor="let interes of interesesList" class="interes">-->
+<!--        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.titulo}}</span>-->
+<!--      </h5>-->
+<!--    </div>-->
     <div class="input-group">
-      <input type="submit" class="button" value="Registrarme" />
-      <small>¿Aún no has rellenado el formulario?.</small>
-      <button class="button" (click)="goToRegistro()">Regresar</button>
+      <input type="submit" class="button rounded-pill mt-3" value="Registrarme" />
     </div>
   </div>
 </form>
