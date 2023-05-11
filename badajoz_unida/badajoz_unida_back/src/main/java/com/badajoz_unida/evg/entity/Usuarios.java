@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -70,7 +67,7 @@ public class Usuarios {
         this.nombreUsuario = nombreUsuario;
         this.fchNacimiento = fchNacimiento;
         this.tlf = tlf;
-        this.idioma = idioma;
+        this.idioma = new Idiomas(idioma.getIdiomaId());
     }
 
     public Usuarios(int usuarioId) {

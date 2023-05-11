@@ -23,4 +23,12 @@ public class Idiomas {
 
     @Column(name="activo")
     private boolean activo;
+
+    public Idiomas(){
+    }
+
+    public Idiomas(int idiomaId){
+        this.idiomaId = idiomaId;
+    }
+
 }

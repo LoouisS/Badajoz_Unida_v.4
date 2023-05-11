@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {IdiomasService} from "../../../services/idiomas.service";
@@ -6,13 +6,14 @@ import {AuthService} from "../../../security/services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
 import {NuevoUsuario} from "../../../security/models/auth/nuevo-usuario";
 import {CategoriasService} from "../../../services/categorias.service";
+import {ValidadoresService} from "../../../services/validadores.service";
 
 @Component({
   selector: 'app-form-register',
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.css']
 })
-export class FormRegisterComponent implements OnInit{
+export class FormRegisterComponent implements OnInit, OnDestroy{
 
   forma!: FormGroup;
   // modal = new ModalComponent();
@@ -32,6 +33,7 @@ export class FormRegisterComponent implements OnInit{
     private _authService: AuthService,
     private _categoriaService: CategoriasService,
     private _idiomasService: IdiomasService,
+    private _validadorService: ValidadoresService,
     private router: Router
   ) {}
 
@@ -77,6 +79,13 @@ export class FormRegisterComponent implements OnInit{
     // this.removeIntereses.subscribe((data: any) => {
     //   this.interesesList = data;
     // });
+    console.log(this.forma);
+  }
+
+  ngOnDestroy() {
+    for(let interes of this.interesesList){
+      interes.activo = false;
+    }
   }
 
   /**
@@ -121,11 +130,11 @@ export class FormRegisterComponent implements OnInit{
         ],
       ],
       password2: ['', [Validators.required]],
-      fechaNacimiento: [null, [Validators.required]],
+      fechaNacimiento: [null, [Validators.required, this._validadorService.comprobarEdad]],
       telefono: ['', [Validators.required, Validators.minLength(9)]],
       usuario: ['', [Validators.required]],
-      idioma: [-1, [Validators.required]]
-    });
+      idioma: [-1, [Validators.required, this._validadorService.comprobarIdioma]]
+    }, {validators:this._validadorService.passwordsIguales('password', 'password2')});
   }
   /**
    * Comprueba que todos los campos introducidos sean correctos.
@@ -140,7 +149,6 @@ export class FormRegisterComponent implements OnInit{
         if (control instanceof FormGroup) this.guardar(control);
         control.markAsTouched();
       });
-
       return;
     }
     this.registro(forma);
@@ -162,6 +170,7 @@ export class FormRegisterComponent implements OnInit{
     });
 
     let user: NuevoUsuario = new NuevoUsuario(datos.nombre, datos.apellidos, datos.usuario, datos.email, datos.password, datos.telefono, datos.fechaNacimiento, datos.idioma);
+    user.intereses = this.interesesSelected;
 
     this._authService.nuevo(user).subscribe(
       (data: any) => {
@@ -172,7 +181,7 @@ export class FormRegisterComponent implements OnInit{
           //   'De acuerdo',
           //   'success'
           // );
-          console.log("Usuario creado");
+          console.log(data);
           this.router.navigate(['/auth']);
           // setTimeout(() => {
           //   this.router.navigate(['login']);
@@ -208,27 +217,33 @@ export class FormRegisterComponent implements OnInit{
    * Verifica que ambas contraseñas coincidan.
    */
   comprobarPasswords() {
-    let pass1 = this.forma.get('password')?.value;
-    let pass2 = this.forma.get('password2')?.value;
-    return pass1 === pass2 ? true : false;
+    // let pass1 = this.forma.get('password')?.value;
+    // let pass2 = this.forma.get('password2')?.value;
+    // return pass1 === pass2 ? true : false;
+    let errorComprobarPass = this.forma?.get('password2')?.errors;
+    if(errorComprobarPass){
+      if(errorComprobarPass['noEsIgual'] && this.forma?.get('idioma')?.touched){
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
    * Comprueba que el usuario sea mayor de 16 años.
    */
   comprobarEdad() {
-    if (this.forma.get('fechaNacimiento') != null) {
-      let fechaNacimiento = this.forma.get('fechaNacimiento')?.value;
-      let convertirFecha = new Date(fechaNacimiento).getTime();
-      let timeDiff = Math.abs(Date.now() - convertirFecha);
-      let edad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365);
-      return edad >= 16 ? true : false;
+    let errorEdad = this.forma?.get('fechaNacimiento')?.errors;
+    if(errorEdad){
+      if(errorEdad['menor16'] && this.forma?.get('idioma')?.touched){
+        return true;
+      }
     }
-    return true;
+    return false;
   }
 
   comprobarIdioma(){
-    return this.forma.get('idioma')?.value == -1 ? true : false;
+    return this.forma.get('idioma')?.value == -1 && this.forma.get('idioma')?.touched ? true : false;
   }
 
   /**
@@ -260,56 +275,48 @@ export class FormRegisterComponent implements OnInit{
     }
   }
 
-  goToLogin(){
-    this.router.navigate(['/auth', '/login'])
-  }
-
   goToIntereses(){
     this.formIntereses = true;
-  }
-
-  goToRegistro(){
-    this.formIntereses = false
   }
 
   getCategoriasAndIntereses(){
     return this._authService.getCategorias();
   }
 
-  selectCategoria(categoria: any){
-    categoria.activo = categoria.activo ? false : true;
-    if(categoria.activo){
-      this.addInteresesFromCategoria(categoria.id);
-    } else {
-      this.removeInteresesFromInteresesList(categoria.id);
-    }
-  }
+  // selectCategoria(categoria: any){
+  //   categoria.activo = categoria.activo ? false : true;
+  //   if(categoria.activo){
+  //     this.addInteresesFromCategoria(categoria.id);
+  //   } else {
+  //     this.removeInteresesFromInteresesList(categoria.id);
+  //   }
+  // }
 
-  addInteresesFromCategoria(categoriaId: number){
-    for(let categoria of this.categorias){
-      if(categoriaId == categoria.categoria.id){
-        this.addIntereses.next(categoria.intereses);
-      }
-    }
+  // addInteresesFromCategoria(categoriaId: number){
+  //   for(let categoria of this.categorias){
+  //     if(categoriaId == categoria.categoria.id){
+  //       this.addIntereses.next(categoria.intereses);
+  //     }
+  //   }
+  //
+  // }
 
-  }
-
-  removeInteresesFromInteresesList(categoriaId: number){
-    let nuevosIntereses: any[] = [];
-    for(let interes of this.interesesList){
-      if(interes.categoria_id != categoriaId){
-        nuevosIntereses.push(interes);
-      }
-    }
-    this.removeIntereses.next(nuevosIntereses);
-  }
+  // removeInteresesFromInteresesList(categoriaId: number){
+  //   let nuevosIntereses: any[] = [];
+  //   for(let interes of this.interesesList){
+  //     if(interes.categoria_id != categoriaId){
+  //       nuevosIntereses.push(interes);
+  //     }
+  //   }
+  //   this.removeIntereses.next(nuevosIntereses);
+  // }
 
   selectInteres(interes: any){
     interes.activo = interes.activo ? false : true;
     if(interes.activo){
-      this.interesesSelected.push(interes.id);
+      this.interesesSelected.push({"interesId": interes.id});
     } else {
-      this.interesesSelected.splice(this.interesesSelected.indexOf(interes.id), 1);
+      this.interesesSelected.splice(this.interesesSelected.indexOf({"interesId": interes.id}), 1);
     }
     console.log(this.interesesSelected);
   }
@@ -323,6 +330,10 @@ export class FormRegisterComponent implements OnInit{
 
   compareRandom(a: any, b: any) {
     return Math.random() - 0.5;
+  }
+
+  imprimir(){
+    console.log(this.forma);
   }
 
 }

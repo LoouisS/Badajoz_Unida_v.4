@@ -39,4 +39,12 @@ public class Intereses {
     @JsonIgnore
     private List<Eventos> eventos;
 
+    public Intereses(){
+
+    }
+
+    public Intereses(int interesId){
+        this.interesId = interesId;
+    }
+
 }

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +33,7 @@ public class CategoriaController {
     UsuarioInteresesService usuarioInteresesService;
 
     @GetMapping("/all")
+    @PermitAll
     public List<Categorias> getAllCategorias(){
        return this.catService.getAllCategorias();
     }

@@ -48,8 +48,8 @@
     <div class="d-flex my-2">
       <div class="input-group pe-1">
         <label for="ifechaNacimiento">Fecha de nacimiento </label>
-        <input class="form-control" type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" />
-        <small *ngIf="!comprobarEdad || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
+        <input class="form-control" type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" (change)="imprimir()"/>
+        <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
       </div>
       <div class="input-group ps-1">
         <label for="iTelefono">Teléfono de contacto </label>
@@ -68,7 +68,7 @@
           {{idioma.titulo}}
         </option>
       </select>
-      <small *ngIf="!validar('idioma')" class="error">Tienes que seleccionar un idioma.</small>
+      <small *ngIf="comprobarIdioma()" class="error">Tienes que seleccionar un idioma.</small>
     </div>
 
     <div class="input-group">

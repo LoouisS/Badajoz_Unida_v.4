@@ -1,6 +1,8 @@
 package com.badajoz_unida.evg.security.controller;
 
 import com.badajoz_unida.evg.dto.Mensaje;
+import com.badajoz_unida.evg.dto.UserInterestDTO;
+import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.entity.Roles;
 import com.badajoz_unida.evg.entity.Usuarios;
 import com.badajoz_unida.evg.security.dto.JwtDTO;
@@ -10,6 +12,8 @@ import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.security.jwt.JwtProvider;
 import com.badajoz_unida.evg.security.service.RolService;
 import com.badajoz_unida.evg.security.service.UsuarioService;
+import com.badajoz_unida.evg.service.CategoriaService;
+import com.badajoz_unida.evg.service.UsuarioInteresesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,6 +48,8 @@ public class AuthController {
 
     @Autowired
     RolService rolService;
+    @Autowired
+    UsuarioInteresesService usuarioInteresesService;
 
     @Autowired
     JwtProvider jwtProvider;
@@ -55,7 +62,6 @@ public class AuthController {
             return new ResponseEntity(new Mensaje("El nombre de usuario ya existe"),HttpStatus.BAD_REQUEST);
         if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("El email ya existe"),HttpStatus.BAD_REQUEST);
-
         Usuarios usuario=
                 new Usuarios(nuevoUsuario.getNombre(),nuevoUsuario.getApellidos(),nuevoUsuario.getEmail(),passwordEncoder.encode(nuevoUsuario.getPassword()),nuevoUsuario.getNombreUsuario(),nuevoUsuario.getFchNacimiento(),nuevoUsuario.getTlf(), nuevoUsuario.getIdioma() );
         Set<Roles> roles=new HashSet<>();
@@ -64,10 +70,15 @@ public class AuthController {
             roles.add(rolService.findByTitulo(RolNombre.ROLE_ADMIN).get());
         usuario.setRoles(roles);
         usuarioService.save(usuario);
+        UserInterestDTO intereses = new UserInterestDTO();
+        intereses.setUsuarioId(usuario.getUserId());
+        intereses.setIntereses(nuevoUsuario.getIntereses());
+        usuarioInteresesService.save(intereses);
         return new ResponseEntity(new Mensaje("Usuario creado correctamente"),HttpStatus.CREATED);
     }
     @PostMapping("/login")
     public ResponseEntity<JwtDTO> nuevo (@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+        System.out.println("Entro aquí");
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos erróneos"), HttpStatus.BAD_REQUEST);
 
