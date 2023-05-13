@@ -11,7 +11,7 @@ export class AuthComponent implements OnInit{
 
   isFormRegistro: boolean = false;
 
-  constructor(private router: Router, private _authService: AuthService) {
+  constructor(private _authService: AuthService) {
   }
 
   ngOnInit() {
@@ -23,11 +23,11 @@ export class AuthComponent implements OnInit{
   }
 
   goToRegistro(){
-    this.router.navigate(['/auth/registro']);
+    this._authService.goToRegistro();
   }
 
   goToLogin(){
-    this.router.navigate(['/auth/login']);
+    this._authService.goToLogin()
   }
 
 }

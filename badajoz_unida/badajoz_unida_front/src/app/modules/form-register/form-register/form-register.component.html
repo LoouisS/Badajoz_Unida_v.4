@@ -1,36 +1,77 @@
 <form [formGroup]="forma" (ngSubmit)="guardar(forma)" class="col-12 rounded-4 d-flex flex-column align-items-center justify-content-between">
-  <div *ngIf="!formIntereses" class="col-12 px-5">
-    <h1 class="col-12 mb-2 p-0">Cuéntanos sobre ti</h1>
+  <div *ngIf="!formIntereses" class="col-12 px-3 px-lg-5 pt-5 pt-lg-0">
+    <h1 class="col-12 mt-5 mt-lg-0 mb-2 p-0">Cuéntanos sobre ti</h1>
     <div class="separador mt-1 mb-4"></div>
-    <div class="d-flex mt-3 mb-2">
-      <div class="input-group pe-1">
+    <div class="d-flex mt-3 mb-2 flex-wrap flex-lg-nowrap">
+      <div class="input-group pe-lg-1 mb-2 mb-lg-0">
         <label for="iNombre">Nombre</label>
-        <input class="form-control" type="text" formControlName="nombre" maxlength="60" name="nombre" id="iNombre" placeholder="Nombre" />
+        <input class="form-control"
+               type="text"
+               formControlName="nombre"
+               maxlength="60"
+               name="nombre"
+               id="iNombre"
+               placeholder="Nombre"
+               [class.is-invalid]="!validar('nombre')"
+        />
         <small *ngIf="!validar('nombre')" class="error">El nombre es un campo requerido.</small>
       </div>
-      <div class="input-group ps-1">
+      <div class="input-group ps-lg-1">
         <label for="iApellidos">Apellidos</label>
-        <input class="form-control" type="text" formControlName="apellidos" maxlength="60" name="apellidos" id="iApellidos" placeholder="Apellidos" />
+        <input class="form-control"
+               type="text"
+               formControlName="apellidos"
+               maxlength="60"
+               name="apellidos"
+               id="iApellidos"
+               placeholder="Apellidos"
+               [class.is-invalid]="!validar('apellidos')"
+        />
         <small *ngIf="!validar('apellidos')" class="error">El apellido es un campo requerido.</small>
       </div>
     </div>
 
-    <div class="d-flex my-2">
-      <div class="input-group pe-1">
+    <div class="d-flex my-2 flex-wrap flex-lg-nowrap">
+      <div class="input-group pe-lg-1 mb-2 mb-lg-0">
         <label for="iMail">Email</label>
-        <input class="form-control" type="email" formControlName="email" maxlength="100"  name="mail" id="iMail" placeholder="Correo Electrónico" />
+        <input class="form-control"
+               type="email"
+               formControlName="email"
+               maxlength="100"
+               name="mail"
+               id="iMail"
+               placeholder="Correo Electrónico"
+               [class.is-invalid]="!validar('email')"
+        />
         <small *ngIf="!validar('email')" class="error">El formato del email debe ser: ejemplo@ejemplo.com</small>
       </div>
-      <div class="input-group ps-1">
+      <div class="input-group ps-lg-1">
         <label for="iUsuario">Nombre de usuario</label>
-        <input class="form-control" type="text" formControlName="usuario" maxlength="60" name="usuario" id="iUsuario" placeholder="Nombre de usuario" />
+        <input class="form-control"
+               type="text"
+               formControlName="usuario"
+               maxlength="60"
+               name="usuario"
+               id="iUsuario"
+               placeholder="Nombre de usuario"
+               [class.is-invalid]="!validar('usuario')"
+        />
         <small *ngIf="!validar('usuario')" class="error">El usuario es un campo requerido.</small>
       </div>
     </div>
 
     <div class="input-group password my-2">
       <label for="iPassword">Contraseña</label>
-      <input class="form-control" type="password" formControlName="password" name="password" id="iPassword" placeholder="Contraseña" oncopy="return false" onpaste="return false"/>
+      <input class="form-control"
+             type="password"
+             formControlName="password"
+             name="password"
+             id="iPassword"
+             placeholder="Contraseña"
+             oncopy="return false"
+             onpaste="return false"
+             [class.is-invalid]="!validar('password')"
+      />
       <i id="ieye"class="bi bi-eye-fill" (click)="showHide()"></i>
       <small *ngIf="!validar('password')" class="error">
         La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
@@ -40,27 +81,51 @@
 
     <div class="input-group password my-2">
       <label for="iPasswordRepeat">Email</label>
-      <input class="form-control" type="password" formControlName="password2" name="passwordRepeat" id="iPasswordRepeat" placeholder="Repite tu contraseña" oncopy="return false" onpaste="return false"/>
+      <input class="form-control"
+             type="password"
+             formControlName="password2"
+             name="passwordRepeat"
+             id="iPasswordRepeat"
+             placeholder="Repite tu contraseña"
+             oncopy="return false"
+             onpaste="return false"
+             [class.is-invalid]="!comprobarPasswords || !validar('password2')"
+      />
       <i id="ieye2"class="bi bi-eye-fill" (click)="showHide2()"></i>
       <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
     </div>
 
-    <div class="d-flex my-2">
-      <div class="input-group pe-1">
+    <div class="d-flex my-2 flex-wrap flex-lg-nowrap">
+      <div class="input-group pe-lg-1 mb-2 mb-lg-0">
         <label for="ifechaNacimiento">Fecha de nacimiento </label>
-        <input class="form-control" type="date" formControlName="fechaNacimiento" name="fechaNacimiento" id="ifechaNacimiento" (change)="imprimir()"/>
+        <input class="form-control"
+               type="date"
+               formControlName="fechaNacimiento"
+               name="fechaNacimiento"
+               id="ifechaNacimiento"
+               (change)="imprimir()"
+               [class.is-invalid]="comprobarEdad() || !validar('fechaNacimiento')"
+        />
         <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
       </div>
-      <div class="input-group ps-1">
+      <div class="input-group ps-lg-1">
         <label for="iTelefono">Teléfono de contacto </label>
-        <input class="form-control" type="text" formControlName="telefono" maxlength="9" name="telefono" id="iTelefono" placeholder="Teléfono de contacto" />
+        <input class="form-control"
+               type="text"
+               formControlName="telefono"
+               maxlength="9"
+               name="telefono"
+               id="iTelefono"
+               placeholder="Teléfono de contacto"
+               [class.is-invalid]="!validar('telefono')"
+        />
         <small *ngIf="!validar('telefono')" class="error">El teléfono es un campo necesario, debe tener 9 digitos.</small>
       </div>
     </div>
 
     <div class="input-group ps-1 mb-3">
       <label for="idioma">Idioma de preferencia</label>
-      <select class="form-select" id="idioma" formControlName="idioma">
+      <select class="form-select" id="idioma" formControlName="idioma" [class.is-invalid]="comprobarIdioma()">
         <option value="-1" disabled selected>Selecciona un idioma</option>
         <option
           *ngFor="let idioma of idiomas"
@@ -75,13 +140,15 @@
 <!--          <input type="submit" class="button" value="Continuar" />-->
       <button [attr.disabled]="verificarFormulario()? true : null"
               [ngClass]="{'btn btn-secondary col-12': (verificarFormulario()), 'button continuar': !verificarFormulario()}"
-              class="rounded-pill mt-3"
+              class="rounded-pill my-3"
               (click)="goToIntereses()">
         Continuar
       </button>
+      <small class="d-lg-none text-black fw-bold">¿Ya tienes cuenta? Entonces inicia sesión.</small>
+      <button class="button rounded-pill d-lg-none mt-2" (click)="goToLogin()">Regresar a iniciar sesión</button>
     </div>
   </div>
-  <div *ngIf="formIntereses" class="px-5">
+  <div *ngIf="formIntereses" class="px-4 px-lg-5">
     <h1 class="py-3 px-0">¿Qué es lo que te gusta?</h1>
     <div class="separador mt-1 mb-4"></div>
     <div class="d-flex flex-wrap justify-content-center">

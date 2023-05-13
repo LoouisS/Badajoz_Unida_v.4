@@ -336,4 +336,8 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     console.log(this.forma);
   }
 
+  goToLogin(){
+    this._authService.goToLogin();
+  }
+
 }

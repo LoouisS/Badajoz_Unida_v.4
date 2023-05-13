@@ -63,7 +63,7 @@ form > small{
   color: var(--primary-color);
 }
 
-.input-group small{
+.input-group .error{
   font-size: .7rem;
   color: var(--primary-color);
   display: block;
@@ -121,4 +121,21 @@ form a{
 
 .badge:hover, .selected{
   background-color: var(--primary-color) !important;
+}
+
+div .password{
+  position: relative;
+}
+
+#ieye, #ieye2{
+  position: absolute;
+  top: 32.5px;
+  transform: translateX(-10px);
+}
+
+@media screen and (min-width: 100px) and (max-width: 900px){
+  form{
+    min-height: 100vh;
+    border-radius: 0 !important;
+  }
 }

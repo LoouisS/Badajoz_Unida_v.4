@@ -1,6 +1,5 @@
 form {
   background-color: white;
-  padding: 3rem .5rem;
 }
 
 form h1{
@@ -104,5 +103,10 @@ form input[type="submit"]:hover{
 form a{
   font-size: .8rem;
   text-decoration: none;
+}
+
+img{
+  width: 100%;
+  height: auto;
 }
 

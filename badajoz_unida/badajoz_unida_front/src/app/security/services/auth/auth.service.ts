@@ -5,6 +5,7 @@ import {NuevoUsuario} from "../../models/auth/nuevo-usuario";
 import {HttpClient} from "@angular/common/http";
 import {JwtDto} from "../../models/auth/jwt-dto";
 import {Model} from "../../../models/model.model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   authURL = 'http://localhost:8080/auth/';
   modelo: Model = new Model();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   public nuevo(nuevoUsuario: NuevoUsuario): Observable<any> {
@@ -48,6 +49,14 @@ export class AuthService {
 
   public getAuthMessage(){
     return this.isFormRegister;
+  }
+
+  goToRegistro(){
+    this.router.navigate(['/auth/registro']);
+  }
+
+  goToLogin(){
+    this.router.navigate(['/auth/login']);
   }
 
 }

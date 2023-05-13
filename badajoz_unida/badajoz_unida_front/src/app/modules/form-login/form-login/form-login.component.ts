@@ -114,4 +114,8 @@ export class FormLoginComponent implements OnInit{
     }
   }
 
+  goToRegistro(){
+    this._authService.goToRegistro();
+  }
+
 }

@@ -1,8 +1,8 @@
 <div class="grid-form-image col-12 d-flex justify-content-center align-items-center">
   <div class="grid-form-background">
   </div>
-  <div class="container d-flex col-12 m-0 justify-content-center align-items-center">
-    <div *ngIf="!isFormRegistro" class="col-6 fadeIn animated">
+  <div class="container d-flex col-12 m-0 p-0 justify-content-center align-items-center">
+    <div *ngIf="!isFormRegistro" class="col-6 fadeIn animated d-none d-lg-block">
       <h1 class="pb-3">¿Qué tal?</h1>
       <div class="px-3">
         <h2 class="pb-4">Nos encanta tenerte por aquí de nuevo</h2>
@@ -11,7 +11,7 @@
         <button class="col-4 button rounded-pill mt-3" (click)="goToRegistro()">Crear mi cuenta</button>
       </div>
     </div>
-    <div *ngIf="isFormRegistro" class="col-5 fadeIn animated">
+    <div *ngIf="isFormRegistro" class="col-5 fadeIn animated d-none d-lg-block">
       <h1 class="pb-3">¿Te nos unes?</h1>
       <div class="px-3">
         <h3 class="pb-4">En nuestra plataforma podrás conocer a varias personas con tus mismos intereses</h3>
@@ -20,8 +20,8 @@
         <button class="col-6 button rounded-pill mt-3" (click)="goToLogin()">Regresar al login</button>
       </div>
     </div>
-    <div class="fadeIn animated grid-form" [class.col-6]="!isFormRegistro" [class.col-7]="isFormRegistro">
-        <router-outlet class="col-12"></router-outlet>
+    <div class="fadeIn animated grid-form" [class.col-lg-6]="!isFormRegistro" [class.col-lg-7]="isFormRegistro">
+        <router-outlet></router-outlet>
     </div>
   </div>
 </div>
