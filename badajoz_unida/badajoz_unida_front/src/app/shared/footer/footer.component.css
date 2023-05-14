@@ -1,0 +1,26 @@
+footer{
+  width: 100%;
+  min-height: 200px;
+  background-color: hsl(0, 0%, 85%);
+}
+
+h1{
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+h1 > span{
+  color: var(--primary-color);
+}
+
+img{
+  width: 100%;
+  height: auto;
+  filter: grayscale(1);
+  transition: all .5s ease;
+  cursor: pointer;
+}
+
+img:hover{
+  filter: grayscale(0);
+}

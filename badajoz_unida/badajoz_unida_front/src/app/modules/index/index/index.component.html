@@ -1,0 +1,48 @@
+<div class="portada d-flex align-items-center justify-content-around fadeIn animated">
+  <div class="degradado"></div>
+  <div class=" mensaje px-5">
+    <span class="d-block">Bienvenido a</span>
+    <span>Badajoz Unida</span>
+  </div>
+  <div class="logo">
+    <img src="../../../../assets/header_logo.png" alt="logo" />
+  </div>
+</div>
+<div class="px-lg-5 my-lg-5 fadeIn animated">
+  <div class="bienvenida px-3 px-lg-5 py-4 rounded-2">
+    <p>
+      Nos complace darte la bienvenida a esta plataforma única que busca reunir y celebrar la diversidad cultural de
+      nuestra comunidad. Sabemos que cada persona tiene su propia historia, tradiciones y costumbres, y queremos fomentar un
+      ambiente donde todos se sientan valorados y respetados.
+    </p>
+    <p>
+      Nuestra intención es conectar a nuestra población venga de donde venga, creando eventos que permitan
+      compartir experiencias, fortalecer la comprensión mutua y construir lazos de amistad. Queremos ofrecer un espacio donde
+      todos puedan aprender unos de otros, disfrutar de la riqueza cultural y celebrar la diversidad que enriquece nuestra sociedad.
+    </p>
+    <p>
+      Aquí encontrarás una amplia variedad de eventos: desde festivales culturales y ferias de comida hasta talleres educativos y
+      actividades recreativas. Queremos que te sientas parte activa de esta comunidad
+    </p>
+  </div>
+</div>
+<div class="enlaces py-5">
+  <h1 class="d-flex justify-content-center">Recorre todos los rincones de nuestra página web</h1>
+  <div class="d-flex justify-content-around mt-5">
+    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4">
+      <span class="fa-regular fa-calendar"></span>
+      <h2 class="mt-2">Eventos</h2>
+      <p class="px-4">Apúntate a cualquiera de los eventos que tenemos disponibles</p>
+    </div>
+    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4" [routerLink]="['/mis-eventos']">
+      <span class="fa-regular fa-calendar-check"></span>
+      <h2 class="mt-2">Mis eventos</h2>
+      <p class="px-4">Gestiona y mira los eventos a los que te has apuntado</p>
+    </div>
+    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4" [routerLink]="['/perfil']">
+      <span class="fa-solid fa-user"></span>
+      <h2 class="mt-2">Perfil</h2>
+      <p >Gestiona y actualiza tus datos</p>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,13 @@
-<app-nav-bar></app-nav-bar>
+<!--<app-header></app-header>-->
+<app-nav-bar (menuOpened)="cambiarTamano($event)"></app-nav-bar>
+<div class="position-relative">
+  <main>
+    <div [ngStyle]="{'margin-left': + menuTamano + 'px'}">
+      <router-outlet></router-outlet>
+    </div>
+    <div [ngStyle]="{'padding-bottom': + paddingTamano + 'px'}"></div>
+  </main>
+  <div class="footer" [ngStyle]="{'margin-left': 'calc(' + menuTamano + 'px)'}">
+    <app-footer (tamanoFooter)="setTamanoPadding($event)"></app-footer>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+div{
+  transition: all .5s ease;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  box-shadow: 0 -1px 4px hsla(0, 0%, 10%, .3);
+}

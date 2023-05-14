@@ -1,192 +1,329 @@
-.menu-container{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
-
-/*======Header======*/
-#menu{
-  height: 100vh;
-}
-
-header{
-  background-color: var(--bg-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
-  margin-block-end: .5rem;
-  padding: 1rem;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .logo-container{
-  display: flex;
-  align-items: center;
-  column-gap: 1rem;
-}
-
-header .logo-container img{
-  width: 60px;
-}
-
-header .logo-container #nombreApp{
-  color: var(--primary-color);
-  font-weight: bold;
-  font-size: 1.7rem;
-  display: none;
-}
-
-header .account-container>button{
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-header .account-container>.desplegable{
-  position: absolute;
-  z-index: 12;
-  top: 60px;
-  right: 10px;
-  width: fit-content;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);
-}
-
-header .account-container>.desplegable.hidden{
-  display: none;
-}
-
-header .account-container>.desplegable ul li{
-  list-style: none;
-  text-align: right;
-  margin: .5rem 0;
-}
-
-header .account-container>.desplegable ul li button{
-  border: none;
-  outline: none;
-  background: none;
-  cursor: pointer;
-}
-
-header .account-container>.desplegable ul li button a{
-  text-decoration: none;
-  color: black;
-}
-
-header .account-container>.desplegable ul li button a:visited{
-  text-decoration: none;
-  color: black;
-}
-
-/*======Menú======*/
 aside{
-  background-color: var(--secondary-color);
-  display: flex;
-  justify-content: space-around;
-  padding: .8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 78px;
+  background-color: var(--primary-color);
+  transition: all .5s ease;
+  box-shadow: 2px 0 4px hsla(0, 0%, 10%, .3);
+  z-index: 1;
 }
 
-aside .icono{
+.menu-abierto{
+  width: 240px;
+}
+
+.logo-container .logo{
+  color: white;
+  display: flex;
+}
+
+.logo-container .logo span{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+aside .logo-container .fa-solid{
+  position: absolute;
+  top: 6px;
+  left: 20%;
+  height: 50px;
+  width: 50px;
+  font-size: 1.2rem;
+  color: white;
+  line-height: 50px;
+  transition: all .5s ease;
+  cursor: pointer;
+}
+
+aside.menu-abierto .logo-container .fa-solid{
+  left: 75%
+}
+
+aside .logo-container .fa-solid:hover{
+  background-color: white;
+  color: var(--primary-color);
+}
+
+aside ul li{
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin: 7.5px 5px;
+  list-style: none;
+  line-height: 50px;
+}
+
+aside ul li div{
+  min-width: 50px;
+  min-height: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  transition: all .4s ease-in;
+  cursor: pointer;
+}
+
+aside ul li div:hover{
+  color: var(--primary-color);
+  background-color: white;
+}
+
+.nav-icon{
+  height: 50px;
+  min-width: 50px;
+  border-radius: 12px;
+  line-height: 50px;
   text-align: center;
 }
 
-aside .icono i{
-  color: var(--bg-color);
-  font-size: 1.4rem;
-  cursor: pointer;
-  font-style: normal;
-  font-weight: bold;
-  display: inline-block;
+li .nav-tip{
+  position: absolute;
+  left: 75px;
+  top: 0;
+  transform: translateY(-50%);
+  height: 35px;
+  width: 125px;
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 5px 10px hsla(0, 0%, 0%, .2);
+  text-align: center;
+  line-height: 35px;
+  transition: 0s;
+  opacity: 0;
+  pointer-events: none;
 }
 
-aside .icono i.active{
-  color: var(--primary-color);
+li:hover .nav-tip{
+  opacity: 1;
+  transition: all .5s ease;
+  top: 50%;
+  pointer-events: none;
 }
 
-aside .icono i span{
-  display: none;
+.perfil-container{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 10px;
+  color: white;
+  background-color: var(--primary-color-dark);
 }
 
-/*======Contenido======*/
-main{
-  background-color: var(--bg-color);
-  overflow-y: scroll;
-  height: 84vh;
-  padding: 1rem;
-  padding-bottom: 70px;
+.perfil-container .perfil{
+  position: relative;
+  padding: 0 6px;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
-/*======Footer======*/
-footer{
-  background-color: silver;
+.perfil-container .perfil .perfil-detalles{
+  display: flex;
+  align-items: center;
 }
 
-/*======Media Queries======*/
-@media screen and (min-width: 750px) {
-
-  header .logo-container #nombreApp{
-    display: block;
-  }
-
-  .app-container{
-    order: 1;
-    position: relative;
-    width: 100%;
-  }
-  .menu-container{
-    position: static;
-    order: 0;
-    width: 350px;
-  }
-
-  #menu{
-    display: flex;
-  }
-
-  aside{
-    display: block;
-    width: 100%;
-    min-height: 100vh;
-    max-height: 100vh;
-    padding: 1rem;
-  }
-
-  aside .icono{
-    text-align: left;
-    margin: 2rem 0;
-  }
-
-  aside .icono i{
-    padding: .5rem;
-    font-size: 1.2rem;
-  }
-
-  aside .icono i.active{
-    background-color: var(--bg-color);
-    border-radius: 15px;
-    color: var(--primary-color);
-  }
-
-  aside .icono i.active span{
-    color: var(--primary-color);
-  }
-
-  aside .icono i span{
-    display: inline-block;
-    margin-left: .5rem;
-    text-decoration: none;
-    color: #fff;
-  }
-
-  main{
-    height: 90vh;
-    padding-bottom: 1rem;
-  }
-
-  footer{display: none;}
+.perfil-detalles .perfil-img{
+  width: 45px;
+  height: 45px;
+  background-color: aqua;
 }
+
+.perfil-detalles .perfil-nombre{
+  font-weight: 500;
+}
+
+/*.menu-container{*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*  bottom: 0;*/
+/*}*/
+
+/*!*======Header======*!*/
+/*#menu{*/
+/*  height: 100vh;*/
+/*}*/
+
+/*header{*/
+/*  background-color: var(--bg-color);*/
+/*  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);*/
+/*  margin-block-end: .5rem;*/
+/*  padding: 1rem;*/
+/*  height: 80px;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
+
+/*header .logo-container{*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  column-gap: 1rem;*/
+/*}*/
+
+/*header .logo-container img{*/
+/*  width: 60px;*/
+/*}*/
+
+/*header .logo-container #nombreApp{*/
+/*  color: var(--primary-color);*/
+/*  font-weight: bold;*/
+/*  font-size: 1.7rem;*/
+/*  display: none;*/
+/*}*/
+
+/*header .account-container>button{*/
+/*  background: none;*/
+/*  border: none;*/
+/*  outline: none;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*header .account-container>.desplegable{*/
+/*  position: absolute;*/
+/*  z-index: 12;*/
+/*  top: 60px;*/
+/*  right: 10px;*/
+/*  width: fit-content;*/
+/*  padding: 1rem;*/
+/*  background-color: #fff;*/
+/*  border-radius: 12px;*/
+/*  box-shadow: 1px 1px 4px rgba(0, 0, 0, .3);*/
+/*}*/
+
+/*header .account-container>.desplegable.hidden{*/
+/*  display: none;*/
+/*}*/
+
+/*header .account-container>.desplegable ul li{*/
+/*  list-style: none;*/
+/*  text-align: right;*/
+/*  margin: .5rem 0;*/
+/*}*/
+
+/*header .account-container>.desplegable ul li button{*/
+/*  border: none;*/
+/*  outline: none;*/
+/*  background: none;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*header .account-container>.desplegable ul li button a{*/
+/*  text-decoration: none;*/
+/*  color: black;*/
+/*}*/
+
+/*header .account-container>.desplegable ul li button a:visited{*/
+/*  text-decoration: none;*/
+/*  color: black;*/
+/*}*/
+
+/*!*======Menú======*!*/
+/*aside{*/
+/*  background-color: var(--secondary-color);*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*  padding: .8rem;*/
+/*}*/
+
+/*aside .icono{*/
+/*  text-align: center;*/
+/*}*/
+
+/*aside .icono i{*/
+/*  color: var(--bg-color);*/
+/*  font-size: 1.4rem;*/
+/*  cursor: pointer;*/
+/*  font-style: normal;*/
+/*  font-weight: bold;*/
+/*  display: inline-block;*/
+/*}*/
+
+/*aside .icono i.active{*/
+/*  color: var(--primary-color);*/
+/*}*/
+
+/*aside .icono i span{*/
+/*  display: none;*/
+/*}*/
+
+/*!*======Contenido======*!*/
+/*main{*/
+/*  background-color: var(--bg-color);*/
+/*  overflow-y: scroll;*/
+/*  height: 84vh;*/
+/*  padding: 1rem;*/
+/*  padding-bottom: 70px;*/
+/*}*/
+
+/*!*======Footer======*!*/
+/*footer{*/
+/*  background-color: silver;*/
+/*}*/
+
+/*!*======Media Queries======*!*/
+/*@media screen and (min-width: 750px) {*/
+
+/*  header .logo-container #nombreApp{*/
+/*    display: block;*/
+/*  }*/
+
+/*  .app-container{*/
+/*    order: 1;*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*  }*/
+/*  .menu-container{*/
+/*    position: static;*/
+/*    order: 0;*/
+/*    width: 350px;*/
+/*  }*/
+
+/*  #menu{*/
+/*    display: flex;*/
+/*  }*/
+
+/*  aside{*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    min-height: 100vh;*/
+/*    max-height: 100vh;*/
+/*    padding: 1rem;*/
+/*  }*/
+
+/*  aside .icono{*/
+/*    text-align: left;*/
+/*    margin: 2rem 0;*/
+/*  }*/
+
+/*  aside .icono i{*/
+/*    padding: .5rem;*/
+/*    font-size: 1.2rem;*/
+/*  }*/
+
+/*  aside .icono i.active{*/
+/*    background-color: var(--bg-color);*/
+/*    border-radius: 15px;*/
+/*    color: var(--primary-color);*/
+/*  }*/
+
+/*  aside .icono i.active span{*/
+/*    color: var(--primary-color);*/
+/*  }*/
+
+/*  aside .icono i span{*/
+/*    display: inline-block;*/
+/*    margin-left: .5rem;*/
+/*    text-decoration: none;*/
+/*    color: #fff;*/
+/*  }*/
+
+/*  main{*/
+/*    height: 90vh;*/
+/*    padding-bottom: 1rem;*/
+/*  }*/
+
+/*  footer{display: none;}*/
+/*}*/
