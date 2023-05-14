@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
 import {NuevoUsuario} from "../../../security/models/auth/nuevo-usuario";
 import {CategoriasService} from "../../../services/categorias.service";
 import {ValidadoresService} from "../../../services/validadores.service";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-form-register',
@@ -22,6 +23,17 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   formIntereses: boolean = false;
   interesesList: any[] = [];
   interesesSelected: any[] = [];
+ alert = Swal.mixin({
+   allowOutsideClick: false,
+   allowEscapeKey: false,
+   allowEnterKey: false,
+   stopKeydownPropagation: true,
+   customClass: {
+     confirmButton: 'btn btn-danger',
+     cancelButton: 'btn btn-light'
+   },
+   buttonsStyling: false
+  })
   addIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   removeIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
@@ -151,7 +163,36 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
       });
       return;
     }
-    this.registro(forma);
+  this.alert.fire({
+    title: '¿Estás seguro que deseas continuar?',
+    text: 'Algunos de tus datos podrán no ser modificados posteriormente',
+    html: '<ul class="list-group list-group-flush d-flex">'+
+            '<li class="list-group-item text-left">Nombre: ' + this.forma.get('nombre')?.value + '</li>'+
+            '<li class="list-group-item text-left">Apellidos: ' + this.forma.get('apellidos')?.value + '</li>'+
+            '<li class="list-group-item text-left">Email: ' + this.forma.get('email')?.value + '</li>'+
+            '<li class="list-group-item text-left">Fecha Nacimiento: ' + this.forma.get('fechaNacimiento')?.value + '</li>'+
+            '<li class="list-group-item text-left">Teléfono: ' + this.forma.get('telefono')?.value + '</li>'+
+            '<li class="list-group-item text-left">Usuario: ' + this.forma.get('usuario')?.value + '</li>'+
+            '<li class="list-group-item text-left">Idioma: ' + this.forma.get('idioma')?.value + '</li>'+
+          '</ul>',
+    icon: 'question',
+    showConfirmButton: true,
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.registro(forma);
+    } else {
+      this.alert.fire({
+        title: 'Registro cancelado con éxito',
+        text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
+        icon: 'info',
+        timer: 4000,
+        showConfirmButton: false,
+        showCancelButton: false,
+      })
+    }
+  })
+
   }
 
   /**

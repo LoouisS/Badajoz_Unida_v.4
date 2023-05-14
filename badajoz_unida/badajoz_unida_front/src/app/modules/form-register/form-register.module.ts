@@ -13,7 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         FormRegisterRoutingModule,
-      ReactiveFormsModule
+        ReactiveFormsModule
     ]
 })
 export class FormRegisterModule { }
