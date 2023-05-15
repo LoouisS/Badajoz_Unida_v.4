@@ -33,7 +33,7 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
      cancelButton: 'btn btn-light'
    },
    buttonsStyling: false
-  })
+  });
   addIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   removeIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
@@ -216,29 +216,30 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     this._authService.nuevo(user).subscribe(
       (data: any) => {
         if (data['status'] != 'error') {
-          // this.modal.generateModal(
-          //   'Éxito',
-          //   `Cuenta creada con éxito.`,
-          //   'De acuerdo',
-          //   'success'
-          // );
-          console.log(data);
-          this.router.navigate(['/auth']);
-          // setTimeout(() => {
-          //   this.router.navigate(['login']);
-          // }, 2000);
-        } else {
-          // this.modal.generateModal(
-          //   'Algo salió mal',
-          //   `${data['result']['error_msg']}`,
-          //   'De acuerdo',
-          //   'error'
-          // );
+          this.alert.fire({
+            title: 'Registrado con éxito!',
+            text: 'El usuario se ha registrado con éxito en la aplicación',
+            icon: 'success',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+         setTimeout(() => {
+           this.router.navigate(['login']);
+         }, 4000);
         }
       },
       async (errorServicio: any) => {
         console.log('he fallado');
         console.log(errorServicio);
+        this.alert.fire({
+          title: 'Ha ocurrido un problema',
+          text: errorServicio.error,
+          icon: 'error',
+          timer: 4000,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
         //this.toast=true;
       }
     );
