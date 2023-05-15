@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../security/services/auth/auth.service";
 import {LoginUsuario} from "../../../security/models/auth/login-usuario";
 import {TokenService} from "../../../security/services/auth/token.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-login',
@@ -14,6 +15,17 @@ export class FormLoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   showAlert: boolean = false;
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
   // modal = new ModalComponent();
   /**
    * @ignore
@@ -93,6 +105,14 @@ export class FormLoginComponent implements OnInit{
       },
       async (errorServicio) => {
         this.showAlert = true;
+        this.alert.fire({
+          title: 'Ha ocurrido un problema',
+          text: errorServicio.error,
+          icon: 'error',
+          timer: 4000,
+          showConfirmButton: false,
+          showCancelButton: false,
+        })
         console.log('fallo al conectar con el servidor');
         console.log(errorServicio);
       }
