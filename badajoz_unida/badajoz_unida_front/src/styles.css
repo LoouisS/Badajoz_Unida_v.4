@@ -3,11 +3,11 @@
   --bg-color: white;
   --primary-color: hsl(0, 100%, 41%);
   --primary-color-opacity: hsla(0, 100%, 41%, .4);
-  --primary-color-opacity-2: hsla(0, 100%, 41%, .7);
+  --primary-color-dark: hsl(0, 100%, 38%);
   --primary-color-hover: #c40000;
-  --secondary-color-opacity: hsla(0, 0%, 57%, .8);
+  --secondary-color-opacity: hsla(0, 0%, 57%, .9);
+  --secondary-color-opacity-2: hsla(0, 0%, 57%, .4);
   --secondary-color: hsl(0, 0%, 57%);
-  --secondary-color-opacity: hsla(0, 0%, 57%, .8);
   --text-base-color: black;
 }
 

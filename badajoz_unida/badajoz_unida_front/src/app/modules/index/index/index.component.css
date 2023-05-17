@@ -1,0 +1,88 @@
+.portada{
+  position: relative;
+  height: 350px;
+  background: url("src/assets/home.jpg");
+  background-size: cover;
+  background-position: 50%;
+  box-shadow: 0 2px 4px hsla(0, 0%, 10%, .3);
+}
+
+.degradado{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--secondary-color-opacity), var(--secondary-color-opacity-2), var(--secondary-color-opacity));
+}
+
+.mensaje, .logo{
+  font-weight: 600;
+  z-index: 1;
+}
+
+.mensaje span:nth-child(1){
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 5px hsla(0, 0%, 10%, .5);
+}
+
+.mensaje span:nth-child(2){
+  font-weight: 700;
+  font-size: 3rem;
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color-dark);
+  text-shadow: 1px 1px 5px hsla(0, 0%, 0%, .4);
+}
+
+.logo img{
+  width: 80%;
+  height: auto;
+}
+
+.bienvenida{
+  background-color: var(--secondary-color-opacity-2);
+}
+
+.enlaces{
+  background-color: var(--primary-color);
+}
+
+.enlaces > div > div{
+  color: white;
+  transition: all .5s ease;
+  cursor: pointer;
+}
+
+.enlaces p{
+  position: absolute;
+  opacity: 0;
+}
+
+.enlaces > div > div:hover{
+  color: hsl(0, 0%, 0%);
+  background-color: white;
+  box-shadow: 0 0 5px hsla(0, 0%, 10%, .5);
+}
+
+.enlaces > div > div:hover span, .enlaces > div > div:hover h2{
+  position: absolute;
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+.enlaces > div > div:hover p{
+  position: static;
+  margin: 0;
+  color: hsl(0, 0%, 10%);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  opacity: 1;
+}
+
+h1{
+  color: white;
+  font-weight: 600;
+}
+
+span.fa-regular, span.fa-solid{
+  font-size: 2.5rem;
+}

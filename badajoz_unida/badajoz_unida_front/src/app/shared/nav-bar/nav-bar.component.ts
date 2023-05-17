@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -7,55 +7,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent {
-  nombreUsuario: any = ";"
 
-  /**
-   * @ignore
-   */
-  constructor(public router: Router) {
+  @Output() menuOpened = new EventEmitter<number>();
+  isOpened: boolean = false;
 
-    this.nombreUsuario = 'Usuario';
-  }
-
-  /**
-   * @ignore
-   */
-  ngOnInit(): void {
-  }
-
-  /**
-   * Valida si el usuario que ha iniciado sesión es administrador o no.
-   *
-   * @returns - Verdadero o falso
-   */
-  comprobarTipo() {
-    // if (this.usuarioService.getTipoActual() == 'a') {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-  }
-
-  /**
-   * Cierra la sesión
-   */
-  cerrarSesion() {
-    // this.usuarioService.cerrarSesion();
-
-  }
-
-  /**
-   * Muestra u oculta el desplegable.
-   */
-  toggleOpt(){
-    document.querySelector('.account-container>.desplegable')?.classList.toggle('hidden');
-  }
-
-  /**
-   * Oculta el desplegable.
-   */
-  hideOpt(){
-    document.querySelector('.account-container>.desplegable')?.classList.add('hidden');
+  toggleMenu(){
+    this.isOpened = this.isOpened ? false : true;
+    this.isOpened ? this.menuOpened.emit(240) : this.menuOpened.emit(78);
   }
 
 }
