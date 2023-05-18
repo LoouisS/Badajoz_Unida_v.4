@@ -27,6 +27,13 @@
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Perfil</span>
     </li>
+    <li class="mx-0">
+      <div class="rounded-pill" [routerLink]="['/gestion-eventos']">
+        <span class="nav-icon fa-regular fa-calendar-check"></span>
+        <span *ngIf="isOpened" class="name-nav-link">Gestión eventos</span>
+      </div>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión eventos</span>
+    </li>
   </ul>
   <div class="perfil-container">
     <div class="perfil">
