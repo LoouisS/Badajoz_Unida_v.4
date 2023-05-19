@@ -5,7 +5,7 @@
     <div [ngStyle]="{'margin-left': + menuTamano + 'px'}">
       <router-outlet></router-outlet>
     </div>
-    <div [ngStyle]="{'padding-bottom': + paddingTamano + 'px'}"></div>
+<!--    <div [ngStyle]="{'height': 'calc('+ paddingTamano + 'px + 50px)'}"></div>-->
   </main>
   <div class="footer" [ngStyle]="{'margin-left': 'calc(' + menuTamano + 'px)'}">
     <app-footer (tamanoFooter)="setTamanoPadding($event)"></app-footer>

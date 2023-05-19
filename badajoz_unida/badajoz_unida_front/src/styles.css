@@ -72,3 +72,27 @@ body{
     margin: 0 auto;
   }
 }
+
+@media screen and (min-width: 100px) and (max-width: 768px) {
+  .footer-padding{
+    padding-bottom: 450px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .footer-padding{
+    padding-bottom: 350px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .footer-padding{
+    padding-bottom: 300px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .footer-padding{
+    padding-bottom: 325px;
+  }
+}
