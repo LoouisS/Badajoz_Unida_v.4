@@ -86,3 +86,14 @@ h1{
 span.fa-regular, span.fa-solid{
   font-size: 2.5rem;
 }
+
+.paginas > div{
+  position: relative;
+}
+
+@media screen and (min-width: 100px) and (max-width: 768px) {
+  .paginas{
+    flex-direction: column;
+    align-items: center;
+  }
+}

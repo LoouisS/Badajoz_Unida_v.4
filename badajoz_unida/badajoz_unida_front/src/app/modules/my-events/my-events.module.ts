@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MyEventsRoutingModule } from './my-events-routing.module';
 import { MyEventsComponent } from './my-events/my-events.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MyEventsComponent } from './my-events/my-events.component';
   ],
   imports: [
     CommonModule,
-    MyEventsRoutingModule
+    MyEventsRoutingModule,
+    SharedModule
   ]
 })
 export class MyEventsModule { }

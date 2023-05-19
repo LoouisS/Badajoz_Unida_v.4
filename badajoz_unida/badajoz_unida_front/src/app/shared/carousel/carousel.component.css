@@ -1,0 +1,36 @@
+.cards-wrapper{
+  display: flex;
+  gap: 10px
+}
+
+.card-1{
+  margin: .5rem;
+  width: 100%;
+}
+
+.card-3{
+  width: calc(100% / 3);
+}
+
+.carousel-control-prev > div, .carousel-control-next > div{
+  background-color: #ff0000;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-control-prev .carousel-control-prev-icon{
+  color: white;
+  transform: translateX(-2px);
+}
+
+.carousel-control-next .carousel-control-next-icon{
+  color: white;
+  transform: translateX(2px);
+}
+
+button.btn{
+  background-color: #ff0000;
+  border: 0;
+}
