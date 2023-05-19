@@ -1,0 +1,10 @@
+<div class="card h-100">
+  <div class="image-wrapper">
+    <img [src]="evento.cover" [alt]="evento.name">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{evento.nombre}}</h5>
+    <p class="card-text">{{evento.descripcion | cortarTexto:200}}</p>
+    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="sayHi()">Saber más</button>
+  </div>
+</div>

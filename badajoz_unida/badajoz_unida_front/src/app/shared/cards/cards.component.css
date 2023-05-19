@@ -1,0 +1,20 @@
+.image-wrapper{
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper img {
+  width: 450px;
+  object-fit: cover;
+}
+
+.btn{
+  border: 0;
+}
+
+.btn-primary{
+  background-color: var(--primary-color);
+}

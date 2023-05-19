@@ -1,0 +1,138 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nombre": "Cine en el río: Todo a la vez en todas partes",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://www.sopitas.com/wp-content/uploads/2022/06/everything-everywhere-all-once-poster.jpg?w=500",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Partido de futbol",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://plus.unsplash.com/premium_photo-1677146015088-71992ac139af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Orquesta músical",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Festival de tapas",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1565599837634-134bc3aadce8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },{
+      "id": 5,
+      "nombre": "Partido de balonceto",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1595795279832-13f0df36fbb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=327&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Fiesta de los Palomos",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1562592619-908ca07deace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Intercambio de idiomas",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1601520525445-1039c1fa232b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "Concurso de fotografía de aves",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1502154882433-a614dba12819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    },
+    {
+      "id": 9,
+      "nombre": "Concurso de Pintura Al Aire Libre",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
+      "cover": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+      "detalles": "",
+      "fechaHora": "",
+      "telefonoContacto": "",
+      "localización": "",
+      "latitud": "",
+      "longitud": "",
+      "intereses": [
+        {"nombre":  ""}
+      ]
+    }
+  ]
+}
