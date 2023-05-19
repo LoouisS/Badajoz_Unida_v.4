@@ -38,6 +38,8 @@ public class Eventos {
 
     @Column(name="longitud")
     private String longitud;
+    @Column(name="localizacion")
+    private String localizacion;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "intereses_eventos",

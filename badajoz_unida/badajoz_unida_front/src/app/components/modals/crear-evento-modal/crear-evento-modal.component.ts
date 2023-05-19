@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ModelNewEvent} from "../../../models/model-new-event";
+import {CategoriasService} from "../../../services/categorias.service";
+import {EventosService} from "../../../services/eventos.service";
 
 @Component({
   selector: 'app-crear-evento-modal',
@@ -11,9 +14,16 @@ export class CrearEventoModalComponent implements OnInit{
   map: any;
   marker: any;
   formCreateEvent!: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  categorias: any;
+  lat: number | undefined;
+  long: number | undefined
+  constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService) { }
 
   ngOnInit() {
+    this.catService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+      console.log("CATEGORIAS", this.categorias);
+    });
     this.initForm();
     this.initMap();
   }
@@ -32,16 +42,9 @@ export class CrearEventoModalComponent implements OnInit{
     this.map.on('click', (e: any) => {
       const latlng = e.latlng;
       this.marker.setLatLng(latlng);
-
-      console.log("Latitud:", latlng.lat);
-      console.log("Longitud:", latlng.lng);
-      // Puedes almacenar los valores en una variable o enviarlos al servidor
+      this.lat = latlng.lat;
+      this.long = latlng.lng;
     });
-
-    // Crear una instancia del control de búsqueda
-
-
-    // Agregar el control de búsqueda al mapa
   }
 
   buscarUbi($event: Event) {
@@ -68,7 +71,6 @@ export class CrearEventoModalComponent implements OnInit{
 
           console.log("Latitud:", result.lat);
           console.log("Longitud:", result.lon);
-          // Puedes almacenar los valores en una variable o enviarlos al servidor
         }
       })
       .catch(error => {
@@ -83,6 +85,7 @@ export class CrearEventoModalComponent implements OnInit{
       descripcion:['',Validators.required],
       tlf:['',Validators.required],
       localizacion:['',Validators.required],
+      intereses:[],
       detalle:['',Validators.required]
     })
   }
@@ -91,4 +94,37 @@ export class CrearEventoModalComponent implements OnInit{
     return !(campo.invalid && campo.touched);
   }
 
+  sendEvent() {
+    if (this.formCreateEvent.invalid || this.formCreateEvent.pending) {
+      Object.values(this.formCreateEvent.controls).forEach((control) => {
+        if (control instanceof FormGroup)
+        control.markAsTouched();
+      });
+      return;
+    }
+    const inter = parseInt(this.formCreateEvent.get('intereses').value);
+
+    const formData = new FormData();
+    formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
+    formData.append('descripcion', this.formCreateEvent.get('descripcion').value);
+    formData.append('detalles', this.formCreateEvent.get('detalle').value);
+    formData.append('localizacion', this.formCreateEvent.get('localizacion').value);
+    formData.append('fechaHora', new Date(this.formCreateEvent.get('fecha').value).toISOString());
+    formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
+    formData.append('latitud', this.lat.toString());
+    formData.append('longitud', this.long.toString());
+    formData.append('imagen', this.getImg());
+    formData.append('intereses', JSON.stringify(inter));
+    this.eventoService.createEvento(formData).subscribe((data) => {
+      console.log("DATA", data);
+    })
+
+  }
+  getImg(){
+    // @ts-ignore
+    const file = (document.getElementById('imgPortada') as HTMLInputElement).files[0];
+    if (file!=null || file != undefined)
+      return file;
+    return null;
+  }
 }

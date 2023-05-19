@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body w-100">
-        <form class="d-flex col-12" [formGroup]="formCreateEvent">
+        <form id="formCreateEvent" class="d-flex col-12" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
           <div class="col-6 p-3">
             <div>
               <label for="nombreEvento" class="form-label">Nombre del evento:</label>
@@ -46,6 +46,15 @@
               <textarea  formControlName="detalle" [class.is-invalid]="!validar('detalle')"
                          class="form-control" id="detalleEvento" ></textarea>
             </div>
+            <div>
+              <label for="intereses" class="form-label">Categoría relacionada</label>
+              <select  formControlName="intereses"
+                         class="form-control" id="intereses" >
+                <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
+                  <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
+                </optgroup>
+              </select>
+            </div>
           </div>
         </form>
         <div class="my-4">
@@ -58,8 +67,7 @@
           <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
           <input type="file" class="form-control" id="imgPortada">
         </div>
-
-        <button type="submit" class="btn button rounded-pill mt-3 mx-5 customBtn">Crear evento</button>
+        <button form="formCreateEvent" type="submit" class="btn button rounded-pill mt-3 mx-5 customBtn">Crear evento</button>
       </div>
     </div>
   </div>

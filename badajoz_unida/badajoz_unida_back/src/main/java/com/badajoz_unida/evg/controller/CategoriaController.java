@@ -35,7 +35,8 @@ public class CategoriaController {
     @GetMapping("/all")
     @PermitAll
     public List<Categorias> getAllCategorias(){
-       return this.catService.getAllCategorias();
+
+        return this.catService.getAllCategorias();
     }
 
     @PostMapping("register/c")
