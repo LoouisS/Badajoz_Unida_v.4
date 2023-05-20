@@ -29,4 +29,12 @@ public class EventoController {
             throw new RuntimeException(e);
         }
     }
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> saveEvent(HttpServletRequest request) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.getAll(),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
