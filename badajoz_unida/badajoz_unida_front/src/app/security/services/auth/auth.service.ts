@@ -28,10 +28,10 @@ export class AuthService {
     return this.httpClient.post<JwtDto>(this.authURL + 'login', loginUsuario);
 
   }
-  //
-  // public refresh(dto: JwtDto): Observable<JwtDto> {
-  //   return this.httpClient.post<JwtDto>(this.authURL + 'refresh', dto);
-  // }
+
+   public refresh(dto: JwtDto): Observable<JwtDto> {
+     return this.httpClient.post<JwtDto>(this.authURL + 'refresh', dto);
+   }
 
   public getCategorias(){
     let categorias: any[] = this.modelo.getCategorias();

@@ -32,6 +32,7 @@ export class ProdInterceptorService implements HttpInterceptor{
     intReq = this.addToken(req,token);
 
 
+    // @ts-ignore
     return next.handle(intReq).pipe(catchError((err:HttpErrorResponse)=>{
       if(err.status===401){
         const dto:JwtDto=new JwtDto(this.tokenService.getToken());

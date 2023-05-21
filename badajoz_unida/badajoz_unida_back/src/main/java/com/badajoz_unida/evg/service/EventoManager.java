@@ -6,6 +6,7 @@ import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.entity.InteresesEventos;
 import com.badajoz_unida.evg.exception.CustomException;
+import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.EventoRepository;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
@@ -64,5 +66,10 @@ public class EventoManager implements EventoService{
         Path fileToSavePath = Files.createFile(folder);
         InputStream inputStream = imagen.get().getInputStream();
         Files.copy(inputStream,fileToSavePath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    @Override
+    public List<Eventos> getAll() throws CustomException {
+        return this.eventoRepository.findAll();
     }
 }

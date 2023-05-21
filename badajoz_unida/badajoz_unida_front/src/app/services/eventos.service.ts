@@ -7,8 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class EventosService {
 
-  apiUrl='http://localhost:8080/eventos/'
-  token='eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTYXJhSmFyYSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE2ODQ1MjgzMjMsImV4cCI6MTY4NDcyODMyM30.eETtvq4LxxJsVkkVjRKm8C7UGDjQVKlCNIY4IkQUNov789VHUvciq_XBknVWs3WFgKCc76iwZJTnpV5nqblyWg';
+  apiUrl='http://localhost:8080/eventos/';
   constructor(private httpClient: HttpClient) { }
 
   getEventos(){
@@ -27,11 +26,10 @@ export class EventosService {
   }
 
   createEvento(formData: FormData){
-    const token = {
-      Authorization:`Bearer ${this.token}`
-    }
-    const headers = new HttpHeaders(token)
-    return this.httpClient.post(this.apiUrl+'save',formData,{headers})
+    return this.httpClient.post(this.apiUrl+'save',formData)
+  }
+  getAllEventos(){
+    return this.httpClient.get(this.apiUrl+'all')
   }
 
 
