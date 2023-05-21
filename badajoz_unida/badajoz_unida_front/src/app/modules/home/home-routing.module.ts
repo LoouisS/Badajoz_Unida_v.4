@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', loadChildren:() => import('../index/index.module').then(module => module.IndexModule) },
   { path: 'mis-eventos', loadChildren:() => import('../my-events/my-events.module').then(module => module.MyEventsModule) },
   { path: 'gestion-eventos', loadChildren:() => import('../gestion-eventos/gestion-eventos.module').then(module => module.GestionEventosModule) },
+  { path: 'eventos', loadChildren:() => import('../events/events.module').then(module => module.EventsModule) },
   { path: 'perfil', loadChildren:() => import('../profile/profile.module').then(module => module.ProfileModule) },
   { path: '**', redirectTo: '/' }
 ];

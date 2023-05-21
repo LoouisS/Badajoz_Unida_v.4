@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cards',
@@ -9,8 +10,11 @@ export class CardsComponent {
 
   @Input() evento: any;
 
-  sayHi(){
-    console.log("Hi");
+  constructor(private router: Router) {
+  }
+
+  showEvent(id: number){
+    this.router.navigate(['/eventos', id]);
   }
 
 }

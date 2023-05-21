@@ -36,6 +36,18 @@ body{
   animation-fill-mode: both;
 }
 
+.btn-primary{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color-dark);
+  transition: all .5s ease;
+}
+
+.btn-primary:hover{
+  transform: scale(1.1);
+  background-color: var(--primary-color-dark);
+  border-color: var(--primary-color);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

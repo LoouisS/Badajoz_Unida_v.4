@@ -5,12 +5,12 @@
       "nombre": "Cine en el río: Todo a la vez en todas partes",
       "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum blandit tortor vel lacinia. Aenean dui mauris, dictum et semper id, mattis vel est. Aenean congue arcu sit amet vehicula tincidunt. Maecenas convallis est in massa iaculis auctor. Cras ornare neque a quam laoreet, at gravida tellus sagittis. Praesent at eros vel ante varius porta eget a lorem. Aliquam eget posuere nulla.",
       "cover": "https://www.sopitas.com/wp-content/uploads/2022/06/everything-everywhere-all-once-poster.jpg?w=500",
-      "detalles": "",
-      "fechaHora": "",
+      "detalles": "Los asistentes al evento deben traer una manta que se pueda poner en el suelo, es recomendable traer sus propios refrescos y comida.",
+      "fechaHora": "2023-05-27 21:41:00",
       "telefonoContacto": "",
-      "localización": "",
-      "latitud": "",
-      "longitud": "",
+      "localizacion": "Paseo del río",
+      "latitud": 38.88189991686415,
+      "longitud": -6.98231473171235,
       "intereses": [
         {"nombre":  ""}
       ]
@@ -23,7 +23,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -38,7 +38,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -53,7 +53,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -67,7 +67,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -82,7 +82,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -97,7 +97,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -112,7 +112,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [
@@ -127,7 +127,7 @@
       "detalles": "",
       "fechaHora": "",
       "telefonoContacto": "",
-      "localización": "",
+      "localizacion": "",
       "latitud": "",
       "longitud": "",
       "intereses": [

@@ -4,7 +4,10 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{evento.nombre}}</h5>
-    <p class="card-text">{{evento.descripcion | cortarTexto:200}}</p>
-    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="sayHi()">Saber más</button>
+    <p class="card-text d-none d-lg-block">{{evento.descripcion | cortarTexto:200}}</p>
+    <p class="card-text d-lg-none">{{evento.descripcion | cortarTexto:100}}</p>
+  </div>
+  <div class="card-footer d-flex justify-content-center py-3">
+    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="showEvent(evento.id)">Saber más <span class="ms-2">→</span></button>
   </div>
 </div>
