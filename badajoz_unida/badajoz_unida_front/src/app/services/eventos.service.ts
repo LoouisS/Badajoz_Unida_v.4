@@ -14,6 +14,17 @@ export class EventosService {
     const {data}: any = (dataEventos as any).default;
     return data;
   }
+
+  getEventosById(id: number){
+    const {data}: any = (dataEventos as any).default;
+    for(let evento of data){
+      if(evento.id == id){
+        return evento;
+      }
+    }
+    return null;
+  }
+
   createEvento(formData: FormData){
     return this.httpClient.post(this.apiUrl+'save',formData)
   }

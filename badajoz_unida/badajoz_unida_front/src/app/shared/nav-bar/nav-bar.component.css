@@ -78,13 +78,25 @@ aside ul li div:hover{
   text-align: center;
 }
 
+.svg-icon{
+  fill: white;
+  transition: color .5s ease;
+}
+
+aside ul li div:hover .svg-icon{
+  fill: var(--primary-color);
+}
+.fa-tag, .fa-heart, .fa-users{
+  font-size: 1.1rem;
+}
+
 li .nav-tip{
   position: absolute;
   left: 75px;
   top: 0;
   transform: translateY(-50%);
   height: 35px;
-  width: 125px;
+  width: 175px;
   background-color: var(--primary-color);
   color: white;
   box-shadow: 0 5px 10px hsla(0, 0%, 0%, .2);

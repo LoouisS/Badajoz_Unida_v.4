@@ -1,0 +1,72 @@
+section{
+  font-size: 1.2rem;
+}
+
+.cover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  max-height: 50vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.cover > div{
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0, 0%, 10%, .7);
+  position: absolute;
+}
+
+.cover h1{
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+
+.cover img{
+  width: 100%;
+  height: auto;
+}
+
+.info{
+  background-color: hsl(0, 0%, 80%);
+}
+
+h1.titulo{
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+div.detalles{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* --- mapa --- */
+
+.bgGeneral{
+  background-color: var(--primary-color);
+  color: white;
+}
+.customForm{
+  border: 0px;
+  border-bottom: 3px solid var(--primary-color);
+  border-radius: 0px;
+}
+.customBtn:hover{
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
+}
+.customBtn{
+  background-color: var(--primary-color-hover);
+  color: white;
+}
+.custom-map{
+  width: 100%;
+  min-height: 300px;
+}

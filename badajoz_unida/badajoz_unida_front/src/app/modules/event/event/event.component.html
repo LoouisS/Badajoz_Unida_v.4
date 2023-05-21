@@ -1,0 +1,30 @@
+<section class="cover col-12">
+  <div></div>
+  <img [src]="evento?.cover" [alt]=""/>
+  <h1>{{evento?.nombre}}</h1>
+</section>
+<section class="px-lg-5 mt-lg-5 d-flex flex-column">
+  <button class="btn btn-primary rounded-pill mb-4 py-2 px-4 align-self-end">Apuntarme <span class="fa-solid fa-check ms-2"></span></button>
+  <div class="info px-5 py-3 rounded-3 d-flex justify-content-around">
+    <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span> |
+    <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span> |
+    <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span>
+  </div>
+  <div class="descripcion py-3 rounded-3">{{evento?.descripcion}}</div>
+</section>
+<section class="pt-5">
+  <h1 class="titulo px-5 mb-3">Detalles</h1>
+  <div class="detalles p-5">
+    <p class="px-5">
+      {{evento?.detalles}}
+    </p>
+  </div>
+</section>
+<section class="pt-5 px-5 d-flex flex-column">
+  <h1 class="titulo mb-3">Lugar</h1>
+  <div class="lugar px-5 py-2">
+    <div id="map" class="custom-map mt-3"></div>
+  </div>
+  <button class="btn btn-primary rounded-pill mt-5 py-2 px-4 align-self-end">Apuntarme <span class="fa-solid fa-check ms-2"></span></button>
+</section>
+<div class="footer-padding"></div>
