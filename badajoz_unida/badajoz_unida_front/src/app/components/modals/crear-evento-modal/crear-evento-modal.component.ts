@@ -22,7 +22,6 @@ export class CrearEventoModalComponent implements OnInit{
   ngOnInit() {
     this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
-      console.log("CATEGORIAS", this.categorias);
     });
     this.initForm();
     this.initMap();

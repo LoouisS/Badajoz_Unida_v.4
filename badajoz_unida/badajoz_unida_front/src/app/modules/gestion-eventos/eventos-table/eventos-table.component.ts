@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from
 import {EventosService} from "../../../services/eventos.service";
 import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
+import {CategoriasService} from "../../../services/categorias.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-eventos-table',
@@ -12,13 +14,18 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   eventos: any;
-
+  categorias: any;
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   dtTable: DataTables.Api;
-  constructor(private eventoService: EventosService) {
+  formFilter!: FormGroup;
+  constructor(private eventoService: EventosService, private catService: CategoriasService, private formBuilder: FormBuilder) {
   }
   ngOnInit() {
+    this.initForm()
+    this.catService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+    });
     this.dtOptions = {
       paging: true,
       searching: true,
@@ -58,4 +65,45 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dtTrigger.next();
       }, 1);
     }
+
+  private initForm() {
+    this.formFilter = this.formBuilder.group({
+      nombre:[],
+      localizacion:[],
+      fechaInit:[],
+      fechaEnd:[],
+      intereses:[]
+    });
+  }
+
+  filtrarBusqueda() {
+    const intereses = this.formFilter.get('intereses').value;
+    const fechaInitValue = this.formFilter.get('fechaInit').value;
+    const fechaEndValue = this.formFilter.get('fechaEnd').value;
+
+    const fechaInit = fechaInitValue ? new Date(fechaInitValue) : null;
+    const fechaEnd = fechaEndValue ? new Date(fechaEndValue) : null;
+
+    if (fechaInit && isNaN(fechaInit.getTime())) {
+      return;
+    }
+
+    if (fechaEnd && isNaN(fechaEnd.getTime())) {
+      return;
+    }
+
+    const filtros = {
+      nombre: this.formFilter.get('nombre').value,
+      localizacion: this.formFilter.get('localizacion').value,
+      fechaInit: fechaInit ? fechaInit.toISOString() : null,
+      fechaEnd: fechaEnd ? fechaEnd.toISOString() : null,
+      intereses: Array.isArray(intereses) ? intereses : [intereses]
+    };
+
+    console.log("ENVIANDO");
+    this.eventoService.getEventosFiltered(filtros).subscribe((data) => {
+      this.eventos = data;
+      console.log("EVENTOS FILTRADOS", this.eventos);
+    });
+  }
 }

@@ -33,5 +33,7 @@ export class EventosService {
   }
 
 
-
+  getEventosFiltered(filtros:any) {
+    return this.httpClient.post(this.apiUrl+'allFilter',filtros)
+  }
 }
