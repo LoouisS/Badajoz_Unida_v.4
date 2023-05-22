@@ -17,6 +17,8 @@ export class CrearEventoModalComponent implements OnInit{
   categorias: any;
   lat: number | undefined;
   long: number | undefined
+  preview: boolean;
+  imgPreview:string;
   constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService) { }
 
   ngOnInit() {
@@ -125,5 +127,20 @@ export class CrearEventoModalComponent implements OnInit{
     if (file!=null || file != undefined)
       return file;
     return null;
+  }
+
+  previewImg($event) {
+    const file = $event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.preview = true
+        this.imgPreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.preview = false
+      this.imgPreview = null;
+    }
   }
 }

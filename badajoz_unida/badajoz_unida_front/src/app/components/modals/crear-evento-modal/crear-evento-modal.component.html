@@ -24,7 +24,7 @@
               <label for="descripcionEvento" class="form-label">Descripción:</label>
               <small *ngIf="!validar('descripcion')" class="error">El nombre es un campo requerido.</small>
               <textarea formControlName="descripcion" [class.is-invalid]="!validar('descripcion')"
-                        class="form-control" id="descripcionEvento" ></textarea>
+                        class="form-control customForm" id="descripcionEvento" ></textarea>
             </div>
           </div>
           <div class="col-6 p-3">
@@ -44,12 +44,12 @@
               <label for="detalleEvento" class="form-label">Detalle del evento</label>
               <small *ngIf="!validar('detalle')" class="error">El nombre es un campo requerido.</small>
               <textarea  formControlName="detalle" [class.is-invalid]="!validar('detalle')"
-                         class="form-control" id="detalleEvento" ></textarea>
+                         class="form-control customForm" id="detalleEvento" ></textarea>
             </div>
             <div>
               <label for="intereses" class="form-label">Categoría relacionada</label>
               <select  formControlName="intereses"
-                         class="form-control" id="intereses" >
+                         class="form-control customForm" id="intereses" >
                 <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
                   <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
                 </optgroup>
@@ -65,7 +65,8 @@
         </div>
         <div>
           <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
-          <input type="file" class="form-control" id="imgPortada">
+          <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada">
+          <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
         </div>
         <button form="formCreateEvent" type="submit" class="btn button rounded-pill mt-3 mx-5 customBtn">Crear evento</button>
       </div>

@@ -54,7 +54,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       $(this.table.nativeElement).DataTable().destroy();
       this.dtOptions = {
         paging: true,
-        searching: true,
+        searching: false,
         ordering: true,
         info: true,
         destroy: true
