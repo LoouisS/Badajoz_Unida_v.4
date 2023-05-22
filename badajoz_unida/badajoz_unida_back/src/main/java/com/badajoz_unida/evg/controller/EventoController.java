@@ -1,6 +1,8 @@
 package com.badajoz_unida.evg.controller;
 
+import com.badajoz_unida.evg.dto.EventFilter;
 import com.badajoz_unida.evg.dto.NewEventDTO;
+import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,17 @@ public class EventoController {
         }
     }
     @GetMapping(value = "/all")
-    public ResponseEntity<?> saveEvent(HttpServletRequest request) throws CustomException, IOException{
+    public ResponseEntity<?> getEvents(HttpServletRequest request) throws CustomException, IOException{
         try{
             return new ResponseEntity<>(this.eventoService.getAll(),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping (value = "/allFilter")
+    public ResponseEntity<?> getEventsFilter(HttpServletRequest request, @RequestBody(required = false) EventFilter evento) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.getAllFilter(evento),HttpStatus.OK);
         }catch (CustomException e){
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

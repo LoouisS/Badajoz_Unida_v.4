@@ -1,10 +1,3 @@
-/**
- @file Contiene la vista del modal para la creación de eventos
- @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
- @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
- **/
-
-
 import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -28,6 +21,8 @@ export class CrearEventoModalComponent implements OnInit{
   categorias: any;
   lat: number | undefined;
   long: number | undefined
+  preview: boolean;
+  imgPreview:string;
 
   /**
    Constructor de la clase
@@ -173,5 +168,20 @@ export class CrearEventoModalComponent implements OnInit{
     if (file!=null || file != undefined)
       return file;
     return null;
+  }
+
+  previewImg($event) {
+    const file = $event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.preview = true
+        this.imgPreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.preview = false
+      this.imgPreview = null;
+    }
   }
 }

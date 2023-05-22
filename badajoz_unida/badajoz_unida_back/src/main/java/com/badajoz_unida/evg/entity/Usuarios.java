@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,6 +50,7 @@ public class Usuarios {
     private List<Intereses> intereses;
 
     @ManyToMany(mappedBy = "usuarios")
+    @JsonIgnoreProperties("usuarios")
     private List<Eventos> eventos;
 
     @ManyToMany(fetch=FetchType.EAGER)
