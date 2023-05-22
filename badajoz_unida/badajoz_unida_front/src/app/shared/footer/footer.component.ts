@@ -1,3 +1,9 @@
+/**
+ @file Contiene del footer
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
@@ -5,26 +11,25 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, View
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit, AfterViewInit{
+
+/**
+ Vista del footer
+ **/
+export class FooterComponent implements OnInit{
 
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();
-  @ViewChild('footer') footer!: ElementRef;
 
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.anio = new Date().getFullYear();
-    console.log(this.footer);
   }
 
-  ngAfterViewInit() {
-    let tamano: number = this.footer.nativeElement.offsetHeight;
-    this.tamanoFooter.emit(tamano);
-  }
-
-  cambioTamano(){
-    console.log('El tamaño ha cambiado');
-  }
-
+  /**
+   Método que abre enlaces a páginas web exteriores
+   **/
   redirectTo(link: string){
     window.open(link, '_blank');
   }

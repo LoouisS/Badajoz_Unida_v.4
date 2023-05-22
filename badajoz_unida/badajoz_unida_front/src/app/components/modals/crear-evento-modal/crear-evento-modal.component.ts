@@ -1,3 +1,10 @@
+/**
+ @file Contiene la vista del modal para la creación de eventos
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
+
 import {Component, OnInit} from '@angular/core';
 import * as L from "leaflet";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -10,6 +17,10 @@ import {EventosService} from "../../../services/eventos.service";
   templateUrl: './crear-evento-modal.component.html',
   styleUrls: ['./crear-evento-modal.component.css']
 })
+
+/**
+ Vista del modal para la creación de eventos
+ **/
 export class CrearEventoModalComponent implements OnInit{
   map: any;
   marker: any;
@@ -17,8 +28,18 @@ export class CrearEventoModalComponent implements OnInit{
   categorias: any;
   lat: number | undefined;
   long: number | undefined
+
+  /**
+   Constructor de la clase
+   @param formBuilder {FormBuilder} Clase para contruir un formulario reactivo
+   @param catService {CategoriasService} Servicio que gestiona los datos de las categorías
+   @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
+   **/
   constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService) { }
 
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
@@ -28,6 +49,9 @@ export class CrearEventoModalComponent implements OnInit{
     this.initMap();
   }
 
+  /**
+   Método que carga el mapa interactivo
+   **/
   initMap() {
     const defaultLatLng = L.latLng([38.87945, -6.97065]); // Latitud y longitud de Badajoz
 
@@ -47,6 +71,10 @@ export class CrearEventoModalComponent implements OnInit{
     });
   }
 
+  /**
+   Método que envia datos para la búsqueda de una ubicación segun los parametros introducidos
+   @param $event {Event} Evento que trae los valores introducidos por el usuario en el campo
+   **/
   buscarUbi($event: Event) {
     // @ts-ignore
     const query = $event.target.value;
@@ -56,6 +84,10 @@ export class CrearEventoModalComponent implements OnInit{
     }
   }
 
+  /**
+   Método que busca la localización según el parametro introducido por el usuario
+   @param query {string} Valor de búsqueda introducido por el usuario
+   **/
   geocodeLocation(query: string) {
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=1`;
 
@@ -78,6 +110,9 @@ export class CrearEventoModalComponent implements OnInit{
       });
   }
 
+  /**
+   Método que inicializa el formulario reactivo
+   **/
   private initForm() {
     this.formCreateEvent = this.formBuilder.group({
       nombreEvento:['',Validators.required],
@@ -89,11 +124,19 @@ export class CrearEventoModalComponent implements OnInit{
       detalle:['',Validators.required]
     })
   }
+
+  /**
+   Método que valida los campos del formulario de forma general
+   @param campo1 {string} Nombre asignado al campo del formulario que se quiere validar
+   **/
   validar(campo1: string) {
     let campo: any = this.formCreateEvent.get(campo1);
     return !(campo.invalid && campo.touched);
   }
 
+  /**
+   Método que recoge los datos del formulario y los envia al servicio correspondiente
+   **/
   sendEvent() {
     if (this.formCreateEvent.invalid || this.formCreateEvent.pending) {
       Object.values(this.formCreateEvent.controls).forEach((control) => {
@@ -120,6 +163,10 @@ export class CrearEventoModalComponent implements OnInit{
     })
 
   }
+
+  /**
+   Método que guarda la imagen seleccionada por el usuario
+   **/
   getImg(){
     // @ts-ignore
     const file = (document.getElementById('imgPortada') as HTMLInputElement).files[0];

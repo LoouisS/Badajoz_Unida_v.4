@@ -1,3 +1,10 @@
+/**
+ @file Contiene la vista del formulario de registro
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
+
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -14,12 +21,16 @@ import Swal from 'sweetalert2'
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.css']
 })
+
+/**
+ Vista del formulario de registro
+ **/
 export class FormRegisterComponent implements OnInit, OnDestroy{
 
   forma!: FormGroup;
   // modal = new ModalComponent();
   idiomas: any[] = [];
-  categorias: any[] = []
+  categorias: any[] = [];
   formIntereses: boolean = false;
   interesesList: any[] = [];
   interesesSelected: any[] = [];
@@ -38,8 +49,14 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   removeIntereses: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   /**
-   * @ignore
-   */
+   Constructor de la clase
+   @param formBuilder {FormBuilder} Clase para construir los formularios reactivos,
+   @param _authService {AuthService} Servicio que gestiona los métodos referentes al login y registro,
+   @param _categoriaService {CategoriasService} Servicio que gestiona los datos de las categorias,
+   @param _idiomasService {IdiomasService} Servicio que gestiona los datos de los idiomas,
+   @param _validadorService {ValidadoresService} Servicio que proporciona validaciones personalizadas,
+   @param router {Router} Clase para la navegación entre componentes
+   **/
   constructor(
     private formBuilder: FormBuilder,
     private _authService: AuthService,
@@ -50,39 +67,42 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   ) {}
 
   /**
-   * @ignore
-   */
+   Método que inicializa la vista
+   **/
   ngOnInit(): void {
     this._authService.changeAuthMessage(true);
     this.crearFormulario();
     this.idiomas = this._idiomasService.getIdiomas();
-    this.categorias = this.getCategoriasAndIntereses();
-    console.log(this.categorias);
-    for(let categoria of this.categorias){
-      for(let interes of categoria.intereses){
-        switch (interes.categoria_id){
-          case 1:
-            interes.emoji = '⚽';
-            break;
-          case 2:
-            interes.emoji = '🎭';
-            break;
-          case 3:
-            interes.emoji = '📚';
-            break;
-          case 4:
-            interes.emoji = '🎵';
-            break;
-          case 5:
-            interes.emoji = '🍲';
-            break;
-          default:
-            interes.emoji = '🔥';
+    this.getCategoriasAndIntereses().subscribe((data: any) => {
+      this.categorias = data;
+      console.log(this.categorias);
+      for(let categoria of this.categorias){
+        for(let interes of categoria.intereses){
+          interes.categoria_id = categoria.categoriaId
+          switch (interes.categoria_id){
+            case 1:
+              interes.emoji = '⚽';
+              break;
+            case 2:
+              interes.emoji = '🎭';
+              break;
+            case 3:
+              interes.emoji = '📚';
+              break;
+            case 4:
+              interes.emoji = '🎵';
+              break;
+            case 5:
+              interes.emoji = '🍲';
+              break;
+            default:
+              interes.emoji = '🔥';
+          }
+          this.interesesList.push(interes);
         }
-        this.interesesList.push(interes);
       }
-    }
-    this.interesesList.sort(this.compareRandom);
+      this.interesesList.sort(this.compareRandom);
+    });
     // this.addIntereses.subscribe((data: any) => {
     //   for(let interes of data){
     //     this.interesesList.push(interes);
@@ -94,6 +114,9 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     console.log(this.forma);
   }
 
+  /**
+   Método que destruye la vista
+   **/
   ngOnDestroy() {
     for(let interes of this.interesesList){
       interes.activo = false;
@@ -149,11 +172,10 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     }, {validators:this._validadorService.passwordsIguales('password', 'password2')});
   }
   /**
-   * Comprueba que todos los campos introducidos sean correctos.
-   *
-   * @param forma - Campos del formulario
-   * @returns - void
-   */
+   Comprueba que todos los campos introducidos sean correctos.
+   @param forma {FormGroup} Campos del formulario
+   @returns - void
+   **/
   guardar(forma: FormGroup) {
     if (forma.invalid || forma.pending) {
       this.formIntereses = false;
@@ -196,10 +218,10 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   }
 
   /**
-   * Llama a la API para dar de alta a un usuario.
-   * @param loginForm - Campos del formulario
-   */
-  registro(loginForm: FormGroup) {
+   Llama a la API para dar de alta a un usuario.
+   @param registroForm {FormGroup} Campos del formulario
+   **/
+  registro(registroForm: FormGroup) {
     // let datos = loginForm.value;
     // datos.tipo = 'registro';
     let controles:any = Object.keys(this.forma.controls);
@@ -246,18 +268,18 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   }
 
   /**
-   * Valida que un campo del formulario sea correcto.
-   * @param campo1 - Valor del campo
-   * @returns - Campo válido y no enfocado
-   */
+   Valida que un campo del formulario sea correcto.
+   @param campo1 {string} Valor del campo
+   @returns - Campo válido y no enfocado
+   **/
   validar(campo1: string) {
     let campo: any = this.forma.get(campo1);
     return !(campo.invalid && campo.touched);
   }
 
   /**
-   * Verifica que ambas contraseñas coincidan.
-   */
+   Verifica que ambas contraseñas coincidan.
+   **/
   comprobarPasswords() {
     // let pass1 = this.forma.get('password')?.value;
     // let pass2 = this.forma.get('password2')?.value;
@@ -272,8 +294,8 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   }
 
   /**
-   * Comprueba que el usuario sea mayor de 16 años.
-   */
+   Comprueba que el usuario sea mayor de 16 años.
+   **/
   comprobarEdad() {
     let errorEdad = this.forma?.get('fechaNacimiento')?.errors;
     if(errorEdad){
@@ -284,13 +306,16 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     return false;
   }
 
+  /**
+   Comprueba que el idioma sea valido.
+   **/
   comprobarIdioma(){
     return this.forma.get('idioma')?.value == -1 && this.forma.get('idioma')?.touched ? true : false;
   }
 
   /**
-   * Permite visualizar tu contraseña
-   */
+   Permite visualizar tu contraseña
+   **/
   showHide() {
     const input = <HTMLInputElement>document.getElementById('iPassword');
     const i = <HTMLInputElement>document.getElementById('ieye');
@@ -303,8 +328,8 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     }
   }
   /**
-   * @ignore
-   */
+   @ignore
+   **/
   showHide2() {
     const input = <HTMLInputElement>document.getElementById('iPasswordRepeat');
     const i = <HTMLInputElement>document.getElementById('ieye2');
@@ -317,12 +342,19 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     }
   }
 
+  /**
+   Cambia al formulario de login
+   **/
   goToIntereses(){
     this.formIntereses = true;
   }
 
+  /**
+   Carga los datos de las categorías y los intereses
+   @return {Observable} Colección de datos con las categorias e intereses disponibles
+   **/
   getCategoriasAndIntereses(){
-    return this._authService.getCategorias();
+    return this._categoriaService.getCategorias();
   }
 
   // selectCategoria(categoria: any){
@@ -353,16 +385,22 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   //   this.removeIntereses.next(nuevosIntereses);
   // }
 
+  /**
+   Selecciona el interes marcado por el usuario
+   **/
   selectInteres(interes: any){
-    interes.activo = interes.activo ? false : true;
-    if(interes.activo){
-      this.interesesSelected.push({"interesId": interes.id});
+    interes.seleccionado = interes.seleccionado ? false : true;
+    if(interes.seleccionado){
+      this.interesesSelected.push({"interesId": interes.interesId});
     } else {
-      this.interesesSelected.splice(this.interesesSelected.indexOf({"interesId": interes.id}), 1);
+      this.interesesSelected.splice(this.interesesSelected.indexOf({"interesId": interes.interesId}), 1);
     }
     console.log(this.interesesSelected);
   }
 
+  /**
+   Verifica que el formulario no sea invalido
+   **/
   verificarFormulario(){
     if (this.forma.invalid) {
       return true;
@@ -370,14 +408,16 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     return false;
   }
 
+  /**
+   Realiza un ordenamiento aleatorio
+   **/
   compareRandom(a: any, b: any) {
     return Math.random() - 0.5;
   }
 
-  imprimir(){
-    console.log(this.forma);
-  }
-
+  /**
+   Cambia al formulario de login
+   **/
   goToLogin(){
     this._authService.goToLogin();
   }

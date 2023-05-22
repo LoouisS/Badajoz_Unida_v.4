@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista del componente inicial o home
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,6 +11,10 @@ import { Component } from '@angular/core';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
+
+/**
+ Vista del componente inicial o home
+ **/
 export class IndexComponent {
 
 }

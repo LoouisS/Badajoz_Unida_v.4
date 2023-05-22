@@ -1,3 +1,9 @@
+/**
+ @file Interceptor que añade el token a las peticiones http
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import { Injectable } from '@angular/core';
 import {
   HTTP_INTERCEPTORS,
@@ -16,10 +22,25 @@ const AUTHORIZATION="Authorization";
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ Interceptor que añade el token a las peticiones http
+ **/
 export class ProdInterceptorService implements HttpInterceptor{
 
+  /**
+   Constructor de la clase
+   @param tokenService {TokenService} Servicio que gestiona el token de acceso,
+   @param authService {AuthService} Servicio que gestiona los procesos de login y registro
+   **/
   constructor(private tokenService: TokenService,private authService:AuthService) { }
 
+  /**
+   Método que introduce el token del usuario en la petición http
+   @param req {HttpRequest} Petición http interceptada
+   @param next {HttpHandler} Manejador de la petición http
+   @return {Observable} Devuelve una nueva petición con la nueva cabecera
+   **/
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if(!this.tokenService.isLogged()){
@@ -50,6 +71,12 @@ export class ProdInterceptorService implements HttpInterceptor{
     }));
   }
 
+  /**
+   Método que clona la petición agregando el token guardado en el navegador
+   @param req {HttpRequest} Petición http
+   @param token {string} Token de acceso del usuario
+   @return {HttpRequest} Nueva petición http con token
+   **/
   private addToken(req: HttpRequest<any>, token: string | null):HttpRequest<any> {
     return req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token)});
   }

@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista del formulario de login
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -11,6 +17,10 @@ import Swal from "sweetalert2";
   templateUrl: './form-login.component.html',
   styleUrls: ['./form-login.component.css']
 })
+
+/**
+ Vista del formulario de login
+ **/
 export class FormLoginComponent implements OnInit{
 
   loginForm!: FormGroup;
@@ -27,9 +37,14 @@ export class FormLoginComponent implements OnInit{
     buttonsStyling: false
   });
   // modal = new ModalComponent();
+
   /**
-   * @ignore
-   */
+   Constructor de la clase
+   @param formBuilder {FormBuilder} Clase para construir los formularios reactivos,
+   @param _authService{AuthService} Servicio que gestiona los métodos referentes al login y registro,
+   @param _tokenService {TokenService} Servicio que gestiona el token de identificación
+   @param router {Router} Clase para la navegación entre componentes
+   **/
   constructor(
     private formBuilder: FormBuilder,
     // private appService: AppService,
@@ -44,15 +59,16 @@ export class FormLoginComponent implements OnInit{
 
 
   /**
-   * @ignore
-   */
+   Método que inicializa la vista
+   **/
   ngOnInit(): void {
     this._authService.changeAuthMessage(false);
     this.crearFormulario();
   }
+
   /**
-   * Añade los validadores del formulario.
-   */
+   Método que inicializa el formulario reactivo
+   **/
   crearFormulario() {
     this.loginForm = this.formBuilder.group({
       user: ['', [Validators.required]],
@@ -61,11 +77,10 @@ export class FormLoginComponent implements OnInit{
   }
 
   /**
-   * Comprueba que todos los campos introducidos sean correctos.
-   *
-   * @param forma - Campos del formulario
-   * @returns - void
-   */
+   Comprueba que todos los campos introducidos sean correctos.
+   @param forma - Conjunto de campos que hacen parte del formulario
+   @returns - void
+   **/
   guardar(forma: FormGroup) {
     if (forma.invalid || forma.pending) {
       Object.values(forma.controls).forEach((control) => {
@@ -78,20 +93,9 @@ export class FormLoginComponent implements OnInit{
   }
 
   /**
-   * Valida que un campo del formulario sea correcto.
-   * @param campo1 - Valor del campo
-   * @returns - Campo válido y no enfocado
-   */
-  validar(campo1: string) {
-    let campo: any = this.loginForm.get(campo1);
-    return !(campo.invalid && campo.touched);
-  }
-
-  /**
-   * Hace una llamada a la API para validar que el usuario exista y los datos sean correctos.
-   *
-   * @param loginForm - Campos del formulario
-   */
+   Hace una llamada a la API para validar que el usuario exista y los datos sean correctos.
+   @param loginForm {FormGroup} Conjunto de campos que hacen parte del formulario
+   **/
   ComprobarUsuario(loginForm: FormGroup) {
     let usuario:any = this.loginForm.get('user')?.value;
     let clave:any = this.loginForm.get('password')?.value;
@@ -120,8 +124,8 @@ export class FormLoginComponent implements OnInit{
   }
 
   /**
-   * Permite visualizar tu contraseña.
-   */
+   Permite visualizar la contraseña introducida en el campo.
+   **/
   showHide() {
     const input = <HTMLInputElement>document.getElementById('iPassword');
     const i = <HTMLInputElement>document.getElementById('ieye');
@@ -134,6 +138,9 @@ export class FormLoginComponent implements OnInit{
     }
   }
 
+  /**
+   Cambia al formulario de registro
+   **/
   goToRegistro(){
     this._authService.goToRegistro();
   }

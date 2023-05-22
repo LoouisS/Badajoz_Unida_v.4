@@ -103,7 +103,6 @@
                formControlName="fechaNacimiento"
                name="fechaNacimiento"
                id="ifechaNacimiento"
-               (change)="imprimir()"
                [class.is-invalid]="comprobarEdad() || !validar('fechaNacimiento')"
         />
         <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
@@ -153,7 +152,7 @@
     <div class="separador mt-1 mb-4"></div>
     <div class="d-flex flex-wrap justify-content-center">
       <h3 *ngFor="let interes of interesesList" class="interes">
-        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.emoji}} {{interes.titulo}}</span>
+        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.seleccionado}">{{interes.emoji}} {{interes.titulo}}</span>
       </h3>
     </div>
 <!--    <h1 class="py-3">Intereses</h1>-->

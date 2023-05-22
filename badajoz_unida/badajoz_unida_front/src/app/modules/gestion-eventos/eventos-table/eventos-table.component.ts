@@ -1,3 +1,9 @@
+/**
+ @file Contiene la tabla con los datos de los eventos
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {Subject} from "rxjs";
@@ -8,6 +14,10 @@ import {DataTableDirective} from "angular-datatables";
   templateUrl: './eventos-table.component.html',
   styleUrls: ['./eventos-table.component.css']
 })
+
+/**
+ Tabla con los datos de los eventos
+ **/
 export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
@@ -16,8 +26,17 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   dtTable: DataTables.Api;
+
+  /**
+   Constructor de la clase
+   @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
+   **/
   constructor(private eventoService: EventosService) {
   }
+
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.dtOptions = {
       paging: true,
@@ -35,14 +54,25 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
+  /**
+   Método que realiza acciones después de iniciar la vista
+   **/
   ngAfterViewInit() {
   }
+
+  /**
+   Método que destruye la vista
+   **/
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
     if (this.dtTable) {
       this.dtTable.destroy()
     }
   }
+
+  /**
+   Método que carga los datos en la datatable
+   **/
   cargarTabla() {
       $(this.table.nativeElement).DataTable().destroy();
       this.dtOptions = {
