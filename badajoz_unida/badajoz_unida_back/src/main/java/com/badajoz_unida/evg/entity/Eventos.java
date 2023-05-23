@@ -54,4 +54,12 @@ public class Eventos {
             inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private List<Usuarios> usuarios;
 
+    public Eventos(){
+
+    }
+
+    public Eventos(int eventoId){
+        this.eventosId = eventoId;
+    }
+
 }

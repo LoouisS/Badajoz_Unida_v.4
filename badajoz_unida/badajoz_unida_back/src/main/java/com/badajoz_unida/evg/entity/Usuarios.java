@@ -76,6 +76,10 @@ public class Usuarios {
         this.userId = usuarioId;
     }
 
+    public Usuarios(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
     /*public Usuarios(String nombre, String nombreUsuario, String email, String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;

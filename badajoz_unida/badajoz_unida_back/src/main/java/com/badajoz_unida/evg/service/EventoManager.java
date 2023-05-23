@@ -1,6 +1,7 @@
 package com.badajoz_unida.evg.service;
 
-
+import com.badajoz_unida.evg.dto.UserEventDTO;
+import com.badajoz_unida.evg.entity.*;
 import com.badajoz_unida.evg.dto.EventFilter;
 import com.badajoz_unida.evg.dto.NewEventDTO;
 import com.badajoz_unida.evg.entity.Eventos;
@@ -10,6 +11,7 @@ import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.EventoRepository;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
+import com.badajoz_unida.evg.repository.UsuarioEventosRepository;
 import com.badajoz_unida.evg.utils.EventosSpecification;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +33,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import static java.lang.Integer.parseInt;
 
@@ -40,6 +42,12 @@ public class EventoManager implements EventoService{
     EventoRepository eventoRepository;
     @Autowired
     InteresesEventosRepository ieRepository;
+
+    @Autowired
+    UsuarioEventosRepository usuarioEventosRepository;
+
+    @Autowired
+    JwtManager jwtManager;
 
     @Override
     public Eventos save(NewEventDTO newEvent) throws CustomException, IOException {
@@ -100,6 +108,17 @@ public class EventoManager implements EventoService{
         );
 
         return eventoRepository.findAll(specification);
+    }
+
+
+    @Override
+    public UsuariosEventos registerUser(HttpServletRequest request, UserEventDTO inscripcion) throws CustomException {
+        UsuariosEventos usuariosEventos = new UsuariosEventos();
+        usuariosEventos.setUsuario(new Usuarios(this.jwtManager.getIdFromToken(request)));
+        usuariosEventos.setEvento(new Eventos(inscripcion.getEventoId()));
+        System.out.println(this.jwtManager.getIdFromToken(request));
+        System.out.println(inscripcion.getEventoId());
+        return this.usuarioEventosRepository.save(usuariosEventos);
     }
 
 }

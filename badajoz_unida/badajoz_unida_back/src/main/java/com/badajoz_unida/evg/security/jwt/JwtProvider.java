@@ -33,6 +33,7 @@ public class JwtProvider {
         UsuarioPrincipal usuarioPrincipal=(UsuarioPrincipal) authentication.getPrincipal();
         List<String> roles= usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         return Jwts.builder()
+                .setId(String.valueOf(usuarioPrincipal.getId()))
                 .setSubject(usuarioPrincipal.getUsername())
                 .claim("roles",roles)
                 .setIssuedAt(new Date())
@@ -43,6 +44,11 @@ public class JwtProvider {
     public String getNombreUsuarioFromToken(String token){
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
     }
+
+    public String getIdFromToken(String token){
+        return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getId();
+    }
+
     public boolean validateToken(String token){
         try{
             Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
