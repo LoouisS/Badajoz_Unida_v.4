@@ -92,11 +92,25 @@ body{
   .footer-padding{
     padding-bottom: 450px;
   }
+
+  .carousel-control-prev{
+    transform: translateX(25px) translateY(-40px);
+  }
+
+
+  .carousel-control-next{
+    transform: translateX(-25px) translateY(-40px);
+  }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .footer-padding{
     padding-bottom: 350px;
+  }
+
+  .carousel-control-prev{
+    transform: translateX(-50px);
   }
 }
 
@@ -104,10 +118,36 @@ body{
   .footer-padding{
     padding-bottom: 300px;
   }
+
+  .carousel-control-prev{
+    transform: translateX(-50px);
+  }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) and (max-width: 1599px){
   .footer-padding{
     padding-bottom: 325px;
+  }
+
+  .carousel-control-prev{
+    transform: translateX(-45px);
+  }
+
+  .carousel-control-next{
+    transform: translateX(65px);
+  }
+}
+
+@media screen and (min-width: 1600px){
+  .footer-padding{
+    padding-bottom: 325px;
+  }
+
+  .carousel-control-prev{
+    transform: translateX(-75px);
+  }
+
+  .carousel-control-next{
+    transform: translateX(95px);
   }
 }

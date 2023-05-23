@@ -34,3 +34,10 @@ button.btn{
   background-color: #ff0000;
   border: 0;
 }
+
+@media screen and (min-width: 100px) and (max-width: 768px) {
+  .carousel-control-prev, .carousel-control-next{
+    opacity: 1;
+  }
+
+}
