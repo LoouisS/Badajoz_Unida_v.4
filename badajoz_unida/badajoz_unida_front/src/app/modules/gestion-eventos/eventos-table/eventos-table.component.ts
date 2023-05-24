@@ -4,7 +4,7 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
@@ -23,6 +23,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
+  @Output() mostrarModal: EventEmitter<any> = new EventEmitter<any>();
   eventos: any;
   categorias: any;
   dtTrigger: Subject<any> = new Subject<any>();
@@ -136,4 +137,9 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log("EVENTOS FILTRADOS", this.eventos);
     });
   }
+
+  mostrarModalEventos(){
+    this.mostrarModal.emit();
+  }
+
 }

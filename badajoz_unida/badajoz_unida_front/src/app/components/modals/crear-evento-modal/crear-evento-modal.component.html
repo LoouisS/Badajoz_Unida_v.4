@@ -1,75 +1,74 @@
-<div class="modal fade modal-xl modal-dialog-scrollable" id="exampleModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" static-backdrop="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bgGeneral">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo evento:</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body w-100">
-        <form id="formCreateEvent" class="d-flex col-12" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
-          <div class="col-6 p-3">
-            <div>
-              <label for="nombreEvento" class="form-label">Nombre del evento:</label>
-              <input formControlName="nombreEvento" [class.is-invalid]="!validar('nombreEvento')"
-                     type="text" class="form-control customForm" id="nombreEvento" >
-              <small *ngIf="!validar('nombreEvento')" class="error">El nombre es un campo requerido.</small>
-            </div>
-            <div class="my-3">
-              <label for="fechaHoraEvento" class="form-label">Fecha y hora:</label>
-              <input formControlName="fecha" [class.is-invalid]="!validar('fecha')"
-                     type="datetime-local" class="form-control customForm" id="fechaHoraEvento" >
-              <small *ngIf="!validar('fecha')" class="error">El nombre es un campo requerido.</small>
-            </div>
-            <div>
-              <label for="descripcionEvento" class="form-label">Descripción:</label>
-              <small *ngIf="!validar('descripcion')" class="error">El nombre es un campo requerido.</small>
-              <textarea formControlName="descripcion" [class.is-invalid]="!validar('descripcion')"
-                        class="form-control customForm" id="descripcionEvento" ></textarea>
-            </div>
-          </div>
-          <div class="col-6 p-3">
-            <div>
-              <label for="tlfEvento" class="form-label">Teléfono de contacto:</label>
-              <input formControlName="tlf" [class.is-invalid]="!validar('tlf')"
-                     type="number" class="form-control customForm" id="tlfEvento" >
-              <small *ngIf="!validar('tlf')" class="error">El nombre es un campo requerido.</small>
-            </div>
-            <div class="my-3">
-              <label for="localizacionEvento" class="form-label">Lugar:</label>
-              <input formControlName="localizacion" [class.is-invalid]="!validar('localizacion')"
-                     type="text" class="form-control customForm" id="localizacionEvento" >
-              <small *ngIf="!validar('localizacion')" class="error">El nombre es un campo requerido.</small>
-            </div>
-            <div>
-              <label for="detalleEvento" class="form-label">Detalle del evento</label>
-              <small *ngIf="!validar('detalle')" class="error">El nombre es un campo requerido.</small>
-              <textarea  formControlName="detalle" [class.is-invalid]="!validar('detalle')"
-                         class="form-control customForm" id="detalleEvento" ></textarea>
-            </div>
-            <div>
-              <label for="intereses" class="form-label">Categoría relacionada</label>
-              <select  formControlName="intereses"
-                         class="form-control customForm" id="intereses" >
-                <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
-                  <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
-                </optgroup>
-              </select>
-            </div>
-          </div>
-        </form>
-        <div class="my-4">
-          <label for="buscador-map" class="form-label">Búsqueda: </label>
-          <input type="text" id="buscador-map" placeholder="Calle Mayor 123, Badajoz, España" (keyup)="buscarUbi($event)"
-                 class="form-control customForm">
-          <div id="map" class="custom-map mt-3"></div>
+<div class="modal-content">
+  <div class="modal-header bgGeneral">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo evento</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+  </div>
+  <div class="modal-body w-100 px-5">
+    <form id="formCreateEvent" class="d-flex col-12" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
+      <div class="col-6 p-3">
+        <div>
+          <label for="nombreEvento" class="form-label">Nombre del evento:</label>
+          <input formControlName="nombreEvento" [class.is-invalid]="!validar('nombreEvento')"
+                 type="text" class="form-control customForm" id="nombreEvento" >
+          <small *ngIf="!validar('nombreEvento')" class="error">El nombre es un campo requerido.</small>
+        </div>
+        <div class="my-3">
+          <label for="fechaHoraEvento" class="form-label">Fecha y hora:</label>
+          <input formControlName="fecha" [class.is-invalid]="!validar('fecha')"
+                 type="datetime-local" class="form-control customForm" id="fechaHoraEvento" >
+          <small *ngIf="!validar('fecha')" class="error">El nombre es un campo requerido.</small>
         </div>
         <div>
-          <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
-          <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada">
-          <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
+          <label for="descripcionEvento" class="form-label">Descripción:</label>
+          <small *ngIf="!validar('descripcion')" class="error">El nombre es un campo requerido.</small>
+          <textarea formControlName="descripcion" [class.is-invalid]="!validar('descripcion')"
+                    class="form-control customForm" id="descripcionEvento" ></textarea>
         </div>
-        <button form="formCreateEvent" type="submit" class="btn button rounded-pill mt-3 mx-5 customBtn">Crear evento</button>
       </div>
+      <div class="col-6 p-3">
+        <div>
+          <label for="tlfEvento" class="form-label">Teléfono de contacto:</label>
+          <input formControlName="tlf" [class.is-invalid]="!validar('tlf')"
+                 type="number" class="form-control customForm" id="tlfEvento" >
+          <small *ngIf="!validar('tlf')" class="error">El nombre es un campo requerido.</small>
+        </div>
+        <div class="my-3">
+          <label for="localizacionEvento" class="form-label">Lugar:</label>
+          <input formControlName="localizacion" [class.is-invalid]="!validar('localizacion')"
+                 type="text" class="form-control customForm" id="localizacionEvento" >
+          <small *ngIf="!validar('localizacion')" class="error">El nombre es un campo requerido.</small>
+        </div>
+        <div>
+          <label for="detalleEvento" class="form-label">Detalle del evento</label>
+          <small *ngIf="!validar('detalle')" class="error">El nombre es un campo requerido.</small>
+          <textarea  formControlName="detalle" [class.is-invalid]="!validar('detalle')"
+                     class="form-control customForm" id="detalleEvento" ></textarea>
+        </div>
+        <div>
+          <label for="intereses" class="form-label">Categoría relacionada</label>
+          <select  formControlName="intereses"
+                     class="form-control customForm" id="intereses" >
+            <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
+              <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div class="my-4">
+      <label for="buscador-map" class="form-label">Búsqueda: </label>
+      <input type="text" id="buscador-map" placeholder="Calle Mayor 123, Badajoz, España" (keyup)="buscarUbi($event)"
+             class="form-control customForm">
+      <div id="map" class="custom-map mt-3"></div>
     </div>
+    <div>
+      <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
+      <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada">
+      <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button form="formCreateEvent" type="submit" class="btn button rounded-pill px-3 py-2 customBtn">Crear evento</button>
   </div>
 </div>

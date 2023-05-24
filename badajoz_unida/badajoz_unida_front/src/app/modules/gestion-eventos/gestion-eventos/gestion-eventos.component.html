@@ -1,6 +1,8 @@
 
-<app-eventos-table></app-eventos-table>
-<app-crear-evento-modal></app-crear-evento-modal>
+<app-eventos-table (mostrarModal)="mostrarModalEventos()"></app-eventos-table>
+<ng-template #eventosForm>
+  <app-crear-evento-modal (cerrarModalEventos)="cerrarModalEventos()"></app-crear-evento-modal>
+</ng-template>
 <div class="footer-padding">
 
 </div>

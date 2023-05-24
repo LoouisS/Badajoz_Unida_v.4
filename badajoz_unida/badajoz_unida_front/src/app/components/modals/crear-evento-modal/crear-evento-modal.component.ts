@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as L from "leaflet";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModelNewEvent} from "../../../models/model-new-event";
@@ -15,6 +15,7 @@ import {EventosService} from "../../../services/eventos.service";
  Vista del modal para la creación de eventos
  **/
 export class CrearEventoModalComponent implements OnInit{
+
   map: any;
   marker: any;
   formCreateEvent!: FormGroup;
@@ -23,6 +24,7 @@ export class CrearEventoModalComponent implements OnInit{
   long: number | undefined
   preview: boolean;
   imgPreview:string;
+  @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
 
   /**
    Constructor de la clase
@@ -184,4 +186,9 @@ export class CrearEventoModalComponent implements OnInit{
       this.imgPreview = null;
     }
   }
+
+  cerrarModal(){
+    this.cerrarModalEventos.emit();
+  }
+
 }

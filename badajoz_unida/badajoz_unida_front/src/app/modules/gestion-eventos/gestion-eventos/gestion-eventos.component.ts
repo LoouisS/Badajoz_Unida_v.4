@@ -4,10 +4,11 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
 import * as jQuery from 'jquery';
 import {CategoriasService} from "../../../services/categorias.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 declare var $: any;
 @Component({
@@ -21,12 +22,19 @@ declare var $: any;
  **/
 export class GestionEventosComponent implements OnInit{
 
-  constructor(private catService: CategoriasService) {
+  @ViewChild('eventosForm') eventosForm: TemplateRef<any>;
+
+  constructor(private catService: CategoriasService, private modalService: NgbModal) {
   }
   ngOnInit() {
   }
 
-  desplegarModal() {
-    $('#exampleModal').modal('show');
+  mostrarModalEventos() {
+    this.modalService.open(this.eventosForm, {size: 'xl', backdrop: 'static'});
   }
+
+  cerrarModalEventos(){
+    this.modalService.dismissAll(this.eventosForm);
+  }
+
 }
