@@ -25,19 +25,12 @@ export class EventosService {
    **/
   constructor(private httpClient: HttpClient) { }
 
-  getEventos(){
-    const {data}: any = (dataEventos as any).default;
-    return data;
+  getEventosByNovedad(){
+    return this.httpClient.get(this.apiUrl + 'new');
   }
 
   getEventosById(id: number){
-    const {data}: any = (dataEventos as any).default;
-    for(let evento of data){
-      if(evento.id == id){
-        return evento;
-      }
-    }
-    return null;
+    return this.httpClient.get(this.apiUrl + id);
   }
 
   /**

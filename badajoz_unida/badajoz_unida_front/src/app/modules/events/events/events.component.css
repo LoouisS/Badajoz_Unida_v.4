@@ -1,0 +1,8 @@
+h1{
+  padding-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  border-bottom: 3px solid var(--primary-color);
+  text-align: center;
+  box-shadow: 0 3px 3px hsla(0, 0%, 10%, .3);
+}

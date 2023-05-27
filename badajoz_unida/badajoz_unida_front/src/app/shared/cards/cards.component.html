@@ -1,6 +1,6 @@
 <div class="card h-100">
   <div class="image-wrapper">
-    <img [src]="evento.cover" [alt]="evento.name">
+    <img [src]="evento.cover" [alt]="evento.name" appNoImage />
   </div>
   <div class="card-body">
     <h5 class="card-title">{{evento.nombre}}</h5>
@@ -17,6 +17,6 @@
     </div>
   </div>
   <div class="card-footer d-flex justify-content-center py-3">
-    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="showEvent(evento.id)">Saber más <span class="ms-2">→</span></button>
+    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="showEvent(evento.eventosId)">Saber más <span class="ms-2">→</span></button>
   </div>
 </div>

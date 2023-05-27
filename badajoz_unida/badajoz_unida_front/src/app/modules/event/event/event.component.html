@@ -1,6 +1,6 @@
 <section class="cover col-12">
   <div></div>
-  <img [src]="evento?.cover" [alt]=""/>
+  <img [src]="evento?.cover" [alt]="" appNoImage />
   <h1>{{evento?.nombre}}</h1>
 </section>
 <section class="px-lg-5 mt-lg-5 d-flex flex-column">
@@ -8,9 +8,14 @@
   <div class="info px-5 py-3 rounded-3 d-flex justify-content-around">
     <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span> |
     <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span> |
-    <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span>
+    <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span> |
+    <span><span class="fa-solid fa-phone me-1"></span> Télefono: {{evento?.telefonoContacto}}</span>
   </div>
-  <div class="descripcion py-3 rounded-3">{{evento?.descripcion}}</div>
+  <div class="descripcion py-3 rounded-3">
+    <p class="mb-0 mt-2">
+      {{evento?.descripcion}}
+    </p>
+  </div>
 </section>
 <section class="pt-5">
   <h1 class="titulo px-5 mb-3">Detalles</h1>

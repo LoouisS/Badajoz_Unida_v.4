@@ -5,6 +5,7 @@
  **/
 
 import {Component, Input, OnInit} from '@angular/core';
+import {EventosService} from "../../services/eventos.service";
 
 /**
  Vista del carrusel de tarjetas
@@ -16,20 +17,35 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CarouselComponent implements OnInit{
 
-  @Input() eventos: any[] = [];
+  @Input() tipo: string;
+  peticion: any;
+  eventos: any[] = [];
   eventosAgrupados: any[] = []
 
   /**
    Constructor de la clase
    **/
-  constructor() {
+  constructor(private _eventosService: EventosService) {
   }
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
-    this.agruparEventos();
+
+    switch(this.tipo){
+      case 'nuevos':
+        this.peticion = this._eventosService.getEventosByNovedad();
+        break;
+      default:
+        this.peticion = this._eventosService.getAllEventos();
+    }
+
+    this.peticion.subscribe((data: any) => {
+      this.eventos = data;
+      this.agruparEventos();
+      console.log(this.eventos);
+    })
   }
 
   /**

@@ -18,20 +18,16 @@ import {EventosService} from "../../../services/eventos.service";
  **/
 export class EventsComponent implements OnInit{
 
-  listaEventos: any[] = [];
-
   /**
    Constructor de la clase
-   @param _eventosService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private _eventosService: EventosService) {
+  constructor() {
   }
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
-    this.listaEventos = this._eventosService.getEventos();
   }
 
 }

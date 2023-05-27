@@ -41,8 +41,10 @@ export class EventComponent implements OnInit{
     this.activatedRoute.params.subscribe(parametros => {
       this.eventoId = parametros['id'];
     })
-    this.evento = this._eventosService.getEventosById(this.eventoId);
-    this.initMap();
+    this._eventosService.getEventosById(this.eventoId).subscribe((data: any) => {
+      this.evento = data;
+      this.initMap();
+    });
   }
 
   /**
