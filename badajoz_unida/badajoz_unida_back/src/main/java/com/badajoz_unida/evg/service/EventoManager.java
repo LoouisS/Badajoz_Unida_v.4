@@ -121,4 +121,13 @@ public class EventoManager implements EventoService{
         return this.usuarioEventosRepository.save(usuariosEventos);
     }
 
+    @Override
+    public Eventos getEventoById(Integer id) throws CustomException {
+        return this.eventoRepository.findByEventosId(id);
+    }
+
+    @Override
+    public List<Eventos> getNewReleases() throws CustomException {
+        return this.eventoRepository.findNewReleases();
+    }
 }

@@ -44,6 +44,15 @@ public class EventoController {
         }
     }
 
+    @PostMapping (value = "/allFilter")
+    public ResponseEntity<?> getEventsFilter(HttpServletRequest request, @RequestBody(required = false) EventFilter evento) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.getAllFilter(evento),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping(value = "/all")
     public ResponseEntity<?> getEvents(HttpServletRequest request) throws CustomException, IOException{
         try{
@@ -53,12 +62,22 @@ public class EventoController {
         }
     }
 
-    @PostMapping (value = "/allFilter")
-    public ResponseEntity<?> getEventsFilter(HttpServletRequest request, @RequestBody(required = false) EventFilter evento) throws CustomException, IOException{
-        try{
-            return new ResponseEntity<>(this.eventoService.getAllFilter(evento),HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getEventById(HttpServletRequest request, @PathVariable Integer id) throws CustomException, IOException{
+        try {
+            return new ResponseEntity<>(this.eventoService.getEventoById(id), HttpStatus.OK);
         }catch (CustomException e){
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/new")
+    public ResponseEntity<?> getNewReleases(HttpServletRequest request) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.getNewReleases(),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

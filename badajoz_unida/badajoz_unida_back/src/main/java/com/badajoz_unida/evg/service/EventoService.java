@@ -16,6 +16,8 @@ import java.util.List;
 public interface EventoService {
     Eventos save(NewEventDTO newEvent) throws CustomException, IOException;
     List<Eventos> getAll() throws CustomException;
+    List<Eventos> getNewReleases() throws CustomException;
+    Eventos getEventoById(Integer id) throws CustomException, IOException;
     List<Eventos> getAllFilter(EventFilter evento) throws CustomException;
     UsuariosEventos registerUser(HttpServletRequest request, UserEventDTO inscripcion) throws CustomException, IOException;
 }
