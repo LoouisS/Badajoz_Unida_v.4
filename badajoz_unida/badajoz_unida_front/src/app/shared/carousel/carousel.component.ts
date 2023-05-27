@@ -21,6 +21,7 @@ export class CarouselComponent implements OnInit{
   peticion: any;
   eventos: any[] = [];
   eventosAgrupados: any[] = []
+  loading: boolean = true;
 
   /**
    Constructor de la clase
@@ -34,7 +35,7 @@ export class CarouselComponent implements OnInit{
   ngOnInit() {
 
     switch(this.tipo){
-      case 'nuevos':
+      case 'recientes':
         this.peticion = this._eventosService.getEventosByNovedad();
         break;
       default:
@@ -44,6 +45,7 @@ export class CarouselComponent implements OnInit{
     this.peticion.subscribe((data: any) => {
       this.eventos = data;
       this.agruparEventos();
+      this.loading = false;
       console.log(this.eventos);
     })
   }

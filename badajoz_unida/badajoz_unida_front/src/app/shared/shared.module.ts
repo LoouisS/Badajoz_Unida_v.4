@@ -7,6 +7,7 @@ import { CardsComponent } from './cards/cards.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import {PipesModule} from "../pipes/pipes.module";
 import {DirectivesModule} from "../directives/directives.module";
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -15,7 +16,8 @@ import {DirectivesModule} from "../directives/directives.module";
     NavBarComponent,
     FooterComponent,
     CardsComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {DirectivesModule} from "../directives/directives.module";
     NavBarComponent,
     FooterComponent,
     CardsComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
