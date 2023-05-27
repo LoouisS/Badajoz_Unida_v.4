@@ -142,4 +142,10 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mostrarModal.emit();
   }
 
+  deleteEvent(eventosId: number) {
+    console.log("eliminando")
+    this.eventoService.deleteEventById(eventosId).subscribe((data) =>{
+      console.log("ELIMINADO", data);
+    });
+  }
 }

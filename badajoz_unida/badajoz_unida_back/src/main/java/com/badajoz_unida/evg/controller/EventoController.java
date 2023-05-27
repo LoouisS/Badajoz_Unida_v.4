@@ -79,5 +79,12 @@ public class EventoController {
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @DeleteMapping(value = "/delete/{eventId}")
+    public ResponseEntity<?> deleteEvent(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.deleteEvent(idEvento),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -50,8 +50,14 @@ export class EventosService {
     return this.httpClient.get(this.apiUrl+'all')
   }
 
-
+  /**
+   * Métodos para la obtención de eventos filtrados por parámetros
+   * @param filtros
+   */
   getEventosFiltered(filtros:any) {
     return this.httpClient.post(this.apiUrl+'allFilter',filtros)
+  }
+  deleteEventById(id: number){
+    return this.httpClient.delete(this.apiUrl+'delete/'+id);
   }
 }

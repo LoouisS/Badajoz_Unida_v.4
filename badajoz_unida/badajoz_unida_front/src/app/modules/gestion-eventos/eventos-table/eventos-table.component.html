@@ -51,6 +51,7 @@
   <table #dataTable class="display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
+      <th>Opciones</th>
       <th>Nombre</th>
       <th>Localización</th>
       <th>Fecha</th>
@@ -58,11 +59,15 @@
       <th>LatLong</th>
       <th>Detalles</th>
       <th>Descripción</th>
+      <th>Imagen</th>
       <th>Intereses</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let evento of eventos">
+      <td>
+        <i class="fa-solid fa-trash" (click)="deleteEvent(evento?.eventosId)"></i>
+      </td>
       <td>{{evento?.nombre}}</td>
       <td>{{evento?.localizacion}}</td>
       <td>{{evento?.fechaHora | date:'dd/mm/yyyy hh:mm'}}</td>
@@ -70,6 +75,7 @@
       <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
       <td>{{evento?.detalles| cortarTexto:200}}</td>
       <td>{{evento?.descripcion| cortarTexto:200}}</td>
+      <td>{{evento?.img}}</td>
       <td>
       <span  *ngFor="let interes of evento?.intereses" class="badge rounded-pill text-bg-danger">
         {{interes?.titulo}}

@@ -46,4 +46,8 @@ public class JavaUtils {
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
     }
+    public String getExtension(String img){
+        int indicePunto = img.lastIndexOf(".");
+        return img.substring(indicePunto + 1);
+    }
 }

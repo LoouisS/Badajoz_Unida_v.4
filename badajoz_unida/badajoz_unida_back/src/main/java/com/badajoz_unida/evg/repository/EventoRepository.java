@@ -22,4 +22,5 @@ public interface EventoRepository extends JpaRepository<Eventos, Integer> {
     @Query(value = "SELECT e.id, e.nombre, e.descripcion, e.detalles, e.fecha_hora, e.telefono_contacto, e.localizacion, e.latitud, e.longitud, e.img FROM eventos e ORDER BY e.id DESC LIMIT 15", nativeQuery = true)
     List<Eventos>findNewReleases();
     Eventos findByEventosId(Integer id);
+    Eventos deleteEventosByEventosId(int eventoId);
 }

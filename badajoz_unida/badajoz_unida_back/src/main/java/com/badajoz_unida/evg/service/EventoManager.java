@@ -13,7 +13,9 @@ import com.badajoz_unida.evg.repository.EventoRepository;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import com.badajoz_unida.evg.repository.UsuarioEventosRepository;
 import com.badajoz_unida.evg.utils.EventosSpecification;
+import com.badajoz_unida.evg.utils.JavaUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -35,6 +37,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
+import static java.nio.file.Paths.get;
 
 @Service
 public class EventoManager implements EventoService{
@@ -48,6 +51,8 @@ public class EventoManager implements EventoService{
 
     @Autowired
     JwtManager jwtManager;
+
+    JavaUtils javaUtils = new JavaUtils();
 
     @Override
     public Eventos save(NewEventDTO newEvent) throws CustomException, IOException {
@@ -74,8 +79,38 @@ public class EventoManager implements EventoService{
     }
 
     private void saveImg(Eventos eventoRegistrado, Optional<MultipartFile> imagen) throws IOException {
+        String extension = "";
+        String nombreGuardar = "";
         String fileName = imagen.get().getOriginalFilename();
-        String fileToSave = "../../assets/img/"+eventoRegistrado.getEventosId()+".png";
+        int dotIndex = fileName.lastIndexOf('.');
+        nombreGuardar = fileName.substring(0, dotIndex);
+        System.out.println(imagen.get().getContentType());
+        System.out.println(imagen.get().getContentType());
+        System.out.println(imagen.get().getContentType());
+        System.out.println(imagen.get().getContentType());
+        System.out.println(imagen.get().getContentType());
+        System.out.println(imagen.get().getContentType());
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        System.out.println(fileName);
+        if (imagen.get().getContentType().equals("image/png")) {
+            extension = ".png";
+        } else if (imagen.get().getContentType().equals("image/jpeg")) {
+            extension = ".jpeg";
+        } else if (imagen.get().getContentType().equals("image/jpg")) {
+            extension = ".jpg";
+        } else {
+            throw new IllegalArgumentException("Formato de imagen no válido");
+        }
+        eventoRegistrado.setImg(nombreGuardar+extension);
+        this.eventoRepository.save(eventoRegistrado);
+        String fileToSave = "../../assets/img/"+eventoRegistrado.getEventosId()+extension;
         File file = new File(fileToSave);
         file.getParentFile().mkdirs();
         file.delete();
@@ -130,4 +165,27 @@ public class EventoManager implements EventoService{
     public List<Eventos> getNewReleases() throws CustomException {
         return this.eventoRepository.findNewReleases();
     }
+    @Override
+    public Eventos deleteEvent(int id) throws CustomException, IOException {
+        Eventos evento = this.eventoRepository.findByEventosId(id);
+        Hibernate.initialize(evento.getIntereses());
+        Hibernate.initialize(evento.getUsuarios());
+        if (evento.getImg() != null) {
+            try {
+                String extension = javaUtils.getExtension(evento.getImg());
+                String filePath = "../../assets/img/" + evento.getEventosId() + "." + extension;
+                File archivo = new File(filePath);
+                if (archivo.exists()) {
+                    archivo.delete();
+                }
+            } catch (Exception e) {
+                // Manejar cualquier exc
+                // epción que pueda ocurrir durante la eliminación del archivo
+            }
+        }
+
+        this.eventoRepository.delete(evento);
+        return evento;
+    }
+
 }
