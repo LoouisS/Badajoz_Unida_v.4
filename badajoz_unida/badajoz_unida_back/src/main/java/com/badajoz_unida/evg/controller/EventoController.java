@@ -80,4 +80,23 @@ public class EventoController {
         }
     }
 
+    @GetMapping(value = "/checkRegister/{eventoId}")
+    public ResponseEntity<?> checkUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
+        try {
+            return new ResponseEntity<Boolean>(this.eventoService.checkUserRegister(request, eventoId), HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/removeUser/{eventoId}")
+    public ResponseEntity<?> removeUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
+        try {
+            this.eventoService.removeUserRegister(request, eventoId);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

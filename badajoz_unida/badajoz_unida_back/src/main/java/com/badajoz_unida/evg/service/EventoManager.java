@@ -130,4 +130,17 @@ public class EventoManager implements EventoService{
     public List<Eventos> getNewReleases() throws CustomException {
         return this.eventoRepository.findNewReleases();
     }
+
+    @Override
+    public Boolean checkUserRegister(HttpServletRequest request, Integer eventoId) throws CustomException, IOException {
+        if(this.usuarioEventosRepository.checkByUsuarioIdAndEventoId(this.jwtManager.getIdFromToken(request), eventoId) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void removeUserRegister(HttpServletRequest request, Integer eventoId) throws CustomException, IOException {
+        usuarioEventosRepository.removeUserRegister(this.jwtManager.getIdFromToken(request), eventoId);
+    }
 }

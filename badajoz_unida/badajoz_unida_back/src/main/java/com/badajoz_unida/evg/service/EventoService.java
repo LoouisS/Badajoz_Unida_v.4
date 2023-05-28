@@ -20,4 +20,6 @@ public interface EventoService {
     Eventos getEventoById(Integer id) throws CustomException, IOException;
     List<Eventos> getAllFilter(EventFilter evento) throws CustomException;
     UsuariosEventos registerUser(HttpServletRequest request, UserEventDTO inscripcion) throws CustomException, IOException;
+    Boolean checkUserRegister(HttpServletRequest request, Integer eventoId) throws CustomException, IOException;
+    void removeUserRegister(HttpServletRequest request, Integer eventoId) throws CustomException, IOException;
 }
