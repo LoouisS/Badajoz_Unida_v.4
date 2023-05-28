@@ -89,6 +89,15 @@ public class EventoController {
         }
     }
 
+    @GetMapping(value = "/userInscriptions")
+    public ResponseEntity<?> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException{
+        try {
+            return new ResponseEntity<>(this.eventoService.getEventsByUserId(request), HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping(value = "/removeUser/{eventoId}")
     public ResponseEntity<?> removeUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
         try {

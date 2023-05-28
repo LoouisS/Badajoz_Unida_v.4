@@ -132,6 +132,11 @@ public class EventoManager implements EventoService{
     }
 
     @Override
+    public List<Eventos> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException {
+        return this.eventoRepository.findByUsuarioId(this.jwtManager.getIdFromToken(request));
+    }
+
+    @Override
     public Boolean checkUserRegister(HttpServletRequest request, Integer eventoId) throws CustomException, IOException {
         if(this.usuarioEventosRepository.checkByUsuarioIdAndEventoId(this.jwtManager.getIdFromToken(request), eventoId) > 0){
             return true;

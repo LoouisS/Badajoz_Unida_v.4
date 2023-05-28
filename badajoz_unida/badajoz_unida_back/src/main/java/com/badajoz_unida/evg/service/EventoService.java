@@ -17,6 +17,7 @@ public interface EventoService {
     Eventos save(NewEventDTO newEvent) throws CustomException, IOException;
     List<Eventos> getAll() throws CustomException;
     List<Eventos> getNewReleases() throws CustomException;
+    List<Eventos> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException;
     Eventos getEventoById(Integer id) throws CustomException, IOException;
     List<Eventos> getAllFilter(EventFilter evento) throws CustomException;
     UsuariosEventos registerUser(HttpServletRequest request, UserEventDTO inscripcion) throws CustomException, IOException;
