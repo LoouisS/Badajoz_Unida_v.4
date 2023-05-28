@@ -1,4 +1,4 @@
-<div class="card mx-5 mb-4">
+<div class="card mx-5 my-4">
   <div>
     <div class="card-header bgGeneral">
       Filtros de búsqueda:
@@ -47,7 +47,7 @@
     </div>
   </div>
 </div>
-<div class=" px-5">
+<div class=" px-5" [ngClass]="{'d-none': loading}">
   <table #dataTable class="display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
@@ -78,5 +78,8 @@
     </tr>
     </tbody>
   </table>
+</div>
+<div *ngIf="loading">
+  <app-loading></app-loading>
 </div>
 

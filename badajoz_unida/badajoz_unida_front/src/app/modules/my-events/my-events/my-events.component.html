@@ -1,1 +1,9 @@
-
+<div class="col-12 d-flex flex-wrap pt-3 px-3" *ngIf="!loading, else cargando">
+  <div class="col-4 p-3" *ngFor="let evento of listaInscripciones">
+    <app-cards [evento]="evento" [desapuntarse]="true"></app-cards>
+  </div>
+</div>
+<div class="footer-padding"></div>
+<ng-template #cargando>
+  <app-loading></app-loading>
+</ng-template>

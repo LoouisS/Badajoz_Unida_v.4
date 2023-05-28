@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {interceptorProvider} from "./security/services/interceptors/prod-interceptor.service";
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import {SharedModule} from "./shared/shared.module";
 
 registerLocaleData(localeEs);
 
@@ -17,7 +18,8 @@ registerLocaleData(localeEs);
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [interceptorProvider],
   exports: [

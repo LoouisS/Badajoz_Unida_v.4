@@ -7,6 +7,7 @@
 import { Injectable } from '@angular/core';
 import * as dataEventos from './../data/eventos.json';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
  **/
 export class EventosService {
 
-  apiUrl='http://localhost:8080/eventos/';
+  apiUrl: string ='http://localhost:8080/eventos/';
+  refreshCards: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   /**
    Constructor de la clase
@@ -31,6 +33,10 @@ export class EventosService {
 
   getEventosById(id: number){
     return this.httpClient.get(this.apiUrl + id);
+  }
+
+  getEventosByUserId(){
+    return this.httpClient.get(this.apiUrl + 'userInscriptions')
   }
 
   /**
@@ -66,4 +72,14 @@ export class EventosService {
   removeUserFromEvent(eventoId: number){
     return this.httpClient.delete(this.apiUrl + 'removeUser/' + eventoId);
   }
+
+  notifyRefreshCards(){
+    return this.refreshCards;
+  }
+
+  setNotificationCards(){
+    this.refreshCards.next(null);
+  }
+
+
 }

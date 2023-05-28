@@ -9,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {ActivatedRoute} from "@angular/router";
 import * as L from "leaflet";
-import Swal from "sweetalert2";
+import {AlertsService} from "../../../services/alerts.service";
 
 @Component({
   selector: 'app-event',
@@ -28,24 +28,12 @@ export class EventComponent implements OnInit{
   marker: any;
   registrado: boolean = false;
 
-  alert = Swal.mixin({
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    allowEnterKey: false,
-    stopKeydownPropagation: true,
-    customClass: {
-      confirmButton: 'btn btn-danger',
-      cancelButton: 'btn btn-light'
-    },
-    buttonsStyling: false
-  });
-
   /**
    Constructor de la clase
    @param activatedRoute {ActivatedRoute} Servicio que recupera información de la ruta de enlace
    @param _eventosService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private activatedRoute: ActivatedRoute, private _eventosService:EventosService) {
+  constructor(private activatedRoute: ActivatedRoute, private _eventosService:EventosService, private _alertsService: AlertsService) {
   }
 
   /**
@@ -86,32 +74,21 @@ export class EventComponent implements OnInit{
     this._eventosService.registerUserInEvent(this.eventoId).subscribe((data: any) => {
       this.checkUserRegister();
       if (data['status'] != 'error') {
-        this.alert.fire({
-          title: 'Te has apuntado con éxito',
-          text: 'Gracias por acompañarnos, te vemos allí',
-          icon: 'success',
-          timer: 2000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        });
+        this._alertsService.showSuccessAlert('Te has apuntado con éxito', 'Gracias por acompañarnos, te vemos allí')
       }
     });
   }
 
-  removeUserFromEvent(){
-    this._eventosService.removeUserFromEvent(this.eventoId).subscribe((data: any) => {
-      this.checkUserRegister();
-      if (data['status'] != 'error') {
-        this.alert.fire({
-          title: 'Te has desapuntado del evento',
-          text: 'Que pena que no puedas acompañarnos, esperamos verte en otro evento',
-          icon: 'info',
-          timer: 3000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        });
-      }
-    });
+  async removeUserFromEvent(){
+    let respuesta = await this._alertsService.askConfirmation('Quieres desapuntarte de ' + this.evento.nombre, '¿Estas seguro de querer desapuntarte de este evento?');
+    if(respuesta){
+      this._eventosService.removeUserFromEvent(this.eventoId).subscribe((data: any) => {
+        this.checkUserRegister();
+        if (data['status'] != 'error') {
+          this._alertsService.showInfoAlert('Te has desapuntado del evento', 'Que pena que no puedas acompañarnos, esperamos verte en otro evento');
+        }
+      });
+    }
   }
 
   checkUserRegister(){
