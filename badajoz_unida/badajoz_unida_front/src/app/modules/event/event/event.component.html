@@ -2,14 +2,14 @@
   <div></div>
   <img [src]="evento?.cover" [alt]="" appNoImage />
   <h1>{{evento?.nombre}}</h1>
+  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>
 </section>
 <section class="px-lg-5 mt-lg-5 d-flex flex-column">
-  <button class="btn btn-primary rounded-pill mb-4 py-2 px-4 align-self-end">Apuntarme <span class="fa-solid fa-check ms-2"></span></button>
-  <div class="info px-5 py-3 rounded-3 d-flex justify-content-around">
-    <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span> |
-    <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span> |
-    <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span> |
-    <span><span class="fa-solid fa-phone me-1"></span> Télefono: {{evento?.telefonoContacto}}</span>
+  <div class="info px-5 py-3 rounded-3 d-flex justify-content-between">
+      <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span> |
+      <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span> |
+      <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span> |
+      <span><span class="fa-solid fa-phone me-1"></span> Télefono: {{evento?.telefonoContacto}}</span>
   </div>
   <div class="descripcion py-3 rounded-3">
     <p class="mb-0 mt-2">
@@ -30,6 +30,8 @@
   <div class="lugar px-5 py-2">
     <div id="map" class="custom-map mt-3"></div>
   </div>
-  <button class="btn btn-primary rounded-pill mt-5 py-2 px-4 align-self-end">Apuntarme <span class="fa-solid fa-check ms-2"></span></button>
 </section>
 <div class="footer-padding"></div>
+<ng-template #desapuntarse>
+  <button class="btn btn-secondary rounded-pill mt-5 py-3 px-4 align-self-end" (click)="removeUserFromEvent()">Desapuntarme</button>
+</ng-template>

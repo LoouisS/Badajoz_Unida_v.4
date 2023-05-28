@@ -9,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {ActivatedRoute} from "@angular/router";
 import * as L from "leaflet";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-event',
@@ -25,6 +26,19 @@ export class EventComponent implements OnInit{
   evento: any;
   map: any;
   marker: any;
+  registrado: boolean = false;
+
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
 
   /**
    Constructor de la clase
@@ -45,6 +59,10 @@ export class EventComponent implements OnInit{
       this.evento = data;
       this.initMap();
     });
+    this._eventosService.checkUserRegister(this.eventoId).subscribe((data: boolean) => {
+      this.registrado = data;
+    })
+    this.checkUserRegister();
   }
 
   /**
@@ -62,6 +80,44 @@ export class EventComponent implements OnInit{
     this.marker = L.marker(defaultLatLng).addTo(this.map)
       .bindPopup(this.evento.localizacion)
       .openPopup();
+  }
+
+  registerUserInEvent(){
+    this._eventosService.registerUserInEvent(this.eventoId).subscribe((data: any) => {
+      this.checkUserRegister();
+      if (data['status'] != 'error') {
+        this.alert.fire({
+          title: 'Te has apuntado con éxito',
+          text: 'Gracias por acompañarnos, te vemos allí',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
+      }
+    });
+  }
+
+  removeUserFromEvent(){
+    this._eventosService.removeUserFromEvent(this.eventoId).subscribe((data: any) => {
+      this.checkUserRegister();
+      if (data['status'] != 'error') {
+        this.alert.fire({
+          title: 'Te has desapuntado del evento',
+          text: 'Que pena que no puedas acompañarnos, esperamos verte en otro evento',
+          icon: 'info',
+          timer: 3000,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
+      }
+    });
+  }
+
+  checkUserRegister(){
+    this._eventosService.checkUserRegister(this.eventoId).subscribe((data: boolean) => {
+      this.registrado = data;
+    })
   }
 
 }

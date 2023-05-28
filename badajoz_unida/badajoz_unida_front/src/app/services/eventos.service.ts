@@ -50,8 +50,20 @@ export class EventosService {
     return this.httpClient.get(this.apiUrl+'all')
   }
 
-
   getEventosFiltered(filtros:any) {
     return this.httpClient.post(this.apiUrl+'allFilter',filtros)
+  }
+
+  checkUserRegister(eventoId: number){
+    return this.httpClient.get<boolean>(this.apiUrl + 'checkRegister/' + eventoId);
+  }
+
+  registerUserInEvent(eventoId: number){
+    let data: any = { eventoId: eventoId };
+    return this.httpClient.post(this.apiUrl + 'register', data);
+  }
+
+  removeUserFromEvent(eventoId: number){
+    return this.httpClient.delete(this.apiUrl + 'removeUser/' + eventoId);
   }
 }
