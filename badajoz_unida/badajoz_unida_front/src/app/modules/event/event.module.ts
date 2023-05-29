@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event/event.component';
 import {DirectivesModule} from "../../directives/directives.module";
+import {ModalsModule} from "../../components/modals/modals.module";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {DirectivesModule} from "../../directives/directives.module";
     imports: [
         CommonModule,
         EventRoutingModule,
-        DirectivesModule
+        DirectivesModule,
+        ModalsModule
     ]
 })
 export class EventModule { }

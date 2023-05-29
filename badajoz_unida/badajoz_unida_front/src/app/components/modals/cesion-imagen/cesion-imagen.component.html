@@ -1,0 +1,55 @@
+<div class="modal-content">
+  <div class="modal-header bgGeneral">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Declaración de Cesión de Imagen</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+  </div>
+  <div class="modal-body w-100 px-5">
+    <p>
+      Estimado {{usuario}},
+    </p>
+    <p>
+      Gracias por tu interés en participar en nuestro evento organizado por <span class="fw-bold">Badajoz Unidos</span>. Para garantizar
+      la transparencia y cumplir con las leyes de España relacionadas con la cesión de imagen, requerimos tu consentimiento
+      expreso para capturar y utilizar tu imagen durante el evento. Por favor, lee atentamente la siguiente declaración y selecciona
+      la opción correspondiente para aceptar o cancelar tu inscripción.
+    </p>
+    <p>
+      Declaración de Cesión de Imagen:
+    </p>
+    <p>
+      Yo, {{usuario}}, reconozco y acepto los siguientes términos y condiciones:
+    </p>
+    <ul>
+      <li>
+        Autorizo a <span class="fw-bold">Badajoz Unidos</span> a capturar, grabar, fotografiar y utilizar mi imagen durante el evento
+        {{evento?.nombre}}, que se llevará a cabo en {{evento?.localizacion}} en {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}.
+      </li>
+      <li>
+        Acepto que <span class="fw-bold">Badajoz Unidos</span> tenga todos los derechos exclusivos sobre las imágenes capturadas, incluyendo el derecho de
+        uso, reproducción, distribución, exhibición, y cualquier otro uso relacionado con los fines promocionales y de divulgación
+        de la organización, ya sea en medios impresos, digitales, redes sociales, publicaciones, sitios web o cualquier otro medio de difusión.
+      </li>
+      <li>
+        Entiendo que las imágenes pueden ser compartidas con terceros, como socios colaboradores, patrocinadores, medios de comunicación u
+        otras organizaciones, siempre con el propósito de promover las actividades de <span class="fw-bold">Badajoz Unidos</span>.
+      </li>
+      <li>
+        Acepto que la cesión de mi imagen es voluntaria y que no recibiré compensación económica alguna por su uso,
+        a menos que exista un acuerdo previo y por escrito con <span class="fw-bold">Badajoz Unidos</span> que especifique lo contrario.
+      </li>
+      <li>
+        Reconozco que <span class="fw-bold">Badajoz Unidos</span> tomará todas las precauciones razonables para proteger mi privacidad, y que no se utilizará mi imagen
+        de manera ofensiva, difamatoria o que pueda perjudicar mi reputación o derechos legales.
+      </li>
+      <li>
+        Entiendo que tengo el derecho de revocar mi consentimiento en cualquier momento, notificándolo por escrito a <span class="fw-bold">Badajoz Unidos</span>, aunque
+        dicha revocación no afectará a las imágenes ya utilizadas con anterioridad a la revocación.
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="registrarUsuario()">Aceptar</button>
+    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</div>
+

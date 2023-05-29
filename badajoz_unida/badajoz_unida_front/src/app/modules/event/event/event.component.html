@@ -2,7 +2,8 @@
   <div></div>
   <img [src]="evento?.cover" [alt]="" appNoImage />
   <h1>{{evento?.nombre}}</h1>
-  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>
+<!--  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>-->
+  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="openCesionImagenModal()">Apuntarme</button>
 </section>
 <section class="px-lg-5 mt-lg-5 d-flex flex-column">
   <div class="info px-5 py-3 rounded-3 d-flex justify-content-between">
@@ -34,4 +35,7 @@
 <div class="footer-padding"></div>
 <ng-template #desapuntarse>
   <button class="btn btn-secondary rounded-pill mt-5 py-3 px-4 align-self-end" (click)="removeUserFromEvent()">Desapuntarme</button>
+</ng-template>
+<ng-template #cesionImagen>
+  <app-cesion-imagen (cerrarCesionImagen)="cerrarCesionImagenModal()" (inscribirUsuario)="registerUserInEvent()" [usuario]="usuario" [evento]="evento"></app-cesion-imagen>
 </ng-template>
