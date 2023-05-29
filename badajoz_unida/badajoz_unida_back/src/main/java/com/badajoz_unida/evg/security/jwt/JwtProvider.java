@@ -35,6 +35,8 @@ public class JwtProvider {
         return Jwts.builder()
                 .setId(String.valueOf(usuarioPrincipal.getId()))
                 .setSubject(usuarioPrincipal.getUsername())
+                .claim("nombre", usuarioPrincipal.getNombre())
+                .claim("apellidos", usuarioPrincipal.getApellidos())
                 .claim("roles",roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime()+expiration*1000))
