@@ -10,6 +10,7 @@ import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 import {CategoriasService} from "../../../services/categorias.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-eventos-table',
@@ -24,6 +25,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @Output() mostrarModal: EventEmitter<any> = new EventEmitter<any>();
+  @Output() editEvent: EventEmitter<any> = new EventEmitter<any>();
   eventos: any;
   categorias: any;
   dtTrigger: Subject<any> = new Subject<any>();
@@ -31,7 +33,17 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   dtTable: DataTables.Api;
   formFilter!: FormGroup;
   loading: boolean = true;
-
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
   /**
    Constructor de la clase
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
@@ -56,13 +68,16 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     // @ts-ignore
     this.dtTrigger.next();
+    this.getEventos();
+  }
+
+  getEventos(){
     this.eventoService.getAllEventos().subscribe((data) => {
       this.eventos = data;
       console.log("EVENTOS:", this.eventos);
       this.cargarTabla();
-    })
+    });
   }
-
   /**
    Método que realiza acciones después de iniciar la vista
    **/
@@ -144,14 +159,53 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mostrarModal.emit();
   }
 
-  deleteEvent(eventosId: number) {
-    console.log("eliminando")
-    this.eventoService.deleteEventById(eventosId).subscribe((data) =>{
-      console.log("ELIMINADO", data);
+  deleteEvent(eventosId: number, evento:any) {
+    this.alert.fire({
+      icon:'question',
+      title:'¿Estás seguro que deseas eliminar el Evento',
+      text:'Se eliminara el evento con nombre' + evento?.nombre + 'de forma permanente',
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then((result) =>{
+      if(result.isConfirmed){
+        this.alert.fire({
+          title:'Espere mientras procesamos su solicitud',
+          didOpen(popup: HTMLElement) {
+            Swal.showLoading();
+          }
+        })
+        this.eventoService.deleteEventById(eventosId).subscribe((data) =>{
+          console.log("ELIMINADO", data);
+          this.alert.fire({
+            title: 'Eliminado con éxito!',
+            text: 'El evento con nombre' + evento?.nombre +'ha sido eliminado correctamente.',
+            icon: 'success',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+          this.getEventos();
+        }, error=>{
+          this.alert.fire({
+            title: 'Ocurrió un problema!',
+            text: 'Vuelva a intentarlo en otro momento',
+            icon: 'error',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+        });
+      }
     });
   }
 
   modEvent(eventosId: number) {
-
+    console.log("ENTRA EN MOD EVENT")
+    this.eventoService.getEventosById(eventosId).subscribe((data) =>{
+      console.log("ANTES DATA")
+      this.eventoService.setEditEvent(data);
+      this.editEvent.emit()
+      console.log("DESPUES DATA", data);
+    });
   }
 }

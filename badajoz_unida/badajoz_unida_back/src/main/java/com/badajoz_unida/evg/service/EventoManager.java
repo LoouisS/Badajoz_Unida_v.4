@@ -57,6 +57,13 @@ public class EventoManager implements EventoService{
     @Override
     public Eventos save(NewEventDTO newEvent) throws CustomException, IOException {
         Eventos evento = new Eventos();
+        boolean sw= false;
+        if (newEvent.getEventosId() != null){
+            evento = this.eventoRepository.findByEventosId(newEvent.getEventosId());
+            if (newEvent.getImagen() != null){
+                sw=true;
+            }
+        }
         evento.setTelefonoContacto(newEvent.getTelefonoContacto());
         evento.setFechaHora(newEvent.getFechaHora());
         evento.setNombre(newEvent.getNombre());
@@ -66,7 +73,10 @@ public class EventoManager implements EventoService{
         evento.setDescripcion(newEvent.getDescripcion());
         evento.setLocalizacion(newEvent.getLocalizacion());
         Eventos eventoRegistrado = this.eventoRepository.save(evento);
-        this.saveImg(eventoRegistrado,newEvent.getImagen());
+        if (newEvent.getEventosId() != null || sw == true){
+            if (newEvent.getImagen() != null)
+            this.saveImg(eventoRegistrado,newEvent.getImagen());
+        }
         for (int x=0; x<newEvent.getIntereses().size(); x++){
             InteresesEventos ie= new InteresesEventos();
             ie.setEvento(eventoRegistrado);
@@ -79,26 +89,12 @@ public class EventoManager implements EventoService{
     }
 
     private void saveImg(Eventos eventoRegistrado, Optional<MultipartFile> imagen) throws IOException {
+
         String extension = "";
         String nombreGuardar = "";
         String fileName = imagen.get().getOriginalFilename();
         int dotIndex = fileName.lastIndexOf('.');
         nombreGuardar = fileName.substring(0, dotIndex);
-        System.out.println(imagen.get().getContentType());
-        System.out.println(imagen.get().getContentType());
-        System.out.println(imagen.get().getContentType());
-        System.out.println(imagen.get().getContentType());
-        System.out.println(imagen.get().getContentType());
-        System.out.println(imagen.get().getContentType());
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
-        System.out.println(fileName);
         if (imagen.get().getContentType().equals("image/png")) {
             extension = ".png";
         } else if (imagen.get().getContentType().equals("image/jpeg")) {
@@ -107,6 +103,11 @@ public class EventoManager implements EventoService{
             extension = ".jpg";
         } else {
             throw new IllegalArgumentException("Formato de imagen no válido");
+        }
+        if (eventoRegistrado.getImg() != null && !eventoRegistrado.getImg().isEmpty()) {
+            String fileToDelete = "../../assets/img/" + eventoRegistrado.getEventosId() + extension;
+            File existingFile = new File(fileToDelete);
+            existingFile.delete();
         }
         eventoRegistrado.setImg(nombreGuardar+extension);
         this.eventoRepository.save(eventoRegistrado);

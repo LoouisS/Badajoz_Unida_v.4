@@ -20,6 +20,7 @@ export class EventosService {
 
   apiUrl: string ='http://localhost:8080/eventos/';
   refreshCards: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  editEvent: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   /**
    Constructor de la clase
@@ -87,6 +88,13 @@ export class EventosService {
   setNotificationCards(){
     this.refreshCards.next(null);
   }
-
-
+  setEditEvent(event: any){
+      this.editEvent.next(event);
+  }
+  deleteEditEvent(){
+    this.editEvent.next(null);
+  }
+  getEditEvent(){
+    return this.editEvent;
+  }
 }

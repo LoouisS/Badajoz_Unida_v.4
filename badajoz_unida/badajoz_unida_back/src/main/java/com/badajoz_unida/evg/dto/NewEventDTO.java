@@ -13,7 +13,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class NewEventDTO {
-    private int eventosId;
+    private Integer eventosId;
     private String nombre;
     private String descripcion;
     private String detalles;

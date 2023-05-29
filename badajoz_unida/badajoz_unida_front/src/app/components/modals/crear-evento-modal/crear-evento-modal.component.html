@@ -63,7 +63,7 @@
     </div>
     <div>
       <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
-      <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada">
+      <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada" >
       <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
     </div>
 

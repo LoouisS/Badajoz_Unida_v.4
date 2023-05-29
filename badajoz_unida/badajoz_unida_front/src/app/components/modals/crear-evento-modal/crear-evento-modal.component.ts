@@ -18,6 +18,7 @@ import {ValidadoresService} from "../../../services/validadores.service";
  **/
 export class CrearEventoModalComponent implements OnInit{
 
+  eventoEdit: any;
   map: any;
   marker: any;
   formCreateEvent!: FormGroup;
@@ -46,7 +47,7 @@ export class CrearEventoModalComponent implements OnInit{
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
   constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService,
-              private validador: ValidadoresService) { }
+              private validador: ValidadoresService) {}
 
   /**
    Método que inicializa la vista
@@ -56,8 +57,19 @@ export class CrearEventoModalComponent implements OnInit{
       this.categorias = data;
       console.log("CATEGORIAS", this.categorias);
     });
+
     this.initForm();
     this.initMap();
+    this.eventoService.getEditEvent().subscribe((data) => {
+      this.eventoEdit = data;
+      console.log("EN EL ONINIT",this.eventoEdit);
+      if (this.eventoEdit != null){
+        this.setFormEdit(this.eventoEdit);
+      }else{
+        this.resetForm();
+      }
+
+    })
   }
 
   /**
@@ -132,8 +144,8 @@ export class CrearEventoModalComponent implements OnInit{
       tlf: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       localizacion: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(100)]],
       intereses: [],
-      detalle: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-      img: ['', this.validador.validateImgExtension]
+      detalle: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
+     // img: ['', this.validador.validateImgExtension]
     });
   }
 
@@ -192,9 +204,11 @@ export class CrearEventoModalComponent implements OnInit{
    **/
   sendEvent() {
     if (this.formCreateEvent.invalid || this.formCreateEvent.pending) {
+      console.log("MAAAAAAAL");
+      console.log(this.formCreateEvent);
       Object.values(this.formCreateEvent.controls).forEach((control) => {
         if (control instanceof FormGroup)
-        control.markAsTouched();
+          control.markAsTouched();
       });
       return;
     }
@@ -224,6 +238,9 @@ export class CrearEventoModalComponent implements OnInit{
         const inter = parseInt(this.formCreateEvent.get('intereses').value);
 
         const formData = new FormData();
+        if (this.eventoEdit != null ){
+          formData.append('eventosId', this.eventoEdit.eventosId);
+        }
         formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
         formData.append('descripcion', this.formCreateEvent.get('descripcion').value);
         formData.append('detalles', this.formCreateEvent.get('detalle').value);
@@ -232,7 +249,9 @@ export class CrearEventoModalComponent implements OnInit{
         formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
         formData.append('latitud', this.lat.toString());
         formData.append('longitud', this.long.toString());
-        formData.append('imagen', this.getImg());
+        if (this.getImg() != null){
+          formData.append('imagen', this.getImg());
+        }
         formData.append('intereses', JSON.stringify(inter));
         this.eventoService.createEvento(formData).subscribe((data) => {
           console.log("DATA", data);
@@ -293,6 +312,25 @@ export class CrearEventoModalComponent implements OnInit{
   }
   cerrarModal(){
     this.cerrarModalEventos.emit();
+    this.eventoService.deleteEditEvent();
+  }
+  setFormEdit(evento: any){
+    console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
+    this.eventoEdit = evento;
+    this.formCreateEvent.setValue({
+      nombreEvento: evento?.nombre,
+      fecha: evento?.fechaHora,
+      descripcion: evento?.descripcion,
+      tlf: evento?.telefonoContacto,
+      localizacion: evento?.localizacion,
+      intereses: evento?.intereses[0].interesId,
+      detalle: evento?.detalles
+    });
   }
 
+  resetForm() {
+    console.log("reseteando formulario")
+    this.eventoEdit = null;
+    this.formCreateEvent.reset();
+  }
 }
