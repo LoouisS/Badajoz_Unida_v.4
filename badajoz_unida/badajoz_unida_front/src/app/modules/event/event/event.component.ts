@@ -5,10 +5,13 @@
  **/
 
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {ActivatedRoute} from "@angular/router";
 import * as L from "leaflet";
+import {AlertsService} from "../../../services/alerts.service";
+import {TokenService} from "../../../security/services/auth/token.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-event',
@@ -25,19 +28,27 @@ export class EventComponent implements OnInit{
   evento: any;
   map: any;
   marker: any;
+  usuario: any;
+  registrado: boolean = false;
+  @ViewChild('cesionImagen') cesionImagen: TemplateRef<any>;
 
   /**
    Constructor de la clase
    @param activatedRoute {ActivatedRoute} Servicio que recupera información de la ruta de enlace
    @param _eventosService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private activatedRoute: ActivatedRoute, private _eventosService:EventosService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private _eventosService:EventosService,
+              private _alertsService: AlertsService,
+              private _tokenService: TokenService,
+              private _modalService: NgbModal) {
   }
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
+    this.usuario = this._tokenService.getNombreApellidos();
     this.activatedRoute.params.subscribe(parametros => {
       this.eventoId = parametros['id'];
     })
@@ -45,6 +56,10 @@ export class EventComponent implements OnInit{
       this.evento = data;
       this.initMap();
     });
+    this._eventosService.checkUserRegister(this.eventoId).subscribe((data: boolean) => {
+      this.registrado = data;
+    })
+    this.checkUserRegister();
   }
 
   /**
@@ -62,6 +77,42 @@ export class EventComponent implements OnInit{
     this.marker = L.marker(defaultLatLng).addTo(this.map)
       .bindPopup(this.evento.localizacion)
       .openPopup();
+  }
+
+  registerUserInEvent(){
+    this._eventosService.registerUserInEvent(this.eventoId).subscribe((data: any) => {
+      this.checkUserRegister();
+      if (data['status'] != 'error') {
+        this._alertsService.showSuccessAlert('Te has apuntado con éxito', 'Gracias por acompañarnos, te vemos allí')
+        this.cerrarCesionImagenModal();
+      }
+    });
+  }
+
+  async removeUserFromEvent(){
+    let respuesta = await this._alertsService.askConfirmation('Quieres desapuntarte de ' + this.evento.nombre, '¿Estas seguro de querer desapuntarte de este evento?');
+    if(respuesta){
+      this._eventosService.removeUserFromEvent(this.eventoId).subscribe((data: any) => {
+        this.checkUserRegister();
+        if (data['status'] != 'error') {
+          this._alertsService.showInfoAlert('Te has desapuntado del evento', 'Que pena que no puedas acompañarnos, esperamos verte en otro evento');
+        }
+      });
+    }
+  }
+
+  checkUserRegister(){
+    this._eventosService.checkUserRegister(this.eventoId).subscribe((data: boolean) => {
+      this.registrado = data;
+    })
+  }
+
+  openCesionImagenModal(){
+    this._modalService.open(this.cesionImagen, {size: 'lg', backdrop: 'static'});
+  }
+
+  cerrarCesionImagenModal(){
+    this._modalService.dismissAll(this.cesionImagen);
   }
 
 }

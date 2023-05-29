@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { EventosTableComponent } from './eventos-table/eventos-table.component';
 import {DataTablesModule} from "angular-datatables";
 import {PipesModule} from "../../pipes/pipes.module";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {PipesModule} from "../../pipes/pipes.module";
     GestionEventosRoutingModule,
     ReactiveFormsModule,
     DataTablesModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ]
 })
 export class GestionEventosModule { }

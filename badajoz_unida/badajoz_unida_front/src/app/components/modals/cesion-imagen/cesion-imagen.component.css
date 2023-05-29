@@ -1,0 +1,22 @@
+.bgGeneral{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.customBtn:hover{
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
+}
+.customBtn{
+  background-color: var(--primary-color-hover);
+  color: white;
+}
+
+.btn-close{
+  filter: brightness(0) invert(1);
+}
+
+.modal-body{
+  max-height: 70vh;
+  overflow-y: auto;
+}

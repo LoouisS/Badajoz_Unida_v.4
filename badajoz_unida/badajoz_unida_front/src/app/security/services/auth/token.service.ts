@@ -91,6 +91,20 @@ export class TokenService {
     return true;
   }
 
+  getNombreApellidos() {
+    if(!this.isLogged()){
+      return null;
+    }
+    const token=this.getToken();
+    // @ts-ignore
+    const payload=token.split('.')[1];
+    const payloadDecoded=atob(payload);
+    const values=JSON.parse(payloadDecoded);
+    const nombre = values.nombre;
+    const apellidos = values.apellidos;
+    return nombre + ' ' + apellidos;
+  }
+
   /**
    Método que destruye el token de acceso y cierra la sesión del usuario
    **/

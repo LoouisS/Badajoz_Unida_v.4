@@ -8,6 +8,7 @@ import {interceptorProvider} from "./security/services/interceptors/prod-interce
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import {SharedModule} from "./shared/shared.module";
+import { CesionImagenComponent } from './components/modals/cesion-imagen/cesion-imagen.component';
 
 registerLocaleData(localeEs);
 

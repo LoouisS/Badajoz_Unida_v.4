@@ -30,6 +30,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   dtOptions: any;
   dtTable: DataTables.Api;
   formFilter!: FormGroup;
+  loading: boolean = true;
 
   /**
    Constructor de la clase
@@ -82,6 +83,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
    Método que carga los datos en la datatable
    **/
   cargarTabla() {
+    this.loading = false;
       $(this.table.nativeElement).DataTable().destroy();
       this.dtOptions = {
         paging: true,

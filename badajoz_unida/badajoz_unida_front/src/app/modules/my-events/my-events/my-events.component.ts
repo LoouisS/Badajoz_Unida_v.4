@@ -5,6 +5,7 @@
  **/
 
 import {Component, OnInit} from '@angular/core';
+import {EventosService} from "../../../services/eventos.service";
 
 @Component({
   selector: 'app-my-events',
@@ -17,10 +18,28 @@ import {Component, OnInit} from '@angular/core';
  **/
 export class MyEventsComponent implements OnInit{
 
+  listaInscripciones : any[];
+  loading: boolean = true;
+
+  constructor(private _eventosServices: EventosService) {
+  }
+
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
+    this.loadEventsByUser();
+    this._eventosServices.notifyRefreshCards().subscribe((data: any) => {
+      this.loading = true;
+      this.loadEventsByUser();
+    })
+  }
+
+  loadEventsByUser(){
+    this._eventosServices.getEventosByUserId().subscribe((data: any) => {
+      this.listaInscripciones = data;
+      this.loading = false;
+    })
   }
 
 }

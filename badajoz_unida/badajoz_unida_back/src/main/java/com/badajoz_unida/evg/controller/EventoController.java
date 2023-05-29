@@ -79,6 +79,35 @@ public class EventoController {
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/checkRegister/{eventoId}")
+    public ResponseEntity<?> checkUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
+        try {
+            return new ResponseEntity<Boolean>(this.eventoService.checkUserRegister(request, eventoId), HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/userInscriptions")
+    public ResponseEntity<?> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException{
+        try {
+            return new ResponseEntity<>(this.eventoService.getEventsByUserId(request), HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/removeUser/{eventoId}")
+    public ResponseEntity<?> removeUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
+        try {
+            this.eventoService.removeUserRegister(request, eventoId);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping(value = "/delete/{eventId}")
     public ResponseEntity<?> deleteEvent(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException{
         try{

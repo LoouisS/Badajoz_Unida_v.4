@@ -33,8 +33,18 @@ section p{
   height: auto;
 }
 
+.cover button{
+  position: absolute;
+  bottom: 30px;
+  right: 75px;
+}
+
 .info{
   background-color: hsl(0, 0%, 80%);
+}
+
+.info > div:nth-child(2){
+  border-left: 2px solid hsl(0, 0%, 30%);
 }
 
 h1.titulo{
@@ -45,6 +55,11 @@ h1.titulo{
 div.detalles{
   background-color: var(--primary-color);
   color: white;
+}
+
+.apuntado{
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 /* --- mapa --- */
