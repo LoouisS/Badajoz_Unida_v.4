@@ -67,6 +67,7 @@
     <tr *ngFor="let evento of eventos">
       <td>
         <i class="fa-solid fa-trash" (click)="deleteEvent(evento?.eventosId)"></i>
+        <i class="fa-solid fa-pen-to-square" (click)="modEvent(evento?.eventosId)"></i>
       </td>
       <td>{{evento?.nombre}}</td>
       <td>{{evento?.localizacion}}</td>

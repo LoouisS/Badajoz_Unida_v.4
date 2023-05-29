@@ -148,4 +148,8 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log("ELIMINADO", data);
     });
   }
+
+  modEvent(eventosId: number) {
+
+  }
 }

@@ -8,44 +8,44 @@
       <div class="col-6 p-3">
         <div>
           <label for="nombreEvento" class="form-label">Nombre del evento:</label>
-          <input formControlName="nombreEvento" [class.is-invalid]="!validar('nombreEvento')"
+          <input formControlName="nombreEvento" [class.is-invalid]="validar('nombreEvento')"
                  type="text" class="form-control customForm" id="nombreEvento" >
-          <small *ngIf="!validar('nombreEvento')" class="error">El nombre es un campo requerido.</small>
+          <small *ngIf="validar('nombreEvento')" class="error">{{validar('nombreEvento')}}</small>
         </div>
         <div class="my-3">
           <label for="fechaHoraEvento" class="form-label">Fecha y hora:</label>
-          <input formControlName="fecha" [class.is-invalid]="!validar('fecha')"
+          <input formControlName="fecha" [class.is-invalid]="validar('fecha')"
                  type="datetime-local" class="form-control customForm" id="fechaHoraEvento" >
-          <small *ngIf="!validar('fecha')" class="error">El nombre es un campo requerido.</small>
+          <small *ngIf="validar('fecha')" class="error">{{validar('fecha')}}</small>
         </div>
         <div>
           <label for="descripcionEvento" class="form-label">Descripción:</label>
-          <small *ngIf="!validar('descripcion')" class="error">El nombre es un campo requerido.</small>
-          <textarea formControlName="descripcion" [class.is-invalid]="!validar('descripcion')"
+          <small *ngIf="validar('descripcion')" class="error">{{validar('descripcion')}}</small>
+          <textarea formControlName="descripcion" [class.is-invalid]="validar('descripcion')"
                     class="form-control customForm" id="descripcionEvento" ></textarea>
         </div>
       </div>
       <div class="col-6 p-3">
         <div>
           <label for="tlfEvento" class="form-label">Teléfono de contacto:</label>
-          <input formControlName="tlf" [class.is-invalid]="!validar('tlf')"
+          <input formControlName="tlf" [class.is-invalid]="validar('tlf')"
                  type="number" class="form-control customForm" id="tlfEvento" >
-          <small *ngIf="!validar('tlf')" class="error">El nombre es un campo requerido.</small>
+          <small *ngIf="validar('tlf')" class="error">{{validar('tlf')}}</small>
         </div>
         <div class="my-3">
           <label for="localizacionEvento" class="form-label">Lugar:</label>
-          <input formControlName="localizacion" [class.is-invalid]="!validar('localizacion')"
+          <input formControlName="localizacion" [class.is-invalid]="validar('localizacion')"
                  type="text" class="form-control customForm" id="localizacionEvento" >
-          <small *ngIf="!validar('localizacion')" class="error">El nombre es un campo requerido.</small>
+          <small *ngIf="validar('localizacion')" class="error">{{validar('localizacion')}}</small>
         </div>
         <div>
           <label for="detalleEvento" class="form-label">Detalle del evento</label>
-          <small *ngIf="!validar('detalle')" class="error">El nombre es un campo requerido.</small>
-          <textarea  formControlName="detalle" [class.is-invalid]="!validar('detalle')"
+          <small *ngIf="validar('detalle')" class="error">{{validar('detalle')}}</small>
+          <textarea  formControlName="detalle" [class.is-invalid]="validar('detalle')"
                      class="form-control customForm" id="detalleEvento" ></textarea>
         </div>
         <div>
-          <label for="intereses" class="form-label">Categoría relacionada</label>
+          <label for="intereses" class="form-label">{{validar('intereses')}}</label>
           <select  formControlName="intereses"
                      class="form-control customForm" id="intereses" >
             <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">

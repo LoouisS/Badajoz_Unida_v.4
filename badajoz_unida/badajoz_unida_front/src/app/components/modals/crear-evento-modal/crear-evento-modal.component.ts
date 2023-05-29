@@ -1,9 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as L from "leaflet";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModelNewEvent} from "../../../models/model-new-event";
 import {CategoriasService} from "../../../services/categorias.service";
 import {EventosService} from "../../../services/eventos.service";
+import Swal from "sweetalert2";
+import {ValidadoresService} from "../../../services/validadores.service";
 
 @Component({
   selector: 'app-crear-evento-modal',
@@ -24,6 +26,17 @@ export class CrearEventoModalComponent implements OnInit{
   long: number | undefined
   preview: boolean;
   imgPreview:string;
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
   @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
 
   /**
@@ -32,7 +45,8 @@ export class CrearEventoModalComponent implements OnInit{
    @param catService {CategoriasService} Servicio que gestiona los datos de las categorías
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService) { }
+  constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService,
+              private validador: ValidadoresService) { }
 
   /**
    Método que inicializa la vista
@@ -112,23 +126,65 @@ export class CrearEventoModalComponent implements OnInit{
    **/
   private initForm() {
     this.formCreateEvent = this.formBuilder.group({
-      nombreEvento:['',Validators.required],
-      fecha:['',Validators.required],
-      descripcion:['',Validators.required],
-      tlf:['',Validators.required],
-      localizacion:['',Validators.required],
-      intereses:[],
-      detalle:['',Validators.required]
-    })
+      nombreEvento: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      fecha: ['', [Validators.required, this.validador.validateFecha]],
+      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      tlf: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      localizacion: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(100)]],
+      intereses: [],
+      detalle: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+      img: ['', this.validador.validateImgExtension]
+    });
   }
 
   /**
    Método que valida los campos del formulario de forma general
    @param campo1 {string} Nombre asignado al campo del formulario que se quiere validar
    **/
-  validar(campo1: string) {
-    let campo: any = this.formCreateEvent.get(campo1);
-    return !(campo.invalid && campo.touched);
+  validar(campo: string): string | null {
+    const control = this.formCreateEvent.get(campo);
+
+    if (control.invalid && control.touched) {
+      if (control.errors?.['required']) {
+        return 'Este campo es requerido.';
+      }
+
+      if (control.errors?.['minlength']) {
+        const minLength = control.errors['minlength']['requiredLength'];
+        return `El valor mínimo es de ${minLength} caracteres.`;
+      }
+
+      if (control.errors?.['maxlength']) {
+        const maxLength = control.errors['maxlength']['requiredLength'];
+        return `El valor máximo es de ${maxLength} caracteres.`;
+      }
+
+      // Validación adicional para el campo de fecha
+      if (campo === 'fecha' && control.errors?.['minDate']) {
+        return 'La fecha debe ser mayor a la fecha actual.';
+      }
+
+      // Validación adicional para el campo de teléfono
+      if (campo === 'tlf' && control.errors?.['minlength']) {
+        return 'El número de teléfono debe tener 9 dígitos.';
+      }
+
+      // Validación adicional para el campo de localización
+      if (campo === 'localizacion' && control.errors?.['minlength']) {
+        const minLength = control.errors['minlength']['requiredLength'];
+        return `La localización debe tener al menos ${minLength} caracteres.`;
+      }
+
+      // Validación adicional para el campo de imagen
+      if (campo === 'imagen' && control.errors?.['extension']) {
+        return 'La imagen debe tener una extensión válida (png, jpg, jpeg).';
+      }
+
+      // Si no se encuentra ningún error específico, devuelve el mensaje genérico
+      return 'El valor ingresado no es válido.';
+    }
+
+    return null;
   }
 
   /**
@@ -142,23 +198,68 @@ export class CrearEventoModalComponent implements OnInit{
       });
       return;
     }
-    const inter = parseInt(this.formCreateEvent.get('intereses').value);
+    this.alert.fire({
+      icon:'question',
+      title:'¿Estas seguro que deseas registrar un nuevo evento?',
+      html:'<ul class="list-group list-group-flush d-flex">'+
+        '<li class="list-group-item text-left">Nombre: ' + this.formCreateEvent.get('nombre')?.value + '</li>'+
+        '<li class="list-group-item text-left">Descripcion: ' + this.formCreateEvent.get('descripcion')?.value + '</li>'+
+        '<li class="list-group-item text-left">Detalles: ' + this.formCreateEvent.get('detalles')?.value + '</li>'+
+        '<li class="list-group-item text-left">Localización: ' + this.formCreateEvent.get('localizacion')?.value + '</li>'+
+        '<li class="list-group-item text-left">Fecha: ' + this.formCreateEvent.get('fechaHora')?.value + '</li>'+
+        '<li class="list-group-item text-left">Tlf: ' + this.formCreateEvent.get('tlf')?.value + '</li>'+
+        '<li class="list-group-item text-left">Intereses: ' + this.formCreateEvent.get('intereses')?.value + '</li>'+
+        '</ul>',
 
-    const formData = new FormData();
-    formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
-    formData.append('descripcion', this.formCreateEvent.get('descripcion').value);
-    formData.append('detalles', this.formCreateEvent.get('detalle').value);
-    formData.append('localizacion', this.formCreateEvent.get('localizacion').value);
-    formData.append('fechaHora', new Date(this.formCreateEvent.get('fecha').value).toISOString());
-    formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
-    formData.append('latitud', this.lat.toString());
-    formData.append('longitud', this.long.toString());
-    formData.append('imagen', this.getImg());
-    formData.append('intereses', JSON.stringify(inter));
-    this.eventoService.createEvento(formData).subscribe((data) => {
-      console.log("DATA", data);
+      showConfirmButton: true,
+      showCancelButton: true,
+    }).then((result) => {
+      this.alert.fire({
+        title:'Espereme mientras gestionamos su solicitud',
+        didOpen(popup: HTMLElement) {
+          Swal.showLoading();
+        }
+      })
+      if (result.isConfirmed) {
+        const inter = parseInt(this.formCreateEvent.get('intereses').value);
+
+        const formData = new FormData();
+        formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
+        formData.append('descripcion', this.formCreateEvent.get('descripcion').value);
+        formData.append('detalles', this.formCreateEvent.get('detalle').value);
+        formData.append('localizacion', this.formCreateEvent.get('localizacion').value);
+        formData.append('fechaHora', new Date(this.formCreateEvent.get('fecha').value).toISOString());
+        formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
+        formData.append('latitud', this.lat.toString());
+        formData.append('longitud', this.long.toString());
+        formData.append('imagen', this.getImg());
+        formData.append('intereses', JSON.stringify(inter));
+        this.eventoService.createEvento(formData).subscribe((data) => {
+          console.log("DATA", data);
+          this.alert.fire({
+            icon:'success',
+            title:'Evento registrado con éxito',
+            timer:4000,
+          })
+        },error => {
+          this.alert.fire({
+            icon:'error',
+            title:'No se ha podido realizar el registro',
+            timer:4000,
+          })
+        })
+
+      } else {
+        this.alert.fire({
+          title: 'Registro cancelado con éxito',
+          text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
+          icon: 'info',
+          timer: 4000,
+          showConfirmButton: false,
+          showCancelButton: false,
+        })
+      }
     })
-
   }
 
   /**
@@ -172,6 +273,10 @@ export class CrearEventoModalComponent implements OnInit{
     return null;
   }
 
+  /**
+   * Método para la carga dinámica de la imagen seleccionada a subir
+   * @param $event
+   */
   previewImg($event) {
     const file = $event.target.files[0];
     if (file) {
@@ -186,7 +291,6 @@ export class CrearEventoModalComponent implements OnInit{
       this.imgPreview = null;
     }
   }
-
   cerrarModal(){
     this.cerrarModalEventos.emit();
   }
