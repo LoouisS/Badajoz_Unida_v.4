@@ -77,11 +77,14 @@ public class EventoManager implements EventoService{
             if (newEvent.getImagen() != null)
             this.saveImg(eventoRegistrado,newEvent.getImagen());
         }
+        if (ieRepository.findAllByEventoEventosId(eventoRegistrado.getEventosId()).size() > 0){
+            ieRepository.deleteAllByEventoEventosId(eventoRegistrado.getEventosId());
+        }
         for (int x=0; x<newEvent.getIntereses().size(); x++){
             InteresesEventos ie= new InteresesEventos();
             ie.setEvento(eventoRegistrado);
             Intereses intereses = new Intereses();
-            intereses.setInteresId(parseInt(newEvent.getIntereses().get(x)));
+            intereses.setInteresId(newEvent.getIntereses().get(x));
             ie.setInteres(intereses);
             this.ieRepository.save(ie);
         }

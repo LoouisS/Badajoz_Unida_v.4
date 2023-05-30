@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import * as L from "leaflet";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModelNewEvent} from "../../../models/model-new-event";
@@ -6,6 +6,7 @@ import {CategoriasService} from "../../../services/categorias.service";
 import {EventosService} from "../../../services/eventos.service";
 import Swal from "sweetalert2";
 import {ValidadoresService} from "../../../services/validadores.service";
+import {AngularMultiSelect} from "angular2-multiselect-dropdown";
 
 @Component({
   selector: 'app-crear-evento-modal',
@@ -18,15 +19,18 @@ import {ValidadoresService} from "../../../services/validadores.service";
  **/
 export class CrearEventoModalComponent implements OnInit{
 
+  @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
   eventoEdit: any;
   map: any;
   marker: any;
   formCreateEvent!: FormGroup;
   categorias: any;
+  selectedCat: any;
   lat: number | undefined;
   long: number | undefined
   preview: boolean;
   imgPreview:string;
+  multiselectSettings!: any;
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -47,31 +51,32 @@ export class CrearEventoModalComponent implements OnInit{
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
   constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService,
-              private validador: ValidadoresService) {}
+              private validador: ValidadoresService) {this.initMultiselect();}
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
-    this.catService.getCategorias().subscribe((data) => {
+    this.catService.getIntereses().subscribe((data) => {
       this.categorias = data;
-      console.log("CATEGORIAS", this.categorias);
+      console.log("LOS INTERESES", this.categorias);
     });
-
     this.initForm();
     this.initMap();
     this.eventoService.getEditEvent().subscribe((data) => {
       this.eventoEdit = data;
       console.log("EN EL ONINIT",this.eventoEdit);
       if (this.eventoEdit != null){
-        this.setFormEdit(this.eventoEdit);
+        setTimeout(() => {
+          this.setFormEdit(this.eventoEdit);
+        },1000)
+
       }else{
         this.resetForm();
       }
 
     })
   }
-
   /**
    Método que carga el mapa interactivo
    **/
@@ -235,8 +240,14 @@ export class CrearEventoModalComponent implements OnInit{
         }
       })
       if (result.isConfirmed) {
-        const inter = parseInt(this.formCreateEvent.get('intereses').value);
+        const interesesAll = this.formCreateEvent.get('intereses').value;
+        const inter =[];
+        for (let int of interesesAll){
+          console.log("INT", int.interesId);
+          inter.push(parseInt(int.interesId));
 
+        }
+        console.log(inter);
         const formData = new FormData();
         if (this.eventoEdit != null ){
           formData.append('eventosId', this.eventoEdit.eventosId);
@@ -252,7 +263,7 @@ export class CrearEventoModalComponent implements OnInit{
         if (this.getImg() != null){
           formData.append('imagen', this.getImg());
         }
-        formData.append('intereses', JSON.stringify(inter));
+        formData.append('intereses', inter.join(','));
         this.eventoService.createEvento(formData).subscribe((data) => {
           console.log("DATA", data);
           this.alert.fire({
@@ -316,7 +327,11 @@ export class CrearEventoModalComponent implements OnInit{
   }
   setFormEdit(evento: any){
     console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
+    let intereses = [];
     this.eventoEdit = evento;
+   // if (evento.intereses !=null || evento.intereses !=undefined){
+
+ //   }
     this.formCreateEvent.setValue({
       nombreEvento: evento?.nombre,
       fecha: evento?.fechaHora,
@@ -326,11 +341,32 @@ export class CrearEventoModalComponent implements OnInit{
       intereses: evento?.intereses[0].interesId,
       detalle: evento?.detalles
     });
+    intereses = evento.intereses
+    this.selectedCat=intereses;
+    this.multiselect.selectedItems = intereses
+    console.log("SELECCIONADOS", this.selectedCat);
   }
 
   resetForm() {
     console.log("reseteando formulario")
     this.eventoEdit = null;
     this.formCreateEvent.reset();
+  }
+
+  private initMultiselect() {
+    this.multiselectSettings = {
+      singleSelection: false,
+      text: 'Seleccione intereses relacionados',
+      searchPlaceHolder: 'Buscar',
+      textField:'titulo',
+      labelKey:'titulo',
+      idField: 'interesId',
+      enableSearchFilter: true,
+      badgeShowLimit: 6,
+      primaryKey: 'interesId',
+      searchBy: 'titulo',
+      tagToBody: true,
+      noDataLabel: 'No disponibles'
+    }
   }
 }

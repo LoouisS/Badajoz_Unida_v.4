@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@popperjs/core": "^2.11.7",
     "angular-datatables": "^15.0.1",
+    "angular2-multiselect-dropdown": "^5.0.4",
     "datatables.net": "^1.13.4",
     "datatables.net-dt": "^1.13.4",
     "jquery": "^3.7.0",

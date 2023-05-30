@@ -26,5 +26,5 @@ public class NewEventDTO {
     private String latitud;
     private String longitud;
     private Optional<MultipartFile> imagen;
-    private List<String> intereses;
+    private List<Integer> intereses;
 }

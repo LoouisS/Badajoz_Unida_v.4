@@ -46,12 +46,11 @@
         </div>
         <div>
           <label for="intereses" class="form-label">{{validar('intereses')}}</label>
-          <select  formControlName="intereses"
-                     class="form-control customForm" id="intereses" >
-            <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
-              <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
-            </optgroup>
-          </select>
+          <angular2-multiselect formControlName="intereses" #multiselectIntereses class="form-control customForm" id="intereses"
+                                [(ngModel)]="selectedCat"
+                                [data]="categorias"
+                                [settings]="multiselectSettings">
+          </angular2-multiselect>
         </div>
       </div>
     </form>

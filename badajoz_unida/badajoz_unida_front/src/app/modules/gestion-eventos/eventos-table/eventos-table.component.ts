@@ -200,12 +200,9 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   modEvent(eventosId: number) {
-    console.log("ENTRA EN MOD EVENT")
     this.eventoService.getEventosById(eventosId).subscribe((data) =>{
-      console.log("ANTES DATA")
       this.eventoService.setEditEvent(data);
       this.editEvent.emit()
-      console.log("DESPUES DATA", data);
     });
   }
 }
