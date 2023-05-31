@@ -97,4 +97,8 @@ export class EventosService {
   getEditEvent(){
     return this.editEvent;
   }
+
+  getExcellEvent(eventosId: any) {
+    return this.httpClient.get(this.apiUrl + 'generateExcell/' + eventosId,{ responseType: 'blob' });
+  }
 }

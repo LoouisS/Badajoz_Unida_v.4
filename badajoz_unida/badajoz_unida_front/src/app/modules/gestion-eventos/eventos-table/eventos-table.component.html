@@ -1,4 +1,4 @@
-<div class="card mx-5 my-4">
+<div class="card mx-4 my-4">
   <div>
     <div class="card-header bgGeneral">
       Filtros de búsqueda:
@@ -47,41 +47,56 @@
     </div>
   </div>
 </div>
-<div class=" px-5" [ngClass]="{'d-none': loading}">
-  <table #dataTable class="display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
+  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
-      <th>Opciones</th>
-      <th>Nombre</th>
-      <th>Localización</th>
-      <th>Fecha</th>
-      <th>Telefono</th>
-      <th>LatLong</th>
-      <th>Detalles</th>
-      <th>Descripción</th>
-      <th>Imagen</th>
-      <th>Intereses</th>
+      <th class="col-1">Opciones</th>
+      <th class="col-1">Nombre</th>
+      <th class="col-1">Localización</th>
+      <th class="col-1">Fecha</th>
+      <th class="col-1">Telefono</th>
+      <th class="col-1">LatLong</th>
+      <th class="col-1">Detalles</th>
+      <th class="col-1">Descripción</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let evento of eventos">
-      <td>
-        <i class="fa-solid fa-trash cursorPointer me-2" (click)="deleteEvent(evento?.eventosId,evento)"></i>
-        <i class="fa-solid fa-pen-to-square cursorPointer" (click)="modEvent(evento?.eventosId)"></i>
+      <td class="col-1 text-center">
+        <div class="text-center pt-2">
+          <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="modEvent(evento?.eventosId)"></i>
+          <div class="btn-group text-center">
+            <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+              <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action" *ngFor="let usuario of evento?.usuarios">
+                  {{usuario.nombre + ' ' +usuario.apellidos}}
+                </button>
+              </div>
+            </ul>
+          </div>
+          <div class="btn-group text-center" *ngIf="evento?.intereses != null">
+            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+              <li *ngFor="let interes of evento?.intereses" class="text-center">
+                <span class="badge rounded-pill text-bg-danger">
+                  {{interes?.titulo}}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <i class="fa-solid fa-file-export" (click)="exportExcell(evento?.eventosId,evento)"></i>
+          <i class="fa-solid fa-trash cursorPointer" (click)="deleteEvent(evento?.eventosId,evento)"></i>
+        </div>
       </td>
       <td>{{evento?.nombre}}</td>
-      <td>{{evento?.localizacion}}</td>
+      <td>{{evento?.localizacion| cortarTexto:10}}</td>
       <td>{{evento?.fechaHora | date:'dd/mm/yyyy hh:mm'}}</td>
       <td>{{evento?.telefonoContacto}}</td>
       <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
-      <td>{{evento?.detalles| cortarTexto:200}}</td>
-      <td>{{evento?.descripcion| cortarTexto:200}}</td>
-      <td>{{evento?.img}}</td>
-      <td>
-      <span  *ngFor="let interes of evento?.intereses" class="badge rounded-pill text-bg-danger">
-        {{interes?.titulo}}
-      </span>
-      </td>
+      <td>{{evento?.detalles| cortarTexto:10}}</td>
+      <td>{{evento?.descripcion| cortarTexto:10}}</td>
     </tr>
     </tbody>
   </table>

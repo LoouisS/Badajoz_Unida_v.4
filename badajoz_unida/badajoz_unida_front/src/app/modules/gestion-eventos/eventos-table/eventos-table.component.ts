@@ -205,4 +205,15 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.editEvent.emit()
     });
   }
+
+  exportExcell(eventosId: any, evento:any) {
+    this.eventoService.getExcellEvent(eventosId).subscribe(data =>{
+      const blob = new Blob([data],{type:'application/vnd.ms-excel'})
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(data);
+      link.download = evento?.nombre+'.xlsx';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  }
 }

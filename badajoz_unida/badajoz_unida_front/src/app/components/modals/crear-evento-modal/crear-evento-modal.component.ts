@@ -321,10 +321,19 @@ export class CrearEventoModalComponent implements OnInit{
       this.imgPreview = null;
     }
   }
+
+  /**
+   * Método para el cierre del modal desarrollado en el template
+   */
   cerrarModal(){
     this.cerrarModalEventos.emit();
     this.eventoService.deleteEditEvent();
   }
+
+  /**
+   * Método para el seteo de valores en el formulario para la edición de un evento
+   * @param evento
+   */
   setFormEdit(evento: any){
     console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
     let intereses = [];
@@ -347,12 +356,19 @@ export class CrearEventoModalComponent implements OnInit{
     console.log("SELECCIONADOS", this.selectedCat);
   }
 
+  /**
+   * Método para el reinicio del formulario a valores en blanco
+   */
   resetForm() {
     console.log("reseteando formulario")
     this.eventoEdit = null;
     this.formCreateEvent.reset();
   }
 
+  /**
+   * Método para el instanciamiento de ajustes del módulo AngularMultiselectModule
+   * @private
+   */
   private initMultiselect() {
     this.multiselectSettings = {
       singleSelection: false,
