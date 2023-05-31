@@ -13,7 +13,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class NewEventDTO {
-    private int eventosId;
+    private Integer eventosId;
     private String nombre;
     private String descripcion;
     private String detalles;
@@ -26,5 +26,5 @@ public class NewEventDTO {
     private String latitud;
     private String longitud;
     private Optional<MultipartFile> imagen;
-    private List<String> intereses;
+    private List<Integer> intereses;
 }

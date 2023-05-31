@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/eventos")
@@ -108,4 +109,20 @@ public class EventoController {
         }
     }
 
+    @DeleteMapping(value = "/delete/{eventId}")
+    public ResponseEntity<?> deleteEvent(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException{
+        try{
+            return new ResponseEntity<>(this.eventoService.deleteEvent(idEvento),HttpStatus.OK);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping(value = "/generateExcell/{eventId}")
+    public ResponseEntity<?> generateExcell(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException, SQLException {
+        try{
+            return this.eventoService.generateExcell(idEvento);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -5,7 +5,7 @@
  **/
 
 import { Injectable } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors} from "@angular/forms";
 
 
 /**
@@ -59,5 +59,26 @@ export class ValidadoresService {
   comprobarIdioma(control: FormControl){
     return control?.value == -1 ? { sinIdioma: true } : null;
   }
+  validateFecha(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = new Date(control.value);
+    const currentDate = new Date();
 
+    if (selectedDate <= currentDate) {
+      return { invalidFecha: true };
+    }
+
+    return null;
+  }
+
+  validateImgExtension(control: AbstractControl): ValidationErrors | null {
+    const allowedExtensions = ['.png', '.jpg', '.jpeg'];
+    const fileName = control.value;
+    const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+
+    if (!allowedExtensions.includes(extension)) {
+      return { invalidImgExtension: true };
+    }
+
+    return null;
+  }
 }

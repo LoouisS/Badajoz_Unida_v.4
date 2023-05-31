@@ -9,6 +9,7 @@ import { EventosTableComponent } from './eventos-table/eventos-table.component';
 import {DataTablesModule} from "angular-datatables";
 import {PipesModule} from "../../pipes/pipes.module";
 import {SharedModule} from "../../shared/shared.module";
+import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 
 
 @NgModule({
@@ -17,13 +18,14 @@ import {SharedModule} from "../../shared/shared.module";
     CrearEventoModalComponent,
     EventosTableComponent
   ],
-  imports: [
-    CommonModule,
-    GestionEventosRoutingModule,
-    ReactiveFormsModule,
-    DataTablesModule,
-    PipesModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        GestionEventosRoutingModule,
+        ReactiveFormsModule,
+        DataTablesModule,
+        PipesModule,
+        SharedModule,
+        AngularMultiSelectModule
+    ]
 })
 export class GestionEventosModule { }

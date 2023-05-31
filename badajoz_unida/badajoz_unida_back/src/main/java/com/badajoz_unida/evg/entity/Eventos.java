@@ -41,7 +41,8 @@ public class Eventos {
     private String longitud;
     @Column(name="localizacion")
     private String localizacion;
-
+    @Column(name="img")
+    private String img;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "intereses_eventos",
             joinColumns = @JoinColumn(name = "evento_id"),

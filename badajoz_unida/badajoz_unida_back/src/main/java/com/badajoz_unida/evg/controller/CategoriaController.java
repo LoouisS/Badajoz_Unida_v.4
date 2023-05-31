@@ -2,10 +2,7 @@ package com.badajoz_unida.evg.controller;
 
 import com.badajoz_unida.evg.dto.Mensaje;
 import com.badajoz_unida.evg.dto.UserInterestDTO;
-import com.badajoz_unida.evg.entity.Categorias;
-import com.badajoz_unida.evg.entity.Roles;
-import com.badajoz_unida.evg.entity.Usuarios;
-import com.badajoz_unida.evg.entity.UsuariosIntereses;
+import com.badajoz_unida.evg.entity.*;
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.service.CategoriaService;
 import com.badajoz_unida.evg.service.UsuarioInteresesService;
@@ -38,7 +35,12 @@ public class CategoriaController {
 
         return this.catService.getAllCategorias();
     }
+    @GetMapping("/interesesAll")
+    @PermitAll
+    public List<Intereses> getAllIntereses(){
 
+        return this.catService.getAllIntereses();
+    }
     @PostMapping("register/c")
     public ResponseEntity<?> registrarIntereses(@RequestBody UserInterestDTO interesesUsuario){
         return this.usuarioInteresesService.save(interesesUsuario);

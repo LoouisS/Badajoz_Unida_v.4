@@ -20,6 +20,7 @@ export class EventosService {
 
   apiUrl: string ='http://localhost:8080/eventos/';
   refreshCards: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  editEvent: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   /**
    Constructor de la clase
@@ -56,8 +57,15 @@ export class EventosService {
     return this.httpClient.get(this.apiUrl+'all')
   }
 
+  /**
+   * Métodos para la obtención de eventos filtrados por parámetros
+   * @param filtros
+   */
   getEventosFiltered(filtros:any) {
     return this.httpClient.post(this.apiUrl+'allFilter',filtros)
+  }
+  deleteEventById(id: number){
+    return this.httpClient.delete(this.apiUrl+'delete/'+id);
   }
 
   checkUserRegister(eventoId: number){
@@ -80,6 +88,17 @@ export class EventosService {
   setNotificationCards(){
     this.refreshCards.next(null);
   }
+  setEditEvent(event: any){
+      this.editEvent.next(event);
+  }
+  deleteEditEvent(){
+    this.editEvent.next(null);
+  }
+  getEditEvent(){
+    return this.editEvent;
+  }
 
-
+  getExcellEvent(eventosId: any) {
+    return this.httpClient.get(this.apiUrl + 'generateExcell/' + eventosId,{ responseType: 'blob' });
+  }
 }

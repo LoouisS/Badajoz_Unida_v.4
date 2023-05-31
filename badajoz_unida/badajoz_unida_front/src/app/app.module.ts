@@ -23,9 +23,9 @@ registerLocaleData(localeEs);
     SharedModule
   ],
   providers: [interceptorProvider],
-    exports: [
-        AppComponent
-    ],
+  exports: [
+    AppComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

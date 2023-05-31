@@ -31,4 +31,11 @@ export class CategoriasService {
   public getCategorias(){
     return this.httpClient.get(this.authURL + 'all');
   }
+
+  /**
+   * Método para la obtención de todas las categorías registradas
+   */
+  getIntereses() {
+    return this.httpClient.get(this.authURL + 'interesesAll');
+  }
 }
