@@ -1,0 +1,39 @@
+<div class="modal fade" id="createCatModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="d" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-header bgGeneral">
+        <h1 class="modal-title fs-5" id="s">Nueva categoría</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body w-100 px-5">
+        <form id="formCreateCat" class="col-12" [formGroup]="formCreateCat" (ngSubmit)="sendCat()" [ngClass]="{'d-none': loading}">
+          <div>
+            <label for="nombreCat" class="form-label">Nombre de categoría:</label>
+            <input formControlName="nombreCat" [class.is-invalid]="validar('nombreCat')"
+                   type="text" class="form-control customForm" id="nombreCat" >
+            <small *ngIf="validar('nombreCat')" class="error">{{validar('nombreCat')}}</small>
+          </div>
+          <div>
+            <label for="descripcionCategoria" class="form-label">Descripción:</label>
+            <small *ngIf="validar('descripcionCategoria')" class="error">{{validar('descripcionCategoria')}}</small>
+            <textarea formControlName="descripcionCategoria" [class.is-invalid]="validar('descripcionCategoria')"
+                      class="form-control customForm" id="descripcionCategoria" ></textarea>
+          </div>
+          <div>
+            <label for="activar" class="form-label">Activar:</label>
+            <small *ngIf="validar('activar')" class="error">{{validar('activar')}}</small>
+            <input type="checkbox" formControlName="activar" [class.is-invalid]="validar('activar')"
+                      class="customForm" id="activar" >
+          </div>
+        </form>
+        <div *ngIf="loading">
+          <app-loading></app-loading>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button form="formCreateCat" type="submit" class="btn button rounded-pill px-3 py-2 customBtn">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+

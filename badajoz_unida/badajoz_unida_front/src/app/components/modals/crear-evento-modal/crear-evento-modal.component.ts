@@ -20,6 +20,7 @@ import {AngularMultiSelect} from "angular2-multiselect-dropdown";
 export class CrearEventoModalComponent implements OnInit{
 
   @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
+  @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
   eventoEdit: any;
   map: any;
   marker: any;
@@ -42,7 +43,7 @@ export class CrearEventoModalComponent implements OnInit{
     },
     buttonsStyling: false
   });
-  @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
+  loading: boolean;
 
   /**
    Constructor de la clase

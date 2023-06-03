@@ -6,6 +6,7 @@ import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.dto.UserEventDTO;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.EventoService;
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -123,6 +124,16 @@ public class EventoController {
             return this.eventoService.generateExcell(idEvento);
         }catch (CustomException e){
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping(value = "/generatePdf/{eventId}")
+    public ResponseEntity<?> generatePdf(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException, SQLException {
+        try{
+            return this.eventoService.generatePdf(idEvento);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (TemplateException e) {
+            throw new RuntimeException(e);
         }
     }
 }

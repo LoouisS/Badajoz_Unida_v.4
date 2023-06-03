@@ -71,6 +71,9 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getEventos();
   }
 
+  /**
+   * Método para la obtención de todos los métodos registrados en la aplicación
+   */
   getEventos(){
     this.eventoService.getAllEventos().subscribe((data) => {
       this.eventos = data;
@@ -212,6 +215,16 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       const link = document.createElement('a');
       link.href = URL.createObjectURL(data);
       link.download = evento?.nombre+'.xlsx';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  }
+  exportPdf(eventosId: any, evento:any){
+    this.eventoService.getPdfEvent(eventosId).subscribe(data =>{
+      const blob = new Blob([data],{type:'application/pdf'})
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = evento?.nombre+'.pdf';
       link.click();
       URL.revokeObjectURL(link.href);
     });

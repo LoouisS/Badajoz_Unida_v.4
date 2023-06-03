@@ -6,6 +6,7 @@ import com.badajoz_unida.evg.dto.UserEventDTO;
 import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.entity.UsuariosEventos;
 import com.badajoz_unida.evg.exception.CustomException;
+import freemarker.template.TemplateException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,6 @@ public interface EventoService {
     Eventos deleteEvent(int id) throws CustomException, IOException;
 
     ResponseEntity<?> generateExcell(int idEvento) throws CustomException, IOException, SQLException;
+
+    ResponseEntity<?> generatePdf(int idEvento) throws CustomException, IOException, SQLException, TemplateException;
 }

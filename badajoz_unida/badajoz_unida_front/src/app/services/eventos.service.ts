@@ -64,6 +64,11 @@ export class EventosService {
   getEventosFiltered(filtros:any) {
     return this.httpClient.post(this.apiUrl+'allFilter',filtros)
   }
+
+  /**
+   * Método para la eliminación de un evento
+   * @param id
+   */
   deleteEventById(id: number){
     return this.httpClient.delete(this.apiUrl+'delete/'+id);
   }
@@ -88,17 +93,42 @@ export class EventosService {
   setNotificationCards(){
     this.refreshCards.next(null);
   }
+
+  /**
+   * Método para el seteo del observable editEvent para le edición de un evento
+   * @param event
+   */
   setEditEvent(event: any){
       this.editEvent.next(event);
   }
+
+  /**
+   * Método para eliminar el registro de un evento en la aplicación
+   */
   deleteEditEvent(){
     this.editEvent.next(null);
   }
+
+  /**
+   * Método para la obtención del objeto observable de edición de un evento
+   */
   getEditEvent(){
     return this.editEvent;
   }
 
+  /**
+   * Método para la obtención de un excell con la información del evento
+   * @param eventosId
+   */
   getExcellEvent(eventosId: any) {
     return this.httpClient.get(this.apiUrl + 'generateExcell/' + eventosId,{ responseType: 'blob' });
+  }
+
+  /**
+   * Método para la obtención de un pdf con la información del evento
+   * @param eventosId
+   */
+  getPdfEvent(eventosId: any) {
+    return this.httpClient.get(this.apiUrl + 'generatePdf/' + eventosId,{ responseType: 'blob' });
   }
 }

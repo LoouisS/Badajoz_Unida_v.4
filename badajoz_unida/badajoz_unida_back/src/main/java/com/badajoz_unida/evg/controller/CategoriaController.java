@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -45,4 +46,14 @@ public class CategoriaController {
     public ResponseEntity<?> registrarIntereses(@RequestBody UserInterestDTO interesesUsuario){
         return this.usuarioInteresesService.save(interesesUsuario);
     }
+    @PostMapping("registrarCategoria")
+    public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria){
+        return this.catService.saveCategoria(categoria);
+    }
+
+    @DeleteMapping("eliminarCategoria/{categoriaId}")
+    public ResponseEntity<?> eliminarCategoria(HttpServletRequest request, @PathVariable("categoriaId") int catId){
+        return this.catService.deleteCategoria(catId);
+    }
+
 }

@@ -4,7 +4,7 @@
       Filtros de búsqueda:
     </div>
     <div class="card-body">
-      <form class="col-12" [formGroup]="formFilter" (ngSubmit)="filtrarBusqueda()">
+      <form class="col-12">
         <div class="d-flex col-12">
           <div class="d-flex mb-3 col-5 me-5">
             <label for="nombreEvento" class="form-label pt-2 me-3">Nombre</label>
@@ -31,16 +31,16 @@
             <label for="intereses" class="form-label pt-2 me-3">Intereses</label>
             <select  formControlName="intereses"
                      class="form-control" id="intereses" >
-              <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
-                <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
+              <optgroup  >
+                <option ></option>
               </optgroup>
             </select>
           </div>
         </div>
         <div class="mt-3">
           <button type="submit" class="btn bgGeneral">Filtrar</button>
-          <button type="button" class="btn btn-primary ms-2" (click)="mostrarModalEventos()">
-            Crear evento
+          <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createCatModal">
+            Crear categoría
           </button>
         </div>
       </form>
@@ -52,34 +52,30 @@
     <thead class="bgGeneral">
     <tr>
       <th class="col-1"></th>
-      <th class="col-1">Nombre</th>
-      <th class="col-1">Localización</th>
-      <th class="col-1">Fecha</th>
-      <th class="col-1">Telefono</th>
-      <th class="col-1">LatLong</th>
-      <th class="col-1">Detalles</th>
-      <th class="col-1">Descripción</th>
-      <th></th>
+      <th class="col-4">Titulo</th>
+      <th class="col-5">Descripción</th>
+      <th class="col-1">Activo</th>
+      <th class="col-1"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let evento of eventos">
+    <tr *ngFor="let cat of categorias">
       <td class="col-1 text-center">
         <div class="text-center pt-2">
           <div class="btn-group text-center">
             <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
               <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action" *ngFor="let usuario of evento?.usuarios">
-                  {{usuario.nombre + ' ' +usuario.apellidos}}
+                <button type="button" class="list-group-item list-group-item-action" >
+
                 </button>
               </div>
             </ul>
           </div>
-          <div class="btn-group text-center" *ngIf="evento?.intereses != null">
+          <div class="btn-group text-center" >
             <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
-              <li *ngFor="let interes of evento?.intereses" class="text-center">
+              <li  class="text-center" *ngFor="let interes of cat?.intereses">
                 <span class="badge rounded-pill text-bg-danger">
                   {{interes?.titulo}}
                 </span>
@@ -88,28 +84,18 @@
           </div>
         </div>
       </td>
-      <td>{{evento?.nombre}}</td>
-      <td>{{evento?.localizacion| cortarTexto:10}}</td>
-      <td>{{evento?.fechaHora | date:'dd/mm/yyyy hh:mm'}}</td>
-      <td>{{evento?.telefonoContacto}}</td>
-      <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
-      <td>{{evento?.detalles| cortarTexto:10}}</td>
-      <td>{{evento?.descripcion| cortarTexto:10}}</td>
-      <td>
+      <td class="col-4">{{cat?.titulo}}</td>
+      <td class="col-5">{{cat?.descripcion | cortarTexto:100}}</td>
+      <td class="col-1">{{cat?.activo}}</td>
+      <td class="col-1">
         <div class="dropdown">
           <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu">
             <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="modEvent(evento?.eventosId)"></i>
+              <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="editCategoria(cat)" data-bs-toggle="modal" data-bs-target="#createCatModal"></i>
             </li>
             <li>
-              <i class="fa-solid fa-file-export" (click)="exportExcell(evento?.eventosId,evento)"></i>
-            </li>
-            <li>
-              <i class="fa-solid fa-file-pdf" (click)="exportPdf(evento?.eventosId,evento)"></i>
-            </li>
-            <li>
-              <i class="fa-solid fa-trash cursorPointer" (click)="deleteEvent(evento?.eventosId,evento)"></i>
+              <i class="fa-solid fa-trash cursorPointer" (click)="eliminarCategoria(cat?.categoriaId, cat)"></i>
             </li>
           </ul>
         </div>
@@ -121,4 +107,4 @@
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-
+<app-crear-categoria></app-crear-categoria>

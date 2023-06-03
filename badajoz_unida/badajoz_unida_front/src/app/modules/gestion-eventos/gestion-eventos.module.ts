@@ -13,11 +13,14 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 
 
 @NgModule({
-  declarations: [
-    GestionEventosComponent,
-    CrearEventoModalComponent,
-    EventosTableComponent
-  ],
+    declarations: [
+        GestionEventosComponent,
+        CrearEventoModalComponent,
+        EventosTableComponent
+    ],
+    exports: [
+        EventosTableComponent
+    ],
     imports: [
         CommonModule,
         GestionEventosRoutingModule,
