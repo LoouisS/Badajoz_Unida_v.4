@@ -54,6 +54,12 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
       this.dtTable.destroy()
     }
   }
+
+  /**
+   * Método para eliminar de la aplicación una categoria registrada
+   * @param categoriaId
+   * @param categoria
+   */
   eliminarCategoria(categoriaId: number, categoria: any) {
       this.alert.fire({
         icon:'question',
@@ -94,9 +100,17 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
       });
   }
 
+  /**
+   * Método para la edición de una categoría preexistente
+   * @param cat
+   */
   editCategoria(cat: any) {
     this.catService.setEditCategoria(cat);
   }
+
+  /**
+   * Método para el reinstanciamiento de la datatable del template
+   */
   cargarTabla() {
     this.loading = false;
     $(this.table.nativeElement).DataTable().destroy();

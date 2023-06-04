@@ -14,11 +14,11 @@ public class UsuariosIntereses {
     @Column(name = "id")
     private Long userInteresId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuarios usuarios;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "interes_id", nullable = false)
     private Intereses intereses;
 }
