@@ -133,6 +133,7 @@ export class CrearCategoriaComponent implements OnInit{
           this.alert.fire({
             icon:'error',
             title:'No se ha podido realizar el registro',
+            text: error.error,
             timer:4000,
           })
         })

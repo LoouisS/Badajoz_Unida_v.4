@@ -29,7 +29,7 @@ public class EventoController {
         try{
             return new ResponseEntity<>(this.eventoService.save(nuevoEvento),HttpStatus.OK);
         }catch (CustomException e){
-            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.OK);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

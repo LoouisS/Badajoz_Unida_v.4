@@ -93,10 +93,13 @@ public class EventoManager implements EventoService{
         Eventos evento = new Eventos();
         boolean sw= false;
         if (newEvent.getEventosId() != null){
+            this.javaUtils.validateModificarEventos(newEvent);
             evento = this.eventoRepository.findByEventosId(newEvent.getEventosId());
             if (newEvent.getImagen() != null){
                 sw=true;
             }
+        }else {
+            this.javaUtils.validateCrearEventos(newEvent);
         }
         evento.setTelefonoContacto(newEvent.getTelefonoContacto());
         evento.setFechaHora(newEvent.getFechaHora());
@@ -107,9 +110,11 @@ public class EventoManager implements EventoService{
         evento.setDescripcion(newEvent.getDescripcion());
         evento.setLocalizacion(newEvent.getLocalizacion());
         Eventos eventoRegistrado = this.eventoRepository.save(evento);
-        if (newEvent.getEventosId() != null || sw == true){
-            if (newEvent.getImagen() != null)
-            this.saveImg(eventoRegistrado,newEvent.getImagen());
+        if (newEvent.getEventosId() == null || sw == true){
+            if (newEvent.getImagen() != null) {
+                this.javaUtils.validarImgPortada(newEvent.getImagen());
+                this.saveImg(eventoRegistrado, newEvent.getImagen());
+            }
         }
         if (ieRepository.findAllByEventoEventosId(eventoRegistrado.getEventosId()).size() > 0){
             ieRepository.deleteAllByEventoEventosId(eventoRegistrado.getEventosId());
