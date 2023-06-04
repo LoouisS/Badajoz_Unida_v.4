@@ -3,6 +3,7 @@ package com.badajoz_unida.evg.controller;
 import com.badajoz_unida.evg.dto.Mensaje;
 import com.badajoz_unida.evg.dto.UserInterestDTO;
 import com.badajoz_unida.evg.entity.*;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.service.CategoriaService;
 import com.badajoz_unida.evg.service.UsuarioInteresesService;
@@ -48,7 +49,11 @@ public class CategoriaController {
     }
     @PostMapping("registrarCategoria")
     public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria){
-        return this.catService.saveCategoria(categoria);
+        try {
+            return this.catService.saveCategoria(categoria);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.CONFLICT);
+        }
     }
 
     @DeleteMapping("eliminarCategoria/{categoriaId}")

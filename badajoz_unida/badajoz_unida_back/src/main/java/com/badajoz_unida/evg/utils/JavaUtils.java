@@ -1,16 +1,10 @@
 package com.badajoz_unida.evg.utils;
 
 import com.badajoz_unida.evg.dto.NewEventDTO;
-import com.badajoz_unida.evg.entity.Eventos;
-import com.badajoz_unida.evg.entity.Intereses;
+import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Usuarios;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.exception.ErrorCode;
-import com.badajoz_unida.evg.repository.EventoRepository;
-import com.badajoz_unida.evg.repository.InteresesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
@@ -19,9 +13,15 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
-
+/**
+ * Clase para la implementación de métodos generales a toda la aplicación, centralización de métodos
+ */
 public class JavaUtils {
-
+    /**
+     * Método para la validación de registro de Usuarios
+     * @param nuevoUsuario
+     * @throws CustomException
+     */
     public void validateRegister(Usuarios nuevoUsuario) throws CustomException{
         if (nuevoUsuario.getNombre() == null || nuevoUsuario.getApellidos()==null || nuevoUsuario.getPassword() == null ||
         nuevoUsuario.getFchNacimiento() == null || nuevoUsuario.getTlf() == null || nuevoUsuario.getNombreUsuario() == null ||
@@ -56,6 +56,12 @@ public class JavaUtils {
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
     }
+
+    /**
+     * Válidación para la creación de nuevos eventos
+     * @param evento
+     * @throws CustomException
+     */
     public void validateCrearEventos(NewEventDTO evento) throws CustomException{
         if (evento.getNombre() == null || evento.getDescripcion() == null || evento.getDetalles() == null ||
             evento.getFechaHora() == null || String.valueOf(evento.getTelefonoContacto()) == null || evento.getLatitud() == null ||
@@ -81,6 +87,12 @@ public class JavaUtils {
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
     }
+
+    /**
+     * Validación para la modificación de eventos
+     * @param evento
+     * @throws CustomException
+     */
     public void validateModificarEventos(NewEventDTO evento) throws CustomException{
         if (String.valueOf(evento.getEventosId()) == null ||evento.getNombre() == null || evento.getDescripcion() == null || evento.getDetalles() == null ||
                 evento.getFechaHora() == null || String.valueOf(evento.getTelefonoContacto()) == null || evento.getLatitud() == null ||
@@ -106,6 +118,12 @@ public class JavaUtils {
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
     }
+
+    /**
+     * Validación para la imagen de portada de un evento nuevo o a modificar
+     * @param file
+     * @throws CustomException
+     */
     public void validarImgPortada(Optional<MultipartFile> file) throws CustomException{
         file.ifPresent(f -> {
             String originalFilename = f.getOriginalFilename();
@@ -122,6 +140,44 @@ public class JavaUtils {
             }
         });
     }
+
+    /**
+     * Método para la validación de una nueva categoría
+     * @param cat
+     * @throws CustomException
+     */
+    public void validarNuevaCategoria(Categorias cat)throws CustomException{
+        if (cat.getTitulo() == null || cat.getDescripcion() == null){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (cat.getTitulo().length() < 2 || cat.getTitulo().length()>50){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (cat.getDescripcion().length() < 10 || cat.getDescripcion().length() > 500){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+    }
+    /**
+     * Método para la validación de una actualización de categoría
+     * @param cat
+     * @throws CustomException
+     */
+    public void validarActualizarCategoria(Categorias cat)throws CustomException{
+        if (String.valueOf(cat.getCategoriaId()) == null||cat.getTitulo() == null || cat.getDescripcion() == null){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (cat.getTitulo().length() < 2 || cat.getTitulo().length()>50){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (cat.getDescripcion().length() < 10 || cat.getDescripcion().length() > 500){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+    }
+    /**
+     * Método para la obtención de la extensión de una imagen recibida como string (Nombre de la imagen)
+     * @param img
+     * @return
+     */
     public String getExtension(String img){
         int indicePunto = img.lastIndexOf(".");
         return img.substring(indicePunto + 1);

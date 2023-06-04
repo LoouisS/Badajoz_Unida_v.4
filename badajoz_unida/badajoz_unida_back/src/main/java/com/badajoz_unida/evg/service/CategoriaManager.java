@@ -2,8 +2,10 @@ package com.badajoz_unida.evg.service;
 
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Intereses;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.repository.CategoriaRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
+import com.badajoz_unida.evg.utils.JavaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class CategoriaManager implements CategoriaService{
     @Autowired
     InteresesRepository interesesRepository;
 
+    JavaUtils javaUtils = new JavaUtils();
+
     @Override
     public List<Categorias> getAllCategorias() {
         return catRepository.findAll();
@@ -31,7 +35,8 @@ public class CategoriaManager implements CategoriaService{
     }
 
     @Override
-    public ResponseEntity<?> saveCategoria(Categorias categoria){
+    public ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException {
+
         this.catRepository.save(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
