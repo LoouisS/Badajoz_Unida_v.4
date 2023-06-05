@@ -2,9 +2,11 @@ package com.badajoz_unida.evg.service;
 
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.*;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
 import com.badajoz_unida.evg.repository.UsuarioInteresesRepository;
+import com.badajoz_unida.evg.utils.JavaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class InteresesManager implements InteresService{
 
     @Autowired
     InteresesEventosRepository iEventos;
+
+    JavaUtils javaUtils = new JavaUtils();
 
     @Override
     public ResponseEntity<?> getAll(){
@@ -53,7 +57,8 @@ public class InteresesManager implements InteresService{
     }
 
     @Override
-    public ResponseEntity<?> save(InteresesUsuariosDTO interesDto){
+    public ResponseEntity<?> save(InteresesUsuariosDTO interesDto) throws CustomException {
+        this.javaUtils.validateNewInteres(interesDto);
         Intereses interes = new Intereses();
         interes.setInteresId(interesDto.getInteresId());
         interes.setTitulo(interesDto.getTitulo());

@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.utils;
 
+import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.dto.NewEventDTO;
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Usuarios;
@@ -170,6 +171,20 @@ public class JavaUtils {
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
         if (cat.getDescripcion().length() < 10 || cat.getDescripcion().length() > 500){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+    }
+    /**
+     * Método para la validación de un nuevo interés
+     */
+    public void validateNewInteres(InteresesUsuariosDTO interesDTO)throws CustomException{
+        if(interesDTO.getTitulo() == null || interesDTO.getDescripcion() == null || interesDTO.getCategoria() == null){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (interesDTO.getTitulo().length() < 2 || interesDTO.getTitulo().length()>50){
+            throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
+        }
+        if (interesDTO.getDescripcion().length() < 10 || interesDTO.getDescripcion().length() > 500){
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
     }

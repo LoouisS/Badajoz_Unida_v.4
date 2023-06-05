@@ -36,7 +36,7 @@ public class CategoriaManager implements CategoriaService{
 
     @Override
     public ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException {
-
+        this.javaUtils.validarNuevaCategoria(categoria);
         this.catRepository.save(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }

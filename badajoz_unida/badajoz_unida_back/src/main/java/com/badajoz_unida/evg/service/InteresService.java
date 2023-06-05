@@ -2,6 +2,7 @@ package com.badajoz_unida.evg.service;
 
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.Intereses;
+import com.badajoz_unida.evg.exception.CustomException;
 import org.springframework.http.ResponseEntity;
 
 public interface InteresService {
@@ -16,7 +17,7 @@ public interface InteresService {
      * @param interes
      * @return
      */
-    ResponseEntity<?> save(InteresesUsuariosDTO interes);
+    ResponseEntity<?> save(InteresesUsuariosDTO interes) throws CustomException;
 
     /**
      * Método para eliminar un interés registrado en la base de datos
