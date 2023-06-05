@@ -103,7 +103,7 @@ export class CrearInteresComponent implements OnInit{
       nombreInt: interes?.titulo,
       descripcionInt: interes?.descripcion,
       activar: interes?.activo,
-      categoria:1
+      categoria:interes?.categoria?.categoriaId
     });
   }
   /**

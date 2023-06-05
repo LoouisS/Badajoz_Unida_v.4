@@ -37,12 +37,19 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
       this.categorias = data;
       console.log("CATEGORÍAS", data);
       this.loading = false;
+      this.interesService.getAll().subscribe((data) => {
+        console.log("INTERESES", data);
+        // @ts-ignore
+        for (let interes of data) {
+          interes.categoria = this.categorias.find((categoria) => {
+            return categoria.intereses.some((int) => int.titulo === interes.titulo);
+          });
+        }
+        this.intereses = data;
+        console.log("LOS INTERESES DESPUÉS DE MONTARLO", this.intereses);
+        this.cargarTabla();
+      })
     });
-    this.interesService.getAll().subscribe((data) => {
-      console.log("INTERESES", data);
-      this.intereses = data;
-      this.cargarTabla();
-    })
     this.dtOptions = {
       paging: true,
       searching: true,
