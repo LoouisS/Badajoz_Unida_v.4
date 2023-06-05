@@ -3,6 +3,7 @@ import {DataTableDirective} from "angular-datatables";
 import {Subject} from "rxjs";
 import {CategoriasService} from "../../../services/categorias.service";
 import {InteresesService} from "../../../services/intereses.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-gestion-intereses-table',
@@ -18,6 +19,17 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   dtTable: DataTables.Api;
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
   constructor(private catService: CategoriasService, private interesService: InteresesService) {
   }
   ngOnInit() {
@@ -29,6 +41,7 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
     this.interesService.getAll().subscribe((data) => {
       console.log("INTERESES", data);
       this.intereses = data;
+      this.cargarTabla();
     })
     this.dtOptions = {
       paging: true,
@@ -64,5 +77,49 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
       // @ts-ignore
       this.dtTrigger.next();
     }, 1);
+  }
+
+  editInteres(interes: any) {
+    this.interesService.setEditInteres(interes);
+  }
+
+  deleteInteres(interes: any) {
+    this.alert.fire({
+      icon:'question',
+      title:'¿Estás seguro que deseas eliminar el interés',
+      text:'Se eliminara el interés con nombre' + interes?.titulo + 'de forma permanente',
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then((result) =>{
+      if(result.isConfirmed){
+        this.alert.fire({
+          title:'Espere mientras procesamos su solicitud',
+          didOpen(popup: HTMLElement) {
+            Swal.showLoading();
+          }
+        })
+        this.interesService.eliminarInteres(interes?.interesId).subscribe((data) =>{
+          console.log("ELIMINADO", data);
+          this.alert.fire({
+            title: 'Eliminado con éxito!',
+            text: 'El interes con nombre' + interes?.titulo +'ha sido eliminado correctamente.',
+            icon: 'success',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+          this.ngOnInit();
+        }, error=>{
+          this.alert.fire({
+            title: 'Ocurrió un problema!',
+            text: 'Vuelva a intentarlo en otro momento',
+            icon: 'error',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+        });
+      }
+    });
   }
 }

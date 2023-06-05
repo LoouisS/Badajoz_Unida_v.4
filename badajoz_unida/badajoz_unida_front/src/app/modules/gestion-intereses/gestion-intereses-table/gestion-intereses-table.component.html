@@ -39,8 +39,8 @@
         </div>
         <div class="mt-3">
           <button type="submit" class="btn bgGeneral">Filtrar</button>
-          <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createCatModal">
-            Crear categoría
+          <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createInteresModal">
+            Crear Interés
           </button>
         </div>
       </form>
@@ -94,10 +94,10 @@
           <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu">
             <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2"  data-bs-toggle="modal" data-bs-target="#createCatModal"></i>
+              <i class="fa-solid fa-pen-to-square cursorPointer me-2"  data-bs-toggle="modal" data-bs-target="#createInteresModal" (click)="editInteres(interes)"></i>
             </li>
             <li>
-              <i class="fa-solid fa-trash cursorPointer"></i>
+              <i class="fa-solid fa-trash cursorPointer" (click)="deleteInteres(interes)"></i>
             </li>
           </ul>
         </div>
@@ -109,4 +109,4 @@
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-
+<app-crear-interes></app-crear-interes>

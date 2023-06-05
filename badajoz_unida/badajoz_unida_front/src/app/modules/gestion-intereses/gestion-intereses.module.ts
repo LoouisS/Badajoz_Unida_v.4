@@ -6,6 +6,7 @@ import { GestionInteresesComponent } from './gestion-intereses/gestion-intereses
 import { GestionInteresesTableComponent } from './gestion-intereses-table/gestion-intereses-table.component';
 import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
+import {ModalsModule} from "../../components/modals/modals.module";
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import {DataTablesModule} from "angular-datatables";
     GestionInteresesComponent,
     GestionInteresesTableComponent
   ],
-  imports: [
-    CommonModule,
-    GestionInteresesRoutingModule,
-    SharedModule,
-    DataTablesModule
-  ]
+    imports: [
+        CommonModule,
+        GestionInteresesRoutingModule,
+        SharedModule,
+        DataTablesModule,
+        ModalsModule
+    ]
 })
 export class GestionInteresesModule { }

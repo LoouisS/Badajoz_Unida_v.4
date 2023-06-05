@@ -1,16 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {InteresesService} from "../../../services/intereses.service";
 import {CategoriasService} from "../../../services/categorias.service";
 
 @Component({
-  selector: 'app-crear-categoria',
-  templateUrl: './crear-categoria.component.html',
-  styleUrls: ['./crear-categoria.component.css']
+  selector: 'app-crear-interes',
+  templateUrl: './crear-interes.component.html',
+  styleUrls: ['./crear-interes.component.css']
 })
-export class CrearCategoriaComponent implements OnInit{
-  formCreateCat!: FormGroup;
-  categoria: any;
+export class CrearInteresComponent implements OnInit{
+  formCreateInteres!: FormGroup;
+  categorias: any;
+  interes:any;
+  loading: boolean;
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -22,19 +25,22 @@ export class CrearCategoriaComponent implements OnInit{
     },
     buttonsStyling: false
   });
-  loading: boolean;
-  constructor(private formBuilder: FormBuilder, private catService: CategoriasService) {
+  constructor(private formBuilder: FormBuilder, private intService: InteresesService, private catService: CategoriasService) {
   }
   ngOnInit() {
     this.initForm();
     this.loading = true;
-    this.catService.getEditCategoria().subscribe((data) => {
-      this.categoria = data;
-      console.log("EN EL ONINIT",this.categoria);
-      if (this.categoria != null){
+    this.catService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+      this.loading = false;
+    })
+    this.intService.getEditInteres().subscribe((data) => {
+      this.interes = data;
+      console.log("EN EL ONINIT",this.interes);
+      if (this.interes != null){
         setTimeout(() => {
           this.loading = false;
-          this.setFormEdit(this.categoria);
+          this.setFormEdit(this.interes);
         },1000)
 
       }else{
@@ -43,15 +49,17 @@ export class CrearCategoriaComponent implements OnInit{
 
     })
   }
+
   private initForm() {
-  this.formCreateCat = this.formBuilder.group({
-    nombreCat:['',[Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-    descripcionCategoria:['',[Validators.required,Validators.minLength(10), Validators.maxLength(500)]],
-    activar:['']
+    this.formCreateInteres = this.formBuilder.group({
+      nombreInt:['',[Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
+      descripcionInt:['',[Validators.required,Validators.minLength(10), Validators.maxLength(500)]],
+      categoria:['',Validators.required],
+      activar:['']
     });
   }
   validar(campo: string): string | null {
-    const control = this.formCreateCat.get(campo);
+    const control = this.formCreateInteres.get(campo);
 
     if (control.invalid && control.touched) {
       if (control.errors?.['required']) {
@@ -69,13 +77,13 @@ export class CrearCategoriaComponent implements OnInit{
       }
 
       // Validación adicional para el campo de nombreCat
-      if (campo === 'nombreCat' && control.errors?.['minlength']) {
+      if (campo === 'nombreInt' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
         return `El nombre debe tener al menos ${minLength} caracteres.`;
       }
 
       // Validación adicional para el campo de descripcion
-      if (campo === 'descripcion' && control.errors?.['minlength']) {
+      if (campo === 'descripcionInt' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
         return `La descripción debe tener al menos ${minLength} caracteres.`;
       }
@@ -86,12 +94,32 @@ export class CrearCategoriaComponent implements OnInit{
 
     return null;
   }
+  /**
+   * Método para el seteo de valores en el formulario para la edición de un interes
+   * @param evento
+   */
+  private setFormEdit(interes: any) {
+    this.formCreateInteres.setValue({
+      nombreInt: interes?.titulo,
+      descripcionInt: interes?.descripcion,
+      activar: interes?.activo,
+      categoria:1
+    });
+  }
+  /**
+   * Método para el reinicio del formulario a valores en blanco
+   */
+  private resetForm() {
+    console.log("reseteando formulario")
+    this.interes = null;
+    this.formCreateInteres.reset();
+  }
 
   sendCat() {
-    if (this.formCreateCat.invalid || this.formCreateCat.pending) {
+    if (this.formCreateInteres.invalid || this.formCreateInteres.pending) {
       console.log("MAAAAAAAL");
-      console.log(this.formCreateCat);
-      Object.values(this.formCreateCat.controls).forEach((control) => {
+      console.log(this.formCreateInteres);
+      Object.values(this.formCreateInteres.controls).forEach((control) => {
         if (control instanceof FormGroup)
           control.markAsTouched();
       });
@@ -110,16 +138,20 @@ export class CrearCategoriaComponent implements OnInit{
         }
       })
       if (result.isConfirmed) {
-        const categoria ={
-          titulo:this.formCreateCat.get('nombreCat').value,
-          descripcion:this.formCreateCat.get('descripcionCategoria').value,
-          activo:this.formCreateCat.get('activar').value,
-          categoriaId: null
+        const interes ={
+          titulo:this.formCreateInteres.get('nombreInt').value,
+          descripcion:this.formCreateInteres.get('descripcionInt').value,
+          activo:this.formCreateInteres.get('activar').value,
+          categoria:{
+            categoriaId: this.formCreateInteres.get('categoria').value
+          },
+          interesId: null
         }
-        if (this.categoria != null){
-          categoria.categoriaId = this.categoria.categoriaId
+        if (this.interes != null){
+          interes.interesId = this.interes.interesId
         }
-        this.catService.registrarCategoria(categoria).subscribe((data) => {
+        console.log("EL INTERES",interes)
+        this.intService.registrarInteres(interes).subscribe((data) => {
           console.log("DATA", data);
           this.alert.fire({
             icon:'success',
@@ -150,33 +182,10 @@ export class CrearCategoriaComponent implements OnInit{
       }
     })
   }
-
-  /**
-   * Método para el seteo de valores en el formulario para la edición de una categoria
-   * @param evento
-   */
-  setFormEdit(categoria: any){
-    this.categoria = categoria;
-    this.formCreateCat.setValue({
-      nombreCat: categoria?.titulo,
-      descripcionCategoria: categoria?.descripcion,
-      activar: categoria?.activo
-    });
-  }
-
-  /**
-   * Método para el reinicio del formulario a valores en blanco
-   */
-  resetForm() {
-    console.log("reseteando formulario")
-    this.categoria = null;
-    this.formCreateCat.reset();
-  }
-
   /**
    * Método para eliminar el observable al cerrar el modal
    */
   cerrarModal() {
-    this.catService.deleteEditCategoria();
+    this.intService.deleteEditInteres();
   }
 }

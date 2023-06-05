@@ -51,4 +51,26 @@ public class InteresesManager implements InteresService{
         }
         return new ResponseEntity<>(interesesUsuariosDTOS, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<?> save(InteresesUsuariosDTO interesDto){
+        Intereses interes = new Intereses();
+        interes.setInteresId(interesDto.getInteresId());
+        interes.setTitulo(interesDto.getTitulo());
+        interes.setDescripcion(interesDto.getDescripcion());
+        interes.setActivo(interesDto.isActivo());
+
+        interes.setCategoria(interesDto.getCategoria());
+
+        this.interesesRepository.save(interes);
+        return new ResponseEntity<>(interes,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> delete(int intId){
+        Intereses interes = new Intereses();
+        interes.setInteresId(intId);
+        this.interesesRepository.delete(interes);
+        return new ResponseEntity<>(interes, HttpStatus.OK);
+    }
 }
