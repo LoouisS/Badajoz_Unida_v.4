@@ -51,7 +51,7 @@
   <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
-      <th class="col-1">Opciones</th>
+      <th class="col-1"></th>
       <th class="col-1">Nombre</th>
       <th class="col-1">Localización</th>
       <th class="col-1">Fecha</th>
@@ -59,13 +59,13 @@
       <th class="col-1">LatLong</th>
       <th class="col-1">Detalles</th>
       <th class="col-1">Descripción</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let evento of eventos">
       <td class="col-1 text-center">
         <div class="text-center pt-2">
-          <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="modEvent(evento?.eventosId)"></i>
           <div class="btn-group text-center">
             <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
@@ -86,8 +86,6 @@
               </li>
             </ul>
           </div>
-          <i class="fa-solid fa-file-export" (click)="exportExcell(evento?.eventosId,evento)"></i>
-          <i class="fa-solid fa-trash cursorPointer" (click)="deleteEvent(evento?.eventosId,evento)"></i>
         </div>
       </td>
       <td>{{evento?.nombre}}</td>
@@ -97,6 +95,25 @@
       <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
       <td>{{evento?.detalles| cortarTexto:10}}</td>
       <td>{{evento?.descripcion| cortarTexto:10}}</td>
+      <td>
+        <div class="dropdown">
+          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <ul class="dropdown-menu">
+            <li>
+              <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="modEvent(evento?.eventosId)"></i>
+            </li>
+            <li>
+              <i class="fa-solid fa-file-export" (click)="exportExcell(evento?.eventosId,evento)"></i>
+            </li>
+            <li>
+              <i class="fa-solid fa-file-pdf" (click)="exportPdf(evento?.eventosId,evento)"></i>
+            </li>
+            <li>
+              <i class="fa-solid fa-trash cursorPointer" (click)="deleteEvent(evento?.eventosId,evento)"></i>
+            </li>
+          </ul>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>

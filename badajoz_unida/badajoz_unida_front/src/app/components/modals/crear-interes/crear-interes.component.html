@@ -1,0 +1,46 @@
+<div class="modal fade" id="createInteresModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="d" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-header bgGeneral">
+        <h1 class="modal-title fs-5" id="s">Nuevo interés</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body w-100 px-5">
+        <form id="formCreateCat" class="col-12" [formGroup]="formCreateInteres" (ngSubmit)="sendCat()" [ngClass]="{'d-none': loading}">
+          <div>
+            <label for="nombreInt" class="form-label">Nombre del interés:</label>
+            <input formControlName="nombreInt" [class.is-invalid]="validar('nombreInt')"
+                   type="text" class="form-control customForm" id="nombreInt" >
+            <small *ngIf="validar('nombreInt')" class="error">{{validar('nombreInt')}}</small>
+          </div>
+          <div>
+            <label for="descripcionInt" class="form-label">Descripción:</label>
+            <small *ngIf="validar('descripcionInt')" class="error">{{validar('descripcionInt')}}</small>
+            <textarea formControlName="descripcionInt" [class.is-invalid]="validar('descripcionInt')"
+                      class="form-control customForm" id="descripcionInt" ></textarea>
+          </div>
+          <div>
+            <label for="categoria" class="form-label pt-2 me-3">Categoría asociada</label>
+            <select  formControlName="categoria"
+                     class="form-control" id="categoria" >
+                <option *ngFor="let cat of categorias" value="{{cat?.categoriaId}}">{{cat?.titulo}}</option>
+            </select>
+          </div>
+          <div>
+            <label for="activar" class="form-label">Activar:</label>
+            <small *ngIf="validar('activar')" class="error">{{validar('activar')}}</small>
+            <input type="checkbox" formControlName="activar" [class.is-invalid]="validar('activar')"
+                   class="customForm" id="activar" >
+          </div>
+        </form>
+        <div *ngIf="loading">
+          <app-loading></app-loading>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button form="formCreateCat" type="submit" class="btn button rounded-pill px-3 py-2 customBtn">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+

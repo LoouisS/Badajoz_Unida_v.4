@@ -18,11 +18,11 @@ public class InteresesEventos {
     @Column(name = "id")
     private Long intEventid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "interes_id", nullable = false)
     private Intereses interes;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "evento_id", nullable = false)
     private Eventos evento;
 }

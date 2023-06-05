@@ -4,10 +4,13 @@ public class CustomException extends Exception{
     private ErrorCode errorCode;
 
     public CustomException(ErrorCode errorCode) {
-        super(errorCode.getMensaje());
+
         this.errorCode = errorCode;
     }
-
+    @Override
+    public String getMessage() {
+        return errorCode.getMensaje();
+    }
     public ErrorCode getErrorCode() {
         return errorCode;
     }

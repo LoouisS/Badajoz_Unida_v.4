@@ -14,6 +14,7 @@ public interface InteresesEventosRepository extends JpaRepository<InteresesEvent
 
     List<InteresesEventos> findAllByEventoEventosId(Integer eventoId);
 
+    List<InteresesEventos> findAllByInteres(Intereses intereses);
     @Transactional
     void  deleteAllByEventoEventosId(Integer eventoId);
 }

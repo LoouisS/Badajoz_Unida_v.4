@@ -1,0 +1,110 @@
+<div class="card mx-4 my-4">
+  <div>
+    <div class="card-header bgGeneral">
+      Filtros de búsqueda:
+    </div>
+    <div class="card-body">
+      <form class="col-12">
+        <div class="d-flex col-12">
+          <div class="d-flex mb-3 col-5 me-5">
+            <label for="nombreEvento" class="form-label pt-2 me-3">Nombre</label>
+            <input formControlName="nombre" type="text" class="form-control" id="nombreEvento" aria-describedby="emailHelp">
+          </div>
+          <div class="d-flex mb-3 col-5">
+            <label for="localizacion" class="form-label pt-2 me-3">Localización</label>
+            <input formControlName="localizacion" type="text" class="form-control" id="localizacion" aria-describedby="emailHelp">
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="col-5 d-flex">
+            <label for="dateInit" class="form-label pt-2 me-5">Fecha</label>
+            <div class="d-flex col-12">
+              <div>
+                <input formControlName="fechaInit" type="date" class="form-control" id="dateInit">
+              </div>
+              <div>
+                <input formControlName="fechaEnd" type="date" class="form-control" id="dateEnd">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 d-flex">
+            <label for="intereses" class="form-label pt-2 me-3">Intereses</label>
+            <select  formControlName="intereses"
+                     class="form-control" id="intereses" >
+              <optgroup  >
+                <option ></option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div class="mt-3">
+          <button type="submit" class="btn bgGeneral">Filtrar</button>
+          <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createCatModal">
+            Crear categoría
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
+  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead class="bgGeneral">
+    <tr>
+      <th class="col-1"></th>
+      <th class="col-4">Titulo</th>
+      <th class="col-5">Descripción</th>
+      <th class="col-1">Activo</th>
+      <th class="col-1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cat of categorias">
+      <td class="col-1 text-center">
+        <div class="text-center pt-2">
+          <div class="btn-group text-center">
+            <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+              <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action" >
+
+                </button>
+              </div>
+            </ul>
+          </div>
+          <div class="btn-group text-center" >
+            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+              <li  class="text-center" *ngFor="let interes of cat?.intereses">
+                <span class="badge rounded-pill text-bg-danger">
+                  {{interes?.titulo}}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </td>
+      <td class="col-4">{{cat?.titulo}}</td>
+      <td class="col-5">{{cat?.descripcion | cortarTexto:100}}</td>
+      <td class="col-1">{{cat?.activo}}</td>
+      <td class="col-1">
+        <div class="dropdown">
+          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <ul class="dropdown-menu">
+            <li>
+              <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="editCategoria(cat)" data-bs-toggle="modal" data-bs-target="#createCatModal"></i>
+            </li>
+            <li>
+              <i class="fa-solid fa-trash cursorPointer" (click)="eliminarCategoria(cat?.categoriaId, cat)"></i>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<app-crear-categoria></app-crear-categoria>

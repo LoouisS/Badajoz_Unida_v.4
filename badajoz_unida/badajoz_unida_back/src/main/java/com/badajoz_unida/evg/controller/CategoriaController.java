@@ -3,6 +3,7 @@ package com.badajoz_unida.evg.controller;
 import com.badajoz_unida.evg.dto.Mensaje;
 import com.badajoz_unida.evg.dto.UserInterestDTO;
 import com.badajoz_unida.evg.entity.*;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.security.enums.RolNombre;
 import com.badajoz_unida.evg.service.CategoriaService;
 import com.badajoz_unida.evg.service.UsuarioInteresesService;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -45,4 +47,18 @@ public class CategoriaController {
     public ResponseEntity<?> registrarIntereses(@RequestBody UserInterestDTO interesesUsuario){
         return this.usuarioInteresesService.save(interesesUsuario);
     }
+    @PostMapping("registrarCategoria")
+    public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria){
+        try {
+            return this.catService.saveCategoria(categoria);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @DeleteMapping("eliminarCategoria/{categoriaId}")
+    public ResponseEntity<?> eliminarCategoria(HttpServletRequest request, @PathVariable("categoriaId") int catId){
+        return this.catService.deleteCategoria(catId);
+    }
+
 }

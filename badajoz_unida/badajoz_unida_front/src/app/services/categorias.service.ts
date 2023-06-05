@@ -6,6 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ import {HttpClient} from "@angular/common/http";
 export class CategoriasService {
 
   authURL = 'http://localhost:8080/categorias/';
+  editCategoria: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
 
   /**
    Constructor de la clase
@@ -37,5 +40,44 @@ export class CategoriasService {
    */
   getIntereses() {
     return this.httpClient.get(this.authURL + 'interesesAll');
+  }
+
+  /**
+   * Método para el registro de una nueva categoría
+   * @param categoria
+   */
+  registrarCategoria(categoria: any){
+    console.log("LA CATEGORIA A REGISTRAR", categoria)
+    return this.httpClient.post(this.authURL + 'registrarCategoria',categoria);
+  }
+
+  /**
+   * Método para el borrado de una categoría
+   * @param id
+   */
+  eliminarCategoria(id: number){
+    return this.httpClient.delete(this.authURL + 'eliminarCategoria/' + id);
+  }
+
+  /**
+   * Método para el almacenamiento de una categoria en el observable editCategoria
+   * @param categoria
+   */
+  setEditCategoria(categoria: any){
+    this.editCategoria.next(categoria);
+  }
+
+  /**
+   * Método para la obtención de la información registrada en el observable de editCategoria
+   */
+  getEditCategoria(){
+    return this.editCategoria;
+  }
+
+  /**
+   * Método para eliminar los registros almacenados en el observable editCategoria
+   */
+  deleteEditCategoria(){
+    this.editCategoria.next(null);
   }
 }

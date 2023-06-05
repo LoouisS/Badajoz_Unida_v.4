@@ -26,4 +26,6 @@ public interface EventoRepository extends JpaRepository<Eventos, Integer> {
     @Query(value = "SELECT e.id, e.nombre, e.descripcion, e.detalles, e.fecha_hora, e.telefono_contacto, e.localizacion, e.latitud, e.longitud, e.img FROM eventos e INNER JOIN usuarios_eventos ue ON e.id = ue.evento_id INNER JOIN usuarios u ON ue.usuario_id = u.id WHERE u.id = :usuarioId", nativeQuery = true)
     List<Eventos>findByUsuarioId(@Param("usuarioId") Integer usuarioId);
     Eventos deleteEventosByEventosId(int eventoId);
+
+    boolean existsEventosByNombre(Eventos eventos);
 }

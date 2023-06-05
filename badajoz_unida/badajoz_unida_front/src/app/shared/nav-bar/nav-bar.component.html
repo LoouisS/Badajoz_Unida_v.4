@@ -60,14 +60,14 @@
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión eventos</span>
     </li>
     <li class="mx-0">
-      <div class="rounded-pill">
+      <div class="rounded-pill" [routerLink]="['/gestion-categorias']">
         <span class="nav-icon fa-solid fa-tag"></span>
         <span *ngIf="isOpened" class="name-nav-link">Gestión categorías</span>
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión categorías</span>
     </li>
     <li class="mx-0">
-      <div class="rounded-pill">
+      <div class="rounded-pill" [routerLink]="['/gestion-intereses']">
         <span class="nav-icon fa-solid fa-heart"></span>
         <span *ngIf="isOpened" class="name-nav-link">Gestión intereses</span>
       </div>

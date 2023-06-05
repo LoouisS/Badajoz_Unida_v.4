@@ -20,6 +20,7 @@ import {AngularMultiSelect} from "angular2-multiselect-dropdown";
 export class CrearEventoModalComponent implements OnInit{
 
   @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
+  @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
   eventoEdit: any;
   map: any;
   marker: any;
@@ -42,7 +43,7 @@ export class CrearEventoModalComponent implements OnInit{
     },
     buttonsStyling: false
   });
-  @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
+  loading: boolean;
 
   /**
    Constructor de la clase
@@ -264,6 +265,7 @@ export class CrearEventoModalComponent implements OnInit{
           formData.append('imagen', this.getImg());
         }
         formData.append('intereses', inter.join(','));
+        console.log("EL FORMDATA A ENVIAR",formData);
         this.eventoService.createEvento(formData).subscribe((data) => {
           console.log("DATA", data);
           this.alert.fire({
@@ -272,9 +274,11 @@ export class CrearEventoModalComponent implements OnInit{
             timer:4000,
           })
         },error => {
+          console.log("ERRRRRRRRRRRRRRRROOORRRRRRRRRRRRRRRRRRR", error);
           this.alert.fire({
             icon:'error',
             title:'No se ha podido realizar el registro',
+            text:error.error.message,
             timer:4000,
           })
         })
@@ -296,10 +300,12 @@ export class CrearEventoModalComponent implements OnInit{
    Método que guarda la imagen seleccionada por el usuario
    **/
   getImg(){
-    // @ts-ignore
     const file = (document.getElementById('imgPortada') as HTMLInputElement).files[0];
-    if (file!=null || file != undefined)
+    console.log("ENTRA EN OBTENER IMG", file);
+    if (file!=null || file != undefined){
+      console.log("EL FILE", file);
       return file;
+    }
     return null;
   }
 
