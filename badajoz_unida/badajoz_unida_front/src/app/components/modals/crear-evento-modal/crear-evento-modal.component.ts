@@ -353,10 +353,9 @@ export class CrearEventoModalComponent implements OnInit{
       descripcion: evento?.descripcion,
       tlf: evento?.telefonoContacto,
       localizacion: evento?.localizacion,
-      intereses: evento?.intereses[0].interesId,
+      intereses: evento.intereses,
       detalle: evento?.detalles
     });
-    intereses = evento.intereses
     this.selectedCat=intereses;
     this.multiselect.selectedItems = intereses
     console.log("SELECCIONADOS", this.selectedCat);
