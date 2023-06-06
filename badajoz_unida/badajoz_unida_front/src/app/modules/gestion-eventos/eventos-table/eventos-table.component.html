@@ -100,16 +100,20 @@
           <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu">
             <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2" (click)="modEvent(evento?.eventosId)"></i>
+              <i class="fa-solid fa-pen-to-square cursorPointer me-2 h6" (click)="modEvent(evento?.eventosId)"></i>
+              <span class="ms-1 fs-6">Modificar evento</span>
             </li>
             <li>
-              <i class="fa-solid fa-file-export" (click)="exportExcell(evento?.eventosId,evento)"></i>
+              <i class="fa-solid fa-file-export h6" (click)="exportExcell(evento?.eventosId,evento)"></i>
+              <span class="ms-2 fs-6">Exportar a excell</span>
             </li>
             <li>
-              <i class="fa-solid fa-file-pdf" (click)="exportPdf(evento?.eventosId,evento)"></i>
+              <i class="fa-solid fa-file-pdf h6" (click)="exportPdf(evento?.eventosId,evento)"></i>
+              <span class="ms-2 fs-6">Exportar a pdf</span>
             </li>
             <li>
-              <i class="fa-solid fa-trash cursorPointer" (click)="deleteEvent(evento?.eventosId,evento)"></i>
+              <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteEvent(evento?.eventosId,evento)"></i>
+              <span class="ms-2 fs-6">Eliminar evento</span>
             </li>
           </ul>
         </div>

@@ -39,6 +39,7 @@ export class CrearCategoriaComponent implements OnInit{
 
       }else{
         this.resetForm();
+        this.loading = false;
       }
 
     })

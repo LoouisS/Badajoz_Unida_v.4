@@ -9,6 +9,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import {SharedModule} from "./shared/shared.module";
 import { CesionImagenComponent } from './components/modals/cesion-imagen/cesion-imagen.component';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 
 registerLocaleData(localeEs);
 

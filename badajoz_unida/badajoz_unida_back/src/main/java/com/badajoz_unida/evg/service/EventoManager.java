@@ -90,6 +90,10 @@ public class EventoManager implements EventoService{
 
     @Override
     public Eventos save(NewEventDTO newEvent) throws CustomException, IOException {
+        if (this.eventoRepository.existsEventosByNombre(newEvent.getNombre())){
+            throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
+        }
+
         Eventos evento = new Eventos();
         boolean sw= false;
         if (newEvent.getEventosId() != null){

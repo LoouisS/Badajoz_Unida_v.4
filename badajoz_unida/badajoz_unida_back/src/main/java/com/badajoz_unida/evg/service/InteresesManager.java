@@ -3,6 +3,7 @@ package com.badajoz_unida.evg.service;
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.*;
 import com.badajoz_unida.evg.exception.CustomException;
+import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
 import com.badajoz_unida.evg.repository.UsuarioInteresesRepository;
@@ -58,6 +59,9 @@ public class InteresesManager implements InteresService{
 
     @Override
     public ResponseEntity<?> save(InteresesUsuariosDTO interesDto) throws CustomException {
+        if (this.interesesRepository.existsInteresesByTitulo(interesDto.getTitulo())){
+            throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
+        }
         this.javaUtils.validateNewInteres(interesDto);
         Intereses interes = new Intereses();
         interes.setInteresId(interesDto.getInteresId());

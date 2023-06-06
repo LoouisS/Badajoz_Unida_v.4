@@ -3,6 +3,7 @@ package com.badajoz_unida.evg.service;
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.exception.CustomException;
+import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.CategoriaRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
 import com.badajoz_unida.evg.utils.JavaUtils;
@@ -36,6 +37,9 @@ public class CategoriaManager implements CategoriaService{
 
     @Override
     public ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException {
+        if (this.catRepository.existsCategoriasByTitulo(categoria.getTitulo())){
+            throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
+        }
         this.javaUtils.validarNuevaCategoria(categoria);
         this.catRepository.save(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);

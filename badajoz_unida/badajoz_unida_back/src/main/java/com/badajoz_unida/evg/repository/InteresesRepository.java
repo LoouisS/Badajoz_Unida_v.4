@@ -12,8 +12,25 @@ import java.util.List;
 
 @Repository
 public interface InteresesRepository extends JpaRepository<Intereses, Integer> {
+
+    /**
+     * Método para la comprobación de un registro de intereses por su id en base de datos
+     * @param interes
+     * @return
+     */
     boolean existsByInteresId(Intereses interes);
 
+    /**
+     * Método para la comprobación de un registro de intereses por su titulo en base de datos
+     * @param titulo
+     * @return
+     */
+    boolean existsInteresesByTitulo(String titulo);
+
+    /**
+     * Método para la obtención de todos los registros de intereses en la base de datos de la aplicación
+     * @return
+     */
     @Override
     List<Intereses> findAll();
 

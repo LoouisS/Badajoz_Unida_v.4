@@ -12,4 +12,6 @@ public interface CategoriaRepository extends JpaRepository<Categorias, Integer> 
 
     public List<Categorias> findAll();
 
+    boolean existsCategoriasByTitulo(String titulo);
+
 }

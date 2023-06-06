@@ -274,11 +274,10 @@ export class CrearEventoModalComponent implements OnInit{
             timer:4000,
           })
         },error => {
-          console.log("ERRRRRRRRRRRRRRRROOORRRRRRRRRRRRRRRRRRR", error);
           this.alert.fire({
             icon:'error',
             title:'No se ha podido realizar el registro',
-            text:error.error.message,
+            text:error.error,
             timer:4000,
           })
         })

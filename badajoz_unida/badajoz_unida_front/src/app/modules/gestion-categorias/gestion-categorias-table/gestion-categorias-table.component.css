@@ -1,0 +1,7 @@
+.dropdown-menu > li:hover{
+  cursor: pointer;
+  background-color: #dadada;
+}
+.dropdown-menu{
+  width: 13.020833333333334vw;
+}

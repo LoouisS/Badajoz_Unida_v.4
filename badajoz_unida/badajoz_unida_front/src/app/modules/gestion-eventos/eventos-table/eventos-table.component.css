@@ -1,3 +1,7 @@
 .cursorPointer{
   cursor: pointer;
 }
+.dropdown-menu > li:hover{
+  cursor: pointer;
+  background-color: #dadada;
+}

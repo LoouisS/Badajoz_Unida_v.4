@@ -55,7 +55,6 @@
       <th class="col-4">Titulo</th>
       <th class="col-5">Descripción</th>
       <th class="col-1">Categoria</th>
-      <th class="col-1">Activo</th>
       <th class="col-1"></th>
     </tr>
     </thead>
@@ -63,6 +62,7 @@
     <tr *ngFor="let interes of intereses">
       <td class="col-1 text-center">
         <div class="text-center pt-2">
+          <i class="fa-solid fa-circle me-2" [ngClass]="interes?.activo ? 'text-success':'text-warning'" ></i>
           <div class="btn-group text-center">
             <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
@@ -88,16 +88,17 @@
       <td class="col-4">{{interes?.titulo}}</td>
       <td class="col-5">{{interes?.descripcion}}</td>
       <td class="col-5">{{interes?.categoria?.titulo}}</td>
-      <td class="col-1">{{interes?.activo}}</td>
       <td class="col-1">
         <div class="dropdown">
           <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu">
             <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2"  data-bs-toggle="modal" data-bs-target="#createInteresModal" (click)="editInteres(interes)"></i>
+              <i class="fa-solid fa-pen-to-square cursorPointer h6"  data-bs-toggle="modal" data-bs-target="#createInteresModal" (click)="editInteres(interes)"></i>
+              <span class="ms-2 fs-6">Modificar interés</span>
             </li>
             <li>
-              <i class="fa-solid fa-trash cursorPointer" (click)="deleteInteres(interes)"></i>
+              <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteInteres(interes)"></i>
+              <span class="ms-2 fs-6">Eliminar interés</span>
             </li>
           </ul>
         </div>

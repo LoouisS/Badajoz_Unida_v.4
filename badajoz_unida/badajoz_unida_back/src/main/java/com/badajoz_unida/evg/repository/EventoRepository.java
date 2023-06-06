@@ -27,5 +27,5 @@ public interface EventoRepository extends JpaRepository<Eventos, Integer> {
     List<Eventos>findByUsuarioId(@Param("usuarioId") Integer usuarioId);
     Eventos deleteEventosByEventosId(int eventoId);
 
-    boolean existsEventosByNombre(Eventos eventos);
+    boolean existsEventosByNombre(String nombre);
 }

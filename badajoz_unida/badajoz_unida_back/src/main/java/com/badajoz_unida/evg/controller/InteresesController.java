@@ -3,6 +3,7 @@ package com.badajoz_unida.evg.controller;
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Intereses;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.InteresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,9 @@ public class InteresesController {
     public ResponseEntity<?> saveInteres(@RequestBody InteresesUsuariosDTO interes){
         try{
             return this.interesService.save(interes);
-        }catch (Exception e){
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.CONFLICT);
+        } catch (Exception e){
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }

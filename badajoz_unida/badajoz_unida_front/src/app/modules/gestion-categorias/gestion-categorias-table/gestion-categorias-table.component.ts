@@ -29,6 +29,7 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
   });
   dtTable: DataTables.Api;
   constructor(private catService: CategoriasService) {
+
   }
   ngOnInit() {
     this.loading = true;

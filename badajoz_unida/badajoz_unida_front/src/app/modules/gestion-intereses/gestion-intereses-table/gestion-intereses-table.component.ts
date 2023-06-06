@@ -33,10 +33,10 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
   constructor(private catService: CategoriasService, private interesService: InteresesService) {
   }
   ngOnInit() {
+    this.loading = true;
     this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
       console.log("CATEGORÍAS", data);
-      this.loading = false;
       this.interesService.getAll().subscribe((data) => {
         console.log("INTERESES", data);
         // @ts-ignore
