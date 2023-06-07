@@ -24,7 +24,8 @@ registerLocaleData(localeEs);
     HttpClientModule,
     SharedModule
   ],
-  providers: [interceptorProvider],
+  providers: [interceptorProvider,
+    NgbModal],
   exports: [
     AppComponent
   ],
