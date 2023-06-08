@@ -72,7 +72,9 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this._authService.changeAuthMessage(true);
     this.crearFormulario();
-    this.idiomas = this._idiomasService.getIdiomas();
+    this._idiomasService.getIdiomas().subscribe((data: any) => {
+      this.idiomas = data;
+    });
     this.getCategoriasAndIntereses().subscribe((data: any) => {
       this.categorias = data;
       console.log(this.categorias);

@@ -85,8 +85,8 @@
   <div class="perfil-container">
     <div class="perfil">
       <div class="perfil-detalles">
-        <div class="col-3 perfil-img rounded-pill"></div>
-        <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">Juan Daniel Carvajal Montes</div>
+        <div class="col-3 perfil-img rounded-pill">{{nombreUsuario | inicialesNombre}}</div>
+        <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
       </div>
     </div>
   </div>

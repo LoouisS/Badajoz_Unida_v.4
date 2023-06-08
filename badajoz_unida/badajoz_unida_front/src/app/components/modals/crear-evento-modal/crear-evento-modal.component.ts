@@ -39,7 +39,7 @@ export class CrearEventoModalComponent implements OnInit{
     stopKeydownPropagation: true,
     customClass: {
       confirmButton: 'btn btn-danger',
-      cancelButton: 'btn btn-light'
+      cancelButton: 'btn btn-light',
     },
     buttonsStyling: false
   });
@@ -81,8 +81,8 @@ export class CrearEventoModalComponent implements OnInit{
   /**
    Método que carga el mapa interactivo
    **/
-  initMap() {
-    const defaultLatLng = L.latLng([38.87945, -6.97065]); // Latitud y longitud de Badajoz
+  initMap(latitud: number = 38.87945, longitud: number = -6.97065) {
+    const defaultLatLng = L.latLng([latitud, longitud]); // Latitud y longitud de Badajoz
 
     this.map = L.map('map').setView(defaultLatLng, 13);
 
@@ -344,21 +344,26 @@ export class CrearEventoModalComponent implements OnInit{
     console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
     let intereses = [];
     this.eventoEdit = evento;
-   // if (evento.intereses !=null || evento.intereses !=undefined){
-
- //   }
+    let fecha = new Date(evento.fechaHora);
     this.formCreateEvent.setValue({
       nombreEvento: evento?.nombre,
-      fecha: evento?.fechaHora,
+      fecha: `${fecha.getFullYear()}-${this.padZero(fecha.getMonth() + 1)}-${this.padZero(fecha.getDate())}T${this.padZero(fecha.getHours())}:${this.padZero(fecha.getMinutes())}`,
       descripcion: evento?.descripcion,
       tlf: evento?.telefonoContacto,
       localizacion: evento?.localizacion,
       intereses: evento.intereses,
       detalle: evento?.detalles
     });
+    this.marker.setLatLng(L.latLng([evento?.latitud, evento?.longitud]));
+    this.lat = evento?.latitud;
+    this.long = evento?.longitud;
     this.selectedCat=intereses;
     this.multiselect.selectedItems = intereses
     console.log("SELECCIONADOS", this.selectedCat);
+  }
+
+  padZero(num) {
+    return num.toString().padStart(2, '0');
   }
 
   /**
