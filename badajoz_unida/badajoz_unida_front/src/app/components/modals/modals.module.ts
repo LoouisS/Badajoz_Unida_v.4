@@ -5,6 +5,7 @@ import { CrearCategoriaComponent } from './crear-categoria/crear-categoria.compo
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import { CrearInteresComponent } from './crear-interes/crear-interes.component';
+import { EditarInteresesComponent } from './editar-intereses/editar-intereses.component';
 
 
 
@@ -12,7 +13,8 @@ import { CrearInteresComponent } from './crear-interes/crear-interes.component';
   declarations: [
     CesionImagenComponent,
     CrearCategoriaComponent,
-    CrearInteresComponent
+    CrearInteresComponent,
+    EditarInteresesComponent
   ],
     imports: [
         CommonModule,
@@ -22,7 +24,8 @@ import { CrearInteresComponent } from './crear-interes/crear-interes.component';
     exports: [
         CesionImagenComponent,
         CrearCategoriaComponent,
-        CrearInteresComponent
+        CrearInteresComponent,
+      EditarInteresesComponent
     ]
 })
 export class ModalsModule { }

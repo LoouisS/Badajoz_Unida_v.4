@@ -4,10 +4,11 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {UsuariosService} from "../../../services/usuarios.service";
 import {IdiomasService} from "../../../services/idiomas.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-profile',
@@ -20,11 +21,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
  **/
 export class ProfileComponent implements OnInit{
 
+  @ViewChild('editarIntereses') editarIntereses: TemplateRef<any>;
   formProfile: FormGroup;
   usuario: any;
   idiomas: any
 
-  constructor(private _usuarioService: UsuariosService, private _idiomasService: IdiomasService, private formBuilder: FormBuilder) {
+  constructor(private _usuarioService: UsuariosService, private _idiomasService: IdiomasService, private formBuilder: FormBuilder, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -85,6 +87,14 @@ export class ProfileComponent implements OnInit{
     });
     // console.log(datos);
     this._usuarioService.saveChanges(datos).subscribe((data: any) => {});
+  }
+
+  mostrarModalIntereses(){
+    this.modalService.open(this.editarIntereses, {size: 'lg', backdrop: 'static'});
+  }
+
+  cerrarModalIntereses(){
+    this.modalService.dismissAll(this.editarIntereses);
   }
 
 }

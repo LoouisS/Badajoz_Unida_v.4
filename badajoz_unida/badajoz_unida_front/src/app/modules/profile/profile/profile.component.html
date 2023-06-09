@@ -67,11 +67,14 @@
         <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">⚽ {{interes.titulo}}</span>
       </div>
       <div class="card-footer py-3 d-flex justify-content-end">
-        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button">Cambiar mis intereses</button>
+        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">Cambiar mis intereses</button>
       </div>
     </div>
   </section>
 </main>
 <div class="footer-padding">
 </div>
+<ng-template #editarIntereses>
+  <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses>
+</ng-template>
 

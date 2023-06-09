@@ -17,4 +17,8 @@ export class UsuariosService {
     return this.httpClient.post(this.apiUrl + "save", datos);
   }
 
+  changeIntereses(intereses: any[]){
+    return this.httpClient.put(this.apiUrl + "saveIntereses", intereses);
+  }
+
 }
