@@ -159,7 +159,8 @@ public class EventoManager implements EventoService{
                 intereses
         );
 
-        return eventoRepository.findAll(specification);
+        List<Eventos> eventos = eventoRepository.findAll(specification);
+        return eventos;
     }
 
 

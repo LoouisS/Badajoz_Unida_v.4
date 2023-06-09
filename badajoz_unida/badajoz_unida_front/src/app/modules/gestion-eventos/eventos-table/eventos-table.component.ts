@@ -155,6 +155,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.eventoService.getEventosFiltered(filtros).subscribe((data) => {
       this.eventos = data;
       console.log("EVENTOS FILTRADOS", this.eventos);
+      this.cargarTabla();
     });
   }
 

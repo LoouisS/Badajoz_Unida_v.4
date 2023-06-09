@@ -5,6 +5,8 @@ import com.badajoz_unida.evg.entity.Intereses;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -13,9 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface EventoRepository extends JpaRepository<Eventos, Integer> {
-    @Override
-    List<Eventos> findAll();
+public interface EventoRepository extends JpaRepository<Eventos, Integer>,JpaSpecificationExecutor<Eventos> {
+
     List<Eventos> findAllByNombreLikeAndFechaHoraBetweenAndLocalizacionLikeAndIntereses(
             String nombre, Date fechaIni, Date fechaEnd, String localizacion, Intereses intereses);
     List<Eventos> findAll(Specification<Eventos> specification);
