@@ -140,7 +140,15 @@ li:hover .nav-tip{
 .perfil-detalles .perfil-img{
   width: 45px;
   height: 45px;
-  background-color: aqua;
+  background-color: hsl(200, 75%, 50%);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.perfil-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .perfil-detalles .perfil-nombre{

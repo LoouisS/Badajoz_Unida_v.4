@@ -3,6 +3,23 @@ hr{
   width: 50%;
   border: red;
 }
-.dejademolestar{
-  height: 2000px;
+
+.profileIcon{
+  width: 150px;
+  height: 150px;
+  padding-top: .5rem;
 }
+
+.profile-data, .profile-data li{
+  background-color: hsl(0, 0%, 95%);
+}
+
+.profile-form > form, .profile-form > form > div{
+  height: 100%;
+}
+
+.profile-data li{
+
+}
+
+

@@ -28,4 +28,9 @@ public class UsuarioInteresesManager implements UsuarioInteresesService{
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    public void deleteInteresesByUserId(int usuarioId){
+        this.usuarioInteresesRepository.deleteByUsuariosUserId(usuarioId);
+    }
+
 }

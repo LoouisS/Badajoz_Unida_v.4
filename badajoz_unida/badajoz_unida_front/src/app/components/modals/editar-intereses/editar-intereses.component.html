@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-header bgGeneral">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Selección de intereses</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+  </div>
+  <div class="modal-body w-100 px-5 d-flex flex-wrap">
+    <div *ngIf="loading; else intereses">
+      <app-loading></app-loading>
+    </div>
+    <ng-template #intereses>
+      <span class="badge bg-secondary fs-6 mx-2" [ngClass]="{'selected': interes?.seleccionado}" *ngFor="let interes of interesesList" (click)="seleccionarInteres(interes)">{{interes.emoji}} {{interes.titulo}}</span>
+    </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="changeIntereses()">Cambiar intereses</button>
+  </div>
+</div>

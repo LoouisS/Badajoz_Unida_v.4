@@ -11,7 +11,7 @@
   --text-base-color: black;
 }
 .bgGeneral{
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   color: white;
 }
 *{

@@ -1,95 +1,80 @@
-<div class="d-flex justify-content-center align-items-center mt-5">
-  <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center" style="width: 150px; height: 150px;">
-    <span class="text-white h1">AR</span>
-  </div>
-  <div>
-    <ol class="list-group list-group-flush">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Adrián</div>
-          Remedios León
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Tlf</div>
-          666333222
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Correo electrónico</div>
-          adrianremediosleon@gmail.com
-        </div>
-      </li>
-    </ol>
-  </div>
-</div>
-<div class="px-5 mt-5">
-  <form>
-    <div class="card">
-      <div class="card-header bgGeneral">
-        Datos personales
+<main class="p-5">
+  <section class="d-flex">
+    <div class="d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4">
+      <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center">
+        <span class="text-white h1">{{(usuario?.nombre + ' ' + usuario?.apellidos) | inicialesNombre}}</span>
       </div>
-      <div class="card-body d-flex justify-content-between col-12 ">
-        <div class="col-6">
-          <div class="d-flex col-12 ps-4">
-            <label class="card-title me-2 pt-2">Nombre</label>
-            <input type="text" class="form-control w-75">
-          </div>
-          <div class="d-flex col-12 ps-3 mt-4">
-            <label class="card-title me-2 pt-2">Nickname</label>
-            <input type="text" class="form-control w-75">
-          </div>
-          <div class="d-flex col-12 ps-4 mt-4">
-            <label class="card-title me-2 pt-2 me-4">Email</label>
-            <input type="text" class="form-control w-75">
-          </div>
-          <div class="d-flex col-12 ps-4 mt-4">
-            <label class="card-title me-3 pt-2">Idioma</label>
-            <select class="form-control w-75"></select>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="d-flex col-12 pe-4">
-            <label class="card-title me-2 pt-2">Apellidos</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="d-flex col-12 pe-4 mt-4">
-            <label class="card-title me-2 pt-2">Contacto</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="d-flex col-12 pe-4 mt-4">
-            <label class="card-title me-2 pt-2">Fecha nacimiento</label>
-            <input type="date" class="form-control">
-          </div>
-          <button class="btn bgGeneral rounded-pill mt-4 w-100" type="submit">Guardar cambios</button>
-        </div>
+      <div>
+        <ol class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-start py-3">
+            <div class="ms-2 me-auto">
+              <span class="fw-bold">{{usuario?.nombre}} </span>
+              {{usuario?.apellidos}}
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-center align-items-center py-3">
+            <span class="fa-solid fa-user me-3"></span>
+            {{usuario?.usuario}}
+          </li>
+          <li class="list-group-item d-flex justify-content-center align-items-start py-3">
+            <span class="fa-solid fa-cake-candles me-3"></span>
+            {{usuario?.fechaNacimiento |  date:'dd MMM yyyy':'':'es'}}
+          </li>
+        </ol>
       </div>
     </div>
-  </form>
-  <div class="mt-5">
-    <div class="d-flex justify-content-center">
-      <h1>Intereses asociados a ti</h1>
+    <div class="px-4 profile-form col-9">
+      <form class="col-12" [formGroup]="formProfile" (ngSubmit)="cambiarDatosUsuario(formProfile)">
+        <div class="card rounded-4 col-12">
+          <div class="card-header bgGeneral rounded-top-3 py-3">
+            <h5 class="m-0">Datos personales</h5>
+          </div>
+          <div class="card-body d-flex justify-content-between col-12 py-3">
+            <div class="col-12">
+              <div class="d-flex col-12 px-4 py-3">
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">Email</label>
+                <input type="text" class="form-control" formControlName="email">
+              </div>
+              <div class="d-flex col-12 px-4 py-3">
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">Teléfono</label>
+                <input type="text" class="form-control" maxlength="9" formControlName="tlf">
+              </div>
+              <div class="d-flex col-12 px-4 py-3">
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">Idioma</label>
+                <select class="form-select" formControlName="idiomaId">
+                  <option
+                    *ngFor="let idioma of idiomas"
+                    [value]="idioma.idiomaId">
+                    {{idioma.titulo}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer py-3 d-flex justify-content-end">
+            <button class="btn bgGeneral rounded-pill w-25 py-2" type="submit">Guardar cambios</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="d-flex justify-content-center">
-      <hr class="bgGeneral">
-    </div>
-    <div class=" d-flex flex-wrap justify-content-center">
-      <span class="badge bg-secondary fs-6 me-2">⚽ Baloncesto</span>
-      <span class="badge bg-secondary fs-6 me-2">⚽ Fútbol</span>
-      <span class="badge bg-secondary fs-6 me-2">⚽ Voley</span>
-      <span class="badge bg-secondary fs-6 me-2">🎵 Hip-Hop</span><br>
-      <span class="badge bg-secondary fs-6 me-2">🍲 Gastronomía asiática</span>
-      <span class="badge bg-secondary fs-6 me-2">📚 Archivo de las tormenta</span>
-      <span class="badge bg-secondary fs-6 me-2">📚 La rueda del tiempo</span>
-      <span class="badge bg-secondary fs-6 me-2">🎭 Comedia</span>
-    </div>
-    <div class=" d-flex flex-wrap justify-content-center">
-    <button class="btn bgGeneral rounded-pill mt-4 w-25 me-2" type="submit"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
+  </section>
+  <section class="py-4 pe-4">
+    <div class="card rounded-4 col-12">
+      <div class="card-header bgGeneral rounded-top-3 py-3">
+        <h5 class="m-0">Mis intereses</h5>
       </div>
-  </div>
+      <div class="card-body d-flex col-12 py-4 flex-wrap">
+        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">⚽ {{interes.titulo}}</span>
+      </div>
+      <div class="card-footer py-3 d-flex justify-content-end">
+        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">Cambiar mis intereses</button>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="footer-padding">
 </div>
-<div class="dejademolestar">
-</div>
+<ng-template #editarIntereses>
+  <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses>
+</ng-template>
 

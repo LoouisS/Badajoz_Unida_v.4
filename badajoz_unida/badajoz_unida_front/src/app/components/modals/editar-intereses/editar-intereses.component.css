@@ -1,0 +1,16 @@
+.modal-body{
+  gap: .5rem;
+}
+
+.badge{
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.badge:active{
+  transform: scale(.9);
+}
+
+.selected{
+  background-color: var(--primary-color) !important;
+}

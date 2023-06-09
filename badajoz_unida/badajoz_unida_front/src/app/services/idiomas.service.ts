@@ -6,6 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import {Model} from "../models/model.model";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,20 @@ import {Model} from "../models/model.model";
  **/
 export class IdiomasService {
 
-  modelo: Model = new Model();
+  apiUrl: string ='http://localhost:8080/idiomas/';
 
   /**
    Constructor de la clase
    @param httpClient {HttpClient} Clase para realizar peticiones http
    **/
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   /**
    Método que obtiene la colección de datos de todos los idiomas disponibles
    @return {Observable} Resultado de la petición GET
    **/
   getIdiomas(){
-    return this.modelo.getIdiomas();
+    return this.httpClient.get(this.apiUrl);
   }
 
 }

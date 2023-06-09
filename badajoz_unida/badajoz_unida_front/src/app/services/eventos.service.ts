@@ -46,6 +46,7 @@ export class EventosService {
    @return {Observable} Resultado de la petición POST
    **/
   createEvento(formData: FormData){
+    console.log("Holaaaaaaaaaa")
     return this.httpClient.post(this.apiUrl+'save',formData)
   }
 
