@@ -1,0 +1,11 @@
+package com.badajoz_unida.evg.repository;
+
+import com.badajoz_unida.evg.entity.UsuarioRoles;
+import com.badajoz_unida.evg.entity.Usuarios;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UsuarioRolesRepository extends JpaRepository<UsuarioRoles, Integer> {
+    UsuarioRoles findByUsuariosUserId(Integer id);
+}

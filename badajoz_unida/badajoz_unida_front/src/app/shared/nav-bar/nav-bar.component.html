@@ -74,7 +74,7 @@
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión intereses</span>
     </li>
     <li class="mx-0">
-      <div class="rounded-pill">
+      <div class="rounded-pill" [routerLink]="['/gestion-usuarios']">
         <span class="nav-icon fa-solid fa-users"></span>
         <span *ngIf="isOpened" class="name-nav-link">Gestión usuarios</span>
       </div>

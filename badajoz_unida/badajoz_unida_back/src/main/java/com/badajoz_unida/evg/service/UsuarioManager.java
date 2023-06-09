@@ -1,14 +1,18 @@
 package com.badajoz_unida.evg.service;
 
+import com.badajoz_unida.evg.dto.UpdateRolUserDTO;
 import com.badajoz_unida.evg.dto.UserInterestDTO;
 import com.badajoz_unida.evg.dto.UsuarioDTO;
-import com.badajoz_unida.evg.entity.Intereses;
-import com.badajoz_unida.evg.entity.Usuarios;
-import com.badajoz_unida.evg.entity.UsuariosIntereses;
+import com.badajoz_unida.evg.entity.*;
+import com.badajoz_unida.evg.exception.CustomException;
+import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.UsuarioDatosRepository;
 import com.badajoz_unida.evg.repository.UsuarioInteresesRepository;
+import com.badajoz_unida.evg.repository.UsuarioRolesRepository;
 import com.badajoz_unida.evg.security.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,9 @@ public class UsuarioManager implements UsuarioService{
 
     @Autowired
     UsuarioInteresesManager usuarioInteresesManager;
+
+    @Autowired
+    UsuarioRolesRepository urRepository;
 
     @Override
     public UsuarioDTO getDatosUsuarioById(int usuarioId) {
@@ -43,4 +50,26 @@ public class UsuarioManager implements UsuarioService{
         this.usuarioInteresesManager.save(userInterestDTO);
     }
 
+    @Override
+    public ResponseEntity<?> getAll() throws CustomException {
+        try {
+            return new ResponseEntity<>(this.usuarioDatosRepository.findAll(), HttpStatus.OK);
+        }catch (Exception e){
+            throw new CustomException(ErrorCode.CUSTOM_SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> updateRol(UpdateRolUserDTO roluDto) throws CustomException{
+        Roles rol = new Roles();
+        rol.setId(roluDto.getRol());
+        try{
+            UsuarioRoles usuarioRol = this.urRepository.findByUsuariosUserId(roluDto.getId());
+            usuarioRol.setRoles(rol);
+            this.urRepository.save(usuarioRol);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            throw new CustomException(ErrorCode.CUSTOM_SYSTEM_ERROR);
+        }
+    }
 }

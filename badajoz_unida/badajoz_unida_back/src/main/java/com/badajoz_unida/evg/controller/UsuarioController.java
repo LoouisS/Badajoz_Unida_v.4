@@ -1,7 +1,9 @@
 package com.badajoz_unida.evg.controller;
 
+import com.badajoz_unida.evg.dto.UpdateRolUserDTO;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.entity.Usuarios;
+import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.JwtService;
 import com.badajoz_unida.evg.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,31 +27,49 @@ public class UsuarioController {
     JwtService jwtService;
 
     @GetMapping("/datos")
-    public ResponseEntity<?> getDatosUsuarioById(HttpServletRequest request){
-        try{
+    public ResponseEntity<?> getDatosUsuarioById(HttpServletRequest request) {
+        try {
             int id = this.jwtService.getIdFromToken(request);
             return new ResponseEntity<>(this.usuarioService.getDatosUsuarioById(id), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/save")
-    public void saveUsuarioChanges(HttpServletRequest request, @RequestBody Usuarios usuario){
-        try{
+    public void saveUsuarioChanges(HttpServletRequest request, @RequestBody Usuarios usuario) {
+        try {
             int id = this.jwtService.getIdFromToken(request);
             this.usuarioService.saveUsuarioChanges(id, usuario);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
     @PutMapping("/saveIntereses")
-    public void saveInteresesChanges(HttpServletRequest request, @RequestBody List<Intereses> intereses){
-        try{
+    public void saveInteresesChanges(HttpServletRequest request, @RequestBody List<Intereses> intereses) {
+        try {
             int id = this.jwtService.getIdFromToken(request);
             this.usuarioService.saveInteresesUsuarioChanges(id, intereses);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
+    @GetMapping("getAll")
+    public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
+        try {
+            return this.usuarioService.getAll();
+        } catch (CustomException e) {
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("updateRol")
+    public ResponseEntity<?> updateRol(HttpServletRequest request, @RequestBody UpdateRolUserDTO roluDto){
+        try{
+            return this.usuarioService.updateRol(roluDto);
+        }catch (CustomException e){
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
