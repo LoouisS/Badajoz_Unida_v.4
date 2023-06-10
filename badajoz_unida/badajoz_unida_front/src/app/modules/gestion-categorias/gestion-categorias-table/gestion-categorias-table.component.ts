@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {CategoriasService} from "../../../services/categorias.service";
 import Swal from "sweetalert2";
 import {DataTableDirective} from "angular-datatables";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-gestion-categorias-table',
@@ -16,6 +17,7 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   categorias: any;
+  formFilter!: FormGroup;
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -28,7 +30,7 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
     buttonsStyling: false
   });
   dtTable: DataTables.Api;
-  constructor(private catService: CategoriasService) {
+  constructor(private catService: CategoriasService, private formBuilder: FormBuilder) {
 
   }
   ngOnInit() {
@@ -48,6 +50,7 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
     };
     // @ts-ignore
     this.dtTrigger.next();
+    this.initForm();
   }
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
@@ -127,5 +130,31 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
       // @ts-ignore
       this.dtTrigger.next();
     }, 1);
+  }
+
+  /**
+   * Método para la inicialización del formulario del componente
+   * @private
+   */
+  private initForm() {
+    this.formFilter = this.formBuilder.group({
+      titulo:[],
+      activo:[]
+    });
+  }
+
+  /**
+   * Método para realizar el filtrado de Eventos en la aplicación
+   */
+  filterCategorias() {
+    const filtros = {
+      titulo: this.formFilter.get('titulo').value,
+      activo: this.formFilter.get('activo').value
+    };
+    console.log(filtros);
+    this.catService.getCategoriasFiltered(filtros).subscribe((data) => {
+      this.categorias = data;
+      this.cargarTabla();
+    })
   }
 }

@@ -80,4 +80,12 @@ export class CategoriasService {
   deleteEditCategoria(){
     this.editCategoria.next(null);
   }
+
+  /**
+   * Método para la obtención de las categorias filtradas por los parámetros de búsqueda
+   * @param filtros
+   */
+  getCategoriasFiltered(filtros:any) {
+    return this.httpClient.post(this.authURL + 'getAllFilter',filtros);
+  }
 }

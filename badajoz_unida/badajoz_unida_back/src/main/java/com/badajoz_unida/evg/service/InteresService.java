@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.service;
 
+import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.exception.CustomException;
@@ -25,4 +26,11 @@ public interface InteresService {
      * @return
      */
     ResponseEntity<?> delete(int intId);
+
+    /**
+     * Métodos para la obtención de intereses filtrados
+     * @param filtro
+     * @return
+     */
+    ResponseEntity<?> getAllInteresesFilter(CatFilter filtro);
 }

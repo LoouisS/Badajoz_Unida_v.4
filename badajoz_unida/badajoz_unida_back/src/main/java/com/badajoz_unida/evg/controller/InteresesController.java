@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.controller;
 
+import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Intereses;
@@ -24,6 +25,14 @@ public class InteresesController {
     public ResponseEntity<?> getAllIntereses(){
         try{
             return this.interesService.getAll();
+        }catch (Exception e){
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping("/getAllFilter")
+    public ResponseEntity<?> getAllInteresesFilter(@RequestBody CatFilter filtro){
+        try{
+            return this.interesService.getAllInteresesFilter(filtro);
         }catch (Exception e){
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

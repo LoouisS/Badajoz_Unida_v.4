@@ -8,6 +8,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
 import {PipesModule} from "../../pipes/pipes.module";
 import {ModalsModule} from "../../components/modals/modals.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,13 +16,14 @@ import {ModalsModule} from "../../components/modals/modals.module";
     GestionCategoriasComponent,
     GestionCategoriasTableComponent
   ],
-  imports: [
-    CommonModule,
-    GestionCategoriasRoutingModule,
-    SharedModule,
-    DataTablesModule,
-    PipesModule,
-    ModalsModule
-  ]
+    imports: [
+        CommonModule,
+        GestionCategoriasRoutingModule,
+        SharedModule,
+        DataTablesModule,
+        PipesModule,
+        ModalsModule,
+        ReactiveFormsModule
+    ]
 })
 export class GestionCategoriasModule { }

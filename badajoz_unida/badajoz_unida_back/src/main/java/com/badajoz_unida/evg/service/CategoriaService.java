@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.service;
 
+import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.entity.Categorias;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.exception.CustomException;
@@ -34,4 +35,11 @@ public interface CategoriaService {
      * @return
      */
     ResponseEntity<?> deleteCategoria(int catId);
+
+    /**
+     * Método para la obtención de categorias filtradas
+     * @param filtro
+     * @return
+     */
+    List<Categorias> getAllCategoriasFilter(CatFilter filtro);
 }

@@ -1,13 +1,18 @@
 package com.badajoz_unida.evg.service;
 
+import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.entity.Categorias;
+import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.CategoriaRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
+import com.badajoz_unida.evg.utils.CategoriaSpecification;
+import com.badajoz_unida.evg.utils.EventosSpecification;
 import com.badajoz_unida.evg.utils.JavaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,5 +56,14 @@ public class CategoriaManager implements CategoriaService{
         categoria.setCategoriaId(catId);
         this.catRepository.delete(categoria);
         return new ResponseEntity<>(categoria,HttpStatus.OK);
+    }
+
+    @Override
+    public List<Categorias> getAllCategoriasFilter(CatFilter filtro){
+        Specification<Categorias> specification = CategoriaSpecification.withFilters(
+                filtro.getTitulo(),
+                filtro.isActivo()
+        );
+        return this.catRepository.findAll(specification);
     }
 }

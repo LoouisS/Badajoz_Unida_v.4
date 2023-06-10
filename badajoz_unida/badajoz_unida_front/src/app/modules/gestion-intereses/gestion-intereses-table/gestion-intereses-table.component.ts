@@ -4,6 +4,7 @@ import {Subject} from "rxjs";
 import {CategoriasService} from "../../../services/categorias.service";
 import {InteresesService} from "../../../services/intereses.service";
 import Swal from "sweetalert2";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-gestion-intereses-table',
@@ -13,6 +14,7 @@ import Swal from "sweetalert2";
 export class GestionInteresesTableComponent implements OnInit,OnDestroy{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
+  formFilter!: FormGroup;
   categorias: any;
   intereses: any;
   loading: boolean;
@@ -30,9 +32,10 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
     },
     buttonsStyling: false
   });
-  constructor(private catService: CategoriasService, private interesService: InteresesService) {
+  constructor(private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
   }
   ngOnInit() {
+    this.initForm();
     this.loading = true;
     this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
@@ -86,10 +89,18 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
     }, 1);
   }
 
+  /**
+   * Método para el desencadenamiento de la edición de un interés
+   * @param interes
+   */
   editInteres(interes: any) {
     this.interesService.setEditInteres(interes);
   }
 
+  /**
+   * Método para la eliminación de un registro de tipo interés del sistema
+   * @param interes
+   */
   deleteInteres(interes: any) {
     this.alert.fire({
       icon:'question',
@@ -127,6 +138,30 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
           });
         });
       }
+    });
+  }
+  /**
+   * Método para realizar el filtrado de categorias en la aplicación
+   */
+  filterIntereses() {
+    const filtros = {
+      titulo: this.formFilter.get('titulo').value,
+      activo: this.formFilter.get('activo').value
+    };
+    console.log(filtros);
+    this.interesService.getInteresesFiltered(filtros).subscribe((data) => {
+      this.intereses = data;
+      this.cargarTabla();
+    })
+  }
+  /**
+   * Método para la inicialización del formulario del componente
+   * @private
+   */
+  private initForm() {
+    this.formFilter = this.formBuilder.group({
+      titulo:[],
+      activo:[]
     });
   }
 }

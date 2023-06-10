@@ -1,5 +1,6 @@
 package com.badajoz_unida.evg.controller;
 
+import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.dto.Mensaje;
 import com.badajoz_unida.evg.dto.UserInterestDTO;
 import com.badajoz_unida.evg.entity.*;
@@ -36,6 +37,10 @@ public class CategoriaController {
     public List<Categorias> getAllCategorias(){
 
         return this.catService.getAllCategorias();
+    }
+    @PostMapping("/getAllFilter")
+    public List<Categorias> getAllFilter(@RequestBody CatFilter filtro){
+        return this.catService.getAllCategoriasFilter(filtro);
     }
     @GetMapping("/interesesAll")
     @PermitAll

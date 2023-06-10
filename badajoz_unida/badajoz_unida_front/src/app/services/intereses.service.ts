@@ -55,4 +55,12 @@ export class InteresesService {
   eliminarInteres(interesId: number) {
     return this.httpClient.delete(this.apiUrl+'delete/'+interesId);
   }
+
+  /**
+   * Método para la obtención de intereses filtrados
+   * @param filtros
+   */
+  getInteresesFiltered(filtros: any) {
+    return this.httpClient.post(this.apiUrl + 'getAllFilter',filtros);
+  }
 }

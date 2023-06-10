@@ -117,6 +117,10 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 1);
     }
 
+  /**
+   * Método para la inicialización del formulario del componente
+   * @private
+   */
   private initForm() {
     this.formFilter = this.formBuilder.group({
       nombre:[],
@@ -127,6 +131,9 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para realizar el filtrado de Eventos en la aplicación
+   */
   filtrarBusqueda() {
     const intereses = this.formFilter.get('intereses').value;
     const fechaInitValue = this.formFilter.get('fechaInit').value;
@@ -159,10 +166,18 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para la emisión al componente padre de la señal para desplegar el modal
+   */
   mostrarModalEventos(){
     this.mostrarModal.emit();
   }
 
+  /**
+   * Método para eliminar un registro de evento del sistema
+   * @param eventosId
+   * @param evento
+   */
   deleteEvent(eventosId: number, evento:any) {
     this.alert.fire({
       icon:'question',
@@ -203,6 +218,10 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para la modificación de un evento
+   * @param eventosId
+   */
   modEvent(eventosId: number) {
     this.eventoService.getEventosById(eventosId).subscribe((data) =>{
       this.eventoService.setEditEvent(data);
@@ -210,6 +229,11 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /**
+   * Método para la exportación de un Evento a excell
+   * @param eventosId
+   * @param evento
+   */
   exportExcell(eventosId: any, evento:any) {
     this.eventoService.getExcellEvent(eventosId).subscribe(data =>{
       const blob = new Blob([data],{type:'application/vnd.ms-excel'})
@@ -220,6 +244,12 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       URL.revokeObjectURL(link.href);
     });
   }
+
+  /**
+   * Método para la exportación de un Evento a pdf
+   * @param eventosId
+   * @param evento
+   */
   exportPdf(eventosId: any, evento:any){
     this.eventoService.getPdfEvent(eventosId).subscribe(data =>{
       const blob = new Blob([data],{type:'application/pdf'})

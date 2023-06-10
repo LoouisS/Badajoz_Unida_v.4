@@ -7,6 +7,7 @@ import { GestionInteresesTableComponent } from './gestion-intereses-table/gestio
 import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
 import {ModalsModule} from "../../components/modals/modals.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ModalsModule} from "../../components/modals/modals.module";
         GestionInteresesRoutingModule,
         SharedModule,
         DataTablesModule,
-        ModalsModule
+        ModalsModule,
+        ReactiveFormsModule
     ]
 })
 export class GestionInteresesModule { }
