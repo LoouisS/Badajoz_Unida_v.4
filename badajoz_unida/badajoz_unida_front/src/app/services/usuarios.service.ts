@@ -50,4 +50,12 @@ export class UsuariosService {
     }
     return this.httpClient.post(this.apiUrl + "updateRol",userPrivilegio);
   }
+
+  /**
+   * Método para el envío de los valores a filtrar para la obtención de usuarios filtrados
+   * @param filtros
+   */
+  getAllFiilter(filtros: any ) {
+    return this.httpClient.post(this.apiUrl + 'getAllFilter',filtros);
+  }
 }

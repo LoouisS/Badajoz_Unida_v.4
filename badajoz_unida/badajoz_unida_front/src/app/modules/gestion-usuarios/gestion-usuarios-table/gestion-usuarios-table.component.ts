@@ -3,6 +3,7 @@ import {UsuariosService} from "../../../services/usuarios.service";
 import {DataTableDirective} from "angular-datatables";
 import {Subject} from "rxjs";
 import Swal from "sweetalert2";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-gestion-usuarios-table',
@@ -15,6 +16,7 @@ export class GestionUsuariosTableComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   usuarios: any;
+  formFilter!: FormGroup;
   loading: boolean;
   alert = Swal.mixin({
     allowOutsideClick: false,
@@ -27,11 +29,12 @@ export class GestionUsuariosTableComponent implements OnInit{
     },
     buttonsStyling: false
   });
-  constructor(private usuarioService: UsuariosService) {
+  constructor(private usuarioService: UsuariosService, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
+    this.initForm();
     this.loading = true;
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarios = data;
@@ -111,5 +114,33 @@ export class GestionUsuariosTableComponent implements OnInit{
         })
       }
     });
+  }
+  /**
+   * Método para la inicialización del formulario del componente
+   * @private
+   */
+  private initForm() {
+    this.formFilter = this.formBuilder.group({
+      nombreUsuario:[],
+      nick:[],
+      email:[],
+      rol:[],
+    });
+  }
+
+  /**
+   * Método para la obtención de todos los usuarios filtrados por el formulario de filtraddo del template
+   */
+  filterUsuarios() {
+    const filtros = {
+      nombreUsuario: this.formFilter.get('nick').value,
+      nombre: this.formFilter.get('nombreUsuario').value,
+      email: this.formFilter.get('email').value,
+      rolId: this.formFilter.get('rol').value
+    };
+    this.usuarioService.getAllFiilter(filtros).subscribe((data) => {
+      this.usuarios = data;
+      this.cargarTabla();
+    })
   }
 }

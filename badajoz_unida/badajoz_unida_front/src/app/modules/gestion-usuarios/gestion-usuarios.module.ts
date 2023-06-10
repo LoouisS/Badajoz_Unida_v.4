@@ -6,6 +6,7 @@ import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.co
 import { GestionUsuariosTableComponent } from './gestion-usuarios-table/gestion-usuarios-table.component';
 import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import {DataTablesModule} from "angular-datatables";
     GestionUsuariosComponent,
     GestionUsuariosTableComponent
   ],
-  imports: [
-    CommonModule,
-    GestionUsuariosRoutingModule,
-    SharedModule,
-    DataTablesModule
-  ]
+    imports: [
+        CommonModule,
+        GestionUsuariosRoutingModule,
+        SharedModule,
+        DataTablesModule,
+        ReactiveFormsModule
+    ]
 })
 export class GestionUsuariosModule { }

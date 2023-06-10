@@ -1,6 +1,7 @@
 package com.badajoz_unida.evg.controller;
 
 import com.badajoz_unida.evg.dto.UpdateRolUserDTO;
+import com.badajoz_unida.evg.dto.UserFilter;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.entity.Usuarios;
 import com.badajoz_unida.evg.exception.CustomException;
@@ -58,6 +59,15 @@ public class UsuarioController {
     public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
         try {
             return this.usuarioService.getAll();
+        } catch (CustomException e) {
+            return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("getAllFilter")
+    public ResponseEntity<?> getAllUsersFilter(HttpServletRequest request, @RequestBody UserFilter filtro) {
+        try {
+            return this.usuarioService.getAllUsersFilter(filtro);
         } catch (CustomException e) {
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,6 +1,7 @@
 package com.badajoz_unida.evg.service;
 
 import com.badajoz_unida.evg.dto.UpdateRolUserDTO;
+import com.badajoz_unida.evg.dto.UserFilter;
 import com.badajoz_unida.evg.dto.UsuarioDTO;
 import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.entity.Usuarios;
@@ -39,5 +40,17 @@ public interface UsuarioService {
      */
     ResponseEntity<?> getAll() throws CustomException;
 
+    /**
+     * Método para actualizar el rol de un usuario registrado
+     * @param roluDto
+     * @return
+     * @throws CustomException
+     */
     ResponseEntity<?> updateRol(UpdateRolUserDTO roluDto) throws CustomException;
+
+    /**
+     * Método para la obtención de usuarios filtrados
+     * @return
+     */
+    ResponseEntity<?> getAllUsersFilter(UserFilter filtro) throws CustomException;
 }
