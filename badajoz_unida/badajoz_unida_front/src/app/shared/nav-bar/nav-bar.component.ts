@@ -22,12 +22,15 @@ export class NavBarComponent implements OnInit{
   nombreUsuario!: string;
   @Output() menuOpened = new EventEmitter<number>();
   isOpened: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private _tokenService: TokenService) {
   }
 
   ngOnInit() {
     this.nombreUsuario = this._tokenService.getNombreApellidos();
+    console.log(this.nombreUsuario)
+    this.isAdmin = this._tokenService.getIsAdmin();
   }
 
   /**
@@ -36,6 +39,10 @@ export class NavBarComponent implements OnInit{
   toggleMenu(){
     this.isOpened = this.isOpened ? false : true;
     this.isOpened ? this.menuOpened.emit(240) : this.menuOpened.emit(78);
+  }
+
+  cerrarSesion(){
+    this._tokenService.logOut();
   }
 
 }

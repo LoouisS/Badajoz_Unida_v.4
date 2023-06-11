@@ -17,7 +17,7 @@
   </div>
 
   <div class="input-group">
-    <input type="submit" class="button rounded-pill" value="Iniciar sesión" />
+    <input type="submit" *ngIf="!verificandoLogin; else loading" class="button rounded-pill" value="Iniciar sesión" />
     <small class="d-lg-none">¿No tienes cuenta? Crea una ahora.</small>
     <button class="button rounded-pill d-lg-none" (click)="goToRegistro()">Crear mi cuenta</button>
   </div>
@@ -34,3 +34,6 @@
     </div>
   </div>
 </form>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

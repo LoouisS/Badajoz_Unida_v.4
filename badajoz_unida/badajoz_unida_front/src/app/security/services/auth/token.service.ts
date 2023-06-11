@@ -97,8 +97,13 @@ export class TokenService {
     }
     const token=this.getToken();
     // @ts-ignore
-    const payload=token.split('.')[1];
-    const payloadDecoded=atob(payload);
+    let payload=token.split('.')[1];
+    payload = payload.replace(/-/g, '+').replace(/_/g, '/');
+    // const payloadDecoded=atob(payload);
+    const payloadDecoded = decodeURIComponent(window.atob(payload).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    console.log(payloadDecoded)
     const values=JSON.parse(payloadDecoded);
     const nombre = values.nombre;
     const apellidos = values.apellidos;

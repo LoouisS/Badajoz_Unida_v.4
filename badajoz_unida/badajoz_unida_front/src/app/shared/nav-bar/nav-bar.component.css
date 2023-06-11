@@ -155,6 +155,10 @@ li:hover .nav-tip{
   font-weight: 500;
 }
 
+.perfil, .log-out{
+  cursor: pointer;
+}
+
 /*.menu-container{*/
 /*  position: absolute;*/
 /*  width: 100%;*/

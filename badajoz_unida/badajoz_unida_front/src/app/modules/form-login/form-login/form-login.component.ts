@@ -25,6 +25,7 @@ export class FormLoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   showAlert: boolean = false;
+  verificandoLogin: boolean = false;
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -100,14 +101,17 @@ export class FormLoginComponent implements OnInit{
     let usuario:any = this.loginForm.get('user')?.value;
     let clave:any = this.loginForm.get('password')?.value;
     let user: LoginUsuario = new LoginUsuario(usuario, clave);
+    this.verificandoLogin = true;
     this._authService.login(user).subscribe(
       (data) => {
         this._tokenService.setToken(data.token);
         console.log("Se ha iniciado sesión exitosamente");
         this.router.navigate(['/']);
         this.showAlert = false;
+        this.verificandoLogin = false;
       },
       async (errorServicio) => {
+        this.verificandoLogin = false;
         this.showAlert = true;
         this.alert.fire({
           title: 'Ha ocurrido un problema',

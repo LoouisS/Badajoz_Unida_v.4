@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
   </div>
   <div class="modal-body w-100 px-5 d-flex flex-wrap">
-    <div *ngIf="loading; else intereses">
+    <div class="col-12" *ngIf="loading; else intereses">
       <app-loading></app-loading>
     </div>
     <ng-template #intereses>

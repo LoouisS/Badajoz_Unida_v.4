@@ -1,6 +1,6 @@
 .loading{
   width: 100%;
-  min-height: 400px;
+  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -24,3 +24,11 @@ img{
 img:hover{
   filter: grayscale(0);
 }
+
+.info h5{
+  color: var(--primary-color);
+}
+
+.entreculturas > div, .cruz-roja > div {
+  background-color: hsl(0, 0%, 80%);
+}
