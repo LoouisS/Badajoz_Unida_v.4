@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista de la gestión de usuarios
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UsuariosService} from "../../../services/usuarios.service";
 import {DataTableDirective} from "angular-datatables";
@@ -10,6 +16,10 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './gestion-usuarios-table.component.html',
   styleUrls: ['./gestion-usuarios-table.component.css']
 })
+
+/**
+ Vista con la tablas para gestionar los datos de los usuarios
+ **/
 export class GestionUsuariosTableComponent implements OnInit{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
@@ -29,10 +39,19 @@ export class GestionUsuariosTableComponent implements OnInit{
     },
     buttonsStyling: false
   });
+
+  /**
+   Contructor de la clase
+   @param usuarioService {UsuariosService} Servicio que gestiona los datos de los usuarios
+   @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
+   **/
   constructor(private usuarioService: UsuariosService, private formBuilder: FormBuilder) {
 
   }
 
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.initForm();
     this.loading = true;

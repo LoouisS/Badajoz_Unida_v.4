@@ -288,8 +288,8 @@ export class LoginGuard implements CanActivate {
    @return {boolean} Verdadero si existe la sesión, false en caso de que no
    **/
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.tokenService.isLogged()){
-      this.router.navigate([&#x27;/&#x27;]);
+    if(!this.tokenService.isLogged()){
+      this.router.navigate([&#x27;/auth&#x27;]);
       return false;
     }
     return true;

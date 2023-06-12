@@ -75,9 +75,11 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import {EventComponent} from &quot;./event/event.component&quot;;
+import {LoginGuard} from &quot;../../security/services/guards/login.guard&quot;;
+import {ProdGuardService} from &quot;../../security/services/guards/prod-guards.service&quot;;
 
 const routes: Routes &#x3D; [
-  { path: &#x27;&#x27;, component: EventComponent }
+  { path: &#x27;&#x27;, component: EventComponent, canActivate: [LoginGuard, ProdGuardService], data: { expectedRol: [&#x27;admin&#x27;, &#x27;colaborador&#x27;, &#x27;user&#x27;] } }
 ];
 
 @NgModule({

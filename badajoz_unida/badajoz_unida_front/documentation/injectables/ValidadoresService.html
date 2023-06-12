@@ -94,6 +94,12 @@
                             <li>
                                 <a href="#passwordsIguales" >passwordsIguales</a>
                             </li>
+                            <li>
+                                <a href="#validateFecha" >validateFecha</a>
+                            </li>
+                            <li>
+                                <a href="#validateImgExtension" >validateImgExtension</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -380,6 +386,144 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateFecha"></a>
+                    <span class="name">
+                        <span ><b>validateFecha</b></span>
+                        <a href="#validateFecha"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateFecha(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/app/services/validadores.service.ts:62</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateImgExtension"></a>
+                    <span class="name">
+                        <span ><b>validateImgExtension</b></span>
+                        <a href="#validateImgExtension"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateImgExtension(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/app/services/validadores.service.ts:73</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -387,7 +531,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import {FormControl, FormGroup} from &quot;@angular/forms&quot;;
+import {AbstractControl, FormControl, FormGroup, ValidationErrors} from &quot;@angular/forms&quot;;
 
 
 /**
@@ -441,7 +585,28 @@ export class ValidadoresService {
   comprobarIdioma(control: FormControl){
     return control?.value &#x3D;&#x3D; -1 ? { sinIdioma: true } : null;
   }
+  validateFecha(control: AbstractControl): ValidationErrors | null {
+    const selectedDate &#x3D; new Date(control.value);
+    const currentDate &#x3D; new Date();
 
+    if (selectedDate &lt;&#x3D; currentDate) {
+      return { invalidFecha: true };
+    }
+
+    return null;
+  }
+
+  validateImgExtension(control: AbstractControl): ValidationErrors | null {
+    const allowedExtensions &#x3D; [&#x27;.png&#x27;, &#x27;.jpg&#x27;, &#x27;.jpeg&#x27;];
+    const fileName &#x3D; control.value;
+    const extension &#x3D; fileName.substring(fileName.lastIndexOf(&#x27;.&#x27;)).toLowerCase();
+
+    if (!allowedExtensions.includes(extension)) {
+      return { invalidImgExtension: true };
+    }
+
+    return null;
+  }
 }
 </code></pre>
     </div>

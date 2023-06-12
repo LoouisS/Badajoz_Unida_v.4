@@ -1,9 +1,19 @@
+/**
+ @file Servicio que gestiona los datos del usuario
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ Servicio que gestiona los datos del usuario
+ **/
 export class UsuariosService {
 
   apiUrl: string ='http://localhost:8080/usuarios/';

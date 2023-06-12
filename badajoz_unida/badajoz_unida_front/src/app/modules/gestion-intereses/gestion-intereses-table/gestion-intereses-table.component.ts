@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista de la tabla de intereses
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DataTableDirective} from "angular-datatables";
 import {Subject} from "rxjs";
@@ -11,6 +17,10 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './gestion-intereses-table.component.html',
   styleUrls: ['./gestion-intereses-table.component.css']
 })
+
+/**
+ Vista de la tabla con los datos de los intereses
+ **/
 export class GestionInteresesTableComponent implements OnInit,OnDestroy{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
@@ -32,8 +42,19 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
     },
     buttonsStyling: false
   });
+
+  /**
+   Contructor de la clase
+   @param catService {CategoriasService} Servicio que gestiona los datos de las categorias
+   @param interesService {InteresesService} Servicio que gestiona los datos de los intereses
+   @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
+   **/
   constructor(private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
   }
+
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.initForm();
     this.loading = true;

@@ -81,6 +81,9 @@ const routes: Routes &#x3D; [
   { path: &#x27;&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../index/index.module&#x27;).then(module &#x3D;&gt; module.IndexModule)&quot; },
   { path: &#x27;mis-eventos&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../my-events/my-events.module&#x27;).then(module &#x3D;&gt; module.MyEventsModule)&quot; },
   { path: &#x27;gestion-eventos&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../gestion-eventos/gestion-eventos.module&#x27;).then(module &#x3D;&gt; module.GestionEventosModule)&quot; },
+  { path: &#x27;gestion-categorias&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../gestion-categorias/gestion-categorias.module&#x27;).then(module &#x3D;&gt; module.GestionCategoriasModule)&quot; },
+  { path: &#x27;gestion-intereses&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../gestion-intereses/gestion-intereses.module&#x27;).then(module &#x3D;&gt; module.GestionInteresesModule)&quot; },
+  { path: &#x27;gestion-usuarios&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../gestion-usuarios/gestion-usuarios.module&#x27;).then(module &#x3D;&gt; module.GestionUsuariosModule)&quot; },
   { path: &#x27;eventos&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../events/events.module&#x27;).then(module &#x3D;&gt; module.EventsModule)&quot; },
   { path: &#x27;perfil&#x27;, loadChildren:() &#x3D;&gt; &quot;import(&#x27;../profile/profile.module&#x27;).then(module &#x3D;&gt; module.ProfileModule)&quot; },
   { path: &#x27;**&#x27;, redirectTo: &#x27;/&#x27; }

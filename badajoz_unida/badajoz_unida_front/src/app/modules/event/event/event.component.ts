@@ -79,6 +79,9 @@ export class EventComponent implements OnInit{
       .openPopup();
   }
 
+  /**
+   Método que inscribe a un usuario en un evento
+   **/
   registerUserInEvent(){
     this._eventosService.registerUserInEvent(this.eventoId).subscribe((data: any) => {
       this.checkUserRegister();
@@ -89,6 +92,9 @@ export class EventComponent implements OnInit{
     });
   }
 
+  /**
+   Método que desinscribe a un usuario de un evento
+   **/
   async removeUserFromEvent(){
     let respuesta = await this._alertsService.askConfirmation('Quieres desapuntarte de ' + this.evento.nombre, '¿Estas seguro de querer desapuntarte de este evento?');
     if(respuesta){
@@ -101,16 +107,25 @@ export class EventComponent implements OnInit{
     }
   }
 
+  /**
+   Método que comprueba la participación
+   **/
   checkUserRegister(){
     this._eventosService.checkUserRegister(this.eventoId).subscribe((data: boolean) => {
       this.registrado = data;
     })
   }
 
+  /**
+   Muestra el modal de cesión de imagen para participar en un evento
+   **/
   openCesionImagenModal(){
     this._modalService.open(this.cesionImagen, {size: 'lg', backdrop: 'static'});
   }
 
+  /**
+   Cierra el modal de cesión de imagen
+   **/
   cerrarCesionImagenModal(){
     this._modalService.dismissAll(this.cesionImagen);
   }

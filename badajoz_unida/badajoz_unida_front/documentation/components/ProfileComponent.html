@@ -70,6 +70,12 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
 
 
 <section>
@@ -115,19 +121,686 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#editarIntereses" >editarIntereses</a>
+                            </li>
+                            <li>
+                                <a href="#formProfile" >formProfile</a>
+                            </li>
+                            <li>
+                                <a href="#idiomas" >idiomas</a>
+                            </li>
+                            <li>
+                                <a href="#usuario" >usuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#cambiarDatosUsuario" >cambiarDatosUsuario</a>
+                            </li>
+                            <li>
+                                <a href="#cargarFormulario" >cargarFormulario</a>
+                            </li>
+                            <li>
+                                <a href="#cerrarModalIntereses" >cerrarModalIntereses</a>
+                            </li>
+                            <li>
+                                <a href="#crearFormulario" >crearFormulario</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarModalIntereses" >mostrarModalIntereses</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#validar" >validar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
 
 
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_usuarioService: <a href="../injectables/UsuariosService.html" target="_self">UsuariosService</a>, _idiomasService: <a href="../injectables/IdiomasService.html" target="_self">IdiomasService</a>, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, modalService: NgbModal, alertsService: <a href="../injectables/AlertsService.html" target="_self">AlertsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor de la clase</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_usuarioService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsuariosService.html" target="_self" >UsuariosService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio que gestiona los datos de los usuarios</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>_idiomasService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/IdiomasService.html" target="_self" >IdiomasService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio que gestiona los datos de los idiomas</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Clase que gestiona el formulario reactivo</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>modalService</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgbModal</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Clase que gestiona las ventanas modales</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>alertsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertsService.html" target="_self" >AlertsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio que gestiona las alertas</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarDatosUsuario"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>cambiarDatosUsuario</b></span>
+                        <a href="#cambiarDatosUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cambiarDatosUsuario(formProfile: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:106</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método que guarda los cambios en los datos del usuario</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formProfile</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Datos del formulario reactivo</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarFormulario"></a>
+                    <span class="name">
+                        <span ><b>cargarFormulario</b></span>
+                        <a href="#cargarFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarFormulario()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método que carga los datos en el formulario</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarModalIntereses"></a>
+                    <span class="name">
+                        <span ><b>cerrarModalIntereses</b></span>
+                        <a href="#cerrarModalIntereses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cerrarModalIntereses()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="136"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:136</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cerrar el modal de modificación de intereses</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="crearFormulario"></a>
+                    <span class="name">
+                        <span ><b>crearFormulario</b></span>
+                        <a href="#crearFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>crearFormulario()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método que inicializa el formulario reactivo</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarModalIntereses"></a>
+                    <span class="name">
+                        <span ><b>mostrarModalIntereses</b></span>
+                        <a href="#mostrarModalIntereses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mostrarModalIntereses()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método que muestra el modal para modificar intereses</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método que inicializa la vista</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validar"></a>
+                    <span class="name">
+                        <span ><b>validar</b></span>
+                        <a href="#validar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validar(campo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método de validaciones generales</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>campo</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Nombre del campo del formulario</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string | null</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>texto de la validación</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarIntereses"></a>
+                    <span class="name">
+                        <span ><b>editarIntereses</b></span>
+                        <a href="#editarIntereses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;editarIntereses&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formProfile"></a>
+                    <span class="name">
+                        <span ><b>formProfile</b></span>
+                        <a href="#formProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="idiomas"></a>
+                    <span class="name">
+                        <span ><b>idiomas</b></span>
+                        <a href="#idiomas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuario"></a>
+                    <span class="name">
+                        <span ><b>usuario</b></span>
+                        <a href="#usuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit, TemplateRef, ViewChild} from &#x27;@angular/core&#x27;;
+import {UsuariosService} from &quot;../../../services/usuarios.service&quot;;
+import {IdiomasService} from &quot;../../../services/idiomas.service&quot;;
+import {FormBuilder, FormGroup, Validators} from &quot;@angular/forms&quot;;
+import {NgbModal} from &quot;@ng-bootstrap/ng-bootstrap&quot;;
+import {AlertsService} from &quot;../../../services/alerts.service&quot;;
 
 @Component({
   selector: &#x27;app-profile&#x27;,
@@ -138,14 +811,255 @@
 /**
  Vista del perfil del usuario
  **/
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
+
+  @ViewChild(&#x27;editarIntereses&#x27;) editarIntereses: TemplateRef&lt;any&gt;;
+  formProfile: FormGroup;
+  usuario: any;
+  idiomas: any
+
+  /**
+   Constructor de la clase
+   @param _usuarioService {UsuariosService} Servicio que gestiona los datos de los usuarios
+   @param _idiomasService {IdiomasService} Servicio que gestiona los datos de los idiomas
+   @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
+   @param modalService {NgbModal} Clase que gestiona las ventanas modales
+   @param alertsService {AlertsService} Servicio que gestiona las alertas
+   **/
+  constructor(
+    private _usuarioService: UsuariosService,
+    private _idiomasService: IdiomasService,
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private alertsService: AlertsService
+  ) {}
+
+  /**
+   Método que inicializa la vista
+   **/
+  ngOnInit() {
+    this.crearFormulario();
+    this._usuarioService.getDatosUsuario().subscribe((data: any) &#x3D;&gt; {
+      this.usuario &#x3D; data;
+      this.cargarFormulario();
+    })
+    this._idiomasService.getIdiomas().subscribe((data: any) &#x3D;&gt; {
+      this.idiomas &#x3D; data;
+    })
+  }
+
+  /**
+   Método que inicializa el formulario reactivo
+   **/
+  crearFormulario() {
+    this.formProfile &#x3D; this.formBuilder.group({
+      tlf: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(9)
+        ],
+      ],
+      idiomaId: [
+        null,
+        [
+          Validators.required
+        ],
+      ],
+      email: [
+        &#x27;&#x27;,
+        [
+          Validators.email,
+          Validators.pattern(
+            /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
+          ),
+        ],
+      ]
+    });
+  }
+
+  /**
+   Método que carga los datos en el formulario
+   **/
+  cargarFormulario(){
+    this.formProfile.setValue({
+      tlf: this.usuario?.telefono,
+      email: this.usuario?.email,
+      idiomaId: this.usuario?.idiomaId
+    })
+  }
+
+  /**
+   Método que guarda los cambios en los datos del usuario
+   @param formProfile {FormBuilder} Datos del formulario reactivo
+   **/
+  async cambiarDatosUsuario(formProfile: FormGroup){
+    let respuesta &#x3D; await this.alertsService.askConfirmation(&#x27;Guardar cambios&#x27;, &#x27;¿Estas seguro de querer guardar estos cambios?&#x27;);
+    if(respuesta){
+      let controles:any &#x3D; Object.keys(this.formProfile.controls);
+      let datos:any &#x3D; {};
+      Object.values(this.formProfile.controls).forEach((control, index) &#x3D;&gt; {
+        if(controles[index] &#x3D;&#x3D; &quot;idiomaId&quot;){
+          datos.idioma &#x3D; { idiomaId: control.value };
+        }
+        datos[controles[index]] &#x3D; control.value;
+      });
+      // console.log(datos);
+      this._usuarioService.saveChanges(datos).subscribe((data: any) &#x3D;&gt; {
+        this.alertsService.showSuccessAlert(&#x27;Guardar cambios&#x27;, &#x27;Cambios guardados exitosamente&#x27;);
+      }, error &#x3D;&gt; {
+        this.alertsService.showInfoAlert(&#x27;Guardar cambios&#x27;, &#x27;No se han podido guardar los cambios&#x27;);
+      });
+    }
+  }
+
+  /**
+   Método que muestra el modal para modificar intereses
+   **/
+  mostrarModalIntereses(){
+    this.modalService.open(this.editarIntereses, {size: &#x27;lg&#x27;, backdrop: &#x27;static&#x27;});
+  }
+
+  /**
+   Cerrar el modal de modificación de intereses
+   **/
+  cerrarModalIntereses(){
+    this.modalService.dismissAll(this.editarIntereses);
+  }
+
+  /**
+   Método de validaciones generales
+   @param campo {string} Nombre del campo del formulario
+   @return {string} texto de la validación
+   **/
+  validar(campo: string): string | null {
+    const control &#x3D; this.formProfile.get(campo);
+
+    if (control.invalid &amp;&amp; control.touched) {
+      if (control.errors?.[&#x27;required&#x27;]) {
+        return &#x27;Este campo es requerido.&#x27;;
+      }
+
+      if (control.errors?.[&#x27;minlength&#x27;]) {
+        const minLength &#x3D; control.errors[&#x27;minlength&#x27;].requiredLength;
+        return &#x60;El valor mínimo es de ${minLength} caracteres.&#x60;;
+      }
+
+      if (control.errors?.[&#x27;maxlength&#x27;]) {
+        const maxLength &#x3D; control.errors[&#x27;maxlength&#x27;].requiredLength;
+        return &#x60;El valor máximo es de ${maxLength} caracteres.&#x60;;
+      }
+
+      // Validación adicional para el campo de nombreCat
+      if (campo &#x3D;&#x3D;&#x3D; &#x27;email&#x27; &amp;&amp; control.errors?.[&#x27;pattern&#x27;]) {
+        return &#x60;El formato del correo electrónico debe ser ejemplo@ejemplo.com&#x60;;
+      }
+
+      // Validación adicional para el campo de descripcion
+      if (campo &#x3D;&#x3D;&#x3D; &#x27;descripcion&#x27; &amp;&amp; control.errors?.[&#x27;minlength&#x27;]) {
+        const minLength &#x3D; control.errors[&#x27;minlength&#x27;].requiredLength;
+        return &#x60;La descripción debe tener al menos ${minLength} caracteres.&#x60;;
+      }
+
+      // Si no se encuentra ningún error específico, devuelve el mensaje genérico
+      return &#x27;El valor ingresado no es válido.&#x27;;
+    }
+
+    return null;
+  }
 
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;profile works!&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;main class&#x3D;&quot;p-5&quot;&gt;
+  &lt;section class&#x3D;&quot;d-flex&quot;&gt;
+    &lt;div class&#x3D;&quot;d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center&quot;&gt;
+        &lt;span class&#x3D;&quot;text-white h1&quot;&gt;{{(usuario?.nombre + &#x27; &#x27; + usuario?.apellidos) | inicialesNombre}}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;ol class&#x3D;&quot;list-group list-group-flush&quot;&gt;
+          &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-between align-items-start py-3&quot;&gt;
+            &lt;div class&#x3D;&quot;ms-2 me-auto&quot;&gt;
+              &lt;span class&#x3D;&quot;fw-bold&quot;&gt;{{usuario?.nombre}} &lt;/span&gt;
+              {{usuario?.apellidos}}
+            &lt;/div&gt;
+          &lt;/li&gt;
+          &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-center align-items-center py-3&quot;&gt;
+            &lt;span class&#x3D;&quot;fa-solid fa-user me-3&quot;&gt;&lt;/span&gt;
+            {{usuario?.usuario}}
+          &lt;/li&gt;
+          &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-center align-items-start py-3&quot;&gt;
+            &lt;span class&#x3D;&quot;fa-solid fa-cake-candles me-3&quot;&gt;&lt;/span&gt;
+            {{usuario?.fechaNacimiento |  date:&#x27;dd MMM yyyy&#x27;:&#x27;&#x27;:&#x27;es&#x27;}}
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;px-4 profile-form col-9&quot;&gt;
+      &lt;form class&#x3D;&quot;col-12&quot; [formGroup]&#x3D;&quot;formProfile&quot; (ngSubmit)&#x3D;&quot;cambiarDatosUsuario(formProfile)&quot;&gt;
+        &lt;div class&#x3D;&quot;card rounded-4 col-12&quot;&gt;
+          &lt;div class&#x3D;&quot;card-header bgGeneral rounded-top-3 py-3&quot;&gt;
+            &lt;h5 class&#x3D;&quot;m-0&quot;&gt;Datos personales&lt;/h5&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;card-body d-flex justify-content-between col-12 py-3&quot;&gt;
+            &lt;div class&#x3D;&quot;col-12&quot;&gt;
+              &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Email&lt;/label&gt;
+                &lt;div class&#x3D;&quot;col-10&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;email&quot; [class.is-invalid]&#x3D;&quot;validar(&#x27;email&#x27;)&quot;&gt;
+                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;email&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{validar(&#x27;email&#x27;)}}&lt;/small&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Teléfono&lt;/label&gt;
+                &lt;div class&#x3D;&quot;col-10&quot;&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; maxlength&#x3D;&quot;9&quot; formControlName&#x3D;&quot;tlf&quot; [class.is-invalid]&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot;&gt;
+                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{validar(&#x27;tlf&#x27;)}}&lt;/small&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Idioma&lt;/label&gt;
+                &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;idiomaId&quot;&gt;
+                  &lt;option
+                    *ngFor&#x3D;&quot;let idioma of idiomas&quot;
+                    [value]&#x3D;&quot;idioma.idiomaId&quot;&gt;
+                    {{idioma.titulo}}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;card-footer py-3 d-flex justify-content-end&quot;&gt;
+            &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill w-25 py-2&quot; type&#x3D;&quot;submit&quot; [attr.disabled]&#x3D;&quot;formProfile.invalid ? true : null&quot;&gt;Guardar cambios&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class&#x3D;&quot;py-4 pe-4&quot;&gt;
+    &lt;div class&#x3D;&quot;card rounded-4 col-12&quot;&gt;
+      &lt;div class&#x3D;&quot;card-header bgGeneral rounded-top-3 py-3&quot;&gt;
+        &lt;h5 class&#x3D;&quot;m-0&quot;&gt;Mis intereses&lt;/h5&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;card-body d-flex col-12 py-4 flex-wrap&quot;&gt;
+        &lt;span class&#x3D;&quot;badge bg-secondary fs-6 mx-2 bgGeneral&quot; *ngFor&#x3D;&quot;let interes of usuario?.intereses&quot;&gt;{{interes.titulo}}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;card-footer py-3 d-flex justify-content-end&quot;&gt;
+        &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill w-20 py-2&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;mostrarModalIntereses()&quot;&gt;Cambiar mis intereses&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+&lt;div class&#x3D;&quot;footer-padding&quot;&gt;
+&lt;/div&gt;
+&lt;ng-template #editarIntereses&gt;
+  &lt;app-editar-intereses [interesesUsuario]&#x3D;&quot;usuario?.intereses&quot; (cerrar)&#x3D;&quot;cerrarModalIntereses()&quot;&gt;&lt;/app-editar-intereses&gt;
+&lt;/ng-template&gt;
+
 </code></pre>
     </div>
 
@@ -153,7 +1067,32 @@ export class ProfileComponent {
                 <p class="comment">
                     <code>./profile.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">hr{
+  height: 3px;
+  width: 50%;
+  border: red;
+}
+
+.profileIcon{
+  width: 150px;
+  height: 150px;
+  padding-top: .5rem;
+}
+
+.profile-data, .profile-data li{
+  background-color: hsl(0, 0%, 95%);
+}
+
+.profile-form &gt; form, .profile-form &gt; form &gt; div{
+  height: 100%;
+}
+
+.profile-data li{
+
+}
+
+
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -181,9 +1120,9 @@ export class ProfileComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>profile works!</p></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><main class="p-5">  <section class="d-flex">    <div class="d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4">      <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center">        <span class="text-white h1">{{(usuario?.nombre + \' \' + usuario?.apellidos) | inicialesNombre}}</span>      </div>      <div>        <ol class="list-group list-group-flush">          <li class="list-group-item d-flex justify-content-between align-items-start py-3">            <div class="ms-2 me-auto">              <span class="fw-bold">{{usuario?.nombre}} </span>              {{usuario?.apellidos}}            </div>          </li>          <li class="list-group-item d-flex justify-content-center align-items-center py-3">            <span class="fa-solid fa-user me-3"></span>            {{usuario?.usuario}}          </li>          <li class="list-group-item d-flex justify-content-center align-items-start py-3">            <span class="fa-solid fa-cake-candles me-3"></span>            {{usuario?.fechaNacimiento |  date:\'dd MMM yyyy\':\'\':\'es\'}}          </li>        </ol>      </div>    </div>    <div class="px-4 profile-form col-9">      <form class="col-12" [formGroup]="formProfile" (ngSubmit)="cambiarDatosUsuario(formProfile)">        <div class="card rounded-4 col-12">          <div class="card-header bgGeneral rounded-top-3 py-3">            <h5 class="m-0">Datos personales</h5>          </div>          <div class="card-body d-flex justify-content-between col-12 py-3">            <div class="col-12">              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Email</label>                <div class="col-10">                  <input type="text" class="form-control" formControlName="email" [class.is-invalid]="validar(\'email\')">                  <small *ngIf="validar(\'email\')" class="error d-block col-12">{{validar(\'email\')}}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Teléfono</label>                <div class="col-10">                  <input type="text" class="form-control" maxlength="9" formControlName="tlf" [class.is-invalid]="validar(\'tlf\')">                  <small *ngIf="validar(\'tlf\')" class="error d-block col-12">{{validar(\'tlf\')}}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Idioma</label>                <select class="form-select" formControlName="idiomaId">                  <option                    *ngFor="let idioma of idiomas"                    [value]="idioma.idiomaId">                    {{idioma.titulo}}                  </option>                </select>              </div>            </div>          </div>          <div class="card-footer py-3 d-flex justify-content-end">            <button class="btn bgGeneral rounded-pill w-25 py-2" type="submit" [attr.disabled]="formProfile.invalid ? true : null">Guardar cambios</button>          </div>        </div>      </form>    </div>  </section>  <section class="py-4 pe-4">    <div class="card rounded-4 col-12">      <div class="card-header bgGeneral rounded-top-3 py-3">        <h5 class="m-0">Mis intereses</h5>      </div>      <div class="card-body d-flex col-12 py-4 flex-wrap">        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">{{interes.titulo}}</span>      </div>      <div class="card-footer py-3 d-flex justify-content-end">        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">Cambiar mis intereses</button>      </div>    </div>  </section></main><div class="footer-padding"></div><ng-template #editarIntereses>  <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+    var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
 </script>
 <script src="../js/tree.js"></script>

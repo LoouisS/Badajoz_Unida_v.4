@@ -1,3 +1,9 @@
+/**
+ @file Servicio de los datos de los intereses
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
@@ -5,6 +11,10 @@ import {BehaviorSubject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ Servicio que gestiona los datos los datos de los intereses
+ **/
 export class InteresesService {
 
   apiUrl: string ='http://localhost:8080/intereses/';

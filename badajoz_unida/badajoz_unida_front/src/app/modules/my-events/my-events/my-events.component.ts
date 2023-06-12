@@ -35,6 +35,9 @@ export class MyEventsComponent implements OnInit{
     })
   }
 
+  /**
+   Método trae los eventos asociados al usuario
+   **/
   loadEventsByUser(){
     this._eventosServices.getEventosByUserId().subscribe((data: any) => {
       this.listaInscripciones = data;

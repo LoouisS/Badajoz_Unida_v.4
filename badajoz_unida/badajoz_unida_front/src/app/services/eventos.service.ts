@@ -28,14 +28,26 @@ export class EventosService {
    **/
   constructor(private httpClient: HttpClient) { }
 
+  /**
+   Método que obtiene la lsita de eventos más recientes
+   @return {Observable}
+   **/
   getEventosByNovedad(){
     return this.httpClient.get(this.apiUrl + 'new');
   }
 
+  /**
+   Método que obtiene un evento por su identificador
+   @return {Observable}
+   **/
   getEventosById(id: number){
     return this.httpClient.get(this.apiUrl + id);
   }
 
+  /**
+   Método que obtiene los eventos por el id del usuario
+   @return {Observable}
+   **/
   getEventosByUserId(){
     return this.httpClient.get(this.apiUrl + 'userInscriptions')
   }
@@ -74,23 +86,45 @@ export class EventosService {
     return this.httpClient.delete(this.apiUrl+'delete/'+id);
   }
 
+  /**
+   Comprueba que un usuario este inscrito en un evento
+   @param eventoId {number} Identificador del usuario
+   @return {Observable}
+   **/
   checkUserRegister(eventoId: number){
     return this.httpClient.get<boolean>(this.apiUrl + 'checkRegister/' + eventoId);
   }
 
+  /**
+   Registra a un usuario en un evento
+   @param eventoId {number} Identificador del usuario
+   @return {Observable}
+   **/
   registerUserInEvent(eventoId: number){
     let data: any = { eventoId: eventoId };
     return this.httpClient.post(this.apiUrl + 'register', data);
   }
 
+  /**
+   Quita la participación de un usuario en un evento
+   @param eventoId {number} Identificador del usuario
+   @return {Observable}
+   **/
   removeUserFromEvent(eventoId: number){
     return this.httpClient.delete(this.apiUrl + 'removeUser/' + eventoId);
   }
 
+  /**
+   Método que emite una señal para que la información en las tarjetas se actualice
+   @return {Observable}
+   **/
   notifyRefreshCards(){
     return this.refreshCards;
   }
 
+  /**
+   Método que acciona la señal para que las tarjetas se actualicen
+   **/
   setNotificationCards(){
     this.refreshCards.next(null);
   }

@@ -409,6 +409,26 @@ export class FooterComponent implements OnInit{
       &lt;img src&#x3D;&quot;./assets/cruz-roja_logo.png&quot; alt&#x3D;&quot;Cruz Roja&quot;&gt;
     &lt;/div&gt;
   &lt;/div&gt;
+  &lt;div class&#x3D;&quot;info&quot;&gt;
+    &lt;div class&#x3D;&quot;entreculturas pt-4&quot;&gt;
+      &lt;h5 class&#x3D;&quot;ps-4&quot;&gt;Entreculturas Fe y Alegría&lt;/h5&gt;
+      &lt;div class&#x3D;&quot;rounded-pill d-flex justify-content-between py-3 px-4&quot;&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-location-dot me-1&quot;&gt;&lt;/span&gt; C/ Ramón Albarrán nº4, bajo&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-envelopes-bulk me-1&quot;&gt;&lt;/span&gt; CP - 06002 - Badajoz&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-phone me-1&quot;&gt;&lt;/span&gt; 692340114&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-envelope me-1&quot;&gt;&lt;/span&gt; extremadura@entreculturas.org&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;cruz-roja py-4&quot;&gt;
+      &lt;h5 class&#x3D;&quot;ps-4&quot;&gt;Cruz Roja Badajoz&lt;/h5&gt;
+      &lt;div class&#x3D;&quot;rounded-pill d-flex justify-content-between py-3 px-4&quot;&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-location-dot me-1&quot;&gt;&lt;/span&gt; C/ Museo nº 5&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-envelopes-bulk me-1&quot;&gt;&lt;/span&gt; CP - 06003 - Badajoz&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-phone me-1&quot;&gt;&lt;/span&gt; 924240200&lt;/span&gt;
+        &lt;span&gt;&lt;span class&#x3D;&quot;fa-solid fa-envelope me-1&quot;&gt;&lt;/span&gt; badajoz@cruzroja.es&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/footer&gt;
 </code></pre>
     </div>
@@ -443,6 +463,14 @@ img{
 img:hover{
   filter: grayscale(0);
 }
+
+.info h5{
+  color: var(--primary-color);
+}
+
+.entreculturas &gt; div, .cruz-roja &gt; div {
+  background-color: hsl(0, 0%, 80%);
+}
 </code></pre>
     </div>
 
@@ -471,9 +499,9 @@ img:hover{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><footer class="px-5 py-4">  <h1 class="d-flex justify-content-center mt-4"><span>¡</span>Conócenos<span>!</span></h1>  <div class="col-12 d-flex justify-content-around mt-2 flex-wrap">    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://fundacionloyola.com/vguadalupe/\')">      <img src="./assets/evg_logo.png" alt="Escuela Virgen de Guadalupe">    </div>    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://www.entreculturas.org/es/home\')">      <img src="./assets/entreculturas_logo.png" alt="Entreculturas">    </div>    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://www2.cruzroja.es\')">      <img src="./assets/cruz-roja_logo.png" alt="Cruz Roja">    </div>  </div></footer></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><footer class="px-5 py-4">  <h1 class="d-flex justify-content-center mt-4"><span>¡</span>Conócenos<span>!</span></h1>  <div class="col-12 d-flex justify-content-around mt-2 flex-wrap">    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://fundacionloyola.com/vguadalupe/\')">      <img src="./assets/evg_logo.png" alt="Escuela Virgen de Guadalupe">    </div>    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://www.entreculturas.org/es/home\')">      <img src="./assets/entreculturas_logo.png" alt="Entreculturas">    </div>    <div class="col-10 col-lg-2 d-flex align-items-center py-2 py-lg-0" (click)="redirectTo(\'https://www2.cruzroja.es\')">      <img src="./assets/cruz-roja_logo.png" alt="Cruz Roja">    </div>  </div>  <div class="info">    <div class="entreculturas pt-4">      <h5 class="ps-4">Entreculturas Fe y Alegría</h5>      <div class="rounded-pill d-flex justify-content-between py-3 px-4">        <span><span class="fa-solid fa-location-dot me-1"></span> C/ Ramón Albarrán nº4, bajo</span>        <span><span class="fa-solid fa-envelopes-bulk me-1"></span> CP - 06002 - Badajoz</span>        <span><span class="fa-solid fa-phone me-1"></span> 692340114</span>        <span><span class="fa-solid fa-envelope me-1"></span> extremadura@entreculturas.org</span>      </div>    </div>    <div class="cruz-roja py-4">      <h5 class="ps-4">Cruz Roja Badajoz</h5>      <div class="rounded-pill d-flex justify-content-between py-3 px-4">        <span><span class="fa-solid fa-location-dot me-1"></span> C/ Museo nº 5</span>        <span><span class="fa-solid fa-envelopes-bulk me-1"></span> CP - 06003 - Badajoz</span>        <span><span class="fa-solid fa-phone me-1"></span> 924240200</span>        <span><span class="fa-solid fa-envelope me-1"></span> badajoz@cruzroja.es</span>      </div>    </div>  </div></footer></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+    var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'FooterComponent'};
 </script>
 <script src="../js/tree.js"></script>

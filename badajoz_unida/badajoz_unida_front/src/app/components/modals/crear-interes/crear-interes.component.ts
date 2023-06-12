@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista del modal para crear un interes
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, OnInit} from '@angular/core';
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -50,6 +56,9 @@ export class CrearInteresComponent implements OnInit{
     })
   }
 
+  /**
+   Método que inicializa el formulario
+   **/
   private initForm() {
     this.formCreateInteres = this.formBuilder.group({
       nombreInt:['',[Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
@@ -58,6 +67,11 @@ export class CrearInteresComponent implements OnInit{
       activar:['']
     });
   }
+
+  /**
+   Método que valida los campos del formulario
+   @param campo {string} Nombre del campo del formulario
+   **/
   validar(campo: string): string | null {
     const control = this.formCreateInteres.get(campo);
 
@@ -115,6 +129,9 @@ export class CrearInteresComponent implements OnInit{
     this.formCreateInteres.reset();
   }
 
+  /**
+   Método que registra los datos de una categoria
+   **/
   sendCat() {
     if (this.formCreateInteres.invalid || this.formCreateInteres.pending) {
       console.log("MAAAAAAAL");

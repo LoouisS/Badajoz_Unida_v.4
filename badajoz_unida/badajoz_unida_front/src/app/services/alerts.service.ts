@@ -1,3 +1,9 @@
+/**
+ @file Contiene el servicio que gestiona las alertas
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
 
@@ -22,6 +28,11 @@ export class AlertsService {
 
   constructor() { }
 
+  /**
+   Método que muestra una alerta informativa
+   @param titulo {string} Titulo de la ventana
+   @param mensaje {string} Titulo de la alerta
+   **/
   showInfoAlert(titulo: string, mensaje: string){
     this.alert.fire({
       title: titulo,
@@ -33,6 +44,11 @@ export class AlertsService {
     });
   }
 
+  /**
+   Método que muestra una alerta de exito
+   @param titulo {string} Titulo de la ventana
+   @param mensaje {string} Titulo de la alerta
+   **/
   showSuccessAlert(titulo: string, mensaje: string){
     this.alert.fire({
       title: titulo,
@@ -44,6 +60,12 @@ export class AlertsService {
     });
   }
 
+  /**
+   Método que muestra una alerta que comprueba la decisión del usuario
+   @param titulo {string} Titulo de la ventana
+   @param mensaje {string} Titulo de la alerta
+   @return {boolean}
+   **/
   async askConfirmation(titulo: string, mensaje: string){
     let respuesta: boolean;
 

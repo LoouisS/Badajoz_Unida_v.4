@@ -22,45 +22,69 @@
 <text text-anchor="start" x="429.73" y="-15.4" font-family="Times-12" font-size="14.00"> &#160;Exports</text>
 <g id="clust1" class="cluster">
 <title>cluster_PipesModule</title>
-<polygon fill="none" stroke="black" stroke-dasharray="1,5" points="176,-70 176,-268 320,-268 320,-70 176,-70"/>
+<polygon fill="none" stroke="black" stroke-dasharray="1,5" points="98,-70 98,-268 398,-268 398,-70 98,-70"/>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_PipesModule_declarations</title>
-<polygon fill="none" stroke="black" points="185,-78 185,-130 311,-130 311,-78 185,-78"/>
+<polygon fill="none" stroke="black" points="109,-78 109,-130 387,-130 387,-78 109,-78"/>
 </g>
-<g id="clust5" class="cluster">
+<g id="clust6" class="cluster">
 <title>cluster_PipesModule_exports</title>
-<polygon fill="none" stroke="black" points="184,-208 184,-260 312,-260 312,-208 184,-208"/>
+<polygon fill="none" stroke="black" points="106,-208 106,-260 390,-260 390,-208 106,-208"/>
 </g>
 <!-- CortarTextoPipe -->
 <g id="node1" class="node">
 <title>CortarTextoPipe</title>
-<polygon fill="#ffffb3" stroke="black" points="302.81,-122 193.19,-122 193.19,-86 302.81,-86 302.81,-122"/>
-<text text-anchor="middle" x="248" y="-99.8" font-family="Times,serif" font-size="14.00">CortarTextoPipe</text>
+<polygon fill="#ffffb3" stroke="black" points="378.81,-122 269.19,-122 269.19,-86 378.81,-86 378.81,-122"/>
+<text text-anchor="middle" x="324" y="-99.8" font-family="Times,serif" font-size="14.00">CortarTextoPipe</text>
 </g>
 <!-- PipesModule -->
-<g id="node2" class="node">
+<g id="node3" class="node">
 <title>PipesModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="292.88,-187 289.88,-191 268.88,-191 265.88,-187 203.12,-187 203.12,-151 292.88,-151 292.88,-187"/>
-<text text-anchor="middle" x="248" y="-164.8" font-family="Times,serif" font-size="14.00">PipesModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="229.88,-187 226.88,-191 205.88,-191 202.88,-187 140.12,-187 140.12,-151 229.88,-151 229.88,-187"/>
+<text text-anchor="middle" x="185" y="-164.8" font-family="Times,serif" font-size="14.00">PipesModule</text>
 </g>
 <!-- CortarTextoPipe&#45;&gt;PipesModule -->
 <g id="edge1" class="edge">
 <title>CortarTextoPipe&#45;&gt;PipesModule</title>
-<path fill="none" stroke="black" d="M248,-122.11C248,-122.11 248,-140.99 248,-140.99"/>
-<polygon fill="black" stroke="black" points="244.5,-140.99 248,-150.99 251.5,-140.99 244.5,-140.99"/>
+<path fill="none" stroke="black" d="M342.3,-122.02C342.3,-139.37 342.3,-163 342.3,-163 342.3,-163 240.08,-163 240.08,-163"/>
+<polygon fill="black" stroke="black" points="240.08,-159.5 230.08,-163 240.08,-166.5 240.08,-159.5"/>
+</g>
+<!-- InicialesNombrePipe -->
+<g id="node2" class="node">
+<title>InicialesNombrePipe</title>
+<polygon fill="#ffffb3" stroke="black" points="251.18,-122 116.82,-122 116.82,-86 251.18,-86 251.18,-122"/>
+<text text-anchor="middle" x="184" y="-99.8" font-family="Times,serif" font-size="14.00">InicialesNombrePipe</text>
+</g>
+<!-- InicialesNombrePipe&#45;&gt;PipesModule -->
+<g id="edge2" class="edge">
+<title>InicialesNombrePipe&#45;&gt;PipesModule</title>
+<path fill="none" stroke="black" d="M185,-122.11C185,-122.11 185,-140.99 185,-140.99"/>
+<polygon fill="black" stroke="black" points="181.5,-140.99 185,-150.99 188.5,-140.99 181.5,-140.99"/>
 </g>
 <!-- CortarTextoPipe  -->
-<g id="node3" class="node">
+<g id="node4" class="node">
 <title>CortarTextoPipe </title>
-<polygon fill="#fb8072" stroke="black" points="304.31,-252 191.69,-252 191.69,-216 304.31,-216 304.31,-252"/>
-<text text-anchor="middle" x="248" y="-229.8" font-family="Times,serif" font-size="14.00">CortarTextoPipe </text>
+<polygon fill="#fb8072" stroke="black" points="382.31,-252 269.69,-252 269.69,-216 382.31,-216 382.31,-252"/>
+<text text-anchor="middle" x="326" y="-229.8" font-family="Times,serif" font-size="14.00">CortarTextoPipe </text>
 </g>
 <!-- PipesModule&#45;&gt;CortarTextoPipe  -->
-<g id="edge2" class="edge">
+<g id="edge3" class="edge">
 <title>PipesModule&#45;&gt;CortarTextoPipe </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M248,-187.11C248,-187.11 248,-205.99 248,-205.99"/>
-<polygon fill="black" stroke="black" points="244.5,-205.99 248,-215.99 251.5,-205.99 244.5,-205.99"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M230.04,-175C264.42,-175 305.95,-175 305.95,-175 305.95,-175 305.95,-205.98 305.95,-205.98"/>
+<polygon fill="black" stroke="black" points="302.45,-205.98 305.95,-215.98 309.45,-205.98 302.45,-205.98"/>
+</g>
+<!-- InicialesNombrePipe  -->
+<g id="node5" class="node">
+<title>InicialesNombrePipe </title>
+<polygon fill="#fb8072" stroke="black" points="251.68,-252 114.32,-252 114.32,-216 251.68,-216 251.68,-252"/>
+<text text-anchor="middle" x="183" y="-229.8" font-family="Times,serif" font-size="14.00">InicialesNombrePipe </text>
+</g>
+<!-- PipesModule&#45;&gt;InicialesNombrePipe  -->
+<g id="edge4" class="edge">
+<title>PipesModule&#45;&gt;InicialesNombrePipe </title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M185,-187.11C185,-187.11 185,-205.99 185,-205.99"/>
+<polygon fill="black" stroke="black" points="181.5,-205.99 185,-215.99 188.5,-205.99 181.5,-205.99"/>
 </g>
 </g>
 </svg>

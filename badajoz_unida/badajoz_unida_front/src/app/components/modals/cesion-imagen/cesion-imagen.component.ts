@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista del modal de cesión de imagen
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
@@ -14,10 +20,16 @@ export class CesionImagenComponent {
   constructor() {
   }
 
+  /**
+   Método que inicializa el proceso de registro de un usuario en un evento
+   **/
   registrarUsuario(){
     this.inscribirUsuario.emit();
   }
 
+  /**
+   Método que emite una señal para cerrar el modal
+   **/
   cerrarModal(){
     this.cerrarCesionImagen.emit();
   }

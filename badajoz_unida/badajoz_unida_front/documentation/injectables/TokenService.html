@@ -97,6 +97,9 @@
                                 <a href="#getIsAdmin" >getIsAdmin</a>
                             </li>
                             <li>
+                                <a href="#getNombreApellidos" >getNombreApellidos</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getToken" >getToken</a>
                             </li>
@@ -230,6 +233,43 @@
                     </div>
                     <div class="io-description">
                         <p>Verdadero en caso de que el usuario tenga permisos de administrador, falso en caso de que no</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNombreApellidos"></a>
+                    <span class="name">
+                        <span ><b>getNombreApellidos</b></span>
+                        <a href="#getNombreApellidos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNombreApellidos()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/security/services/auth/token.service.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </div>
                 </td>
@@ -399,8 +439,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="97"
-                            class="link-to-prism">src/app/security/services/auth/token.service.ts:97</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="116"
+                            class="link-to-prism">src/app/security/services/auth/token.service.ts:116</a></div>
                 </td>
             </tr>
 
@@ -624,6 +664,25 @@ export class TokenService {
       return false;
     }
     return true;
+  }
+
+  getNombreApellidos() {
+    if(!this.isLogged()){
+      return null;
+    }
+    const token&#x3D;this.getToken();
+    // @ts-ignore
+    let payload&#x3D;token.split(&#x27;.&#x27;)[1];
+    payload &#x3D; payload.replace(/-/g, &#x27;+&#x27;).replace(/_/g, &#x27;/&#x27;);
+    // const payloadDecoded&#x3D;atob(payload);
+    const payloadDecoded &#x3D; decodeURIComponent(window.atob(payload).split(&#x27;&#x27;).map(function(c) {
+      return &#x27;%&#x27; + (&#x27;00&#x27; + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(&#x27;&#x27;));
+    console.log(payloadDecoded)
+    const values&#x3D;JSON.parse(payloadDecoded);
+    const nombre &#x3D; values.nombre;
+    const apellidos &#x3D; values.apellidos;
+    return nombre + &#x27; &#x27; + apellidos;
   }
 
   /**

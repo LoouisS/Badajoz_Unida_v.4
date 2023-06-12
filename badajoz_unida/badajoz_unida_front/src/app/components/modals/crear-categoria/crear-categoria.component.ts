@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista del modal para crear una categoria
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
@@ -44,6 +50,10 @@ export class CrearCategoriaComponent implements OnInit{
 
     })
   }
+
+  /**
+   Método que inicializa el formulario
+   **/
   private initForm() {
   this.formCreateCat = this.formBuilder.group({
     nombreCat:['',[Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
@@ -51,6 +61,11 @@ export class CrearCategoriaComponent implements OnInit{
     activar:['']
     });
   }
+
+  /**
+   Método que valida los campos del formulario
+   @param campo {string} Campo del formulario
+   **/
   validar(campo: string): string | null {
     const control = this.formCreateCat.get(campo);
 
@@ -88,6 +103,9 @@ export class CrearCategoriaComponent implements OnInit{
     return null;
   }
 
+  /**
+   Método que envia los datos de una categoría para su registro
+   **/
   sendCat() {
     if (this.formCreateCat.invalid || this.formCreateCat.pending) {
       console.log("MAAAAAAAL");

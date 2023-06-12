@@ -27,6 +27,14 @@ export class ProfileComponent implements OnInit{
   usuario: any;
   idiomas: any
 
+  /**
+   Constructor de la clase
+   @param _usuarioService {UsuariosService} Servicio que gestiona los datos de los usuarios
+   @param _idiomasService {IdiomasService} Servicio que gestiona los datos de los idiomas
+   @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
+   @param modalService {NgbModal} Clase que gestiona las ventanas modales
+   @param alertsService {AlertsService} Servicio que gestiona las alertas
+   **/
   constructor(
     private _usuarioService: UsuariosService,
     private _idiomasService: IdiomasService,
@@ -35,6 +43,9 @@ export class ProfileComponent implements OnInit{
     private alertsService: AlertsService
   ) {}
 
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.crearFormulario();
     this._usuarioService.getDatosUsuario().subscribe((data: any) => {
@@ -46,6 +57,9 @@ export class ProfileComponent implements OnInit{
     })
   }
 
+  /**
+   Método que inicializa el formulario reactivo
+   **/
   crearFormulario() {
     this.formProfile = this.formBuilder.group({
       tlf: [
@@ -74,6 +88,9 @@ export class ProfileComponent implements OnInit{
     });
   }
 
+  /**
+   Método que carga los datos en el formulario
+   **/
   cargarFormulario(){
     this.formProfile.setValue({
       tlf: this.usuario?.telefono,
@@ -82,6 +99,10 @@ export class ProfileComponent implements OnInit{
     })
   }
 
+  /**
+   Método que guarda los cambios en los datos del usuario
+   @param formProfile {FormBuilder} Datos del formulario reactivo
+   **/
   async cambiarDatosUsuario(formProfile: FormGroup){
     let respuesta = await this.alertsService.askConfirmation('Guardar cambios', '¿Estas seguro de querer guardar estos cambios?');
     if(respuesta){
@@ -102,14 +123,25 @@ export class ProfileComponent implements OnInit{
     }
   }
 
+  /**
+   Método que muestra el modal para modificar intereses
+   **/
   mostrarModalIntereses(){
     this.modalService.open(this.editarIntereses, {size: 'lg', backdrop: 'static'});
   }
 
+  /**
+   Cerrar el modal de modificación de intereses
+   **/
   cerrarModalIntereses(){
     this.modalService.dismissAll(this.editarIntereses);
   }
 
+  /**
+   Método de validaciones generales
+   @param campo {string} Nombre del campo del formulario
+   @return {string} texto de la validación
+   **/
   validar(campo: string): string | null {
     const control = this.formProfile.get(campo);
 

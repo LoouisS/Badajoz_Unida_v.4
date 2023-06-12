@@ -1,3 +1,9 @@
+/**
+ @file Contiene la vista de la tabla con los datos de las categorias
+ @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ **/
+
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject} from "rxjs";
 import {CategoriasService} from "../../../services/categorias.service";
@@ -10,6 +16,10 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './gestion-categorias-table.component.html',
   styleUrls: ['./gestion-categorias-table.component.css']
 })
+
+/**
+ Vista que muestra la tabla con los datos de las categorias
+ **/
 export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
@@ -33,6 +43,10 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
   constructor(private catService: CategoriasService, private formBuilder: FormBuilder) {
 
   }
+
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
     this.loading = true;
     this.catService.getCategorias().subscribe((data) => {
@@ -52,6 +66,10 @@ export class GestionCategoriasTableComponent implements OnInit,OnDestroy{
     this.dtTrigger.next();
     this.initForm();
   }
+
+  /**
+   Método que destruye la vista
+   **/
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
     if (this.dtTable) {

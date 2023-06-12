@@ -26,15 +26,31 @@ export class GestionEventosComponent implements OnInit{
   @ViewChild('eventosForm') eventosForm: TemplateRef<any>;
   @ViewChild('modalCrearEvento',{static:false}) modalCrearEvento: CrearEventoModalComponent;
 
+
+  /**
+   Constructor de la clase
+   @param catService {CategoriasService} Servicio que gestiona los datos de las categorias
+   @param modalService {NgbModal} Servicio que controla los modales
+   **/
   constructor(private catService: CategoriasService, private modalService: NgbModal) {
   }
+
+  /**
+   Método que inicializa la vista
+   **/
   ngOnInit() {
   }
 
+  /**
+   Método que muestra el modal con el formulario de eventos
+   **/
   mostrarModalEventos() {
     this.modalService.open(this.eventosForm, {size: 'xl', backdrop: 'static'})
   }
 
+  /**
+   Método que cierra el modal de eventos
+   **/
   cerrarModalEventos(){
     this.modalService.dismissAll(this.eventosForm);
   }
