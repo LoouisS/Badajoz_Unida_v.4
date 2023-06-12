@@ -10,6 +10,7 @@ import {IdiomasService} from "../../../services/idiomas.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertsService} from "../../../services/alerts.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,17 @@ export class ProfileComponent implements OnInit{
   formProfile: FormGroup;
   usuario: any;
   idiomas: any
+  alert = Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: 'btn btn-danger',
+      cancelButton: 'btn btn-light'
+    },
+    buttonsStyling: false
+  });
 
   /**
    Constructor de la clase
@@ -178,4 +190,33 @@ export class ProfileComponent implements OnInit{
     return null;
   }
 
+  /**
+   * Método para eliminar una cuenta de un usuario
+   * @param userId
+   */
+  eliminarCuenta(userId: number) {
+    this.alert.fire({
+      title: "¿Seguro que deseas eliminar tu cuenta?",
+      text: "Tu cuenta se eliminará de forma permanente en la aplicación"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.alert.fire({
+          title: 'Espere mientras procesamos su solicitud',
+          didOpen(popup: HTMLElement) {
+            Swal.showLoading();
+          }
+        })
+        this._usuarioService.deleteUser(userId).subscribe((data) => {
+          this.alert.fire({
+            title: 'Eliminado con éxito!',
+            text: 'Tu cuenta ha sido eliminada correctamente, deseamos volver a contar contigo cuando quieras.',
+            icon: 'success',
+            timer: 4000,
+            showConfirmButton: false,
+            showCancelButton: false,
+          });
+        })
+      }
+    });
+  }
 }

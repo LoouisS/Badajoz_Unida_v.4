@@ -114,4 +114,14 @@ public class UsuarioController {
         }
 
     }
+
+    /**
+     * Endpoint para eliminar un usuario de la aplicación
+     * @param id
+     * @return
+     */
+    @DeleteMapping("deleteUser/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") int id){
+        return this.usuarioService.deleteUser(id);
+    }
 }

@@ -53,4 +53,11 @@ public interface UsuarioService {
      * @return
      */
     ResponseEntity<?> getAllUsersFilter(UserFilter filtro) throws CustomException;
+
+    /**
+     * Método para la eliminación de un usuario de la aplicación
+     * @param id
+     * @return
+     */
+    ResponseEntity<?> deleteUser(int id);
 }
