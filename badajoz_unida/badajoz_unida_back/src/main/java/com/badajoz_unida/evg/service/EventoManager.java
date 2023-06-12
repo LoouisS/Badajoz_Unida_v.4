@@ -222,7 +222,11 @@ public class EventoManager implements EventoService{
 
     @Override
     public List<Eventos> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException {
-        return this.eventoRepository.findByUsuarioId(this.jwtManager.getIdFromToken(request));
+        List<Eventos> eventos = this.eventoRepository.findByUsuarioId(this.jwtManager.getIdFromToken(request));
+        for(Eventos evento : eventos){
+            evento.setImg(this.convertIntoBase64(evento));
+        }
+        return eventos;
     }
 
     @Override
