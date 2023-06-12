@@ -22,7 +22,9 @@ COLLATE=utf8_spanish_ci;
 -- Tabla roles
 CREATE TABLE roles (
   id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  titulo VARCHAR(50) NOT NULL
+  titulo VARCHAR(50) NOT NULL,
+  rol_nombre VARCHAR(50) NOT NULL
+
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
@@ -69,7 +71,8 @@ CREATE TABLE eventos(
     telefono_contacto CHAR(9) NOT NULL,
     localizacion VARCHAR(100) NOT NULL,
     latitud FLOAT NOT NULL,
-    longitud FLOAT NOT NULL
+    longitud FLOAT NOT NULL,
+    img VARCHAR(500) NULL
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
