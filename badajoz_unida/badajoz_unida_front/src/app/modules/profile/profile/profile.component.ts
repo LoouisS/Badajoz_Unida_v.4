@@ -9,6 +9,7 @@ import {UsuariosService} from "../../../services/usuarios.service";
 import {IdiomasService} from "../../../services/idiomas.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AlertsService} from "../../../services/alerts.service";
 
 @Component({
   selector: 'app-profile',
@@ -26,8 +27,13 @@ export class ProfileComponent implements OnInit{
   usuario: any;
   idiomas: any
 
-  constructor(private _usuarioService: UsuariosService, private _idiomasService: IdiomasService, private formBuilder: FormBuilder, private modalService: NgbModal) {
-  }
+  constructor(
+    private _usuarioService: UsuariosService,
+    private _idiomasService: IdiomasService,
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private alertsService: AlertsService
+  ) {}
 
   ngOnInit() {
     this.crearFormulario();
@@ -76,17 +82,24 @@ export class ProfileComponent implements OnInit{
     })
   }
 
-  cambiarDatosUsuario(formProfile: FormGroup){
-    let controles:any = Object.keys(this.formProfile.controls);
-    let datos:any = {};
-    Object.values(this.formProfile.controls).forEach((control, index) => {
-      if(controles[index] == "idiomaId"){
-        datos.idioma = { idiomaId: control.value };
-      }
-      datos[controles[index]] = control.value;
-    });
-    // console.log(datos);
-    this._usuarioService.saveChanges(datos).subscribe((data: any) => {});
+  async cambiarDatosUsuario(formProfile: FormGroup){
+    let respuesta = await this.alertsService.askConfirmation('Guardar cambios', '¿Estas seguro de querer guardar estos cambios?');
+    if(respuesta){
+      let controles:any = Object.keys(this.formProfile.controls);
+      let datos:any = {};
+      Object.values(this.formProfile.controls).forEach((control, index) => {
+        if(controles[index] == "idiomaId"){
+          datos.idioma = { idiomaId: control.value };
+        }
+        datos[controles[index]] = control.value;
+      });
+      // console.log(datos);
+      this._usuarioService.saveChanges(datos).subscribe((data: any) => {
+        this.alertsService.showSuccessAlert('Guardar cambios', 'Cambios guardados exitosamente');
+      }, error => {
+        this.alertsService.showInfoAlert('Guardar cambios', 'No se han podido guardar los cambios');
+      });
+    }
   }
 
   mostrarModalIntereses(){
@@ -95,6 +108,42 @@ export class ProfileComponent implements OnInit{
 
   cerrarModalIntereses(){
     this.modalService.dismissAll(this.editarIntereses);
+  }
+
+  validar(campo: string): string | null {
+    const control = this.formProfile.get(campo);
+
+    if (control.invalid && control.touched) {
+      if (control.errors?.['required']) {
+        return 'Este campo es requerido.';
+      }
+
+      if (control.errors?.['minlength']) {
+        const minLength = control.errors['minlength'].requiredLength;
+        return `El valor mínimo es de ${minLength} caracteres.`;
+      }
+
+      if (control.errors?.['maxlength']) {
+        const maxLength = control.errors['maxlength'].requiredLength;
+        return `El valor máximo es de ${maxLength} caracteres.`;
+      }
+
+      // Validación adicional para el campo de nombreCat
+      if (campo === 'email' && control.errors?.['pattern']) {
+        return `El formato del correo electrónico debe ser ejemplo@ejemplo.com`;
+      }
+
+      // Validación adicional para el campo de descripcion
+      if (campo === 'descripcion' && control.errors?.['minlength']) {
+        const minLength = control.errors['minlength'].requiredLength;
+        return `La descripción debe tener al menos ${minLength} caracteres.`;
+      }
+
+      // Si no se encuentra ningún error específico, devuelve el mensaje genérico
+      return 'El valor ingresado no es válido.';
+    }
+
+    return null;
   }
 
 }

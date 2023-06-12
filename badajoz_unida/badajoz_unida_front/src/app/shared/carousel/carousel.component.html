@@ -1,6 +1,6 @@
 <!--Carrusel de tres tarjetas-->
 <ng-container *ngIf="!loading; else momentum">
-  <div id="carouselExampleAutoplaying" class="carousel slide pt-5 d-none d-lg-block" data-interval="false" *ngIf="!loading; else momentum">
+  <div [id]="'carouselExampleAutoplaying-' + tipo" class="carousel slide pt-5 d-none d-lg-block" data-interval="false" *ngIf="!loading; else momentum">
     <div class="carousel-inner">
       <ng-container *ngFor="let grupoEventos of eventosAgrupados; let i = index">
         <div class="carousel-item px-5" [ngClass]="{'active' : i == 0}">
@@ -12,13 +12,13 @@
         </div>
       </ng-container>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleAutoplaying-' + tipo" data-bs-slide="prev">
       <div>
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       </div>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleAutoplaying-' + tipo" data-bs-slide="next">
       <div>
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
       </div>
@@ -26,7 +26,7 @@
     </button>
   </div>
   <!--Carrousel de una tarjeta (Móvil)-->
-  <div id="carousel" class="carousel slide d-lg-none" data-interval="false">
+  <div [id]="'carousel-' + tipo" class="carousel slide d-lg-none" data-interval="false">
     <div class="carousel-inner">
       <ng-container *ngFor="let evento of eventos; let i = index">
         <div class="carousel-item px-3" [ngClass]="{'active' : i == 0}">
@@ -38,13 +38,13 @@
         </div>
       </ng-container>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel-' + tipo" data-bs-slide="prev">
       <div>
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       </div>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel-' + tipo" data-bs-slide="next">
       <div>
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
       </div>

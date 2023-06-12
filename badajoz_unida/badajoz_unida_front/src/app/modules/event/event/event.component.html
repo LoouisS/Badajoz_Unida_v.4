@@ -1,6 +1,6 @@
 <section class="cover col-12">
   <div></div>
-  <img [src]="evento?.cover" [alt]="" appNoImage />
+  <img [src]="evento?.img" [alt]="" appNoImage />
   <h1>{{evento?.nombre}}</h1>
 <!--  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>-->
   <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="openCesionImagenModal()">Participar</button>

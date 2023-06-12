@@ -37,13 +37,13 @@ export class EditarInteresesComponent implements OnInit{
             interes.emoji = '🎭';
             break;
           case 3:
-            interes.emoji = '📚';
-            break;
-          case 4:
             interes.emoji = '🎵';
             break;
-          case 5:
+          case 4:
             interes.emoji = '🍲';
+            break;
+          case 5:
+            interes.emoji = '📚';
             break;
           default:
             interes.emoji = '🔥';
