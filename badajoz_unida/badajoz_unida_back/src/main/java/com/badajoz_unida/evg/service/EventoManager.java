@@ -15,6 +15,7 @@ import com.badajoz_unida.evg.repository.UsuarioEventosRepository;
 import com.badajoz_unida.evg.utils.EventosSpecification;
 import com.badajoz_unida.evg.utils.JavaUtils;
 import freemarker.template.TemplateException;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
@@ -160,6 +161,9 @@ public class EventoManager implements EventoService{
         );
 
         List<Eventos> eventos = eventoRepository.findAll(specification);
+        for(Eventos eventoFiltro : eventos){
+            eventoFiltro.setImg(this.convertIntoBase64(eventoFiltro));
+        }
         return eventos;
     }
 
@@ -176,12 +180,44 @@ public class EventoManager implements EventoService{
 
     @Override
     public Eventos getEventoById(Integer id) throws CustomException {
-        return this.eventoRepository.findByEventosId(id);
+        Eventos evento = this.eventoRepository.findByEventosId(id);
+        evento.setImg(this.convertIntoBase64(evento));
+        return evento;
     }
 
     @Override
     public List<Eventos> getNewReleases() throws CustomException {
-        return this.eventoRepository.findNewReleases();
+        List<Eventos> eventos = this.eventoRepository.findNewReleases();
+        for(Eventos evento : eventos){
+            evento.setImg(this.convertIntoBase64(evento));
+        }
+
+        return eventos;
+    }
+
+    public String convertIntoBase64(Eventos evento){
+        if (evento.getImg() != null) {
+            try {
+                Base64 base64 = new Base64();
+                String extension = javaUtils.getExtension(evento.getImg());
+                String filePath = "../../assets/img/" + evento.getEventosId() + "." + extension;
+                File archivo = new File(filePath);
+                if (archivo.exists()) {
+                    byte[] archivoBytes = new byte[(int) archivo.length()];
+                    InputStream inputStream;
+                    try {
+                        inputStream = new FileInputStream(archivo);
+                        inputStream.read(archivoBytes);
+
+                        return "data:image/" + extension + ";base64," + base64.encodeToString(archivoBytes);
+                    } catch(Exception e) { }
+                }
+            } catch (Exception e) {
+                // Manejar cualquier exc
+                // epción que pueda ocurrir durante la eliminación del archivo
+            }
+        }
+        return null;
     }
 
     @Override
