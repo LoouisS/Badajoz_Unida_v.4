@@ -28,32 +28,60 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtEntryPoint jwtEntryPoint;
 
+    /**
+     * Método para el instanciamiento de JwtTokenFilter usado en el sistema de JWT
+     * @return
+     */
     @Bean
     public JwtTokenFilter jwtTokenFilter(){
         return new JwtTokenFilter();
     }
 
+    /**
+     * Método para el instanciamiento de PasswordEncoder usado en el sistema de JWT
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Método para el instanciamiento de un AuthenticationManagerBuilder usado en el sistema de JWT
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * Método para el instanciamiento de authenticationManagerBean usado en el sistema de JWT
+     * @return
+     * @throws Exception
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Método para el instanciamiento de AuthenticationManager usado en el sistema de JWT
+     * @return
+     * @throws Exception
+     */
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
 
+    /**
+     * Método para el instanciamiento de la configuración de seguridad asociada a JWT
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

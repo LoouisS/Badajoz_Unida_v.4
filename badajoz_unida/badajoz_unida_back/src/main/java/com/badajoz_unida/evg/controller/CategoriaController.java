@@ -32,26 +32,53 @@ public class CategoriaController {
     @Autowired
     UsuarioInteresesService usuarioInteresesService;
 
+    /**
+     * Endpoint para la obtención de todos los registros de categorías
+     * @return
+     */
     @GetMapping("/all")
     @PermitAll
     public List<Categorias> getAllCategorias(){
 
         return this.catService.getAllCategorias();
     }
+
+    /**
+     * Endpoint para la obtención de todas las categorías filtradas por los parámetros de búsqueda
+     * @param filtro
+     * @return
+     */
     @PostMapping("/getAllFilter")
     public List<Categorias> getAllFilter(@RequestBody CatFilter filtro){
         return this.catService.getAllCategoriasFilter(filtro);
     }
+
+    /**
+     * Endpoint para la obtención de todos los intereses asociados
+     * @return
+     */
     @GetMapping("/interesesAll")
     @PermitAll
     public List<Intereses> getAllIntereses(){
 
         return this.catService.getAllIntereses();
     }
+
+    /**
+     * Endpoint para el registro de intereses a un usuario
+     * @param interesesUsuario
+     * @return
+     */
     @PostMapping("register/c")
     public ResponseEntity<?> registrarIntereses(@RequestBody UserInterestDTO interesesUsuario){
         return this.usuarioInteresesService.save(interesesUsuario);
     }
+
+    /**
+     * Endpoint para la creación de una nueva categoría
+     * @param categoria
+     * @return
+     */
     @PostMapping("registrarCategoria")
     public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria){
         try {
@@ -61,6 +88,12 @@ public class CategoriaController {
         }
     }
 
+    /**
+     * Endpoint para eliminar un registro de tipo categoría
+     * @param request
+     * @param catId
+     * @return
+     */
     @DeleteMapping("eliminarCategoria/{categoriaId}")
     public ResponseEntity<?> eliminarCategoria(HttpServletRequest request, @PathVariable("categoriaId") int catId){
         return this.catService.deleteCategoria(catId);

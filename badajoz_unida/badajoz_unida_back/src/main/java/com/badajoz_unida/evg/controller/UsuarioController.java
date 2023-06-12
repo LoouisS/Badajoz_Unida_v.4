@@ -27,6 +27,11 @@ public class UsuarioController {
     @Autowired
     JwtService jwtService;
 
+    /**
+     * Endpoint para la obtención de toda la información asociada a un usuario
+     * @param request
+     * @return
+     */
     @GetMapping("/datos")
     public ResponseEntity<?> getDatosUsuarioById(HttpServletRequest request) {
         try {
@@ -37,6 +42,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Endpoint para la actualización de la información asociada a un usuario
+     * @param request
+     * @param usuario
+     */
     @PostMapping("/save")
     public void saveUsuarioChanges(HttpServletRequest request, @RequestBody Usuarios usuario) {
         try {
@@ -46,6 +56,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Endpoint para la actualización de intereses de un usuario
+     * @param request
+     * @param intereses
+     */
     @PutMapping("/saveIntereses")
     public void saveInteresesChanges(HttpServletRequest request, @RequestBody List<Intereses> intereses) {
         try {
@@ -55,6 +70,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de todos los usuarios registrados en la aplicación
+     * @param request
+     * @return
+     */
     @GetMapping("getAll")
     public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
         try {
@@ -64,6 +84,12 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de todos los usuarios filtrados
+     * @param request
+     * @param filtro
+     * @return
+     */
     @PostMapping("getAllFilter")
     public ResponseEntity<?> getAllUsersFilter(HttpServletRequest request, @RequestBody UserFilter filtro) {
         try {
@@ -73,6 +99,12 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Endpoint para la actualización de rol de un usuario
+     * @param request
+     * @param roluDto
+     * @return
+     */
     @PostMapping("updateRol")
     public ResponseEntity<?> updateRol(HttpServletRequest request, @RequestBody UpdateRolUserDTO roluDto){
         try{

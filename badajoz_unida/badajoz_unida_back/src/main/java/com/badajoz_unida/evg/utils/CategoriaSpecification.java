@@ -14,6 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CategoriaSpecification {
+    /**
+     * Método para la generación de un Specification para poder realizar el filtrado de Categorias
+     * @param titulo
+     * @param activo
+     * @return
+     */
     public static Specification<Categorias> withFilters(String titulo, boolean activo) {
         return new Specification<Categorias>() {
             @Override

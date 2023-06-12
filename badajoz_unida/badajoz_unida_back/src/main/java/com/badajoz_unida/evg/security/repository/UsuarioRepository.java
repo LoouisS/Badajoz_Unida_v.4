@@ -11,8 +11,24 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuarios,Integer> {
 
-
+    /**
+     * Método para la  comprobación de un usuario por su nick o nombre de usuario
+     * @param nombreUsuario
+     * @return
+     */
     Optional<Usuarios> findByNombreUsuario(String nombreUsuario);
+
+    /**
+     * Método para la comprobación de la existencia de un usuario por su nommbre de usuario
+     * @param nombreUsuario
+     * @return
+     */
     boolean existsByNombreUsuario(String nombreUsuario);
+
+    /**
+     * Método para la comprobación de la existencia de un usuario a través de su email
+     * @param email
+     * @return
+     */
     boolean existsByEmail(String email);
 }
