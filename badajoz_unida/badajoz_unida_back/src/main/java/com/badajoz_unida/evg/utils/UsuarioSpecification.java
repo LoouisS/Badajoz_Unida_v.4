@@ -9,6 +9,14 @@ import java.util.List;
 
 public class UsuarioSpecification {
 
+    /**
+     * Método para la generación de un Specification para poder realizar el filtrado de Usuarios
+     * @param nombre
+     * @param nombreUsuario
+     * @param email
+     * @param rol
+     * @return
+     */
     public static Specification<Usuarios> withFilters(String nombre, String nombreUsuario, String email, Roles rol) {
         return new Specification<Usuarios>() {
             @Override

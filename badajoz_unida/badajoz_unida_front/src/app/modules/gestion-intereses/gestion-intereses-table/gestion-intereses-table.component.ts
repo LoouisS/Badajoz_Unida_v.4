@@ -161,7 +161,7 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
   private initForm() {
     this.formFilter = this.formBuilder.group({
       titulo:[],
-      activo:[]
+      activo:[true]
     });
   }
 }

@@ -29,6 +29,11 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private int expiration;
 
+    /**
+     * Método para la generación de un jwt asociado a un usuario
+     * @param authentication
+     * @return
+     */
     public String generateToken(Authentication authentication){
         UsuarioPrincipal usuarioPrincipal=(UsuarioPrincipal) authentication.getPrincipal();
         List<String> roles= usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
@@ -43,14 +48,29 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS512,secret.getBytes())
                 .compact();
     }
+
+    /**
+     * Método para la obtención del nombre de usuario registrado en el jwt
+     * @param token
+     * @return
+     */
     public String getNombreUsuarioFromToken(String token){
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
     }
-
+    /**
+     * Método para la obtención del id de usuario registrado en el jwt
+     * @param token
+     * @return
+     */
     public String getIdFromToken(String token){
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getId();
     }
 
+    /**
+     * Método para la validación de un jwt siguiendo los parámetros de creación de nuestro jwt
+     * @param token
+     * @return
+     */
     public boolean validateToken(String token){
         try{
             Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token);
@@ -69,6 +89,12 @@ public class JwtProvider {
         return false;
     }
 
+    /**
+     * Método para el refrescado de un jwt de la aplicación
+     * @param jwtDTO
+     * @return
+     * @throws ParseException
+     */
     public String refreshToken(JwtDTO jwtDTO) throws  ParseException{
         try {
             Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(jwtDTO.getToken());

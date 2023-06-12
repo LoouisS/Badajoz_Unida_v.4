@@ -61,6 +61,12 @@ public class AuthController {
 
     JavaUtils utils = new JavaUtils();
 
+    /**
+     * Endpoint para el registro de un nuevo usuario en la aplicación
+     * @param nuevoUsuario
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/register")
     public ResponseEntity<?> nuevo (@Valid @RequestBody Usuarios nuevoUsuario, BindingResult bindingResult){
         try{
@@ -89,6 +95,13 @@ public class AuthController {
         }
 
     }
+
+    /**
+     * Método para el inicio de sesión en la aplicación, generá el jwt necesario para navegar en la aplicación
+     * @param loginUsuario
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/login")
     public ResponseEntity<?> nuevo (@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
         try {
@@ -111,6 +124,12 @@ public class AuthController {
 
     }
 
+    /**
+     * Endpoint para el refrescado del token asociado a un usuario en la aplicación
+     * @param jwDto
+     * @return
+     * @throws ParseException
+     */
     @PostMapping("/refresh")
     public ResponseEntity<JwtDTO> refresh(@RequestBody JwtDTO jwDto)throws ParseException {
         String token=this.jwtProvider.refreshToken(jwDto);

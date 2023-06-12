@@ -1,0 +1,16 @@
+com.badajoz_unida.evg
+com.badajoz_unida.evg.controller
+com.badajoz_unida.evg.dto
+com.badajoz_unida.evg.entity
+com.badajoz_unida.evg.exception
+com.badajoz_unida.evg.repository
+com.badajoz_unida.evg.security
+com.badajoz_unida.evg.security.controller
+com.badajoz_unida.evg.security.dto
+com.badajoz_unida.evg.security.entity
+com.badajoz_unida.evg.security.enums
+com.badajoz_unida.evg.security.jwt
+com.badajoz_unida.evg.security.repository
+com.badajoz_unida.evg.security.service
+com.badajoz_unida.evg.service
+com.badajoz_unida.evg.utils

@@ -11,6 +11,15 @@ import java.util.List;
 
 public class EventosSpecification {
 
+    /**
+     * Método para la generación de un Specification para poder realizar el filtrado de Eventos
+     * @param nombre
+     * @param fechaIni
+     * @param fechaEnd
+     * @param localizacion
+     * @param intereses
+     * @return
+     */
     public static Specification<Eventos> withFilters(String nombre, Date fechaIni, Date fechaEnd, String localizacion, List<Intereses> intereses) {
         return new Specification<Eventos>() {
             @Override

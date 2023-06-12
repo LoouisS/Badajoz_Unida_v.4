@@ -2,16 +2,12 @@ package com.badajoz_unida.evg.controller;
 
 import com.badajoz_unida.evg.dto.CatFilter;
 import com.badajoz_unida.evg.dto.InteresesUsuariosDTO;
-import com.badajoz_unida.evg.entity.Categorias;
-import com.badajoz_unida.evg.entity.Intereses;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.InteresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/intereses")
@@ -21,6 +17,11 @@ public class InteresesController {
     @Autowired
     InteresService interesService;
 
+
+    /**
+     * Endpoint para la obtención de todos los intereses registrados en la aplicación
+     * @return
+     */
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllIntereses(){
         try{
@@ -29,6 +30,12 @@ public class InteresesController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * Endpoint para la obtención de los intereses filtrados en la aplicación
+     * @param filtro
+     * @return
+     */
     @PostMapping("/getAllFilter")
     public ResponseEntity<?> getAllInteresesFilter(@RequestBody CatFilter filtro){
         try{
@@ -38,6 +45,11 @@ public class InteresesController {
         }
     }
 
+    /**
+     * Endpoint para el registro de un nuevo interés en el sistema
+     * @param interes
+     * @return
+     */
     @PostMapping("/save")
     public ResponseEntity<?> saveInteres(@RequestBody InteresesUsuariosDTO interes){
         try{
@@ -49,6 +61,11 @@ public class InteresesController {
         }
     }
 
+    /**
+     * Endpoint para el eliminado de un registro de tipo interés
+     * @param intId
+     * @return
+     */
     @DeleteMapping("/delete/{interesId}")
     public ResponseEntity<?> deleteInteres(@PathVariable("interesId") int intId){
         try{

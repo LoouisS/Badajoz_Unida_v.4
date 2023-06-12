@@ -24,6 +24,12 @@ public class EventoController {
     @Autowired
     EventoService eventoService;
 
+    /**
+     * Endpoint para el registro de un nuevo evento
+     * @param request
+     * @param nuevoEvento
+     * @return
+     */
     @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> saveEvent(HttpServletRequest request, @ModelAttribute NewEventDTO nuevoEvento){
         try{
@@ -35,6 +41,12 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para registrar la paricipación de un usuario a un evento
+     * @param request
+     * @param inscripcion
+     * @return
+     */
     @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(HttpServletRequest request, @RequestBody UserEventDTO inscripcion){
         try{
@@ -46,6 +58,14 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de los eventos filtrados por los parámetros de búsqueda
+     * @param request
+     * @param evento
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @PostMapping (value = "/allFilter")
     public ResponseEntity<?> getEventsFilter(HttpServletRequest request, @RequestBody(required = false) EventFilter evento) throws CustomException, IOException{
         try{
@@ -55,6 +75,13 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de todos los eventos registrados en el sistema
+     * @param request
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @GetMapping(value = "/all")
     public ResponseEntity<?> getEvents(HttpServletRequest request) throws CustomException, IOException{
         try{
@@ -64,6 +91,14 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de un evento por su id
+     * @param request
+     * @param id
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getEventById(HttpServletRequest request, @PathVariable Integer id) throws CustomException, IOException{
         try {
@@ -73,6 +108,13 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de los últimos eventos registrados
+     * @param request
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @GetMapping(value = "/new")
     public ResponseEntity<?> getNewReleases(HttpServletRequest request) throws CustomException, IOException{
         try{
@@ -82,6 +124,14 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la comprobación del estado de participación de un usuario con respecto a un evento
+     * @param request
+     * @param eventoId
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @GetMapping(value = "/checkRegister/{eventoId}")
     public ResponseEntity<?> checkUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
         try {
@@ -91,6 +141,13 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para la obtención de todos los eventos asociados a un usuario
+     * @param request
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @GetMapping(value = "/userInscriptions")
     public ResponseEntity<?> getEventsByUserId(HttpServletRequest request) throws CustomException, IOException{
         try {
@@ -100,6 +157,14 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para eliminar la participación de un usuario en un evento
+     * @param request
+     * @param eventoId
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @DeleteMapping(value = "/removeUser/{eventoId}")
     public ResponseEntity<?> removeUserRegister(HttpServletRequest request, @PathVariable Integer eventoId) throws CustomException, IOException{
         try {
@@ -110,6 +175,14 @@ public class EventoController {
         }
     }
 
+    /**
+     * Endpoint para eliminar un registro de tipo Evento
+     * @param request
+     * @param idEvento
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     */
     @DeleteMapping(value = "/delete/{eventId}")
     public ResponseEntity<?> deleteEvent(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException{
         try{
@@ -118,6 +191,16 @@ public class EventoController {
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Endpoint para la generación de un excell con la información asociada a un Evento
+     * @param request
+     * @param idEvento
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     * @throws SQLException
+     */
     @GetMapping(value = "/generateExcell/{eventId}")
     public ResponseEntity<?> generateExcell(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException, SQLException {
         try{
@@ -126,6 +209,16 @@ public class EventoController {
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Endpoint para la generación de un archivo de tipo pdf con la información asociada a un Evento
+     * @param request
+     * @param idEvento
+     * @return
+     * @throws CustomException
+     * @throws IOException
+     * @throws SQLException
+     */
     @GetMapping(value = "/generatePdf/{eventId}")
     public ResponseEntity<?> generatePdf(HttpServletRequest request,@PathVariable("eventId") int idEvento) throws CustomException, IOException, SQLException {
         try{

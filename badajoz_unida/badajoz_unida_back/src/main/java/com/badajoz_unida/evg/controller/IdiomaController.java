@@ -19,6 +19,11 @@ public class IdiomaController {
     @Autowired
     IdiomasService idiomasService;
 
+    /**
+     * Endpoint para la obtención de todos los idiomas registrados en la aplicación
+     * @param request
+     * @return
+     */
     @GetMapping("/")
     public ResponseEntity<?> getIdiomas(HttpServletRequest request){
         try{

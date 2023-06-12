@@ -11,9 +11,17 @@ import java.util.List;
 
 public interface UsuarioInteresesRepository extends JpaRepository<UsuariosIntereses, Integer> {
 
+    /**
+     * Método para la obtención de una lista de la asociación de un usuario con sus intereses en la aplicación
+     * @param intereses
+     * @return
+     */
     List<UsuariosIntereses> findAllByIntereses(Intereses intereses);
-    Usuarios findByUserInteresId(Integer integer);
 
+    /**
+     * Método para eliminar una asociación de un usuario a un interés de la aplicación
+     * @param usuarioId
+     */
     @Transactional
     @Modifying
     void deleteByUsuariosUserId(int usuarioId);

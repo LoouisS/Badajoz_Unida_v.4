@@ -9,5 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface RolRepository extends JpaRepository<Roles,Integer> {
+    /**
+     * Método para la comprobación de la existencia de un rol registrado en el sistema
+     * @param rolNombre
+     * @return
+     */
     Optional<Roles> findByRolNombre(RolNombre rolNombre);
 }
