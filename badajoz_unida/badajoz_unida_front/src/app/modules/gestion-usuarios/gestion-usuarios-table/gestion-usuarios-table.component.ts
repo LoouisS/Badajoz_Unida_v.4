@@ -124,7 +124,7 @@ export class GestionUsuariosTableComponent implements OnInit{
       nombreUsuario:[],
       nick:[],
       email:[],
-      rol:[],
+      rol:[2],
     });
   }
 

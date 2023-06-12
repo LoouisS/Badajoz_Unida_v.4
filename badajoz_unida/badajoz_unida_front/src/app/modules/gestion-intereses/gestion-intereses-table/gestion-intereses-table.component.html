@@ -10,15 +10,15 @@
             <label for="titulo" class="form-label pt-2 me-3">Titulo</label>
             <input formControlName="titulo" type="text" class="form-control" id="titulo" aria-describedby="emailHelp">
           </div>
-          <div class="d-flex mb-3 col-5 me-5">
-            <label for="activo" class="form-label pt-2 me-3">Activo</label>
-            <input formControlName="activo" type="checkbox" class="form-control" id="activo" aria-describedby="emailHelp">
+          <div class="mb-3 form-check">
+            <input type="checkbox" formControlName="activo" class="form-check-input" id="activo" aria-describedby="emailHelp">
+            <label class="form-check-label" for="activo">Activo</label>
           </div>
-          <button type="submit" class="btn bgGeneral">Filtrar</button>
-          <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createInteresModal">
-            Crear Interés
-          </button>
         </div>
+        <button type="submit" class="btn bgGeneral">Filtrar</button>
+        <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createInteresModal">
+          Crear Interés
+        </button>
       </form>
     </div>
   </div>
