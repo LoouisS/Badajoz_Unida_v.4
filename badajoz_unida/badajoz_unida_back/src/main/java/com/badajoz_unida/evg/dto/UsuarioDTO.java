@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 public class UsuarioDTO {
 
+    private int id;
     private String nombre;
     private String apellidos;
     private String email;
@@ -25,7 +26,8 @@ public class UsuarioDTO {
 
     }
 
-    public UsuarioDTO(String nombre, String apellidos, String email, String usuario, Date fechaNacimiento, String telefono, int idiomaId, List<Intereses> intereses){
+    public UsuarioDTO(int id, String nombre, String apellidos, String email, String usuario, Date fechaNacimiento, String telefono, int idiomaId, List<Intereses> intereses){
+        this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;

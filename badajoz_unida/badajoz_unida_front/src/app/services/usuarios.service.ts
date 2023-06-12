@@ -58,4 +58,13 @@ export class UsuariosService {
   getAllFiilter(filtros: any ) {
     return this.httpClient.post(this.apiUrl + 'getAllFilter',filtros);
   }
+
+  /**
+   * Método para eliminar un usuario de la aplicación
+   * @param param
+   */
+  deleteUser(id: number) {
+    console.log("EL ID A ELIMINAR", id);
+    return this.httpClient.delete(this.apiUrl + 'deleteUser/'+id);
+  }
 }

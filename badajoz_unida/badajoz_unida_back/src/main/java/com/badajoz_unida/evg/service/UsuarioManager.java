@@ -37,7 +37,7 @@ public class UsuarioManager implements UsuarioService{
     @Override
     public UsuarioDTO getDatosUsuarioById(int usuarioId) {
         Usuarios usuario = this.usuarioDatosRepository.findUsuarioByUserId(usuarioId);
-        return new UsuarioDTO(usuario.getNombre(), usuario.getApellidos(), usuario.getEmail(), usuario.getNombreUsuario(), usuario.getFchNacimiento(), usuario.getTlf(), usuario.getIdioma().getIdiomaId(), usuario.getIntereses());
+        return new UsuarioDTO(usuario.getUserId(),usuario.getNombre(), usuario.getApellidos(), usuario.getEmail(), usuario.getNombreUsuario(), usuario.getFchNacimiento(), usuario.getTlf(), usuario.getIdioma().getIdiomaId(), usuario.getIntereses());
     }
 
     @Override
@@ -88,5 +88,13 @@ public class UsuarioManager implements UsuarioService{
                 rol
         );
         return new ResponseEntity<>(this.usuarioDatosRepository.findAll(specification), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteUser(int id){
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(id);
+        this.usuarioDatosRepository.delete(usuario);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
