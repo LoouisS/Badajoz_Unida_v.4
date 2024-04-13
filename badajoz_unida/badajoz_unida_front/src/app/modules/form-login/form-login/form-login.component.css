@@ -110,3 +110,24 @@ img{
   height: auto;
 }
 
+@media only screen and (max-width: 900px) {
+  .button.rounded-pill {
+    padding: .2rem .2rem !important;
+    font-size: .9rem !important;
+    height: 50px !important; /* Ajusta este valor según tus necesidades */
+    width: 100% !important; /* Ajusta este valor según tus necesidades */
+  }
+
+  .d-flex {
+    width: 100% !important; /* Hace que el contenedor ocupe el 100% del ancho */
+    flex-wrap: nowrap !important; /* Hace que las imágenes se dispongan horizontalmente */
+  }
+
+  .hide-on-mobile {
+    display: none !important; /* Oculta solo las imágenes con la clase hide-on-mobile en dispositivos móviles */
+  }
+}
+
+
+
+
