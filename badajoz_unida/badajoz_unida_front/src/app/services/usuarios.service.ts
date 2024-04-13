@@ -6,6 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import {HttpClient} from "@angular/common/http";
  Servicio que gestiona los datos del usuario
  **/
 export class UsuariosService {
+  user: BehaviorSubject<any> = new BehaviorSubject(null);
 
   apiUrl: string ='http://localhost:8080/usuarios/';
   constructor(private httpClient: HttpClient) { }
@@ -24,6 +26,14 @@ export class UsuariosService {
    */
   getDatosUsuario(){
     return this.httpClient.get(this.apiUrl + "datos");
+  }
+
+  setUser(user: any) {
+    this.user.next(user);
+  }
+
+  getUser() {
+    return this.user.asObservable();
   }
 
   /**

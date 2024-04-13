@@ -93,7 +93,6 @@ public class AuthController {
         }catch (CustomException e){
             return new ResponseEntity(new CustomException(ErrorCode.ERROR_LOGIN_FAIL).getErrorCode().getMensaje(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     /**

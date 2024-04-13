@@ -6,6 +6,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../security/services/auth/auth.service";
+import { LocaleHelper } from 'src/app/config/locale-helper';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-auth',
@@ -16,7 +18,7 @@ import {AuthService} from "../../../security/services/auth/auth.service";
 /**
  Vista de la vista general de los procesos de login y registro
  **/
-export class AuthComponent implements OnInit{
+export class AuthComponent extends LocalizedComponent implements OnInit{
 
   isFormRegistro: boolean = false;
 
@@ -25,6 +27,7 @@ export class AuthComponent implements OnInit{
    @param _authService {AuthService} Servicio que gestiona los métodos referentes al login y registro
    **/
   constructor(private _authService: AuthService) {
+    super();
   }
 
   /**
