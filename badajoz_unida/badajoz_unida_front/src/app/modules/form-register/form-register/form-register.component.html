@@ -1,30 +1,30 @@
 <form [formGroup]="forma" (ngSubmit)="guardar(forma)" class="col-12 rounded-4 d-flex flex-column align-items-center justify-content-between">
   <div *ngIf="!formIntereses" class="col-12 px-3 px-lg-5 pt-5 pt-lg-0">
-    <h1 class="col-12 mt-5 mt-lg-0 mb-2 p-0">Cuéntanos sobre ti</h1>
+    <h1 class="col-12 mt-5 mt-lg-0 mb-2 p-0">{{ resources.tellUs }}</h1>
     <div class="separador mt-1 mb-4"></div>
     <div class="d-flex mt-3 mb-2 flex-wrap flex-lg-nowrap">
       <div class="input-group pe-lg-1 mb-2 mb-lg-0">
-        <label for="iNombre">Nombre</label>
+        <label for="iNombre">{{resources.offName}}</label>
         <input class="form-control"
                type="text"
                formControlName="nombre"
                maxlength="60"
                name="nombre"
                id="iNombre"
-               placeholder="Nombre"
+               placeholder="{{resources.offName}}"
                [class.is-invalid]="!validar('nombre')"
         />
         <small *ngIf="!validar('nombre')" class="error">El nombre es un campo requerido.</small>
       </div>
       <div class="input-group ps-lg-1">
-        <label for="iApellidos">Apellidos</label>
+        <label for="iApellidos">{{resources.surname}}</label>
         <input class="form-control"
                type="text"
                formControlName="apellidos"
                maxlength="60"
                name="apellidos"
                id="iApellidos"
-               placeholder="Apellidos"
+               placeholder="{{resources.surname}}"
                [class.is-invalid]="!validar('apellidos')"
         />
         <small *ngIf="!validar('apellidos')" class="error">El apellido es un campo requerido.</small>
@@ -40,20 +40,20 @@
                maxlength="100"
                name="mail"
                id="iMail"
-               placeholder="Correo Electrónico"
+               placeholder="{{resources.email}}"
                [class.is-invalid]="!validar('email')"
         />
         <small *ngIf="!validar('email')" class="error">El formato del email debe ser: ejemplo@ejemplo.com</small>
       </div>
       <div class="input-group ps-lg-1">
-        <label for="iUsuario">Nombre de usuario</label>
+        <label for="iUsuario">{{ resources.username }}</label>
         <input class="form-control"
                type="text"
                formControlName="usuario"
                maxlength="60"
                name="usuario"
                id="iUsuario"
-               placeholder="Nombre de usuario"
+               placeholder="{{ resources.username}}"
                [class.is-invalid]="!validar('usuario')"
         />
         <small *ngIf="!validar('usuario')" class="error">El usuario es un campo requerido.</small>
@@ -61,13 +61,13 @@
     </div>
 
     <div class="input-group password my-2">
-      <label for="iPassword">Contraseña</label>
+      <label for="iPassword">{{ resources.password }}</label>
       <input class="form-control"
              type="password"
              formControlName="password"
              name="password"
              id="iPassword"
-             placeholder="Contraseña"
+             placeholder="{{ resources.password }}"
              oncopy="return false"
              onpaste="return false"
              [class.is-invalid]="!validar('password')"
@@ -80,13 +80,13 @@
     </div>
 
     <div class="input-group password my-2">
-      <label for="iPasswordRepeat">Email</label>
+      <label for="iPasswordRepeat">{{ resources.repeatPw }}</label>
       <input class="form-control"
              type="password"
              formControlName="password2"
              name="passwordRepeat"
              id="iPasswordRepeat"
-             placeholder="Repite tu contraseña"
+             placeholder="{{ resources.repeatPw}}"
              oncopy="return false"
              onpaste="return false"
              [class.is-invalid]="!comprobarPasswords || !validar('password2')"
@@ -97,7 +97,7 @@
 
     <div class="d-flex my-2 flex-wrap flex-lg-nowrap">
       <div class="input-group pe-lg-1 mb-2 mb-lg-0">
-        <label for="ifechaNacimiento">Fecha de nacimiento </label>
+        <label for="ifechaNacimiento"> {{ resources.birth }} </label>
         <input class="form-control"
                type="date"
                formControlName="fechaNacimiento"
@@ -108,14 +108,14 @@
         <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
       </div>
       <div class="input-group ps-lg-1">
-        <label for="iTelefono">Teléfono de contacto </label>
+        <label for="iTelefono"> {{ resources.phone }}</label>
         <input class="form-control"
                type="text"
                formControlName="telefono"
                maxlength="9"
                name="telefono"
                id="iTelefono"
-               placeholder="Teléfono de contacto"
+               placeholder="{{ resources.phone }}"
                [class.is-invalid]="!validar('telefono')"
         />
         <small *ngIf="!validar('telefono')" class="error">El teléfono es un campo necesario, debe tener 9 digitos.</small>
@@ -123,9 +123,9 @@
     </div>
 
     <div class="input-group ps-1 mb-3">
-      <label for="idioma">Idioma de preferencia</label>
+      <label for="idioma">{{ resources.lang}}</label>
       <select class="form-select" id="idioma" formControlName="idioma" [class.is-invalid]="comprobarIdioma()">
-        <option value="-1" disabled selected>Selecciona un idioma</option>
+        <option value="-1" disabled selected>{{ resources.selectLang }}</option>
         <option
           *ngFor="let idioma of idiomas"
           [value]="idioma.idiomaId">
@@ -141,14 +141,14 @@
               [ngClass]="{'btn btn-secondary col-12': (verificarFormulario()), 'button continuar': !verificarFormulario()}"
               class="rounded-pill my-3"
               (click)="goToIntereses()">
-        Continuar
+        {{ resources.continue }}
       </button>
-      <small class="d-lg-none text-black fw-bold">¿Ya tienes cuenta? Entonces inicia sesión.</small>
-      <button class="button rounded-pill d-lg-none mt-2" (click)="goToLogin()">Regresar a iniciar sesión</button>
+      <small class="d-lg-none text-black fw-bold">{{ resources.alreadyAcc }}</small>
+      <button class="button rounded-pill d-lg-none mt-2" (click)="goToLogin()">{{ resources.backLogin }}</button>
     </div>
   </div>
   <div *ngIf="formIntereses" class="px-4 px-lg-5">
-    <h1 class="py-3 px-0">¿Qué es lo que te gusta?</h1>
+    <h1 class="py-3 px-0">{{ resources.whatULike}}</h1>
     <div class="separador mt-1 mb-4"></div>
     <div class="d-flex flex-wrap justify-content-center">
       <h3 *ngFor="let interes of interesesList" class="interes">
@@ -163,7 +163,7 @@
 <!--      </h5>-->
 <!--    </div>-->
     <div class="input-group">
-      <input type="submit" class="button rounded-pill mt-3" value="Registrarme" />
+      <input type="submit" class="button rounded-pill mt-3" value="{{ resources.register }}" />
     </div>
   </div>
 </form>

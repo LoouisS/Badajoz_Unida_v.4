@@ -15,6 +15,7 @@ import {NuevoUsuario} from "../../../security/models/auth/nuevo-usuario";
 import {CategoriasService} from "../../../services/categorias.service";
 import {ValidadoresService} from "../../../services/validadores.service";
 import Swal from 'sweetalert2'
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-form-register',
@@ -25,7 +26,7 @@ import Swal from 'sweetalert2'
 /**
  Vista del formulario de registro
  **/
-export class FormRegisterComponent implements OnInit, OnDestroy{
+export class FormRegisterComponent extends LocalizedComponent implements OnInit, OnDestroy {
 
   forma!: FormGroup;
   // modal = new ModalComponent();
@@ -64,7 +65,9 @@ export class FormRegisterComponent implements OnInit, OnDestroy{
     private _idiomasService: IdiomasService,
     private _validadorService: ValidadoresService,
     private router: Router
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    Método que inicializa la vista

@@ -9,17 +9,17 @@
     Nombre de usuario o contraseña incorrectos
   </div>
   <div class="input-group">
-    <input type="text" class="form-control" maxlength="100" formControlName="user" name="user" id="input-user" placeholder="Nombre de usuario"/>
+    <input type="text" class="form-control" maxlength="100" formControlName="user" name="user" id="input-user" placeholder=" {{ resources.username }}"/>
   </div>
   <div class="input-group password">
-    <input type="password" class="form-control" formControlName="password" name="password" id="iPassword" placeholder="Contraseña"/>
+    <input type="password" class="form-control" formControlName="password" name="password" id="iPassword" placeholder="{{ resources.password }}"/>
     <i id="ieye"class="bi bi-eye-fill rounded-3" (click)="showHide()"></i>
   </div>
 
   <div class="input-group">
-    <input type="submit" *ngIf="!verificandoLogin; else loading" class="button rounded-pill" value="Iniciar sesión" />
-    <small class="d-lg-none">¿No tienes cuenta? Crea una ahora.</small>
-    <button class="button rounded-pill d-lg-none" (click)="goToRegistro()">Crear mi cuenta</button>
+    <input type="submit" *ngIf="!verificandoLogin; else loading" class="button rounded-pill" value="{{ resources.login }}" />
+    <small class="d-lg-none">{{ resources.noAcc }}</small>
+    <button class="button rounded-pill d-lg-none" (click)="goToRegistro()"> {{ resources.createAcc }}</button>
   </div>
   <div class="separador mt-4"></div>
   <div class="d-flex col-10 align-items-center justify-content-center py-3 px-4 px-lg-0 flex-wrap">

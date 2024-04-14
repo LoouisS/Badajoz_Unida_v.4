@@ -11,6 +11,7 @@ import {AuthService} from "../../../security/services/auth/auth.service";
 import {LoginUsuario} from "../../../security/models/auth/login-usuario";
 import {TokenService} from "../../../security/services/auth/token.service";
 import Swal from "sweetalert2";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-form-login',
@@ -21,7 +22,7 @@ import Swal from "sweetalert2";
 /**
  Vista del formulario de login
  **/
-export class FormLoginComponent implements OnInit{
+export class FormLoginComponent extends LocalizedComponent implements OnInit{
 
   loginForm!: FormGroup;
   showAlert: boolean = false;
@@ -54,6 +55,7 @@ export class FormLoginComponent implements OnInit{
     private router: Router,
     // private usuarioService: UsuarioService
   ) {
+    super();
     // this.usuarioService.removeSesionActual();
 
   }
