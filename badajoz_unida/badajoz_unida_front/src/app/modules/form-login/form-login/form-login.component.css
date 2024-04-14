@@ -124,9 +124,20 @@ img{
     flex-wrap: nowrap !important;
   }
 
-  .hide-on-mobile {
-    display: none !important;
+  .mobile-visible {
+    display: inline-block !important;
   }
+
+  .sponsor-images {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sponsor-images > div {
+    flex: 1 1 33.33%;
+  }
+
 }
 
 
