@@ -69,9 +69,7 @@
              id="iPassword"
              placeholder="{{ resources.password }}"
              oncopy="return false"
-             onpaste="return false"
-             [class.is-invalid]="!validar('password')"
-      />
+             onpaste="return false">
       <i id="ieye"class="bi bi-eye-fill" (click)="showHide()"></i>
       <small *ngIf="!validar('password')" class="error">
         La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
@@ -89,7 +87,6 @@
              placeholder="{{ resources.repeatPw}}"
              oncopy="return false"
              onpaste="return false"
-             [class.is-invalid]="!comprobarPasswords || !validar('password2')"
       />
       <i id="ieye2"class="bi bi-eye-fill" (click)="showHide2()"></i>
       <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
@@ -103,7 +100,6 @@
                formControlName="fechaNacimiento"
                name="fechaNacimiento"
                id="ifechaNacimiento"
-               [class.is-invalid]="comprobarEdad() || !validar('fechaNacimiento')"
         />
         <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
       </div>
@@ -136,7 +132,6 @@
     </div>
 
     <div class="input-group">
-<!--          <input type="submit" class="button" value="Continuar" />-->
       <button [attr.disabled]="verificarFormulario()? true : null"
               [ngClass]="{'btn btn-secondary col-12': (verificarFormulario()), 'button continuar': !verificarFormulario()}"
               class="rounded-pill my-3"
@@ -155,13 +150,6 @@
         <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.seleccionado}">{{interes.emoji}} {{interes.titulo}}</span>
       </h3>
     </div>
-<!--    <h1 class="py-3">Intereses</h1>-->
-<!--    <h5 *ngIf="interesesList.length == 0">Selecciona una categoría</h5>-->
-<!--    <div *ngIf="interesesList.length > 0" class="d-flex flex-wrap">-->
-<!--      <h5 *ngFor="let interes of interesesList" class="interes">-->
-<!--        <span class="badge bg-secondary" (click)="selectInteres(interes)" [ngClass]="{'selected' : interes.activo}">{{interes.titulo}}</span>-->
-<!--      </h5>-->
-<!--    </div>-->
     <div class="input-group">
       <input type="submit" class="button rounded-pill mt-3" value="{{ resources.register }}" />
     </div>

@@ -44,6 +44,7 @@ form .input-group.password i{
   bottom: .5rem;
   right: .5rem;
   cursor: pointer;
+  z-index: 1000;
 }
 
 form input{
@@ -109,4 +110,36 @@ img{
   width: 100%;
   height: auto;
 }
+
+@media only screen and (max-width: 900px) {
+  .button.rounded-pill {
+    padding: .2rem .2rem !important;
+    font-size: .9rem !important;
+    height: 50px !important;
+    width: 100% !important;
+  }
+
+  .d-flex {
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .mobile-visible {
+    display: inline-block !important;
+  }
+
+  .sponsor-images {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sponsor-images > div {
+    flex: 1 1 33.33%;
+  }
+
+}
+
+
+
 

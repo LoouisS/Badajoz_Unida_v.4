@@ -131,6 +131,7 @@ div .password{
   position: absolute;
   top: 32.5px;
   transform: translateX(-10px);
+  z-index: 99999;
 }
 
 @media screen and (min-width: 100px) and (max-width: 900px){
