@@ -1,9 +1,9 @@
-<form [formGroup]="loginForm" (ngSubmit)="guardar(loginForm)" class="py-3 py-lg-4 px-1 rounded-4 d-flex flex-column align-items-center justify-content-between">
+<form [formGroup]="loginForm" (ngSubmit)="guardar(loginForm)" class="py-lg-4 px-1 rounded-4 d-flex flex-column align-items-center justify-content-between">
 <!--  <h2>Bienvenido a</h2>-->
 <!--  <h1>Badajoz Unida</h1>-->
 <!--  <div class="separador"></div>-->
-  <div class="col-8 col-lg-6 pt-3 mt-5 mt-lg-0 d-flex justify-content-center">
-    <img src="assets/logo.png">
+  <div class="col-8 col-lg-6 pt-0 pt-lg-3 mt-3 mt-lg-5 mt-lg-0 d-flex justify-content-center">
+    <img class="w-65" src="assets/logo.png">
   </div>
   <div *ngIf="showAlert" class="alert alert-danger col-10 mt-2" role="alert">
     Nombre de usuario o contraseña incorrectos

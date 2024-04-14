@@ -57,6 +57,10 @@ form input:focus{
   border-bottom: 2px solid var(--text-base-color);
 }
 
+.w-65{
+  width: 65% !important;
+}
+
 form > small{
   width: 80%;
   font-family: 'Open Sans', sans-serif;
