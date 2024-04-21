@@ -5,6 +5,7 @@
  **/
 
 import { Component } from '@angular/core';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-index',
@@ -15,6 +16,6 @@ import { Component } from '@angular/core';
 /**
  Vista del componente inicial o home
  **/
-export class IndexComponent {
+export class IndexComponent extends LocalizedComponent{
 
 }

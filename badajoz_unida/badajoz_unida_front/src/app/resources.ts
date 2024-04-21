@@ -31,6 +31,17 @@ export abstract class Resources {
   public static deleteAcc: string = null;
   public static interests: string = null;
   public static changeInterests: string = null;
+  public static welcomeTo: string = null;
+  public static homeIntro1: string = null;
+  public static homeIntro2: string = null;
+  public static homeIntro3: string = null;
+  public static visitCorners: string = null;
+  public static events: string = null;
+  public static eventsInfo: string = null;
+  public static myEvents: string = null;
+  public static myEventsInfo: string = null;
+  public static profile: string = null;
+  public static profileInfo: string = null;
 
 }
 

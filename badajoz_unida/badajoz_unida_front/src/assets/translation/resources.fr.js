@@ -32,4 +32,16 @@ export const resources = {
     'deleteAcc': 'Supprimer le compte',
     'interests': 'Mes centres d’intérêt',
     'changeInterests': 'Changer mes centres d’intérêt',
+    // HOME
+    'welcomeTo': 'Bienvenue à',
+    'homeIntro1': 'Nous sommes ravis de vous accueillir sur cette plateforme unique qui cherche à rassembler et à célébrer la diversité culturelle de notre communauté. Nous savons que chaque personne a sa propre histoire, ses traditions et ses coutumes, et nous voulons favoriser un environnement où chacun se sent valorisé et respecté.',
+    'homeIntro2': 'Notre intention est de connecter notre population d’où qu’elle vienne, en créant des événements qui permettent de partager des expériences, de renforcer la compréhension mutuelle et de tisser des liens d’amitié. Nous voulons offrir un espace où chacun peut apprendre les uns des autres, profiter de la richesse culturelle et célébrer la diversité qui enrichit notre société.',
+    'homeIntro3': 'Vous trouverez ici une grande variété d’événements : des festivals culturels et des foires alimentaires aux ateliers éducatifs et aux activités récréatives. Nous voulons que vous soyez un acteur actif de cette communauté',
+    'visitCorners': 'Visitez tous les coins de notre site web',
+    'events': 'Événements',
+    'eventsInfo': 'Inscrivez-vous à l’un des événements que nous avons disponibles',
+    'myEvents': 'Mes événements',
+    'myEventsInfo': 'Gérez et consultez les événements auxquels vous vous êtes inscrit',
+    'profile': 'Profil',
+    'profileInfo': 'Gérez et mettez à jour vos données',
     }

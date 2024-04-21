@@ -32,4 +32,16 @@ export const resources = {
   'deleteAcc': 'Eliminar cuenta',
   'interests': 'Mis intereses',
   'changeInterests': 'Cambiar mis intereses',
+  // HOME
+  'welcomeTo': 'Bienvenido a',
+  'homeIntro1': 'Nos complace darte la bienvenida a esta plataforma única que busca reunir y celebrar la diversidad cultural de nuestra comunidad. Sabemos que cada persona tiene su propia historia, tradiciones y costumbres, y queremos fomentar un ambiente donde todos se sientan valorados y respetados.',
+  'homeIntro2': 'Nuestra intención es conectar a nuestra población venga de donde venga, creando eventos que permitan compartir experiencias, fortalecer la comprensión mutua y construir lazos de amistad. Queremos ofrecer un espacio donde todos puedan aprender unos de otros, disfrutar de la riqueza cultural y celebrar la diversidad que enriquece nuestra sociedad.',
+  'homeIntro3': 'Aquí encontrarás una amplia variedad de eventos: desde festivales culturales y ferias de comida hasta talleres educativos y actividades recreativas. Queremos que te sientas parte activa de esta comunidad',
+  'visitCorners': 'Recorre todos los rincones de nuestra página web',
+  'events': 'Eventos',
+  'eventsInfo': 'Apúntate a cualquiera de los eventos que tenemos disponibles',
+  'myEvents': 'Mis eventos',
+  'myEventsInfo': 'Gestiona y mira los eventos a los que te has apuntado',
+  'profile': 'Perfil',
+  'profileInfo': 'Gestiona y actualiza tus datos',
 }

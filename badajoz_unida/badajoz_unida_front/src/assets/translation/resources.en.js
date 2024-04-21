@@ -32,4 +32,17 @@ export const resources = {
   'deleteAcc': 'Delete account',
   'interests': 'My interests',
   'changeInterests': 'Change my interests',
+  // HOME
+  'welcomeTo': 'Welcome to',
+  'homeIntro1': 'We are pleased to welcome you to this unique platform that seeks to bring together and celebrate the cultural diversity of our community. We know that each person has their own story, traditions, and customs, and we want to foster an environment where everyone feels valued and respected.',
+  'homeIntro2': 'Our intention is to connect our population from wherever they come, creating events that allow sharing experiences, strengthening mutual understanding, and building bonds of friendship. We want to offer a space where everyone can learn from each other, enjoy cultural richness, and celebrate the diversity that enriches our society.',
+  'homeIntro3': 'Here you will find a wide variety of events: from cultural festivals and food fairs to educational workshops and recreational activities. We want you to be an active part of this community',
+  'visitCorners': 'Visit all the corners of our website',
+  'events': 'Events',
+  'eventsInfo': 'Sign up for any of the events we have available',
+  'myEvents': 'My events',
+  'myEventsInfo': 'Manage and view the events you have signed up for',
+  'profile': 'Profile',
+  'profileInfo': 'Manage and update your data',
+  
 }
