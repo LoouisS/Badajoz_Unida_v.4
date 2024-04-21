@@ -12,6 +12,7 @@ import {LoginUsuario} from "../../../security/models/auth/login-usuario";
 import {TokenService} from "../../../security/services/auth/token.service";
 import Swal from "sweetalert2";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-form-login',
@@ -53,6 +54,7 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
     private _authService: AuthService,
     private _tokenService: TokenService,
     private router: Router,
+    private userService: UsuariosService
     // private usuarioService: UsuarioService
   ) {
     super();
@@ -111,6 +113,11 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
         this.router.navigate(['/']);
         this.showAlert = false;
         this.verificandoLogin = false;
+        this.userService.getDatosUsuario().subscribe((data: any) => {
+          const usuario = data;
+          console.log(usuario);
+          this.userService.setUser(usuario);
+        })
       },
       async (errorServicio) => {
         this.verificandoLogin = false;

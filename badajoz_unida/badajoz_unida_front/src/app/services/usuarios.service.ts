@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,12 @@ export class UsuariosService {
    * @param datos
    */
   saveChanges(datos: any){
-    return this.httpClient.post(this.apiUrl + "save", datos);
+    return this.httpClient.post(this.apiUrl + "save", datos)
+    .pipe(
+      tap(saveChanges => {
+        this.user.next(saveChanges);
+      })
+    );;
   }
 
   /**

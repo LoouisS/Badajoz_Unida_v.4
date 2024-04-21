@@ -13,7 +13,7 @@ public class Idiomas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int idiomaId;
+    private String idiomaId;
 
     @Column(name="titulo")
     private String titulo;
@@ -27,7 +27,7 @@ public class Idiomas {
     public Idiomas(){
     }
 
-    public Idiomas(int idiomaId){
+    public Idiomas(String idiomaId){
         this.idiomaId = idiomaId;
     }
 

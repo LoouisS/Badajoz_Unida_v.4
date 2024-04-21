@@ -26,4 +26,10 @@ export const resources = {
     'alreadyAcc': 'Tu as déjà un compte? Connecte-toi ici',
     'whatULike': 'Quels sont tes centres d’intérêt?',
     'register': "S'inscrire",
+    // PROFILE
+    'personalData': 'Données personnelles',
+    'saveChanges': 'Enregistrer les modifications',
+    'deleteAcc': 'Supprimer le compte',
+    'interests': 'Mes centres d’intérêt',
+    'changeInterests': 'Changer mes centres d’intérêt',
     }

@@ -26,6 +26,11 @@ export abstract class Resources {
   public static alreadyAcc: string = null;
   public static whatULike: string = null;
   public static register: string = null;
+  public static personalData: string = null;
+  public static saveChanges: string = null;
+  public static deleteAcc: string = null;
+  public static interests: string = null;
+  public static changeInterests: string = null;
 
 }
 

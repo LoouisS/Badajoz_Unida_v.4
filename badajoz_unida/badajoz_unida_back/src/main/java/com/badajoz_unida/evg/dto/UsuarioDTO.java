@@ -19,14 +19,14 @@ public class UsuarioDTO {
     private String usuario;
     private Date fechaNacimiento;
     private String telefono;
-    private int idiomaId;
+    private String idiomaId;
     private List<Intereses> intereses;
 
     public UsuarioDTO(){
 
     }
 
-    public UsuarioDTO(int id, String nombre, String apellidos, String email, String usuario, Date fechaNacimiento, String telefono, int idiomaId, List<Intereses> intereses){
+    public UsuarioDTO(int id, String nombre, String apellidos, String email, String usuario, Date fechaNacimiento, String telefono, String idiomaId, List<Intereses> intereses){
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;

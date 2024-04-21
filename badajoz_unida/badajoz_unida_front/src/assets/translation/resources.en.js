@@ -26,4 +26,10 @@ export const resources = {
   'alreadyAcc': 'Already have an account? Log in here',
   'whatULike': 'What do you like?',
   'register': 'Register',
+  // PROFILE
+  'personalData': 'Personal data',
+  'saveChanges': 'Save changes',
+  'deleteAcc': 'Delete account',
+  'interests': 'My interests',
+  'changeInterests': 'Change my interests',
 }

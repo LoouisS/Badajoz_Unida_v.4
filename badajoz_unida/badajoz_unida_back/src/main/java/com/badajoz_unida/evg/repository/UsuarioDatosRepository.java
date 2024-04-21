@@ -31,7 +31,7 @@ public interface UsuarioDatosRepository extends JpaRepository<Usuarios, Integer>
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE usuarios SET email = :email, telefono = :telefono, idioma_id = :idiomaId WHERE id = :usuarioId", nativeQuery = true)
-    void saveChanges(@Param("usuarioId") int usuarioId, @Param("email") String email, @Param("telefono") String telefono, @Param("idiomaId") int idiomaId);
+    void saveChanges(@Param("usuarioId") int usuarioId, @Param("email") String email, @Param("telefono") String telefono, @Param("idiomaId") String idiomaId);
 
     /**
      * Método para la obtencion de los usuarios filtrdos

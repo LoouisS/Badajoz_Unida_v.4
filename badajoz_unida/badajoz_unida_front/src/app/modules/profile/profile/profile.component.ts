@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertsService} from "../../../services/alerts.service";
 import Swal from "sweetalert2";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,7 @@ import Swal from "sweetalert2";
 /**
  Vista del perfil del usuario
  **/
-export class ProfileComponent implements OnInit{
+export class ProfileComponent extends LocalizedComponent implements OnInit{
 
   @ViewChild('editarIntereses') editarIntereses: TemplateRef<any>;
   formProfile: FormGroup;
@@ -53,7 +54,9 @@ export class ProfileComponent implements OnInit{
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private alertsService: AlertsService
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    Método que inicializa la vista
@@ -128,6 +131,8 @@ export class ProfileComponent implements OnInit{
       });
       // console.log(datos);
       this._usuarioService.saveChanges(datos).subscribe((data: any) => {
+        console.log(datos);
+        this._usuarioService.setUser(datos);
         this.alertsService.showSuccessAlert('Guardar cambios', 'Cambios guardados exitosamente');
       }, error => {
         this.alertsService.showInfoAlert('Guardar cambios', 'No se han podido guardar los cambios');
