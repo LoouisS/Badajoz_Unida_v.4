@@ -115,7 +115,6 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
         this.verificandoLogin = false;
         this.userService.getDatosUsuario().subscribe((data: any) => {
           const usuario = data;
-          console.log(usuario);
           this.userService.setUser(usuario);
         })
       },

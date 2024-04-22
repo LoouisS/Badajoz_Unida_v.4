@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
 import {TokenService} from "../auth/token.service";
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class LoginGuard implements CanActivate {
    @param tokenService {TokenService} Servicio que gestiona el token de acceso,
    @param router {Router} Clase para la navegación entre componentes
    **/
-  constructor(private tokenService: TokenService, private router: Router) { }
+  constructor(private tokenService: TokenService, private router: Router, private userService: UsuariosService) { }
 
   /**
    Método que comprueba la existencia de la sesión
@@ -34,7 +35,15 @@ export class LoginGuard implements CanActivate {
       this.router.navigate(['/auth']);
       return false;
     }
+    this.setLoggedInUserData();
     return true;
+  }
+
+  private setLoggedInUserData() {
+    this.userService.getDatosUsuario().subscribe((data: any) => {
+      const usuario = data;
+      this.userService.setUser(usuario);
+    })
   }
 
 }
