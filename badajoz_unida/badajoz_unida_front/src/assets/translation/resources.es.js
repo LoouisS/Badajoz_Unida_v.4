@@ -44,4 +44,7 @@ export const resources = {
   'myEventsInfo': 'Gestiona y mira los eventos a los que te has apuntado',
   'profile': 'Perfil',
   'profileInfo': 'Gestiona y actualiza tus datos',
+  // NAVBAR
+  'home': 'Inicio',
+  'logOut': 'Cerrar sesión',
 }

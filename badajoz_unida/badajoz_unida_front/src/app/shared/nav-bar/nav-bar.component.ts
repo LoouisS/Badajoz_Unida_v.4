@@ -7,6 +7,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {TokenService} from "../../security/services/auth/token.service";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,7 +18,7 @@ import {TokenService} from "../../security/services/auth/token.service";
 /**
  Vista de la barra de navegación
  **/
-export class NavBarComponent implements OnInit{
+export class NavBarComponent extends LocalizedComponent implements OnInit{
 
   nombreUsuario!: string;
   @Output() menuOpened = new EventEmitter<number>();
@@ -30,6 +31,7 @@ export class NavBarComponent implements OnInit{
    @param _tokenService {TokenService} Servicio que gestiona el token de acceso
    **/
   constructor(private _tokenService: TokenService) {
+    super();
   }
 
   /**

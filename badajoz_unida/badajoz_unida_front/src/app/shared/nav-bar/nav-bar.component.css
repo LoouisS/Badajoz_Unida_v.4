@@ -120,7 +120,7 @@ li:hover .nav-tip{
   bottom: 0;
   width: 100%;
   padding: 15px 10px;
-  color: white;
+  color: #D10000;
   background-color: var(--primary-color-dark);
 }
 
@@ -140,7 +140,7 @@ li:hover .nav-tip{
 .perfil-detalles .perfil-img{
   width: 45px;
   height: 45px;
-  background-color: hsl(200, 75%, 50%);
+  background-color: hsl(0, 0%, 100%);
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -153,6 +153,7 @@ li:hover .nav-tip{
 
 .perfil-detalles .perfil-nombre{
   font-weight: 500;
+  color: white;
 }
 
 .perfil, .log-out{

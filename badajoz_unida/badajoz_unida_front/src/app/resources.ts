@@ -42,6 +42,8 @@ export abstract class Resources {
   public static myEventsInfo: string = null;
   public static profile: string = null;
   public static profileInfo: string = null;
+  public static home: string = null;
+  public static logOut: string = null;
 
 }
 

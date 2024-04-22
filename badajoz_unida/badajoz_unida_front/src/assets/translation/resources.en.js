@@ -44,5 +44,8 @@ export const resources = {
   'myEventsInfo': 'Manage and view the events you have signed up for',
   'profile': 'Profile',
   'profileInfo': 'Manage and update your data',
+  // NAVBAR
+  'home': 'Home',
+  'logOut': 'Logout',
   
 }

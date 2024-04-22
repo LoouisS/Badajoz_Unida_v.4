@@ -9,30 +9,30 @@
     <li class="mx-0">
       <div class="rounded-pill" [routerLink]="['/']">
         <span class="nav-icon fa-solid fa-house"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Inicio</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{resources.home}}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Inicio</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.home}}</span>
     </li>
     <li class="mx-0">
       <div class="rounded-pill" [routerLink]="['/eventos']">
         <span class="nav-icon fa-solid fa-calendar-day"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Eventos</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{resources.events}}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Eventos</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.events}}</span>
     </li>
     <li class="mx-0">
       <div class="rounded-pill" [routerLink]="['/mis-eventos']">
         <span class="nav-icon fa-regular fa-calendar-check"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Mis eventos</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{resources.myEvents}}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Mis eventos</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.myEvents}}</span>
     </li>
     <li class="mx-0">
       <div class="rounded-pill" [routerLink]="['/perfil']">
         <span class="nav-icon fa-solid fa-user"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Perfil</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{resources.profile}}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Perfil</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.profile}}</span>
     </li>
     <div *ngIf="isAdmin">
       <hr />
@@ -75,7 +75,7 @@
       </div>
     </div>
     <ul class="dropdown-menu">
-      <li class="log-out ps-2" (click)="cerrarSesion()">Cerrar sesión</li>
+      <li class="log-out ps-2" (click)="cerrarSesion()">{{resources.logOut}}</li>
     </ul>
   </div>
 </aside>
