@@ -204,5 +204,9 @@ li:hover .nav-tip{
     display: none !important;
   }
 
+  li .nav-tip{
+    display: none;
+  }
+
 }
 

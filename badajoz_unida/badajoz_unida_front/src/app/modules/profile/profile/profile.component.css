@@ -18,8 +18,8 @@ hr{
   height: 100%;
 }
 
-.profile-data li{
-
+@media screen and (max-width: 768px) {
+  .profile-data, .profile-form, .profile-form > form, .profile-form > form > div {
+    width: 100%; /* Establece el ancho al 100% para que los elementos ocupen todo el ancho de la pantalla */
+  }
 }
-
-
