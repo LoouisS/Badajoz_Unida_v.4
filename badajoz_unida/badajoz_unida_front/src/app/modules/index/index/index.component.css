@@ -92,8 +92,44 @@ span.fa-regular, span.fa-solid{
 }
 
 @media screen and (min-width: 100px) and (max-width: 768px) {
-  .paginas{
+
+  .paginas {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
+
+  .paginas > div {
+    margin-bottom: 20px;
+    height: 128px;
+  }
+
+  .enlaces > div > div {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .enlaces > div > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform .5s ease;
+  }
+
+  .enlaces > div > div:hover::before {
+    transform: translateX(-20px);
+  }
+
+  .enlaces > div > div:hover p {
+    opacity: 1;
+  }
+
+  .enlaces p {
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
+
 }
