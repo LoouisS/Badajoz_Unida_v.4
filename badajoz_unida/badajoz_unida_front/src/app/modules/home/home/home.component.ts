@@ -4,7 +4,7 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 @Component({
@@ -19,11 +19,13 @@ import {BehaviorSubject} from "rxjs";
 export class HomeComponent implements OnInit{
 
   menuTamano: number = 78;
+  isDesktop: boolean = true;
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
+    this.updateView(window.innerWidth);
   }
 
   /**
@@ -32,6 +34,16 @@ export class HomeComponent implements OnInit{
    **/
   cambiarTamano(tamano: number){
     this.menuTamano = tamano;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.updateView(event.target.innerWidth);
+  }
+
+  private updateView(width: number) {
+    // Considera 'desktop' si el ancho es mayor a 768px
+    this.isDesktop = width > 768;
   }
 
 }
