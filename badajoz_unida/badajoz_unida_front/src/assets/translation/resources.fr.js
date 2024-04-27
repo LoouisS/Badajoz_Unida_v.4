@@ -47,4 +47,6 @@ export const resources = {
     // NAVBAR
     'home': 'Accueil',
     'logOut': 'Déconnexion',
+    // FOOTER
+    'meetUs': 'Rencontrez-nous',
     }

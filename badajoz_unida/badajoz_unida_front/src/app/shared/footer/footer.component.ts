@@ -5,6 +5,7 @@
  **/
 
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-footer',
@@ -15,7 +16,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, View
 /**
  Vista del footer
  **/
-export class FooterComponent implements OnInit{
+export class FooterComponent extends LocalizedComponent implements OnInit{
 
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();

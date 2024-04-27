@@ -47,5 +47,7 @@ export const resources = {
   // NAVBAR
   'home': 'Home',
   'logOut': 'Logout',
+  // FOOTER
+  'meetUs': 'Meet us',
   
 }

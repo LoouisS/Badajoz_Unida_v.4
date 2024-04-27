@@ -44,6 +44,7 @@ export abstract class Resources {
   public static profileInfo: string = null;
   public static home: string = null;
   public static logOut: string = null;
+  public static meetUs: string = null;
 
 }
 
