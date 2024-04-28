@@ -70,12 +70,12 @@
   <div class="perfil-container dropdown">
     <div class="perfil" data-bs-toggle="dropdown" aria-expanded="false">
       <div class="perfil-detalles">
-        <div class="col-3 perfil-img rounded-pill">{{nombreUsuario | inicialesNombre}}</div>
+        <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">
+          <span class="user-initials">{{nombreUsuario | inicialesNombre}}</span>
+          <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
+        </div>
         <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
       </div>
     </div>
-    <ul class="dropdown-menu">
-      <li class="log-out ps-2" (click)="cerrarSesion()">{{resources.logOut}}</li>
-    </ul>
   </div>
 </aside>

@@ -160,6 +160,20 @@ li:hover .nav-tip{
   cursor: pointer;
 }
 
+/* Estilo para ocultar el icono cuando no hay hover */
+.log-text .logout-icon {
+  display: none;
+}
+
+/* Estilos para ocultar las iniciales y mostrar el icono al hacer hover */
+.log-text:hover .user-initials {
+  display: none; /* Oculta las iniciales */
+}
+
+.log-text:hover .logout-icon {
+  display: block; /* Muestra el icono de logout */
+}
+
 /*.menu-container{*/
 /*  position: absolute;*/
 /*  width: 100%;*/
