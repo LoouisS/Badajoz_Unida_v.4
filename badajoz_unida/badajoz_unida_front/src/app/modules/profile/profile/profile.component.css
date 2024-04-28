@@ -20,6 +20,36 @@ hr{
 
 @media screen and (max-width: 768px) {
   .profile-data, .profile-form, .profile-form > form, .profile-form > form > div {
-    width: 100%; /* Establece el ancho al 100% para que los elementos ocupen todo el ancho de la pantalla */
+    width: 100%;
   }
+
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .py-4.pe-4 {
+    padding-left: 20px;
+  }
+
+  .profile-data   {
+    margin-bottom: 20px !important;
+  }
+
+  .footer-padding {
+    display: none !important;
+  }
+
+  .card-footer .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card-footer button {
+    width: 48%; /* Esto asegura que los botones tengan un ancho similar y haya un pequeño espacio entre ellos */
+  }
+
+  .fa-solid {
+    display: none;
+  }
+
 }

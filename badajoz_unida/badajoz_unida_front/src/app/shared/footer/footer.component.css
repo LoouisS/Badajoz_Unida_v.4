@@ -26,6 +26,17 @@ img:hover {
   filter: grayscale(0);
 }
 
+.contenedor-imagenes {
+  display: flex;
+}
+
+.contenedor-imagenes .col-10 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .info h5 {
   color: var(--primary-color);
 }
@@ -45,15 +56,25 @@ img:hover {
   }
 
   .contenedor-imagenes {
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Agrega esta línea para centrar verticalmente */
+    height: 100%; /* Ajusta la altura para que ocupe toda la altura disponible */
   }
 
   .col-10 {
-    flex-basis: calc(33.33% - 20px);
-    margin: 0 10px 20px;
+    display: flex; /* Establece como flex para ajustar el ancho y alto */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    flex-basis: 100%; /* Ocupa todo el ancho disponible */
+    margin: 0 0 20px; /* Elimina el margen horizontal y agrega margen inferior */
   }
 
+  .col-10 img {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: auto; /* Establece la altura automática para mantener la proporción */
+  }
 
   footer {
     padding: 20px;

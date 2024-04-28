@@ -99,6 +99,10 @@ span.fa-regular, span.fa-solid{
     align-items: center;
   }
 
+  h1 {
+    text-align: center;
+  }
+
   .paginas > div {
     margin-bottom: 20px;
     height: 128px;

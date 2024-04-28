@@ -119,9 +119,15 @@ li:hover .nav-tip{
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 15px 10px;
   color: white;
   background-color: var(--primary-color-dark);
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.perfil {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .perfil-container .perfil{
@@ -159,7 +165,27 @@ li:hover .nav-tip{
   cursor: pointer;
 }
 
+.log-text .logout-icon {
+  display: none;
+}
+
+.log-text:hover .user-initials {
+  display: none;
+}
+
+.log-text:hover .logout-icon {
+  display: block;
+}
+
 @media (max-width: 767px) {
+
+  .nav-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   aside {
     position: fixed;
     top: auto;
@@ -170,8 +196,8 @@ li:hover .nav-tip{
     padding: 0 !important;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
   }
 
   .nav-bar {
@@ -181,6 +207,7 @@ li:hover .nav-tip{
     margin: 0 !important;
     padding: 0 !important;
     height: 50px !important;
+
   }
 
   aside, ul {
@@ -196,17 +223,25 @@ li:hover .nav-tip{
     flex-grow: 1;
   }
 
-  .perfil-container {
-    display: none !important;
-  }
-
-  .logo-container {
-    display: none !important;
-  }
-
   li .nav-tip{
     display: none;
   }
+
+  .perfil {
+    padding: 0 !important;
+  }
+
+  .col-3.perfil-img.rounded-pill.log-text {
+    width: 30px !important;
+    height: 30px !important;
+
+  }
+
+  .fa-solid.fa-bars.me-1.d-flex.align-items-center.justify-content-center.rounded-pill {
+    display: none !important;
+  }
+
+
 
 }
 

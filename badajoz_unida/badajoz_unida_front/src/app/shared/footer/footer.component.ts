@@ -5,6 +5,7 @@
  **/
 
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-footer',
@@ -20,6 +21,8 @@ export class FooterComponent implements OnInit{
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();
 
+  constructor(private router: Router) { }
+
   /**
    Método que inicializa la vista
    **/
@@ -32,6 +35,10 @@ export class FooterComponent implements OnInit{
    **/
   redirectTo(link: string){
     window.open(link, '_blank');
+  }
+
+  isPerfilRoute(): boolean {
+    return this.router.url === '/perfil';
   }
 
 }
