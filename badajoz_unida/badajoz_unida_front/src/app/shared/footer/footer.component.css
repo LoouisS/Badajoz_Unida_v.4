@@ -59,21 +59,21 @@ img:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Agrega esta línea para centrar verticalmente */
-    height: 100%; /* Ajusta la altura para que ocupe toda la altura disponible */
+    justify-content: center; 
+    height: 100%; 
   }
 
   .col-10 {
-    display: flex; /* Establece como flex para ajustar el ancho y alto */
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
-    flex-basis: 100%; /* Ocupa todo el ancho disponible */
-    margin: 0 0 20px; /* Elimina el margen horizontal y agrega margen inferior */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-basis: 100%; 
+    margin: 0 0 20px; 
   }
 
   .col-10 img {
-    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
-    height: auto; /* Establece la altura automática para mantener la proporción */
+    width: 100%; 
+    height: auto; 
   }
 
   footer {
