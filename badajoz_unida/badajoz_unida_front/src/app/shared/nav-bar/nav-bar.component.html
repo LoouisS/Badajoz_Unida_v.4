@@ -20,6 +20,17 @@
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.events}}</span>
     </li>
+    <li class="d-md-none mx-0">
+      <div class="perfil perfil-mobile" aria-expanded="false">
+        <div class="perfil-detalles ms-2">
+          <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">
+            <span class="user-initials">{{nombreUsuario | inicialesNombre}}</span>
+            <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
+          </div>
+          <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
+        </div>
+      </div>
+    </li>
     <li class="mx-0">
       <div class="rounded-pill" [routerLink]="['/mis-eventos']">
         <span class="nav-icon fa-regular fa-calendar-check"></span>
@@ -64,7 +75,7 @@
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión usuarios</span>
     </li>
   </ul>
-  <div class="perfil-container dropdown">
+  <div class="perfil-container dropdown d-none d-md-block">
     <div class="perfil" data-bs-toggle="dropdown" aria-expanded="false">
       <div class="perfil-detalles">
         <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">

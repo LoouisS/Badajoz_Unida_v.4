@@ -55,7 +55,7 @@ aside ul li{
   line-height: 50px;
 }
 
-aside ul li div{
+aside ul li div:not(:last-child){
   min-width: 50px;
   min-height: 50px;
   color: white;
@@ -63,11 +63,6 @@ aside ul li div{
   align-items: center;
   transition: all .4s ease-in;
   cursor: pointer;
-}
-
-aside ul li div:hover{
-  color: var(--primary-color);
-  background-color: white;
 }
 
 .nav-icon{
@@ -120,8 +115,18 @@ li:hover .nav-tip{
   bottom: 0;
   width: 100%;
   padding: 15px 10px;
-  color: white;
+  color: #D10000;
   background-color: var(--primary-color-dark);
+}
+
+.perfil-mobile{
+  color: #D10000 !important;
+  min-width: 50px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  transition: all .4s ease-in;
+  cursor: pointer;
 }
 
 .perfil-container .perfil{
@@ -163,14 +168,15 @@ li:hover .nav-tip{
 /* Estilo para ocultar el icono cuando no hay hover */
 .log-text .logout-icon {
   display: none;
+  padding-top: 3px;
 }
 
 /* Estilos para ocultar las iniciales y mostrar el icono al hacer hover */
-.log-text:hover .user-initials {
+aside:hover .user-initials {
   display: none; /* Oculta las iniciales */
 }
 
-.log-text:hover .logout-icon {
+aside:hover .logout-icon {
   display: block; /* Muestra el icono de logout */
 }
 
@@ -225,8 +231,9 @@ li:hover .nav-tip{
   .nav-bar {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    
   }
 
   aside {
@@ -258,9 +265,10 @@ li:hover .nav-tip{
   }
 
   .nav-bar li {
-    margin: 0 !important;
-
+    margin: 2px !important;
   }
+
+  
 
   .perfil-container.dropdown {
     flex-grow: 1;
@@ -275,16 +283,26 @@ li:hover .nav-tip{
   }
 
   .col-3.perfil-img.rounded-pill.log-text {
-    width: 30px !important;
-    height: 30px !important;
+    width: 35px !important;
+    height: 35px !important;
 
+  }
+  
+  .logout-icon {
+    font-size: 0.9rem !important;
+  }
+
+  span.user-initials{
+    font-size: 0.9rem;
   }
 
   .fa-solid.fa-bars.me-1.d-flex.align-items-center.justify-content-center.rounded-pill {
     display: none !important;
   }
 
-
+.perfil-li{
+  margin-left: 5px !important;
+}
 
 }
 
