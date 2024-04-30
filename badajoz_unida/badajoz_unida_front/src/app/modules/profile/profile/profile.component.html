@@ -58,8 +58,10 @@
             </div>
           </div>
           <div class="card-footer py-3 d-flex justify-content-end">
-            <button class="btn bgGeneral rounded-pill w-25 py-2" type="submit" [attr.disabled]="formProfile.invalid ? true : null">{{ resources.saveChanges}}</button>
-            <button class="btn rounded-pill w-25 py-2" type="button" (click)="eliminarCuenta(usuario?.id)"> {{resources.deleteAcc}}</button>
+            <div class="button-container">
+              <button class="btn bgGeneral rounded-pill py-2" type="submit" [attr.disabled]="formProfile.invalid ? true : null">{{ resources.saveChanges}}</button>
+              <button class="btn rounded-pill py-2" type="button" (click)="eliminarCuenta(usuario?.id)">{{resources.deleteAcc}}</button>
+            </div>
           </div>
         </div>
       </form>

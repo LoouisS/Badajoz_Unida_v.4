@@ -47,7 +47,7 @@ export class NavBarComponent extends LocalizedComponent implements OnInit{
    Método que detecta si el menú de navegación esta abierto o cerrado
    **/
   toggleMenu(){
-    this.isOpened = this.isOpened ? false : true;
+    this.isOpened = !this.isOpened;
     this.isOpened ? this.menuOpened.emit(240) : this.menuOpened.emit(78);
   }
 
@@ -57,5 +57,6 @@ export class NavBarComponent extends LocalizedComponent implements OnInit{
   cerrarSesion(){
     this._tokenService.logOut();
   }
+
 
 }

@@ -1,4 +1,4 @@
-<aside class="py-3 px-3 d-none d-md-block" #navBar [ngClass]="{'menu-abierto px-4': isOpened}">
+<aside class="py-3 px-3" #navBar [ngClass]="{'menu-abierto px-4': isOpened}">
   <div class="logo-container">
     <div class="logo col-12">
       <span *ngIf="isOpened">Badajoz Unida</span>
@@ -34,38 +34,35 @@
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.profile}}</span>
     </li>
-    <div *ngIf="isAdmin">
-      <hr />
-      <li class="mx-0">
-        <div class="rounded-pill" [routerLink]="['/gestion-eventos']">
-          <span class="nav-icon fa-solid fa-calendar-days"></span>
-          <span *ngIf="isOpened" class="name-nav-link">Gestión eventos</span>
-        </div>
-        <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión eventos</span>
-      </li>
-      <li class="mx-0">
-        <div class="rounded-pill" [routerLink]="['/gestion-categorias']">
-          <span class="nav-icon fa-solid fa-tag"></span>
-          <span *ngIf="isOpened" class="name-nav-link">Gestión categorías</span>
-        </div>
-        <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión categorías</span>
-      </li>
-      <li class="mx-0">
-        <div class="rounded-pill" [routerLink]="['/gestion-intereses']">
-          <span class="nav-icon fa-solid fa-heart"></span>
-          <span *ngIf="isOpened" class="name-nav-link">Gestión intereses</span>
-        </div>
-        <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión intereses</span>
-      </li>
-      <li class="mx-0">
-        <div class="rounded-pill" [routerLink]="['/gestion-usuarios']">
-          <span class="nav-icon fa-solid fa-users"></span>
-          <span *ngIf="isOpened" class="name-nav-link">Gestión usuarios</span>
-        </div>
-        <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión usuarios</span>
-      </li>
-      <hr />
-    </div>
+    <hr *ngIf="isAdmin" />
+    <li class="mx-0" *ngIf="isAdmin">
+      <div class="rounded-pill" [routerLink]="['/gestion-eventos']">
+        <span class="nav-icon fa-solid fa-calendar-days"></span>
+        <span *ngIf="isOpened" class="name-nav-link">Gestión eventos</span>
+      </div>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión eventos</span>
+    </li>
+    <li class="mx-0" *ngIf="isAdmin">
+      <div class="rounded-pill" [routerLink]="['/gestion-categorias']">
+        <span class="nav-icon fa-solid fa-tag"></span>
+        <span *ngIf="isOpened" class="name-nav-link">Gestión categorías</span>
+      </div>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión categorías</span>
+    </li>
+    <li class="mx-0" *ngIf="isAdmin">
+      <div class="rounded-pill" [routerLink]="['/gestion-intereses']">
+        <span class="nav-icon fa-solid fa-heart"></span>
+        <span *ngIf="isOpened" class="name-nav-link">Gestión intereses</span>
+      </div>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión intereses</span>
+    </li>
+    <li class="mx-0" *ngIf="isAdmin">
+      <div class="rounded-pill" [routerLink]="['/gestion-usuarios']">
+        <span class="nav-icon fa-solid fa-users"></span>
+        <span *ngIf="isOpened" class="name-nav-link">Gestión usuarios</span>
+      </div>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión usuarios</span>
+    </li>
   </ul>
   <div class="perfil-container dropdown">
     <div class="perfil" data-bs-toggle="dropdown" aria-expanded="false">
