@@ -25,10 +25,10 @@ aside > ul > li:hover{
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* White glow */
 }
 
-
 .name-nav-link{
   font-size: 0.8rem;
 }
+
 .menu-abierto{
   width: 240px;
   color: white;

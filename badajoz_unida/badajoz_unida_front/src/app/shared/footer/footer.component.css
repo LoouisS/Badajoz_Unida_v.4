@@ -14,12 +14,45 @@ h1 > span {
   color: var(--primary-color);
 }
 
+.fs-7{
+  font-size: 0.8rem;
+}
+
+.padding-phone{
+  padding-top: 7px;
+}
+
+.fit-img{
+  width: 30% !important;
+}
+
 img {
-  width: 50%;
+  display: inline !important;
+  width: 45%;
   height: auto;
   filter: grayscale(1);
   transition: all .5s ease;
   cursor: pointer;
+}
+
+.red-color{
+  color: #D10000 !important;
+}
+
+.h-fit{
+  height: fit-content;
+}
+
+.w-35 {
+  width: 25%;
+}
+
+.min-h{
+  height: 80px;
+}
+
+div {
+  border-radius: 10px;
 }
 
 img:hover {
@@ -59,21 +92,21 @@ img:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
-    height: 100%; 
+    justify-content: center;
+    height: 100%;
   }
 
   .col-10 {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
-    flex-basis: 100%; 
-    margin: 0 0 20px; 
+    flex-basis: 100%;
+    margin: 0 0 20px;
   }
 
   .col-10 img {
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
   }
 
   footer {
