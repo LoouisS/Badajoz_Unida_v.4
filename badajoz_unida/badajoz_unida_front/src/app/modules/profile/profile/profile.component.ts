@@ -4,31 +4,30 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {UsuariosService} from "../../../services/usuarios.service";
-import {IdiomasService} from "../../../services/idiomas.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlertsService} from "../../../services/alerts.service";
-import Swal from "sweetalert2";
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { IdiomasService } from '../../../services/idiomas.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertsService } from '../../../services/alerts.service';
+import Swal from 'sweetalert2';
 import { LocalizedComponent } from 'src/app/config/localize.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 
 /**
  Vista del perfil del usuario
  **/
-export class ProfileComponent extends LocalizedComponent implements OnInit{
-
+export class ProfileComponent extends LocalizedComponent implements OnInit {
   @ViewChild('editarIntereses') editarIntereses: TemplateRef<any>;
   formProfile: FormGroup;
   usuario: any;
-  idiomas: any
+  idiomas: any;
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -36,9 +35,9 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     stopKeydownPropagation: true,
     customClass: {
       confirmButton: 'btn btn-danger',
-      cancelButton: 'btn btn-light'
+      cancelButton: 'btn btn-light',
     },
-    buttonsStyling: false
+    buttonsStyling: false,
   });
 
   /**
@@ -56,7 +55,7 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     private modalService: NgbModal,
     private alertsService: AlertsService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     super();
   }
@@ -69,10 +68,10 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     this._usuarioService.getDatosUsuario().subscribe((data: any) => {
       this.usuario = data;
       this.cargarFormulario();
-    })
+    });
     this._idiomasService.getIdiomas().subscribe((data: any) => {
       this.idiomas = data;
-    })
+    });
   }
 
   /**
@@ -82,75 +81,81 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     this.formProfile = this.formBuilder.group({
       tlf: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ],
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
       ],
-      idiomaId: [
-        null,
-        [
-          Validators.required
-        ],
-      ],
+      idiomaId: [null, [Validators.required]],
       email: [
         '',
         [
           Validators.email,
           Validators.pattern(
-            /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
+            /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
           ),
         ],
-      ]
+      ],
     });
   }
 
   /**
    Método que carga los datos en el formulario
    **/
-  cargarFormulario(){
+  cargarFormulario() {
     this.formProfile.setValue({
       tlf: this.usuario?.telefono,
       email: this.usuario?.email,
-      idiomaId: this.usuario?.idiomaId
-    })
+      idiomaId: this.usuario?.idiomaId,
+    });
   }
 
   /**
    Método que guarda los cambios en los datos del usuario
    @param formProfile {FormBuilder} Datos del formulario reactivo
    **/
-  async cambiarDatosUsuario(formProfile: FormGroup){
+  async cambiarDatosUsuario(formProfile: FormGroup) {
     this.confirmationService.confirm({
       message: `${this.resources.saveMessage}`,
       header: `${this.resources.saveConfirmation}`,
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: 'p-button-text p-button-text',
       rejectButtonStyleClass: 'p-button-danger p-button-text',
-      acceptLabel: 'Sí',
-      rejectLabel: 'No',
+      acceptLabel: `${this.resources.yes}`,
+      rejectLabel: `${this.resources.no}`,
       acceptIcon: 'none',
       rejectIcon: 'none',
       accept: () => {
-        let controles:any = Object.keys(this.formProfile.controls);
-        let datos:any = {};
+        let controles: any = Object.keys(this.formProfile.controls);
+        let datos: any = {};
         Object.values(this.formProfile.controls).forEach((control, index) => {
-          if(controles[index] == "idiomaId"){
+          if (controles[index] == 'idiomaId') {
             datos.idioma = { idiomaId: control.value };
           }
           datos[controles[index]] = control.value;
         });
-        this._usuarioService.saveChanges(datos).subscribe((data: any) => {
-          this._usuarioService.setUser(datos);
-          this.messageService.add({severity:'success', summary:`${this.resources.changesSaved}`, detail:`${this.resources.saveInfo}`}); 
-        }, error => {
-          this.messageService.add({severity:'error', summary:`${this.resources.saveChanges}`, detail:`${this.resources.notSaveInfo}`});
-        });
+        this._usuarioService.saveChanges(datos).subscribe(
+          (data: any) => {
+            this._usuarioService.setUser(datos);
+            this.messageService.add({
+              severity: 'success',
+              summary: `${this.resources.changesSaved}`,
+              detail: `${this.resources.saveInfo}`,
+            });
+          },
+          (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: `${this.resources.saveChanges}`,
+              detail: `${this.resources.notSaveInfo}`,
+            });
+          },
+        );
       },
       reject: () => {
-        this.messageService.add({severity:'info', summary:`${this.resources.saveChanges}`, detail:`${this.resources.notSaveInfo}`});
-      }
+        this.messageService.add({
+          severity: 'info',
+          summary: `${this.resources.saveChanges}`,
+          detail: `${this.resources.notSaveInfo}`,
+        });
+      },
     });
     // let respuesta = await this.alertsService.askConfirmation('Guardar cambios', '¿Estas seguro de querer guardar estos cambios?');
     // if(respuesta){
@@ -170,19 +175,22 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     //   }, error => {
     //     this.alertsService.showInfoAlert('Guardar cambios', 'No se han podido guardar los cambios');
     //   });
-    }
+  }
 
   /**
    Método que muestra el modal para modificar intereses
    **/
-  mostrarModalIntereses(){
-    this.modalService.open(this.editarIntereses, {size: 'lg', backdrop: 'static'});
+  mostrarModalIntereses() {
+    this.modalService.open(this.editarIntereses, {
+      size: 'lg',
+      backdrop: 'static',
+    });
   }
 
   /**
    Cerrar el modal de modificación de intereses
    **/
-  cerrarModalIntereses(){
+  cerrarModalIntereses() {
     this.modalService.dismissAll(this.editarIntereses);
   }
 
@@ -232,28 +240,32 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
    * @param userId
    */
   eliminarCuenta(userId: number) {
-    this.alert.fire({
-      title: "¿Seguro que deseas eliminar tu cuenta?",
-      text: "Tu cuenta se eliminará de forma permanente en la aplicación"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.alert.fire({
-          title: 'Espere mientras procesamos su solicitud',
-          didOpen(popup: HTMLElement) {
-            Swal.showLoading();
-          }
-        })
+    this.confirmationService.confirm({
+      message: `${this.resources.deleteAccountMessage}`,
+      header: `${this.resources.deleteAccountHeader}`,
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptLabel: `${this.resources.yes}`,
+      rejectLabel: `${this.resources.no}`,
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
         this._usuarioService.deleteUser(userId).subscribe((data) => {
-          this.alert.fire({
-            title: 'Eliminado con éxito!',
-            text: 'Tu cuenta ha sido eliminada correctamente, deseamos volver a contar contigo cuando quieras.',
-            icon: 'success',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
-        })
-      }
+            this.messageService.add({
+              severity: 'success',
+              summary: `${this.resources.accountDeleted}`,
+              detail: `${this.resources.accountDeletedInfo}`,
+            });
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: `${this.resources.warning}`,
+          detail: `${this.resources.accountNotDeleted}`,
+        });
+      },
     });
   }
 }

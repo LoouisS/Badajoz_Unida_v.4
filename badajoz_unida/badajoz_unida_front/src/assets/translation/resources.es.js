@@ -44,10 +44,16 @@ export const resources = {
   'myEventsInfo': 'Gestiona y mira los eventos a los que te has apuntado',
   'profile': 'Perfil',
   'profileInfo': 'Gestiona y actualiza tus datos',
+  'deleteAccountHeader': '¿Seguro de que deseas eliminar tu cuenta?',
+  'deleteAccountMessage': 'Tu cuenta se eliminará permanentemente',
+  'accountDeleted': 'Cuenta eliminada',
+  'accountDeletedInfo': 'Tu cuenta ha sido eliminada con éxito',
+  'accountNotDeleted': 'Cuenta no eliminada',
+  'warning': 'Atención',
   // NAVBAR
   'home': 'Inicio',
   'logOut': 'Cerrar sesión',
-  'eventManagement': 'Gestión de eventos',  
+  'eventManagement': 'Gestión de eventos',
   'categoryManagement': 'Gestión de categorías',
   'interestManagement': 'Gestión de intereses',
   'userManagement': 'Gestión de usuarios',
@@ -56,7 +62,7 @@ export const resources = {
   // GESTION DE CATEGORIAS
   'searchFilters': 'Filtros de búsqueda',
   'title': 'Título',
-  'active': 'Activo', 
+  'active': 'Activo',
   'filter': 'Filtrar',
   'createCategory': 'Crear categoría',
   'description': 'Descripción',
@@ -73,5 +79,8 @@ export const resources = {
   'saveInfo': 'Cambios guardados con éxito',
   'notSaveInfo': 'No se han guardado los cambios',
   'changesSaved': 'Cambios guardados',
+  // GLOBAL
+  'yes': 'Sí',
+  'no': 'No',
 }
 

@@ -44,6 +44,12 @@ export const resources = {
   'myEventsInfo': 'Manage and view the events you have signed up for',
   'profile': 'Profile',
   'profileInfo': 'Manage and update your data',
+  'deleteAccountHeader': 'Are you sure you want to delete your account?',
+  'deleteAccountMessage': 'Your account will be permanently deleted',
+  'accountDeleted': 'Account deleted',
+  'accountDeletedInfo': 'Your account has been successfully deleted',
+  'accountNotDeleted': 'Account not deleted',
+  'warning': 'Warning',
   // NAVBAR
   'home': 'Home',
   'logOut': 'Logout',
@@ -73,4 +79,7 @@ export const resources = {
   'saveInfo': 'Changes saved successfully',
   'notSaveInfo': 'Changes have not been saved',
   'changesSaved': 'Changes saved',
+  // GLOBAL
+  'yes': 'Yes',
+  'no': 'No',
 }

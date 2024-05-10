@@ -66,4 +66,12 @@ export abstract class Resources {
   public static saveInfo: string = null;
   public static notSaveInfo: string = null;
   public static changesSaved: string = null;
+  public static yes: string = null;
+  public static no: string = null;
+  public static deleteAccountMessage: string = null;
+  public static deleteAccountHeader: string = null;
+  public static accountDeleted: string = null;
+  public static accountDeletedInfo: string = null;
+  public static accountNotDeleted: string = null;
+  public static warning: string = null;
 }
