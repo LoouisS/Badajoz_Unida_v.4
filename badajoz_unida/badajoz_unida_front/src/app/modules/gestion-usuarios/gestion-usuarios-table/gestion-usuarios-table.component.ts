@@ -10,6 +10,7 @@ import {DataTableDirective} from "angular-datatables";
 import {Subject} from "rxjs";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-gestion-usuarios-table',
@@ -20,7 +21,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 /**
  Vista con la tablas para gestionar los datos de los usuarios
  **/
-export class GestionUsuariosTableComponent implements OnInit{
+export class GestionUsuariosTableComponent extends LocalizedComponent implements OnInit{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   dtTrigger: Subject<any> = new Subject<any>();
@@ -46,7 +47,7 @@ export class GestionUsuariosTableComponent implements OnInit{
    @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
    **/
   constructor(private usuarioService: UsuariosService, private formBuilder: FormBuilder) {
-
+super();
   }
 
   /**
@@ -70,9 +71,12 @@ export class GestionUsuariosTableComponent implements OnInit{
     $(this.table.nativeElement).DataTable().destroy();
     this.dtOptions = {
       paging: true,
+      pagingType: 'numbers',
+      resposive: true,
       searching: false,
       ordering: true,
-      info: true,
+      info: false,
+      lengthChange: false,
       destroy: true
     };
     setTimeout(() => {

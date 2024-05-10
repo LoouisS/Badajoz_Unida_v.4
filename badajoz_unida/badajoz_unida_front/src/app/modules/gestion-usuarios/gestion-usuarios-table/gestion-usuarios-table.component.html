@@ -1,13 +1,13 @@
 <div class="card mx-4 my-4">
   <div>
     <div class="card-header bgGeneral">
-      Filtros de búsqueda:
+      {{resources.searchFilters}}
     </div>
     <div class="card-body">
       <form class="col-12" [formGroup]="formFilter" (ngSubmit)="filterUsuarios()">
         <div class="d-flex col-12">
           <div class="d-flex mb-3 col-5 me-5">
-            <label for="nombreUsuario" class="form-label pt-2 me-3">Nombre</label>
+            <label for="nombreUsuario" class="form-label pt-2 me-3">{{resources.nombre}}</label>
             <input formControlName="nombreUsuario" type="text" class="form-control" id="nombreUsuario" aria-describedby="emailHelp">
           </div>
           <div class="d-flex mb-3 col-5">
@@ -21,7 +21,7 @@
             <input formControlName="email" type="text" class="form-control" id="mail" aria-describedby="emailHelp">
           </div>
           <div class="col-5 mb-3 d-flex">
-            <label for="rol" class="form-label pt-2 me-3">Rol</label>
+            <label for="rol" class="form-label pt-2 me-3">{{resources.rol}}</label>
             <select  formControlName="rol" class="form-control" id="rol" >
               <optgroup>
                 <option value="2">Usuario</option>
@@ -31,24 +31,24 @@
           </div>
         </div>
         <div class="mt-3">
-          <button type="submit" class="btn bgGeneral">Filtrar</button>
+          <button type="submit" class="btn bgGeneral">{{resources.filter}}</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
+<div class="px-custom fs-6" [ngClass]="{'d-none': loading}">
   <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
       <th class="col-1"></th>
       <th class="col-1">Id</th>
-      <th class="col-2">Nombre</th>
-      <th class="col-2">Apellidos</th>
-      <th class="col-2">Nombre de usuario</th>
+        <th class="col-2">{{resources.nombre}}</th>
+        <th class="col-2">{{resources.surname}}</th>
+        <th class="col-2">{{resources.username}}</th>
       <th class="col-1">Email</th>
-      <th class="col-1">Tlf</th>
-      <th class="col-1">Fech.Nacimiento</th>
+        <th class="col-1">{{resources.phone}}</th>
+        <th class="col-1">{{resources.birthdate}}</th>
       <th class="col-1"></th>
     </tr>
     </thead>

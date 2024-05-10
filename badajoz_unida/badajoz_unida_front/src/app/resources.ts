@@ -74,4 +74,8 @@ export abstract class Resources {
   public static accountDeletedInfo: string = null;
   public static accountNotDeleted: string = null;
   public static warning: string = null;
+  public static nombre: string = null;
+  public static rol: string = null;
+  public static usernarme: string = null;
+  public static birthdate: string = null;
 }

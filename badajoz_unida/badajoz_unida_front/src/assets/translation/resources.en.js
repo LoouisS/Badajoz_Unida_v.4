@@ -19,7 +19,7 @@ export const resources = {
   'email': 'Email',
   'repeatPw': 'Repeat password',
   'birth': 'Date of birth',
-  'phone': 'Contact phone',
+  'phone': 'phone',
   'lang': 'Preferred language',
   'selectLang': 'Select a language',
   'continue': 'Continue',
@@ -73,6 +73,11 @@ export const resources = {
   'category': 'Category',
   'modifyInterest': 'Modify interest',
   'deleteInterest': 'Delete interest',
+  // GESTION DE USUARIOS
+  'nombre': 'Name',
+  'rol': 'Role',
+  'username': 'Username',
+  'birthdate': 'birth',
   // MESSAGE SERVICE
   'saveMessage': 'Are you sure you want to save the changes?',
   'saveConfirmation': 'Save confirmation',
