@@ -28,6 +28,8 @@ export class EventosService {
    **/
   constructor(private httpClient: HttpClient) { }
 
+  // TODO: terminar de comentar esto
+
   /**
    Método que obtiene la lsita de eventos más recientes
    @return {Observable}

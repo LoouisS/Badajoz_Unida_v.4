@@ -1,36 +1,36 @@
 <div class="card mx-4 my-4">
   <div>
     <div class="card-header bgGeneral">
-      Filtros de búsqueda:
+      {{resources.searchFilters}}
     </div>
     <div class="card-body">
       <form class="col-12"[formGroup]="formFilter" (ngSubmit)="filterIntereses()">
         <div class="d-flex col-12">
           <div class="d-flex mb-3 col-5 me-5">
-            <label for="titulo" class="form-label pt-2 me-3">Titulo</label>
+            <label for="titulo" class="form-label pt-2 me-3">{{resources.title}}</label>
             <input formControlName="titulo" type="text" class="form-control" id="titulo" aria-describedby="emailHelp">
           </div>
           <div class="mb-3 form-check">
             <input type="checkbox" formControlName="activo" class="form-check-input" id="activo" aria-describedby="emailHelp">
-            <label class="form-check-label" for="activo">Activo</label>
+            <label class="form-check-label" for="activo">{{resources.active}}</label>
           </div>
         </div>
-        <button type="submit" class="btn bgGeneral">Filtrar</button>
+        <button type="submit" class="btn bgGeneral">{{resources.filter}}</button>
         <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createInteresModal">
-          Crear Interés
+          {{resources.createInterest}}
         </button>
       </form>
     </div>
   </div>
 </div>
-<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
+<div class="px-custom fs-6" [ngClass]="{'d-none': loading}">
   <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
       <th class="col-1"></th>
-      <th class="col-4">Titulo</th>
-      <th class="col-5">Descripción</th>
-      <th class="col-1">Categoria</th>
+      <th class="col-4">{{resources.title}}</th>
+      <th class="col-5">{{resources.description}}</th>
+      <th class="col-1">{{resources.category}}</th>
       <th class="col-1"></th>
     </tr>
     </thead>
@@ -64,21 +64,43 @@
       <td class="col-4">{{interes?.titulo}}</td>
       <td class="col-5">{{interes?.descripcion}}</td>
       <td class="col-5">{{interes?.categoria?.titulo}}</td>
-      <td class="col-1">
+      <td class="text-end px-0">
         <div class="dropdown">
-          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu">
-            <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer h6"  data-bs-toggle="modal" data-bs-target="#createInteresModal" (click)="editInteres(interes)"></i>
-              <span class="ms-2 fs-6">Modificar interés</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteInteres(interes)"></i>
-              <span class="ms-2 fs-6">Eliminar interés</span>
-            </li>
-          </ul>
+            <button
+                class="btn btn-link"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                <i class="fa-solid fa-ellipsis-vertical" style="color: red;"></i>
+            </button>
+            <ul
+                class="dropdown-menu dropdown-menu-right position-absolute py-0"
+                aria-labelledby="navbarDropdownMenuLink"
+            >
+                <li>
+                    <button
+                        class="dropdown-item border-bottom py-3"
+                        (click)="editInteres(interes)"
+                        data-bs-toggle="modal"
+                        data bs-target="#createInteresModal"
+                    >
+                        <i class="fa-solid fa-pen-to-square me-2"></i>{{resources.modifyInterest}}
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class="dropdown-item py-3"
+                        (click)="deleteInteres(interes)"
+                    >
+                        <i class="fa-solid fa-trash me-2"></i>{{resources.deleteInterest}}
+                    </button>
+                </li>
+            </ul>
         </div>
-      </td>
+    </td>
     </tr>
     </tbody>
   </table>

@@ -1,75 +1,129 @@
 <div class="card mx-4 my-4">
   <div>
-    <div class="card-header bgGeneral">
-      Filtros de búsqueda:
-    </div>
+    <div class="card-header bgGeneral">{{resources.searchFilters}}</div>
     <div class="card-body">
-      <form class="col-12"[formGroup]="formFilter" (ngSubmit)="filterCategorias()">
+      <form
+        class="col-12"
+        [formGroup]="formFilter"
+        (ngSubmit)="filterCategorias()"
+      >
         <div class="d-flex col-12">
           <div class="d-flex mb-3 col-5 me-5">
-            <label for="titulo" class="form-label pt-2 me-3">Titulo</label>
-            <input formControlName="titulo" type="text" class="form-control" id="titulo" aria-describedby="emailHelp">
+            <label for="titulo" class="form-label pt-2 me-3">{{resources.title}}</label>
+            <input
+              formControlName="titulo"
+              type="text"
+              class="form-control"
+              id="titulo"
+              aria-describedby="emailHelp"
+            />
           </div>
           <div class="mb-3 form-check">
-            <input type="checkbox" formControlName="activo" class="form-check-input" id="activo" aria-describedby="emailHelp">
-            <label class="form-check-label" for="activo">Activo</label>
+            <input
+              type="checkbox"
+              formControlName="activo"
+              class="form-check-input"
+              id="activo"
+              aria-describedby="emailHelp"
+            />
+            <label class="form-check-label" for="activo">{{resources.active}}</label>
           </div>
         </div>
-        <button type="submit" class="btn bgGeneral">Filtrar</button>
-        <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#createCatModal">
-          Crear categoría
+        <button type="submit" class="btn bgGeneral">{{resources.filter}}</button>
+        <button
+          type="button"
+          class="btn btn-primary ms-2"
+          data-bs-toggle="modal"
+          data-bs-target="#createCatModal"
+        >
+           {{resources.createCategory}}
         </button>
       </form>
     </div>
   </div>
 </div>
-<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
-  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<div class="px-custom fs-6" [ngClass]="{ 'd-none': loading }">
+  <table
+    #dataTable
+    class="w-100 table table-striped"
+    datatable
+    [dtOptions]="dtOptions"
+    [dtTrigger]="dtTrigger"
+  >
     <thead class="bgGeneral">
-    <tr>
-      <th class="col-1"></th>
-      <th class="col-4">Titulo</th>
-      <th class="col-5">Descripción</th>
-      <th class="col-1"></th>
-    </tr>
+      <tr>
+        <th class="col-1"></th>
+        <th class="col-4">{{resources.title}}</th>
+        <th class="col-5">{{resources.description}}</th>
+        <th class="col-1"></th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let cat of categorias">
-      <td class="col-1 text-center">
-        <div class="text-center pt-2 d-flex">
-          <i class="fa-solid fa-circle me-2" [ngClass]="cat?.activo ? 'text-success':'text-warning'" ></i>
-          <div class="btn-group text-center" >
-            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <li  class="text-center" *ngFor="let interes of cat?.intereses">
-                <span class="badge rounded-pill text-bg-danger">
-                  {{interes?.titulo}}
-                </span>
+      <tr *ngFor="let cat of categorias">
+        <td class="col-1 text-center">
+          <div class="text-center pt-2 d-flex">
+            <i
+              class="fa-solid fa-circle me-2"
+              [ngClass]="cat?.activo ? 'text-success' : 'text-warning'"
+            ></i>
+            <div class="btn-group text-center">
+              <i
+                class="fa-solid fa-fire me-2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></i>
+              <ul class="dropdown-menu">
+                <li class="text-center" *ngFor="let interes of cat?.intereses">
+                  <span class="badge rounded-pill text-bg-danger">
+                    {{ interes?.titulo }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </td>
+        <td class="col-4">{{ cat?.titulo }}</td>
+        <td class="col-5">
+          {{ cat?.descripcion | cortarTexto : 100 }}
+        </td>
+        <td class="text-end px-0">
+          <div class="dropdown">
+            <button
+              class="btn btn-link"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fa-solid fa-ellipsis-vertical" style="color: red;"></i>
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-right position-absolute py-0"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <button
+                  class="dropdown-item border-bottom py-3"
+                  (click)="editCategoria(cat)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#createCatModal"
+                >
+                  <i class="fa-solid fa-pen-to-square me-2"></i>{{resources.modifyCategory}}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item py-3"
+                  (click)="eliminarCategoria(cat?.categoriaId, cat)"
+                >
+                  <i class="fa-solid fa-trash me-2"></i> {{resources.deleteCategory}}
+                </button>
               </li>
             </ul>
           </div>
-        </div>
-      </td>
-      <td class="col-4">{{cat?.titulo}}</td>
-      <td class="col-5" >
-        {{cat?.descripcion | cortarTexto:100}}
-      </td>
-      <td class="col-1">
-        <div class="dropdown">
-          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu">
-            <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer h6" (click)="editCategoria(cat)" data-bs-toggle="modal" data-bs-target="#createCatModal"></i>
-              <span class="ms-2 fs-6">Modificar categoría</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-trash cursorPointer h6" (click)="eliminarCategoria(cat?.categoriaId, cat)"></i>
-              <span class="ms-2 fs-6">Eliminar categoría</span>
-            </li>
-          </ul>
-        </div>
-      </td>
-    </tr>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -77,4 +131,3 @@
   <app-loading></app-loading>
 </div>
 <app-crear-categoria></app-crear-categoria>
-

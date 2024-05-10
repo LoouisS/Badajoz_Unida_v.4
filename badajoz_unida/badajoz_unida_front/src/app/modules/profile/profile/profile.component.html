@@ -83,6 +83,8 @@
 </main>
 <div class="footer-padding">
 </div>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+<p-confirmDialog></p-confirmDialog>
 <ng-template #editarIntereses>
   <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses>
 </ng-template>

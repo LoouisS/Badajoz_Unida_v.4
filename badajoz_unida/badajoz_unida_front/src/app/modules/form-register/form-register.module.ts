@@ -5,6 +5,7 @@ import { FormRegisterRoutingModule } from './form-register-routing.module';
 import { FormRegisterComponent } from './form-register/form-register.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
+    import { Comment } from '@angular/compiler';
 
 @NgModule({
   declarations: [

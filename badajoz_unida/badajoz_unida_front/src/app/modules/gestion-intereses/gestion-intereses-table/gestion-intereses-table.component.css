@@ -2,6 +2,12 @@
   cursor: pointer;
   background-color: #dadada;
 }
-.dropdown-menu{
-  width: 16.020833333333334vw;
+
+.px-custom{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.dropdown-menu > li {
+  font-size: 0.8rem;
 }

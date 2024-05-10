@@ -11,6 +11,7 @@ import {CategoriasService} from "../../../services/categorias.service";
 import {InteresesService} from "../../../services/intereses.service";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-gestion-intereses-table',
@@ -21,7 +22,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 /**
  Vista de la tabla con los datos de los intereses
  **/
-export class GestionInteresesTableComponent implements OnInit,OnDestroy{
+export class GestionInteresesTableComponent extends LocalizedComponent implements OnInit,OnDestroy{
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   formFilter!: FormGroup;
@@ -50,6 +51,7 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
    @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
    **/
   constructor(private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
+    super();
   }
 
   /**
@@ -76,9 +78,11 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
     });
     this.dtOptions = {
       paging: true,
+      pagingType: 'numbers',
       searching: true,
       ordering: true,
-      info: true,
+      info: false,
+      lengthChange: false,
       destroy: true
     };
     // @ts-ignore
@@ -100,7 +104,9 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
       paging: true,
       searching: false,
       ordering: true,
-      info: true,
+      info: false,
+      pagingType: 'numbers',
+      lengthChange: false,
       destroy: true
     };
     setTimeout(() => {

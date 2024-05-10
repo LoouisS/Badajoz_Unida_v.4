@@ -45,6 +45,25 @@ export abstract class Resources {
   public static home: string = null;
   public static logOut: string = null;
   public static meetUs: string = null;
-
+  public static eventManagement: string = null;
+  public static categoryManagement: string = null;
+  public static interestManagement: string = null;
+  public static userManagement: string = null;
+  public static searchFilters : string = null;
+  public static title : string = null;
+  public static active : string = null;
+  public static filter : string = null;
+  public static createCategory : string = null;
+  public static description : string = null;
+  public static modifyCategory : string = null;
+  public static deleteCategory : string = null;
+  public static createInterest : string = null;
+  public static category : string = null;
+  public static modifyInterest : string = null;
+  public static deleteInterest : string = null;
+  public static saveMessage : string = null;
+  public static saveConfirmation: string = null;
+  public static saveInfo: string = null;
+  public static notSaveInfo: string = null;
+  public static changesSaved: string = null;
 }
-

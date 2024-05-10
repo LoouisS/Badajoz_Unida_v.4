@@ -12,6 +12,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertsService} from "../../../services/alerts.service";
 import Swal from "sweetalert2";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
@@ -53,7 +54,9 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
     private _idiomasService: IdiomasService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
     super();
   }
@@ -119,26 +122,55 @@ export class ProfileComponent extends LocalizedComponent implements OnInit{
    @param formProfile {FormBuilder} Datos del formulario reactivo
    **/
   async cambiarDatosUsuario(formProfile: FormGroup){
-    let respuesta = await this.alertsService.askConfirmation('Guardar cambios', '¿Estas seguro de querer guardar estos cambios?');
-    if(respuesta){
-      let controles:any = Object.keys(this.formProfile.controls);
-      let datos:any = {};
-      Object.values(this.formProfile.controls).forEach((control, index) => {
-        if(controles[index] == "idiomaId"){
-          datos.idioma = { idiomaId: control.value };
-        }
-        datos[controles[index]] = control.value;
-      });
-      // console.log(datos);
-      this._usuarioService.saveChanges(datos).subscribe((data: any) => {
-        console.log(datos);
-        this._usuarioService.setUser(datos);
-        this.alertsService.showSuccessAlert('Guardar cambios', 'Cambios guardados exitosamente');
-      }, error => {
-        this.alertsService.showInfoAlert('Guardar cambios', 'No se han podido guardar los cambios');
-      });
+    this.confirmationService.confirm({
+      message: `${this.resources.saveMessage}`,
+      header: `${this.resources.saveConfirmation}`,
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-text p-button-text',
+      rejectButtonStyleClass: 'p-button-danger p-button-text',
+      acceptLabel: 'Sí',
+      rejectLabel: 'No',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        let controles:any = Object.keys(this.formProfile.controls);
+        let datos:any = {};
+        Object.values(this.formProfile.controls).forEach((control, index) => {
+          if(controles[index] == "idiomaId"){
+            datos.idioma = { idiomaId: control.value };
+          }
+          datos[controles[index]] = control.value;
+        });
+        this._usuarioService.saveChanges(datos).subscribe((data: any) => {
+          this._usuarioService.setUser(datos);
+          this.messageService.add({severity:'success', summary:`${this.resources.changesSaved}`, detail:`${this.resources.saveInfo}`}); 
+        }, error => {
+          this.messageService.add({severity:'error', summary:`${this.resources.saveChanges}`, detail:`${this.resources.notSaveInfo}`});
+        });
+      },
+      reject: () => {
+        this.messageService.add({severity:'info', summary:`${this.resources.saveChanges}`, detail:`${this.resources.notSaveInfo}`});
+      }
+    });
+    // let respuesta = await this.alertsService.askConfirmation('Guardar cambios', '¿Estas seguro de querer guardar estos cambios?');
+    // if(respuesta){
+    //   let controles:any = Object.keys(this.formProfile.controls);
+    //   let datos:any = {};
+    //   Object.values(this.formProfile.controls).forEach((control, index) => {
+    //     if(controles[index] == "idiomaId"){
+    //       datos.idioma = { idiomaId: control.value };
+    //     }
+    //     datos[controles[index]] = control.value;
+    //   });
+    //   // console.log(datos);
+    //   this._usuarioService.saveChanges(datos).subscribe((data: any) => {
+    //     console.log(datos);
+    //     this._usuarioService.setUser(datos);
+    //     this.alertsService.showSuccessAlert('Guardar cambios', 'Cambios guardados exitosamente');
+    //   }, error => {
+    //     this.alertsService.showInfoAlert('Guardar cambios', 'No se han podido guardar los cambios');
+    //   });
     }
-  }
 
   /**
    Método que muestra el modal para modificar intereses

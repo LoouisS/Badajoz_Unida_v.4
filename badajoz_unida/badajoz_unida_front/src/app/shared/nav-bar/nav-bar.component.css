@@ -12,6 +12,7 @@ aside{
 
 .menu-abierto{
   width: 240px;
+  color: white;
 }
 
 .logo-container .logo{
@@ -89,9 +90,9 @@ li .nav-tip{
   position: absolute;
   left: 75px;
   top: 0;
-  transform: translateY(-50%);
+  transform: translatey(-50%);
   height: 35px;
-  width: 175px;
+  width: auto;
   background-color: var(--primary-color);
   color: white;
   box-shadow: 0 5px 10px hsla(0, 0%, 0%, .2);
@@ -100,6 +101,10 @@ li .nav-tip{
   transition: 0s;
   opacity: 0;
   pointer-events: none;
+  white-space: nowrap;
+  overflow: visible;
+  min-width: 150px;
+  padding: 0 10px;
 }
 
 li:hover .nav-tip{
@@ -115,12 +120,12 @@ li:hover .nav-tip{
   bottom: 0;
   width: 100%;
   padding: 15px 10px;
-  color: #D10000;
+  color: #d10000;
   background-color: var(--primary-color-dark);
 }
 
 .perfil-mobile{
-  color: #D10000 !important;
+  color: #d10000 !important;
   min-width: 50px;
   min-height: 50px;
   display: flex;
@@ -165,19 +170,9 @@ li:hover .nav-tip{
   cursor: pointer;
 }
 
-/* Estilo para ocultar el icono cuando no hay hover */
-.log-text .logout-icon {
-  display: none;
-  padding-top: 3px;
-}
-
-/* Estilos para ocultar las iniciales y mostrar el icono al hacer hover */
-aside:hover .user-initials {
-  display: none; /* Oculta las iniciales */
-}
 
 aside:hover .logout-icon {
-  display: block; /* Muestra el icono de logout */
+  display: block; /* muestra el icono de logout */
 }
 
 /*.menu-container{*/
@@ -186,7 +181,7 @@ aside:hover .logout-icon {
 /*  bottom: 0;*/
 /*}*/
 
-/*!*======Header======*!*/
+/*!*======header======*!*/
 /*#menu{*/
 /*  height: 100vh;*/
 /*}*/
@@ -212,7 +207,7 @@ aside:hover .logout-icon {
 /*  width: 60px;*/
 /*}*/
 
-/*header .logo-container #nombreApp{*/
+/*header .logo-container #nombreapp{*/
 /*  color: var(--primary-color);*/
 /*  font-weight: bold;*/
 /*  font-size: 1.7rem;*/
@@ -233,7 +228,7 @@ aside:hover .logout-icon {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
+
   }
 
   aside {
@@ -268,7 +263,7 @@ aside:hover .logout-icon {
     margin: 2px !important;
   }
 
-  
+
 
   .perfil-container.dropdown {
     flex-grow: 1;
@@ -287,7 +282,7 @@ aside:hover .logout-icon {
     height: 35px !important;
 
   }
-  
+
   .logout-icon {
     font-size: 0.9rem !important;
   }

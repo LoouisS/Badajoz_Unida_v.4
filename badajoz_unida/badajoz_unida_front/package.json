@@ -31,6 +31,8 @@
     "jquery": "^3.7.1",
     "leaflet": "^1.9.3",
     "leaflet-control-geocoder": "^2.4.0",
+    "primeicons": "^6.0.1",
+    "primeng": "^14.0.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.7.5",
     "tslib": "^2.3.0",

@@ -15,10 +15,13 @@ import { Resources } from './resources';
 import { LanguageService } from './services/language.service';
 import localeEsExtra from '@angular/common/locales/extra/es';
 import { UsuariosService } from './services/usuarios.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Add this import statement
 
 
 registerLocaleData(localeEs);
-
 @NgModule({
   declarations: [
     AppComponent
@@ -28,10 +31,15 @@ registerLocaleData(localeEs);
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    ToastModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule // Add BrowserAnimationsModule to the imports array
   ],
   providers: [interceptorProvider,
-    NgbModal],
+    NgbModal,
+    MessageService,
+    ConfirmationService],
   exports: [
     AppComponent
   ],

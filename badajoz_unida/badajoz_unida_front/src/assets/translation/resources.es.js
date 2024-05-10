@@ -47,6 +47,31 @@ export const resources = {
   // NAVBAR
   'home': 'Inicio',
   'logOut': 'Cerrar sesión',
+  'eventManagement': 'Gestión de eventos',  
+  'categoryManagement': 'Gestión de categorías',
+  'interestManagement': 'Gestión de intereses',
+  'userManagement': 'Gestión de usuarios',
   // FOOTER
   'meetUs': 'Conócenos',
+  // GESTION DE CATEGORIAS
+  'searchFilters': 'Filtros de búsqueda',
+  'title': 'Título',
+  'active': 'Activo', 
+  'filter': 'Filtrar',
+  'createCategory': 'Crear categoría',
+  'description': 'Descripción',
+  'modifyCategory': 'Modificar categoría',
+  'deleteCategory': 'Eliminar categoría',
+  // GESTION DE INTERESES
+  'createInterest': 'Crear interés',
+  'category': 'Categoría',
+  'modifyInterest': 'Modificar interés',
+  'deleteInterest': 'Eliminar interés',
+  // MESSAGESERVICE
+  'saveMessage': '¿Estás seguro de que deseas guardar los cambios?',
+  'saveConfirmation': 'Confirmación de guardado',
+  'saveInfo': 'Cambios guardados con éxito',
+  'notSaveInfo': 'No se han guardado los cambios',
+  'changesSaved': 'Cambios guardados',
 }
+

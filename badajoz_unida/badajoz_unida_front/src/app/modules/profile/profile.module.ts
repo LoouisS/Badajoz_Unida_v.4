@@ -6,6 +6,9 @@ import { ProfileComponent } from './profile/profile.component';
 import {PipesModule} from "../../pipes/pipes.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ModalsModule} from "../../components/modals/modals.module";
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import {ModalsModule} from "../../components/modals/modals.module";
       ProfileRoutingModule,
       PipesModule,
       ReactiveFormsModule,
-      ModalsModule
+      ModalsModule,
+      ToastModule,
+      ConfirmDialogModule,
     ]
 })
 export class ProfileModule { }
