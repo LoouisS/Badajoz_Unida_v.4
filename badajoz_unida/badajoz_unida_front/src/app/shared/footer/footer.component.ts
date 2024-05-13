@@ -20,14 +20,25 @@ export class FooterComponent implements OnInit{
 
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();
+  routesMap: Record<string, boolean>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    const routesMap = {
+      '/perfil': true,
+      '/gestion-categorias': true,
+      '/gestion-intereses': true
+    };
+  }
 
   /**
    Método que inicializa la vista
    **/
   ngOnInit() {
     this.anio = new Date().getFullYear();
+    this.routesMap = {
+      '/perfil': true,
+      '/gestion-categorias': true
+    };
   }
 
   /**
@@ -37,8 +48,8 @@ export class FooterComponent implements OnInit{
     window.open(link, '_blank');
   }
 
-  isPerfilRoute(): boolean {
-    return this.router.url === '/perfil';
+  showFooter(): boolean {
+    return this.routesMap[this.router.url];
   }
 
 }

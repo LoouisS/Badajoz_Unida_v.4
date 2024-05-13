@@ -177,7 +177,45 @@ li:hover .nav-tip{
   display: block;
 }
 
+.dropdown-menu {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glowing-text .nav-icon {
+  color: white;
+}
+
+.dropdown-menu li a {
+  color: inherit;
+}
+
 @media (max-width: 767px) {
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    display: none;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 
   .nav-bar {
     display: flex;
@@ -245,3 +283,16 @@ li:hover .nav-tip{
 
 }
 
+@media (min-width: 768px) {
+  .perfil-container.dropdown {
+    position: static;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    top: auto;
+    bottom: 100%;
+    left: auto;
+    right: 0;
+  }
+}

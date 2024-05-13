@@ -23,6 +23,11 @@ export class NavBarComponent implements OnInit{
   @Output() menuOpened = new EventEmitter<number>();
   isOpened: boolean = false;
   isAdmin: boolean = false;
+  dropdownVisible = false;
+
+  isMobileScreen: boolean = window.matchMedia("(max-width: 767px)").matches;
+
+
 
 
   /**
@@ -30,6 +35,10 @@ export class NavBarComponent implements OnInit{
    @param _tokenService {TokenService} Servicio que gestiona el token de acceso
    **/
   constructor(private _tokenService: TokenService) {
+  }
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
   }
 
   /**
@@ -53,7 +62,7 @@ export class NavBarComponent implements OnInit{
    Método para cerrar la sesión del usuario
    **/
   cerrarSesion(){
-    this._tokenService.logOut();
+      this._tokenService.logOut();
   }
 
 

@@ -6,73 +6,88 @@
     <span class="fa-solid fa-bars me-1 d-flex align-items-center justify-content-center rounded-pill" #menu (click)="toggleMenu()"></span>
   </div>
   <ul class="nav-bar pt-3 ps-0 mt-4">
-    <li class="mx-0">
+    <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/']">
         <span class="nav-icon fa-solid fa-house"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Inicio</span>
+        <span *ngIf="isOpened" class="name-nav-link">Home</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Inicio</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Home</span>
     </li>
-    <li class="mx-0">
+    <li class="mx-0 glowing-text ">
       <div class="rounded-pill" [routerLink]="['/eventos']">
         <span class="nav-icon fa-solid fa-calendar-day"></span>
         <span *ngIf="isOpened" class="name-nav-link">Eventos</span>
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Eventos</span>
     </li>
-    <li class="mx-0">
+    <li class="d-md-none mx-0 glowing-text">
+      <div class="perfil perfil-mobile" aria-expanded="false">
+        <div class="perfil-detalles ms-2">
+          <div class="col-3 perfil-img rounded-pill log-text dropdown" (click)="toggleDropdown()">
+            <span class="user-initials">{{nombreUsuario | inicialesNombre}}</span>
+            <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
+            <ul class="dropdown-menu" *ngIf="dropdownVisible && isMobileScreen">
+              <li><a [routerLink]="['/gestion-eventos']">Gestion eventos</a></li>
+              <li><a [routerLink]="['/gestion-categorias']">Gestion categorias</a></li>
+              <li><a [routerLink]="['/gestion-intereses']">Gestion intereses</a></li>
+              <li><a [routerLink]="['/gestion-usuarios']">Gestion usuarios</a></li>
+              <li><a (click)="cerrarSesion()">Cerrar sesión</a></li>
+            </ul>
+          </div>
+          <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
+        </div>
+      </div>
+    </li>
+    <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/mis-eventos']">
         <span class="nav-icon fa-regular fa-calendar-check"></span>
         <span *ngIf="isOpened" class="name-nav-link">Mis eventos</span>
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Mis eventos</span>
     </li>
-    <li class="mx-0">
+    <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/perfil']">
         <span class="nav-icon fa-solid fa-user"></span>
         <span *ngIf="isOpened" class="name-nav-link">Perfil</span>
       </div>
       <span *ngIf="!isOpened" class="nav-tip rounded-pill">Perfil</span>
     </li>
-    <hr *ngIf="isAdmin" />
-    <li class="mx-0" *ngIf="isAdmin">
-      <div class="rounded-pill" [routerLink]="['/gestion-eventos']">
-        <span class="nav-icon fa-solid fa-calendar-days"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Gestión eventos</span>
-      </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión eventos</span>
+    <li class="mx-0 glowing-text d-none d-md-block">
+      <a [routerLink]="['/gestion-eventos']">
+        <span class="nav-icon fa fa-calendar"></span>
+      </a>
     </li>
-    <li class="mx-0" *ngIf="isAdmin">
-      <div class="rounded-pill" [routerLink]="['/gestion-categorias']">
-        <span class="nav-icon fa-solid fa-tag"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Gestión categorías</span>
-      </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión categorías</span>
+    <li class="mx-0 glowing-text d-none d-md-block">
+      <a [routerLink]="['/gestion-categorias']">
+        <span class="nav-icon fa fa-tags"></span>
+      </a>
     </li>
-    <li class="mx-0" *ngIf="isAdmin">
-      <div class="rounded-pill" [routerLink]="['/gestion-intereses']">
-        <span class="nav-icon fa-solid fa-heart"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Gestión intereses</span>
-      </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión intereses</span>
+    <li class="mx-0 glowing-text d-none d-md-block">
+      <a [routerLink]="['/gestion-intereses']">
+        <span class="nav-icon fa fa-heart"></span>
+      </a>
     </li>
-    <li class="mx-0" *ngIf="isAdmin">
-      <div class="rounded-pill" [routerLink]="['/gestion-usuarios']">
-        <span class="nav-icon fa-solid fa-users"></span>
-        <span *ngIf="isOpened" class="name-nav-link">Gestión usuarios</span>
-      </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">Gestión usuarios</span>
-    </li>
-    <li class="perfil-container dropdown">
-      <div class="perfil" data-bs-toggle="dropdown" aria-expanded="false">
-        <div class="perfil-detalles">
-          <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">
-            <span class="user-initials">{{nombreUsuario | inicialesNombre}}</span>
-            <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
-          </div>
-          <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
-        </div>
-      </div>
+    <li class="mx-0 glowing-text d-none d-md-block">
+      <a [routerLink]="['/gestion-usuarios']">
+        <span class="nav-icon fa fa-users"></span>
+      </a>
     </li>
   </ul>
+  <div class="perfil-container dropdown d-none d-md-block">
+    <div class="perfil" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleDropdown()">
+      <div class="perfil-detalles">
+        <div class="col-3 perfil-img rounded-pill log-text">
+          <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
+        </div>
+        <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
+      </div>
+      <ul class="dropdown-menu d-none d-md-none" *ngIf="dropdownVisible">
+        <li class="d-none d-md-none"><a [routerLink]="['/gestion-eventos']">Gestion eventos</a></li>
+        <li class="d-none d-md-none"><a [routerLink]="['/gestion-categorias']">Gestion categorias</a></li>
+        <li class="d-none d-md-none"><a [routerLink]="['/gestion-intereses']">Gestion intereses</a></li>
+        <li class="d-none d-md-none"><a [routerLink]="['/gestion-usuarios']">Gestion usuarios</a></li>
+        <li><a (click)="cerrarSesion()">Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </div>
 </aside>

@@ -5,3 +5,7 @@
 .dropdown-menu{
   width: 13.020833333333334vw;
 }
+
+.footer-padding {
+  display: none !important;
+}

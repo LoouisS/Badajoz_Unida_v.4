@@ -11,6 +11,7 @@ import {CategoriasService} from "../../../services/categorias.service";
 import {InteresesService} from "../../../services/intereses.service";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-gestion-intereses-table',
@@ -21,7 +22,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 /**
  Vista de la tabla con los datos de los intereses
  **/
-export class GestionInteresesTableComponent implements OnInit,OnDestroy{
+export class GestionInteresesTableComponent implements OnInit,OnDestroy {
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   formFilter!: FormGroup;
@@ -48,8 +49,12 @@ export class GestionInteresesTableComponent implements OnInit,OnDestroy{
    @param catService {CategoriasService} Servicio que gestiona los datos de las categorias
    @param interesService {InteresesService} Servicio que gestiona los datos de los intereses
    @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
+   * @param router
    **/
-  constructor(private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
+  constructor(private catService: CategoriasService,
+              private interesService: InteresesService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   /**
