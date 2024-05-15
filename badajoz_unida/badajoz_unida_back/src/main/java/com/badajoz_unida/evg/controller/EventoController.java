@@ -2,7 +2,6 @@ package com.badajoz_unida.evg.controller;
 
 import com.badajoz_unida.evg.dto.EventFilter;
 import com.badajoz_unida.evg.dto.NewEventDTO;
-import com.badajoz_unida.evg.entity.Eventos;
 import com.badajoz_unida.evg.dto.UserEventDTO;
 import com.badajoz_unida.evg.exception.CustomException;
 import com.badajoz_unida.evg.service.EventoService;

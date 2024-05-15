@@ -1,50 +1,53 @@
-aside{
+aside {
   position: fixed;
-  color:white;
+  color: white;
   top: 0;
   left: 0;
   height: 100%;
   width: 78px;
   background-color: var(--primary-color);
-  transition: all .5s ease;
-  box-shadow: 2px 0 4px hsla(0, 0%, 10%, .3);
+  transition: all 0.5s ease;
+  box-shadow: 2px 0 4px hsla(0, 0%, 10%, 0.3);
   z-index: 1;
 }
 
-aside > ul > li:hover{
-  cursor:pointer;
+aside > ul > li:hover {
+  cursor: pointer;
 }
 
 .glowing-text {
   transition: text-shadow 0.3s ease-in-out;
-  color: white; /* Set the text color */
-  text-shadow: none; /* No shadow by default */
+  color: white;
+  /* Set the text color */
+  text-shadow: none;
+  /* No shadow by default */
 }
 
 .glowing-text:hover {
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* White glow */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  /* White glow */
 }
 
-.name-nav-link{
+.name-nav-link {
   font-size: 0.8rem;
 }
 
-.menu-abierto{
+.menu-abierto {
   width: 240px;
   color: white;
 }
 
-.logo-container .logo{
+.logo-container .logo {
   color: white;
   display: flex;
 }
 
-.logo-container .logo span{
+.logo-container .logo span {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-aside .logo-container .fa-solid{
+aside .logo-container .fa-solid {
   position: absolute;
   top: 6px;
   left: 20%;
@@ -53,20 +56,20 @@ aside .logo-container .fa-solid{
   font-size: 1.2rem;
   color: white;
   line-height: 50px;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   cursor: pointer;
 }
 
-aside.menu-abierto .logo-container .fa-solid{
-  left: 75%
+aside.menu-abierto .logo-container .fa-solid {
+  left: 75%;
 }
 
-aside .logo-container .fa-solid:hover{
+aside .logo-container .fa-solid:hover {
   background-color: white;
   color: var(--primary-color);
 }
 
-aside ul li{
+aside ul li {
   position: relative;
   height: 50px;
   width: 100%;
@@ -75,17 +78,17 @@ aside ul li{
   line-height: 50px;
 }
 
-aside ul li div:not(:last-child){
+aside ul li div:not(:last-child) {
   min-width: 50px;
   min-height: 50px;
   color: white;
   display: flex;
   align-items: center;
-  transition: all .4s ease-in;
+  transition: all 0.4s ease-in;
   cursor: pointer;
 }
 
-.nav-icon{
+.nav-icon {
   height: 50px;
   min-width: 50px;
   border-radius: 12px;
@@ -93,19 +96,22 @@ aside ul li div:not(:last-child){
   text-align: center;
 }
 
-.svg-icon{
+.svg-icon {
   fill: white;
-  transition: color .5s ease;
+  transition: color 0.5s ease;
 }
 
-aside ul li div:hover .svg-icon{
+aside ul li div:hover .svg-icon {
   fill: var(--primary-color);
 }
-.fa-tag, .fa-heart, .fa-users{
+
+.fa-tag,
+.fa-heart,
+.fa-users {
   font-size: 1.1rem;
 }
 
-li .nav-tip{
+li .nav-tip {
   position: absolute;
   left: 75px;
   top: 0;
@@ -114,7 +120,7 @@ li .nav-tip{
   width: auto;
   background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 5px 10px hsla(0, 0%, 0%, .2);
+  box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.2);
   text-align: center;
   line-height: 35px;
   transition: 0s;
@@ -126,14 +132,14 @@ li .nav-tip{
   padding: 0 10px;
 }
 
-li:hover .nav-tip{
+li:hover .nav-tip {
   opacity: 1;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   top: 50%;
   pointer-events: none;
 }
 
-.perfil-container{
+.perfil-container {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -143,17 +149,17 @@ li:hover .nav-tip{
   background-color: var(--primary-color-dark);
 }
 
-.perfil-mobile{
+.perfil-mobile {
   color: #d10000 !important;
   min-width: 50px;
   min-height: 50px;
   display: flex;
   align-items: center;
-  transition: all .4s ease-in;
+  transition: all 0.4s ease-in;
   cursor: pointer;
 }
 
-.perfil-container .perfil{
+.perfil-container .perfil {
   position: relative;
   padding: 0 6px;
   height: 60px;
@@ -161,12 +167,12 @@ li:hover .nav-tip{
   align-items: center;
 }
 
-.perfil-container .perfil .perfil-detalles{
+.perfil-container .perfil .perfil-detalles {
   display: flex;
   align-items: center;
 }
 
-.perfil-detalles .perfil-img{
+.perfil-detalles .perfil-img {
   width: 45px;
   height: 45px;
   background-color: hsl(0, 0%, 100%);
@@ -174,24 +180,25 @@ li:hover .nav-tip{
   font-weight: 600;
 }
 
-.perfil-img{
+.perfil-img {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.perfil-detalles .perfil-nombre{
+.perfil-detalles .perfil-nombre {
   font-weight: 500;
   color: white;
 }
 
-.perfil, .log-out{
+.perfil,
+.log-out {
   cursor: pointer;
 }
 
-
 aside:hover .logout-icon {
-  display: block; /* muestra el icono de logout */
+  display: block;
+  /* muestra el icono de logout */
 }
 
 /*.menu-container{*/
@@ -241,13 +248,11 @@ aside:hover .logout-icon {
 /*}*/
 
 @media (max-width: 767px) {
-
   .nav-bar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
   }
 
   aside {
@@ -271,10 +276,10 @@ aside:hover .logout-icon {
     margin: 0 !important;
     padding: 0 !important;
     height: 50px !important;
-
   }
 
-  aside, ul {
+  aside,
+  ul {
     box-sizing: border-box !important;
   }
 
@@ -282,13 +287,11 @@ aside:hover .logout-icon {
     margin: 2px !important;
   }
 
-
-
   .perfil-container.dropdown {
     flex-grow: 1;
   }
 
-  li .nav-tip{
+  li .nav-tip {
     display: none;
   }
 
@@ -299,14 +302,13 @@ aside:hover .logout-icon {
   .col-3.perfil-img.rounded-pill.log-text {
     width: 35px !important;
     height: 35px !important;
-
   }
 
   .logout-icon {
     font-size: 0.9rem !important;
   }
 
-  span.user-initials{
+  span.user-initials {
     font-size: 0.9rem;
   }
 
@@ -314,9 +316,7 @@ aside:hover .logout-icon {
     display: none !important;
   }
 
-.perfil-li{
-  margin-left: 5px !important;
+  .perfil-li {
+    margin-left: 5px !important;
+  }
 }
-
-}
-
