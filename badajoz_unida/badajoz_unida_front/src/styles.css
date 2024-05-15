@@ -93,32 +93,32 @@ body{
 
 @media screen and (min-width: 100px) and (max-width: 768px) {
   .footer-padding{
-    padding-bottom: 675px;
+    padding-bottom: 250px;
   }
 
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .footer-padding{
-    padding-bottom: 575px;
+    padding-bottom: 250px;
   }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   .footer-padding{
-    padding-bottom: 525px;
+    padding-bottom: 250px;
   }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1599px){
   .footer-padding{
-    padding-bottom: 550px;
+    padding-bottom: 250px;
   }
 }
 
 @media screen and (min-width: 1600px){
   .footer-padding{
-    padding-bottom: 595px;
+    padding-bottom: 250px;
   }
 }
 

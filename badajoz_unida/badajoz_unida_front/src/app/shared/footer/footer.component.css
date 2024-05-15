@@ -84,9 +84,9 @@ img:hover {
     display: none !important;
   }
 
-  .contenedor-span, h5, .info {
-    display: none !important;
-  }
+ /* .contenedor-span, h5, .info { */
+  /*   display: none !important; */
+  /* } */
 
   .contenedor-imagenes {
     display: flex;
