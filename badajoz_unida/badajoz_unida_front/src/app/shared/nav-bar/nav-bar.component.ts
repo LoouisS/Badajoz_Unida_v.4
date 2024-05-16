@@ -23,6 +23,7 @@ export class NavBarComponent extends LocalizedComponent implements OnInit {
   @Output() menuOpened = new EventEmitter<number>();
   isOpened: boolean = false;
   isAdmin: boolean = false;
+  dropdownOpen: boolean = false;
 
   /**
    Constructor de la clase
@@ -47,6 +48,10 @@ export class NavBarComponent extends LocalizedComponent implements OnInit {
   toggleMenu() {
     this.isOpened = !this.isOpened;
     this.isOpened ? this.menuOpened.emit(240) : this.menuOpened.emit(78);
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
   /**

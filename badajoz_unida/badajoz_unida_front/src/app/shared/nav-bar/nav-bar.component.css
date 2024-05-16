@@ -78,22 +78,24 @@ aside ul li {
   line-height: 50px;
 }
 
-aside ul li div:not(:last-child) {
-  min-width: 50px;
-  min-height: 50px;
-  color: white;
-  display: flex;
-  align-items: center;
-  transition: all 0.4s ease-in;
-  cursor: pointer;
-}
-
 .nav-icon {
   height: 50px;
   min-width: 50px;
   border-radius: 12px;
   line-height: 50px;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  aside ul li div:not(.perfil-mobile) {
+    min-width: 50px;
+    min-height: 50px;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: all 0.4s ease-in;
+    cursor: pointer;
+  }
 }
 
 .svg-icon {
@@ -318,5 +320,44 @@ aside:hover .logout-icon {
 
   .perfil-li {
     margin-left: 5px !important;
+  }
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  bottom: 110%; /* Inicio justo encima del elemento que lo activa */
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 5px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(20px); /* Empieza más abajo */
+  transition: transform 0.3s, opacity 0.3s; /* Anima las propiedades */
+}
+
+.dropdown-content.active {
+  opacity: 1;
+  transform: translateY(0); /* Mueve la posición a normal */
+}
+
+.circle-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #D10000; /* Example gray background, customize as needed */
+  margin: 5px;
+  border-radius: 50%; /* Round shape */
+  text-align: center;
+  line-height: 30px; /* Align icon inside circle */
+  color: white; /* Icon color */
+}
+
+@media (max-width: 768px) {
+  aside ul .admin {
+    display: none; /* Oculta los li en móviles */
   }
 }

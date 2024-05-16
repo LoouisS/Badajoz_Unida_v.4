@@ -1,78 +1,120 @@
-<aside class="py-3 px-3" #navBar [ngClass]="{'menu-abierto px-4': isOpened}">
+<aside class="py-3 px-3" #navBar [ngClass]="{ 'menu-abierto px-4': isOpened }">
   <div class="logo-container">
     <div class="logo col-12">
       <span *ngIf="isOpened">Badajoz Unida</span>
     </div>
-    <span class="fa-solid fa-bars me-1 d-flex align-items-center justify-content-center rounded-pill" #menu (click)="toggleMenu()"></span>
+    <span class="fa-solid fa-bars me-1 d-flex align-items-center justify-content-center rounded-pill" #menu
+      (click)="toggleMenu()"></span>
   </div>
   <ul class="nav-bar pt-3 ps-0 mt-4">
     <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/']">
         <span class="nav-icon fa-solid fa-house"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.home}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{ resources.home }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.home}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.home
+        }}</span>
     </li>
-    <li class="mx-0 glowing-text ">
+    <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/eventos']">
         <span class="nav-icon fa-solid fa-calendar-day"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.events}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.events
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.events}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.events
+        }}</span>
     </li>
     <li class="d-md-none mx-0 glowing-text">
-      <div class="perfil perfil-mobile" aria-expanded="false">
+      <div class="perfil perfil-mobile" aria-expanded="false" (click)="toggleDropdown()">
         <div class="perfil-detalles ms-2">
-          <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">
-            <span class="user-initials">{{nombreUsuario | inicialesNombre}}</span>
-            <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
+          <div class="col-3 perfil-img rounded-pill log-text">
+            <i class="logout-icon fa fa-ellipsis-v" aria-hidden="true"></i>
           </div>
-          <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
+          <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">
+            {{ nombreUsuario }}
+          </div>
+        </div>
+        <!-- Dropdown Content -->
+        <div class="dropdown-content" [class.active]="dropdownOpen" *ngIf="dropdownOpen">
+          <span class="circle-icon fa fa-icon-name"><i class="fa fa-sign-out"></i></span>
+          <span class="circle-icon fa fa-icon-name"><i class="fa-solid fa-calendar-days"></i></span>
+          <span class="circle-icon fa fa-icon-name"><i class="fa-solid fa-tag"></i></span>
+          <span class="circle-icon fa fa-icon-name"><i class="fa-solid fa-heart"></i></span>
+          <span class="circle-icon fa fa-icon-name"><i class="fa-solid fa-users"></i></span>
+          <!-- more icons as needed -->
         </div>
       </div>
     </li>
+
     <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/mis-eventos']">
         <span class="nav-icon fa-regular fa-calendar-check"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.myEvents}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.myEvents
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.myEvents}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.myEvents
+        }}</span>
     </li>
     <li class="mx-0 glowing-text">
       <div class="rounded-pill" [routerLink]="['/perfil']">
         <span class="nav-icon fa-solid fa-user"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.profile}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.profile
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.profile}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.profile
+        }}</span>
     </li>
     <hr *ngIf="isAdmin" />
-    <li class="mx-0 glowing-text" *ngIf="isAdmin">
+    <li class="mx-0 glowing-text admin" *ngIf="isAdmin">
       <div class="rounded-pill" [routerLink]="['/gestion-eventos']">
         <span class="nav-icon fa-solid fa-calendar-days"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.eventManagement}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.eventManagement
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.eventManagement}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.eventManagement
+        }}</span>
     </li>
-    <li class="mx-0 glowing-text" *ngIf="isAdmin">
+    <li class="mx-0 glowing-text admin" *ngIf="isAdmin">
       <div class="rounded-pill" [routerLink]="['/gestion-categorias']">
         <span class="nav-icon fa-solid fa-tag"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.categoryManagement}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.categoryManagement
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.categoryManagement}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.categoryManagement
+        }}</span>
     </li>
-    <li class="mx-0 glowing-text" *ngIf="isAdmin">
+    <li class="mx-0 glowing-text admin" *ngIf="isAdmin">
       <div class="rounded-pill" [routerLink]="['/gestion-intereses']">
         <span class="nav-icon fa-solid fa-heart"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.interestManagement}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.interestManagement
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.interestManagement}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.interestManagement
+        }}</span>
     </li>
-    <li class="mx-0 glowing-text" *ngIf="isAdmin">
+    <li class="mx-0 glowing-text admin" *ngIf="isAdmin">
       <div class="rounded-pill" [routerLink]="['/gestion-usuarios']">
         <span class="nav-icon fa-solid fa-users"></span>
-        <span *ngIf="isOpened" class="name-nav-link">{{resources.userManagement}}</span>
+        <span *ngIf="isOpened" class="name-nav-link">{{
+          resources.userManagement
+          }}</span>
       </div>
-      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{resources.userManagement}}</span>
+      <span *ngIf="!isOpened" class="nav-tip rounded-pill">{{
+        resources.userManagement
+        }}</span>
     </li>
   </ul>
   <div class="perfil-container dropdown d-none d-md-block">
@@ -81,7 +123,9 @@
         <div class="col-3 perfil-img rounded-pill log-text" (click)="cerrarSesion()">
           <i class="logout-icon fa fa-sign-out" aria-hidden="true"></i>
         </div>
-        <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">{{nombreUsuario}}</div>
+        <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">
+          {{ nombreUsuario }}
+        </div>
       </div>
     </div>
   </div>
