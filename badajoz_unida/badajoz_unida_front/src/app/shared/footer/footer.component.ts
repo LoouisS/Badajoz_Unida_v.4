@@ -17,7 +17,15 @@ import { LocalizedComponent } from 'src/app/config/localize.component';
 /**
  Vista del footer
  **/
-export class FooterComponent extends LocalizedComponent implements OnInit{
+export class FooterComponent extends LocalizedComponent implements OnInit {
+
+  private routesMap: { [key: string]: boolean } = {
+    '/perfil': true,
+    '/gestion-eventos': true,
+    '/gestion-categorias': true,
+    '/gestion-intereses': true,
+    '/gestion-usuarios': true,
+  };
 
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();
@@ -41,7 +49,7 @@ export class FooterComponent extends LocalizedComponent implements OnInit{
   }
 
   isPerfilRoute(): boolean {
-    return this.router.url === '/perfil';
+    return this.routesMap[this.router.url] === true;
   }
 
 }
