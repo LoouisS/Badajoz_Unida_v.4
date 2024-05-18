@@ -87,4 +87,11 @@ export const resources = {
   // GLOBAL
   'yes': 'Oui',
   'no': 'Non',
+  // GESTION DE EVENTOS
+  'location': 'Emplacement',
+  'date': 'Date',
+  'details': 'Détails',
+  'intereses': 'Intérêts',
+  'createEvent': 'Créer un événement',
+  'place': 'Lieu',
 }

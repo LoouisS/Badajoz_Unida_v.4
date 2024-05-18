@@ -78,4 +78,10 @@ export abstract class Resources {
   public static rol: string = null;
   public static usernarme: string = null;
   public static birthdate: string = null;
+  public static location: string = null;
+  public static date: string = null;
+  public static intereses: string = null;
+  public static createEvent: string = null;
+  public static place: string = null;
+  public static details: string = null;
 }

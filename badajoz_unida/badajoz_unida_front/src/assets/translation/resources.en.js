@@ -84,6 +84,13 @@ export const resources = {
   'saveInfo': 'Changes saved successfully',
   'notSaveInfo': 'Changes have not been saved',
   'changesSaved': 'Changes saved',
+  // GESTION DE EVENTOS
+  'location': 'Location',
+  'date': 'Date',
+  'intereses': 'Interests',
+  'createEvent': 'Create event',
+  'place': 'Place',
+  'details': 'Details',
   // GLOBAL
   'yes': 'Yes',
   'no': 'No',

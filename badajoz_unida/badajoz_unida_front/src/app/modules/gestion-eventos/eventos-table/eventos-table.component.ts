@@ -11,6 +11,7 @@ import {DataTableDirective} from "angular-datatables";
 import {CategoriasService} from "../../../services/categorias.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import Swal from "sweetalert2";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-eventos-table',
@@ -21,7 +22,7 @@ import Swal from "sweetalert2";
 /**
  Tabla con los datos de los eventos
  **/
-export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class EventosTableComponent extends LocalizedComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('dataTable', { static: false }) table: ElementRef;
   @ViewChild(DataTableDirective, { static: false }) dirDataTable: DataTableDirective;
   @Output() mostrarModal: EventEmitter<any> = new EventEmitter<any>();
@@ -49,6 +50,7 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
   constructor(private eventoService: EventosService, private catService: CategoriasService, private formBuilder: FormBuilder) {
+    super();
   }
 
   /**
@@ -60,12 +62,17 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.categorias = data;
     });
     this.dtOptions = {
+
       paging: true,
-      searching: true,
+      pagingType: "numbers",
+      responsive: true,
+      searching: false,
       ordering: true,
-      info: true,
-      destroy: true
+      info: false,
+      destroy: true,
+      lengthChange: false,
     };
+
     // @ts-ignore
     this.dtTrigger.next();
     this.getEventos();
@@ -104,11 +111,15 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loading = false;
       $(this.table.nativeElement).DataTable().destroy();
       this.dtOptions = {
-        paging: true,
-        searching: false,
-        ordering: true,
-        info: true,
-        destroy: true
+
+      paging: true,
+      pagingType: "numbers",
+      responsive: true,
+      searching: false,
+      ordering: true,
+      info: false,
+      destroy: true,
+      lengthChange: false,
       };
       setTimeout(() => {
         $(this.table.nativeElement).DataTable(this.dtOptions);
