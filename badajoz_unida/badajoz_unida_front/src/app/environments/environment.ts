@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: {
+    apikey: 'CD5NAQYA5TPUC9633J8MD3ZWG',
     authUrl: 'http://localhost:8080/api/auth/',
     url: 'http://localhost:8080/api',
 

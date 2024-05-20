@@ -96,29 +96,58 @@
       <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
       <td>{{evento?.detalles| cortarTexto:10}}</td>
       <td>{{evento?.descripcion| cortarTexto:10}}</td>
-      <td>
-        <div class="dropdown">
-          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu">
-            <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2 h6" (click)="modEvent(evento?.eventosId)"></i>
-              <span class="ms-1 fs-6">Modificar evento</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-file-export h6" (click)="exportExcell(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Exportar a excell</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-file-pdf h6" (click)="exportPdf(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Exportar a pdf</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteEvent(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Eliminar evento</span>
-            </li>
-          </ul>
-        </div>
-      </td>
+        <td class="text-end px-0">
+  <div class="dropdown">
+    <button
+      class="btn btn-link"
+      id="dropdownEventoMenuLink"
+      role="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-ellipsis-vertical" style="color: red;"></i>
+    </button>
+    <ul
+      class="dropdown-menu dropdown-menu-right position-absolute py-0"
+      aria-labelledby="dropdownEventoMenuLink"
+    >
+      <li>
+        <button
+          class="dropdown-item border-bottom py-3"
+          (click)="modEvent(evento?.eventosId)"
+        >
+          <i class="fa-solid fa-pen-to-square me-2"></i>Modificar evento
+        </button>
+      </li>
+      <li>
+        <button
+          class="dropdown-item border-bottom py-3"
+          (click)="exportExcell(evento?.eventosId, evento)"
+        >
+          <i class="fa-solid fa-file-export me-2"></i>Exportar a excell
+        </button>
+      </li>
+      <li>
+        <button
+          class="dropdown-item border-bottom py-3"
+          (click)="exportPdf(evento?.eventosId, evento)"
+        >
+          <i class="fa-solid fa-file-pdf me-2"></i>Exportar a PDF
+        </button>
+      </li>
+      <li>
+        <button
+          class="dropdown-item py-3"
+          (click)="deleteEvent(evento?.eventosId, evento)"
+        >
+          <i class="fa-solid fa-trash me-2"></i>Eliminar evento
+        </button>
+      <li>
+    </ul>
+  </div>
+</td>
+
     </tr>
     </tbody>
   </table>

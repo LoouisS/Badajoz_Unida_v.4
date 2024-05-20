@@ -1,19 +1,12 @@
 <footer class="px-3 py-2 justify-content-center" *ngIf="!isPerfilRoute()">
   <h4 class="d-none d-md-flex justify-content-center mt-4">
-    <span>¡</span><span class="red-color">{{resources.meetUs}}</span
-    ><span>!</span>
+    <span>¡</span><span class="red-color">{{ resources.meetUs }}</span><span>!</span>
   </h4>
   <div class="info row pt-0">
     <div class="entreculturas pt-4 col-12 col-md-4 h-fit">
       <!-- <h5 class="ps-4 col-12">Entreculturas Fe y Alegría</h5> -->
-      <div
-        class="contenedor-span d-flex justify-content-around align-items-center py-3 px-4 fs-7 min-h"
-      >
-        <img
-          src="./assets/entreculturas_logo.png"
-          alt="Entreculturas"
-          class="pe-2 entreculturas"
-        />
+      <div class="contenedor-span d-flex justify-content-around align-items-center py-3 px-4 fs-7 min-h">
+        <img src="./assets/entreculturas_logo.png" alt="Entreculturas" class="pe-2 entreculturas" onclick="window.location.href='https://www.entreculturas.org/'"/>
         <!-- <span><span class="fa-solid fa-location-dot me-1"></span> C/ Ramón Albarrán nº4, bajo</span> -->
         <!-- <span><span class="fa-solid fa-envelopes-bulk me-1"></span> CP - 06002 - Badajoz</span> -->
         <span><span class="fa-solid fa-phone me-1"></span> 692340114</span>
@@ -22,27 +15,20 @@
     </div>
     <div class="cruz-roja pt-4 col-12 col-md-4">
       <!-- <h5 class="ps-4">Cruz Roja Badajoz</h5> -->
-      <div
-        class="contenedor-span d-flex align-items-center justify-content-around py-3 px-4 fs-7 min-h"
-      >
-        <img src="./assets/cruz-roja_logo.png" alt="Cruz Roja" />
+      <div class="contenedor-span d-flex align-items-center justify-content-around py-3 px-4 fs-7 min-h">
+        <img src="./assets/cruz-roja_logo.png" alt="Cruz Roja" onclick="window.location.href='https://www2.cruzroja.es/'"/>
         <!-- <span><span class="fa-solid fa-location-dot me-1"></span> C/ Museo nº 5</span> -->
         <!-- <span><span class="fa-solid fa-envelopes-bulk me-1"></span> CP - 06003 - Badajoz</span> -->
         <span><span class="fa-solid fa-phone me-1"></span> 924240200</span>
         <!-- <span><span class="fa-solid fa-envelope me-1"></span> badajoz@cruzroja.es</span> -->
       </div>
     </div>
-    <div class="entreculturas pb-5 pt-4 col-12 col-md-4">
+    <div class="entreculturas pt-4 col-12 col-md-4">
       <!-- <h5 class="ps-4 col-12">Entreculturas Fe y Alegría</h5> -->
-      <div
-        class="contenedor-span d-flex justify-content-around align-items-center py-3 px-4 fs-7 min-h"
-      >
+      <div class="contenedor-span d-flex justify-content-around align-items-center py-3 px-4 fs-7 min-h">
         <!-- <span><span class="fa-solid fa-location-dot me-1"></span> C/ Ramón Albarrán nº4, bajo</span> -->
-        <img
-          src="./assets/evg_logo.png"
-          alt="Escuela Virgen de Guadalupe"
-          class="fit-img"
-        />
+        <img src="./assets/evg_logo.png" alt="Escuela Virgen de Guadalupe" class="fit-img"
+          onclick="window.location.href='https://fundacionloyola.com/vguadalupe/'" />
         <!-- <span><span class="fa-solid fa-envelopes-bulk me-1"></span> CP - 06002 - Badajoz</span> -->
         <span><span class="fa-solid fa-phone me-1"></span> 924251761</span>
         <!-- <span><span class="fa-solid fa-envelope me-1"></span> extremadura@entreculturas.org</span> -->

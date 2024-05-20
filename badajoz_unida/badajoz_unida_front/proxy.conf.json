@@ -1,0 +1,11 @@
+
+{
+  "/api": {
+    "target": "https://weather.visualcrossing.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

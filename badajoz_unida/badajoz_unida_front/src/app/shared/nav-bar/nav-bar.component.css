@@ -325,10 +325,11 @@ aside:hover .logout-icon {
 
 .dropdown-content {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   position: absolute;
   bottom: 110%; /* Inicio justo encima del elemento que lo activa */
-  right: 0;
+  position: absolute;
+  right: -162%; /* Posicionamiento a la mitad del elemento padre */
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
