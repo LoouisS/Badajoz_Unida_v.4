@@ -60,10 +60,11 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.categorias = data;
     });
     this.dtOptions = {
-      paging: true,
+      paging: false,
       searching: true,
       ordering: true,
-      info: true,
+      lengthChange: false,
+      info: false,
       destroy: true
     };
     // @ts-ignore
@@ -107,7 +108,8 @@ export class EventosTableComponent implements OnInit, AfterViewInit, OnDestroy {
         paging: true,
         searching: false,
         ordering: true,
-        info: true,
+        info: false,
+        lengthChange: false,
         destroy: true
       };
       setTimeout(() => {

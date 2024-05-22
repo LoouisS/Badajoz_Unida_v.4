@@ -5,24 +5,24 @@
     </div>
     <div class="card-body">
       <form class="col-12" [formGroup]="formFilter" (ngSubmit)="filterUsuarios()">
-        <div class="d-flex col-12">
-          <div class="d-flex mb-3 col-5 me-5">
-            <label for="nombreUsuario" class="form-label pt-2 me-3">{{resources.nombre}}</label>
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <label for="nombreUsuario" class="form-label">{{resources.nombre}}</label>
             <input formControlName="nombreUsuario" type="text" class="form-control" id="nombreUsuario" aria-describedby="emailHelp">
           </div>
-          <div class="d-flex mb-3 col-5">
-            <label for="nick" class="form-label pt-2 me-3">Nick</label>
+          <div class="col-12 col-md-6 mb-3">
+            <label for="nick" class="form-label">Nick</label>
             <input formControlName="nick" type="text" class="form-control" id="nick" aria-describedby="emailHelp">
           </div>
         </div>
-        <div class="d-flex col-12">
-          <div class="d-flex mb-3 col-5 me-5">
-            <label for="mail" class="form-label pt-2 me-3">Email</label>
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <label for="mail" class="form-label">Email</label>
             <input formControlName="email" type="text" class="form-control" id="mail" aria-describedby="emailHelp">
           </div>
-          <div class="col-5 mb-3 d-flex">
-            <label for="rol" class="form-label pt-2 me-3">{{resources.rol}}</label>
-            <select  formControlName="rol" class="form-control" id="rol" >
+          <div class="col-12 col-md-6 mb-3">
+            <label for="rol" class="form-label">{{resources.rol}}</label>
+            <select formControlName="rol" class="form-control" id="rol">
               <optgroup>
                 <option value="2">Usuario</option>
                 <option value="3">Colaborador</option>
@@ -37,74 +37,77 @@
     </div>
   </div>
 </div>
-<div class="px-custom fs-6" [ngClass]="{'d-none': loading}">
-  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-    <thead class="bgGeneral">
-    <tr>
-      <th class="col-1"></th>
-      <th class="col-1">Id</th>
+
+<div class="px-4 py-2 fs-6" [ngClass]="{'d-none': loading}">
+  <div class="table-responsive">
+    <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead class="bgGeneral">
+      <tr>
+        <th class="col-1"></th>
+        <th class="col-1">Id</th>
         <th class="col-2">{{resources.nombre}}</th>
         <th class="col-2">{{resources.surname}}</th>
         <th class="col-2">{{resources.username}}</th>
-      <th class="col-1">Email</th>
+        <th class="col-1">Email</th>
         <th class="col-1">{{resources.phone}}</th>
         <th class="col-1">{{resources.birthdate}}</th>
-      <th class="col-1"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of usuarios">
-      <td class="col-1 text-center">
-        <div class="text-center pt-2">
-          <div class="btn-group text-center" >
-            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <th class="col-1"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of usuarios">
+        <td class="col-1 text-center">
+          <div class="text-center pt-2">
+            <div class="btn-group text-center">
+              <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <li class="text-center">
+                    <span class="badge rounded-pill text-bg-danger" *ngFor="let interes of user?.intereses">
+                      {{interes?.titulo}}
+                    </span>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group text-center">
+              <i class="fa-sharp fa-solid fa-shield-halved" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <li class="text-center">
+                    <span class="badge rounded-pill bg-warning" *ngFor="let rol of user?.roles">
+                      {{rol?.id + ' ' + rol?.rolNombre}}
+                    </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </td>
+        <td class="col-1">{{user?.userId}}</td>
+        <td class="col-2">{{user?.nombre}}</td>
+        <td class="col-2">{{user?.apellidos}}</td>
+        <td class="col-2">{{user?.nombreUsuario}}</td>
+        <td class="col-1">{{user?.email}}</td>
+        <td class="col-1">{{user?.tlf}}</td>
+        <td class="col-1">{{user?.fchNacimiento | date:'dd/MM/yyyy'}}</td>
+        <td class="col-1">
+          <div class="dropdown">
+            <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
-              <li  class="text-center">
-                <span class="badge rounded-pill text-bg-danger" *ngFor="let interes of user?.intereses">
-                  {{interes?.titulo}}
-                </span>
+              <li (click)="asignarPrivilegio(2,user)">
+                <i class="fa-sharp fa-solid fa-lock cursorPointer h6"></i>
+                <span class="ms-2 fs-6">Asignar usuario</span>
+              </li>
+              <li (click)="asignarPrivilegio(3,user)">
+                <i class="fa-solid fa-unlock cursorPointer h6"></i>
+                <span class="ms-2 fs-6">Asignar colaborador</span>
               </li>
             </ul>
           </div>
-          <div class="btn-group text-center" >
-            <i class="fa-sharp fa-solid fa-shield-halved"  data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <li  class="text-center">
-                <span class="badge rounded-pill bg-warning" *ngFor="let rol of user?.roles">
-                  {{rol?.id + ' ' + rol?.rolNombre}}
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </td>
-      <td class="col-1">{{user?.userId}}</td>
-      <td class="col-2">{{user?.nombre}}</td>
-      <td class="col-2">{{user?.apellidos}}</td>
-      <td class="col-2">{{user?.nombreUsuario}}</td>
-      <td class="col-1">{{user?.email}}</td>
-      <td class="col-1">{{user?.tlf}}</td>
-      <td class="col-1">{{user?.fchNacimiento | date:'dd/MM/yyyy'}}</td>
-      <td class="col-1">
-        <div class="dropdown">
-          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu">
-            <li (click)="asignarPrivilegio(2,user)">
-              <i class="fa-sharp fa-solid fa-lock cursorPointer h6"></i>
-              <span class="ms-2 fs-6">Asignar usuario</span>
-            </li>
-            <li (click)="asignarPrivilegio(3,user)">
-              <i class="fa-solid fa-unlock cursorPointer h6"></i>
-              <span class="ms-2 fs-6">Asignar colaborador</span>
-            </li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-

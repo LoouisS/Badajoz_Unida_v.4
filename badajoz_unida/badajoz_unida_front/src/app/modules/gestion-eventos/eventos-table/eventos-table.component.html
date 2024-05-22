@@ -5,124 +5,126 @@
     </div>
     <div class="card-body">
       <form class="col-12" [formGroup]="formFilter" (ngSubmit)="filtrarBusqueda()">
-        <div class="d-flex col-12">
-          <div class="d-flex mb-3 col-5 me-5">
-            <label for="nombreEvento" class="form-label pt-2 me-3">Nombre</label>
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <label for="nombreEvento" class="form-label">Nombre</label>
             <input formControlName="nombre" type="text" class="form-control" id="nombreEvento" aria-describedby="emailHelp">
           </div>
-          <div class="d-flex mb-3 col-5">
-            <label for="localizacion" class="form-label pt-2 me-3">Localización</label>
+          <div class="col-12 col-md-6 mb-3">
+            <label for="localizacion" class="form-label">Localización</label>
             <input formControlName="localizacion" type="text" class="form-control" id="localizacion" aria-describedby="emailHelp">
           </div>
         </div>
-        <div class="d-flex">
-          <div class="col-5 d-flex">
-            <label for="dateInit" class="form-label pt-2 me-5">Fecha</label>
-            <div class="d-flex col-12">
-              <div>
-                <input formControlName="fechaInit" type="date" class="form-control" id="dateInit">
-              </div>
-              <div>
-                <input formControlName="fechaEnd" type="date" class="form-control" id="dateEnd">
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <label for="dateInit" class="form-label">Fecha Inicio</label>
+            <input formControlName="fechaInit" type="date" class="form-control" id="dateInit">
           </div>
-          <div class="col-6 d-flex">
-            <label for="intereses" class="form-label pt-2 me-3">Intereses</label>
-            <select  formControlName="intereses"
-                     class="form-control" id="intereses" >
-              <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
-                <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
+          <div class="col-12 col-md-6 mb-3">
+            <label for="dateEnd" class="form-label">Fecha Fin</label>
+            <input formControlName="fechaEnd" type="date" class="form-control" id="dateEnd">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 mb-3">
+            <label for="intereses" class="form-label">Intereses</label>
+            <select formControlName="intereses" class="form-control" id="intereses">
+              <optgroup *ngFor="let categoria of categorias" [label]="categoria?.titulo">
+                <option *ngFor="let interes of categoria?.intereses" [value]="interes?.interesId">{{interes?.titulo}}</option>
               </optgroup>
             </select>
           </div>
         </div>
-        <div class="mt-3">
-          <button type="submit" class="btn bgGeneral">Filtrar</button>
-          <button type="button" class="btn btn-primary ms-2" (click)="mostrarModalEventos()">
-            Crear evento
-          </button>
+        <div class="row mt-3">
+          <div class="col-12">
+            <button type="submit" class="btn bgGeneral">Filtrar</button>
+            <button type="button" class="btn btn-primary ms-2" (click)="mostrarModalEventos()">Crear evento</button>
+          </div>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="px-5 fs-6" [ngClass]="{'d-none': loading}">
-  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-    <thead class="bgGeneral">
-    <tr>
-      <th class="col-1"></th>
-      <th class="col-1">Nombre</th>
-      <th class="col-1">Localización</th>
-      <th class="col-1">Fecha</th>
-      <th class="col-1">Telefono</th>
-      <th class="col-1">LatLong</th>
-      <th class="col-1">Detalles</th>
-      <th class="col-1">Descripción</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let evento of eventos">
-      <td class="col-1 text-center">
-        <div class="text-center pt-2">
-          <div class="btn-group text-center">
-            <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action" *ngFor="let usuario of evento?.usuarios">
-                  {{usuario.nombre + ' ' +usuario.apellidos}}
-                </button>
-              </div>
-            </ul>
+
+<div class="px-5 fs-6 mt-4" [ngClass]="{'d-none': loading}">
+  <div class="table-responsive">
+    <table #dataTable class="table table-striped mb-0" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead class="bgGeneral">
+      <tr>
+        <th class="col-1"></th>
+        <th class="col-1">Nombre</th>
+        <th class="col-1">Localización</th>
+        <th class="col-1">Fecha</th>
+        <th class="col-1">Telefono</th>
+        <th class="col-1">LatLong</th>
+        <th class="col-1">Detalles</th>
+        <th class="col-1">Descripción</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let evento of eventos">
+        <td class="col-1 text-center">
+          <div class="text-center pt-2">
+            <div class="btn-group text-center">
+              <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <div class="list-group">
+                  <button type="button" class="list-group-item list-group-item-action" *ngFor="let usuario of evento?.usuarios">
+                    {{usuario.nombre + ' ' +usuario.apellidos}}
+                  </button>
+                </div>
+              </ul>
+            </div>
+            <div class="btn-group text-center" *ngIf="evento?.intereses != null">
+              <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <li *ngFor="let interes of evento?.intereses" class="text-center">
+                    <span class="badge rounded-pill text-bg-danger">
+                      {{interes?.titulo}}
+                    </span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="btn-group text-center" *ngIf="evento?.intereses != null">
-            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        </td>
+        <td>{{evento?.nombre}}</td>
+        <td>{{evento?.localizacion | cortarTexto:10}}</td>
+        <td>{{evento?.fechaHora | date:'dd/MM/yyyy hh:mm'}}</td>
+        <td>{{evento?.telefonoContacto}}</td>
+        <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
+        <td>{{evento?.detalles | cortarTexto:10}}</td>
+        <td>{{evento?.descripcion | cortarTexto:10}}</td>
+        <td>
+          <div class="dropdown">
+            <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu">
-              <li *ngFor="let interes of evento?.intereses" class="text-center">
-                <span class="badge rounded-pill text-bg-danger">
-                  {{interes?.titulo}}
-                </span>
+              <li>
+                <i class="fa-solid fa-pen-to-square cursorPointer me-2 h6" (click)="modEvent(evento?.eventosId)"></i>
+                <span class="ms-1 fs-6">Modificar evento</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-file-export h6" (click)="exportExcell(evento?.eventosId, evento)"></i>
+                <span class="ms-2 fs-6">Exportar a excell</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-file-pdf h6" (click)="exportPdf(evento?.eventosId, evento)"></i>
+                <span class="ms-2 fs-6">Exportar a pdf</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteEvent(evento?.eventosId, evento)"></i>
+                <span class="ms-2 fs-6">Eliminar evento</span>
               </li>
             </ul>
           </div>
-        </div>
-      </td>
-      <td>{{evento?.nombre}}</td>
-      <td>{{evento?.localizacion| cortarTexto:10}}</td>
-      <td>{{evento?.fechaHora | date:'dd/MM/yyyy hh:mm'}}</td>
-      <td>{{evento?.telefonoContacto}}</td>
-      <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
-      <td>{{evento?.detalles| cortarTexto:10}}</td>
-      <td>{{evento?.descripcion| cortarTexto:10}}</td>
-      <td>
-        <div class="dropdown">
-          <i class="fa-solid fa-ellipsis-vertical cursorPointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu">
-            <li>
-              <i class="fa-solid fa-pen-to-square cursorPointer me-2 h6" (click)="modEvent(evento?.eventosId)"></i>
-              <span class="ms-1 fs-6">Modificar evento</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-file-export h6" (click)="exportExcell(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Exportar a excell</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-file-pdf h6" (click)="exportPdf(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Exportar a pdf</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-trash cursorPointer h6" (click)="deleteEvent(evento?.eventosId,evento)"></i>
-              <span class="ms-2 fs-6">Eliminar evento</span>
-            </li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+<div _ngcontent-tof-c39="" class="footer-padding"></div>
+
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-

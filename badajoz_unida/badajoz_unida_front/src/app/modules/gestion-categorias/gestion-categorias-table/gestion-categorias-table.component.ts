@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import { DataTableDirective } from "angular-datatables";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { LocalizedComponent } from "src/app/config/localize.component";
+import '@popperjs/core';
 
 @Component({
   selector: "app-gestion-categorias-table",

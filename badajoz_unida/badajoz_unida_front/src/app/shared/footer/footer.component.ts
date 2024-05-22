@@ -25,6 +25,8 @@ export class FooterComponent extends LocalizedComponent implements OnInit {
     '/gestion-categorias': true,
     '/gestion-intereses': true,
     '/gestion-usuarios': true,
+    '/eventos': true,
+    '/mis-eventos': true
   };
 
   anio!: number;
@@ -51,5 +53,6 @@ export class FooterComponent extends LocalizedComponent implements OnInit {
   isPerfilRoute(): boolean {
     return this.routesMap[this.router.url] === true;
   }
+
 
 }

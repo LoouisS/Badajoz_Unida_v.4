@@ -9,6 +9,7 @@ import {DataTablesModule} from "angular-datatables";
 import {PipesModule} from "../../pipes/pipes.module";
 import {ModalsModule} from "../../components/modals/modals.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import '@popperjs/core';
 
 
 @NgModule({
