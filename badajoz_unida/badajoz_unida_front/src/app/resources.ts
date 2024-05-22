@@ -84,4 +84,9 @@ export abstract class Resources {
   public static createEvent: string = null;
   public static place: string = null;
   public static details: string = null;
+  public static recentEvents: string = null;
+  public static interestedEvents: string = null;
+  public static hour: string = null;
+  public static knowMore: string = null;
+  public static notParticipate: string = null;
 }

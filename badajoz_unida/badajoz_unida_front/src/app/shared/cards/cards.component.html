@@ -7,17 +7,17 @@
     <p class="card-text d-none d-lg-block">{{evento.descripcion | cortarTexto:100}}</p>
     <p class="card-text d-lg-none">{{evento.descripcion | cortarTexto:50}}</p>
     <div>
-      <span class="fw-bold">Fecha: </span> {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}
+      <span class="fw-bold">{{resources.date}}: </span> {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}
     </div>
     <div class="my-2">
-      <span class="fw-bold">Hora: </span> {{evento?.fechaHora | date: 'shortTime'}}
+      <span class="fw-bold">{{resources.hour}}: </span> {{evento?.fechaHora | date: 'shortTime'}}
     </div>
     <div>
-      <span class="fw-bold">Localización: </span> {{evento?.localizacion}}
+      <span class="fw-bold">{{resources.location}}: </span> {{evento?.localizacion}}
     </div>
   </div>
   <div class="card-footer d-flex justify-content-center py-3">
-    <button class="btn btn-primary rounded-pill px-4 py-2 me-1" (click)="showEvent(evento.eventosId)">Saber más</button>
-    <button class="btn btn-secondary rounded-pill py-2 px-4 align-self-end ms-1" (click)="removeUserFromEvent(evento?.eventosId)" *ngIf="desapuntarse">No participar</button>
+    <button class="btn btn-primary rounded-pill px-4 py-2 me-1" (click)="showEvent(evento.eventosId)">{{resources.knowMore}}</button>
+    <button class="btn btn-secondary rounded-pill py-2 px-4 align-self-end ms-1" (click)="removeUserFromEvent(evento?.eventosId)" *ngIf="desapuntarse">{{resources.notParticipate}}</button>
   </div>
 </div>

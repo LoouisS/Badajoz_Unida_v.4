@@ -74,7 +74,7 @@ public class EventoManager implements EventoService{
         boolean sw= false;
         if (newEvent.getEventosId() != null){
             evento = this.eventoRepository.findByEventosId(newEvent.getEventosId());
-            if (newEvent.getImagen() != null){
+            if (newEvent.getImagen().isPresent()){
                 sw=true;
             }
         }
@@ -87,8 +87,8 @@ public class EventoManager implements EventoService{
         evento.setDescripcion(newEvent.getDescripcion());
         evento.setLocalizacion(newEvent.getLocalizacion());
         Eventos eventoRegistrado = this.eventoRepository.save(evento);
-        if (newEvent.getEventosId() != null || sw == true){
-            if (newEvent.getImagen() != null)
+        if (newEvent.getEventosId() == null || sw == true){
+            if (newEvent.getImagen().isPresent())
             this.saveImg(eventoRegistrado,newEvent.getImagen());
         }
         if (ieRepository.findAllByEventoEventosId(eventoRegistrado.getEventosId()).size() > 0){

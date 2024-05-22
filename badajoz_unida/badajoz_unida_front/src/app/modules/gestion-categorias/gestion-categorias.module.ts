@@ -23,7 +23,7 @@ import '@popperjs/core';
         DataTablesModule,
         PipesModule,
         ModalsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ]
 })
 export class GestionCategoriasModule { }

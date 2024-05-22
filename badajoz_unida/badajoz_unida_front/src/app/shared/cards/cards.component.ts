@@ -10,6 +10,7 @@ import {EventosService} from "../../services/eventos.service";
 import {Util} from "leaflet";
 import formatNum = Util.formatNum;
 import {AlertsService} from "../../services/alerts.service";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-cards',
@@ -20,7 +21,7 @@ import {AlertsService} from "../../services/alerts.service";
 /**
  Vista de las tarjetas
  **/
-export class CardsComponent implements OnInit{
+export class CardsComponent extends LocalizedComponent implements OnInit{
 
   @Input() evento: any;
   @Input() desapuntarse: boolean = false;
@@ -30,9 +31,11 @@ export class CardsComponent implements OnInit{
    @param router {Router} Clase para la navegación entre componentes
    **/
   constructor(private router: Router, private _eventosService: EventosService, private _alertsService: AlertsService) {
+    super();
   }
 
   ngOnInit() {
+    console.log(this.evento);
   }
 
   /**

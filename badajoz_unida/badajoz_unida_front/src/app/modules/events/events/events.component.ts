@@ -5,6 +5,7 @@
  **/
 
 import {Component, OnInit} from '@angular/core';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 import {EventosService} from "../../../services/eventos.service";
 
 @Component({
@@ -16,12 +17,13 @@ import {EventosService} from "../../../services/eventos.service";
 /**
  Vista de la vista que muestra los eventos disponibles por categorías
  **/
-export class EventsComponent implements OnInit{
+export class EventsComponent extends LocalizedComponent implements OnInit{
 
   /**
    Constructor de la clase
    **/
   constructor() {
+    super();
   }
 
   /**

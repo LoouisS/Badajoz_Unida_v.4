@@ -94,5 +94,11 @@ export const resources = {
   'createEvent': 'Crear evento',
   'place': 'Lugar',
   'details': 'Detalles',
+  // EVENTOS
+  'recentEvents': 'Eventos más recientes',
+  'interestedEvents': 'Eventos de tu interés',
+  'hour': 'Hora',
+  'knowMore': 'Saber más',
+  'notParticipate': 'No participar',
 }
 

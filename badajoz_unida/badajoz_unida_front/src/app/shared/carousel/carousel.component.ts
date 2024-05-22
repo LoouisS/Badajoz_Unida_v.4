@@ -50,6 +50,7 @@ export class CarouselComponent implements OnInit{
         default:
           this.peticion = this._eventosService.getAllEventos();
       }
+      console.log(this.peticion)
       this.peticion.subscribe((data: any) => {
         this.eventos = data;
         this.agruparEventos();

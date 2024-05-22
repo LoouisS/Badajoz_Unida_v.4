@@ -94,4 +94,10 @@ export const resources = {
   // GLOBAL
   'yes': 'Yes',
   'no': 'No',
+  // EVENTOS
+  'recentEvents': 'Most recent events',
+  'interestedEvents': 'Events of your interest',
+  'hour': 'Hour',
+  'knowMore': 'Know more',
+  'notParticipate': 'not participate',
 }

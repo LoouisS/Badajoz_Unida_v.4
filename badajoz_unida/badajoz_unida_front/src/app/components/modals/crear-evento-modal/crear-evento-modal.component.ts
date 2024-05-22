@@ -261,11 +261,15 @@ export class CrearEventoModalComponent implements OnInit{
         formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
         formData.append('latitud', this.lat.toString());
         formData.append('longitud', this.long.toString());
+          console.log(this.getImg())
         if (this.getImg() != null){
           formData.append('imagen', this.getImg());
         }
         formData.append('intereses', inter.join(','));
-        console.log("EL FORMDATA A ENVIAR",formData);
+          formData.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+});
+
         this.eventoService.createEvento(formData).subscribe((data) => {
           console.log("DATA", data);
           this.alert.fire({
@@ -319,6 +323,7 @@ export class CrearEventoModalComponent implements OnInit{
       reader.onload = (e: any) => {
         this.preview = true
         this.imgPreview = e.target.result;
+        console.log("PREVIEW", this.imgPreview);
       };
       reader.readAsDataURL(file);
     } else {
