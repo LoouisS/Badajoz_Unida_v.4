@@ -1,0 +1,97 @@
+
+/* weather-card.component.css */
+
+.card {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: light border giving a "frosted" look */
+  backdrop-filter: blur(10px); /* This creates the blurred glass effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 14px;
+  width: 250px;
+  color: #D10000;
+  font-family: 'jetbrains mono', monospace;
+  transition: all 1s ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.card:hover .temperature {
+  color: #D10000;
+}
+
+.date-location {
+  font-size: 0.9em;
+}
+
+.card:hover .date-location {
+  color: #2F2F2F !important;
+}
+
+.card:hover i{
+  color: #2F2F2F !important;
+}
+
+.card:hover .condition-text {
+    color: black !important; /* Replace with your preferred color */
+}
+
+.condition-text{
+  transition: color 1s ease;
+}
+.card:hover .location{
+  color: #2F2F2F !important;
+}
+
+.location{
+  transition: color 1s ease;
+}
+
+.card:hover .weather{
+  color: black !important;
+}
+
+.weather{
+  transition: color 1s ease;
+}
+i{
+  transition: color 1s ease;
+}
+
+.temperature {
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: 'jetbrains mono', monospace;
+  padding-bottom: 40px;
+  color: #fff;
+  transition: color 1s ease;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.condition-high-low {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.condition-high-low i {
+  color: #fff;
+}
+
+.p-10{
+  padding-right: 13px;
+}
+
+.condition-high-low p {
+  font-size: 0.9em;
+  margin: 0;
+  color: #f2f2f2;
+}
+.card-body {
+  padding: 0;
+}

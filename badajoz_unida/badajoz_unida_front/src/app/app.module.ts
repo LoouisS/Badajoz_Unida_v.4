@@ -18,13 +18,13 @@ import { UsuariosService } from './services/usuarios.service';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Add this import statement
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

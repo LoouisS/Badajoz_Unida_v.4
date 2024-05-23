@@ -1,5 +1,7 @@
 <section class="cover col-12">
   <div></div>
+
+<app-weather [clima]="clima"></app-weather>
   <img [src]="evento?.img" [alt]="" appNoImage />
   <h1>{{ evento?.nombre }}</h1>
   <!--  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>-->

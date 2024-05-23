@@ -5,11 +5,13 @@ import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event/event.component';
 import {DirectivesModule} from "../../directives/directives.module";
 import {ModalsModule} from "../../components/modals/modals.module";
+import { WeatherComponent } from 'src/app/components/weather/weather.component';
 
 
 @NgModule({
   declarations: [
-    EventComponent
+    EventComponent,
+    WeatherComponent
   ],
     imports: [
         CommonModule,

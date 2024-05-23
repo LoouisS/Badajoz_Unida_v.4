@@ -30,6 +30,7 @@ export class EventComponent implements OnInit {
   usuario: any;
   registrado: boolean = false;
   @ViewChild('cesionImagen') cesionImagen: TemplateRef<any>;
+    clima: any;
 
   /**
    Constructor de la clase
@@ -61,6 +62,7 @@ export class EventComponent implements OnInit {
           .getWeatherData(this.evento.latitud, this.evento.longitud,this.evento.fechaHora.split('T')[0])
           .subscribe((data: any) => {
             console.log(data);
+            this.clima = data
             this.evento.temperatura = data.temperature;
             console.log(this.evento.temperatura);
           });
