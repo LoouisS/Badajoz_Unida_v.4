@@ -1,7 +1,7 @@
 /**
  @file Contiene la vista del carrusel de tarjetas
- @author Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
- @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
+ @autor Daniel García <danielgarciarasero.guadalupe@alumnado.fundacionloyola.net>
+ @autor Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
 import {Component, Input, OnInit} from '@angular/core';
@@ -16,13 +16,13 @@ import {UsuariosService} from "../../services/usuarios.service";
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css']
 })
-export class CarouselComponent implements OnInit{
+export class CarouselComponent implements OnInit {
 
   @Input() tipo: string;
   peticion: any;
   usuario: any = {};
   eventos: any[] = [];
-  eventosAgrupados: any[] = []
+  eventosAgrupados: any[] = [];
   loading: boolean = true;
 
   /**
@@ -62,10 +62,24 @@ export class CarouselComponent implements OnInit{
   /**
    Método que junta los eventos en grupos de tres
    **/
-  agruparEventos(){
-    for(let i=0; i<this.eventos.length; i+=3){
+  agruparEventos() {
+    this.eventosAgrupados = []; // Reiniciar el array para evitar duplicados
+    for(let i = 0; i < this.eventos.length; i += 3) {
       this.eventosAgrupados.push(this.eventos.slice(i, i + 3));
     }
   }
 
+  /**
+   Método para verificar si hay más de un grupo de eventos
+   **/
+  hayMasDeUnGrupo(): boolean {
+    return this.eventosAgrupados.length > 1;
+  }
+
+  /**
+   Método para verificar si hay más de un evento
+   **/
+  hayMasDeUnEvento(): boolean {
+    return this.eventos.length > 1;
+  }
 }

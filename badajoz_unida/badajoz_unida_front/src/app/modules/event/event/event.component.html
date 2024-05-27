@@ -2,39 +2,34 @@
   <div></div>
   <img [src]="evento?.img" [alt]="" appNoImage />
   <h1>{{evento?.nombre}}</h1>
-<!--  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="registerUserInEvent()">Apuntarme</button>-->
-  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end" *ngIf="!registrado; else desapuntarse" (click)="openCesionImagenModal()">Participar</button>
+  <button class="btn btn-primary rounded-pill mt-5 py-3 px-4 align-self-end participar-btn" *ngIf="!registrado; else desapuntarse" (click)="openCesionImagenModal()">Participar</button>
 </section>
-<section class="px-lg-5 mt-lg-5 d-flex flex-column">
-  <div class="info px-5 py-3 rounded-3 d-flex justify-content-between">
-      <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span> |
-      <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span> |
-      <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span> |
-      <span><span class="fa-solid fa-phone me-1"></span> Télefono: {{evento?.telefonoContacto}}</span>
+<section class="px-3 px-lg-5 mt-3 mt-lg-5 d-flex flex-column">
+  <div class="info px-3 px-lg-5 py-3 rounded-3 d-flex flex-column flex-lg-row justify-content-between">
+    <span><span class="fa-solid fa-calendar-xmark me-1"></span> Fecha: {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}, {{evento?.fechaHora | date:'cccc':'':'es'}}</span>
+    <span><span class="fa-solid fa-clock me-1"></span> Hora: {{evento?.fechaHora | date: 'shortTime'}}</span>
+    <span><span class="fa-solid fa-location-dot me-1"></span> Lugar: {{evento?.localizacion}}</span>
+    <span><span class="fa-solid fa-phone me-1"></span> Télefono: {{evento?.telefonoContacto}}</span>
   </div>
   <div class="descripcion py-3 rounded-3">
-    <p class="mb-0 mt-2">
-      {{evento?.descripcion}}
-    </p>
+    <p class="mb-0 mt-2">{{evento?.descripcion}}</p>
   </div>
 </section>
-<section class="pt-5">
-  <h1 class="titulo px-5 mb-3">Detalles</h1>
-  <div class="detalles p-5">
-    <p class="px-5">
-      {{evento?.detalles}}
-    </p>
+<section class="pt-3 pt-lg-5">
+  <h1 class="titulo px-3 px-lg-5 mb-3">Detalles</h1>
+  <div class="detalles p-3 p-lg-5">
+    <p class="px-3 px-lg-5">{{evento?.detalles}}</p>
   </div>
 </section>
-<section class="pt-5 px-5 d-flex flex-column">
+<section class="pt-3 pt-lg-5 px-3 px-lg-5 d-flex flex-column">
   <h1 class="titulo mb-3">Lugar</h1>
-  <div class="lugar px-5 py-2">
+  <div class="lugar px-3 px-lg-5 py-2">
     <div id="map" class="custom-map mt-3"></div>
   </div>
 </section>
 <div class="footer-padding"></div>
 <ng-template #desapuntarse>
-  <button class="btn btn-secondary rounded-pill mt-5 py-3 px-4 align-self-end" (click)="removeUserFromEvent()">No participar</button>
+  <button class="btn btn-secondary rounded-pill mt-5 py-3 px-4 align-self-end no-participar-btn" (click)="removeUserFromEvent()">No participar</button>
 </ng-template>
 <ng-template #cesionImagen>
   <app-cesion-imagen (cerrarCesionImagen)="cerrarCesionImagenModal()" (inscribirUsuario)="registerUserInEvent()" [usuario]="usuario" [evento]="evento"></app-cesion-imagen>

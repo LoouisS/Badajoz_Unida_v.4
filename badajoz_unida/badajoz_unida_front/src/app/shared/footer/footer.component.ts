@@ -51,7 +51,8 @@ export class FooterComponent extends LocalizedComponent implements OnInit {
   }
 
   isPerfilRoute(): boolean {
-    return this.routesMap[this.router.url] === true;
+    const regex = new RegExp('^/eventos/\\d+$');
+    return this.routesMap[this.router.url] === true && !regex.test(this.router.url);
   }
 
 
