@@ -102,7 +102,7 @@ public class EventoManager implements EventoService{
         Eventos eventoRegistrado = this.eventoRepository.save(evento);
         if (newEvent.getEventosId() == null || sw == true){
             if (newEvent.getImagen().isPresent())
-            this.saveImg(eventoRegistrado,newEvent.getImagen());
+            this.saveImg(eventoRegistrado,newEvent.getImagen().get());
         }
         if (ieRepository.findAllByEventoEventosId(eventoRegistrado.getEventosId()).size() > 0){
             ieRepository.deleteAllByEventoEventosId(eventoRegistrado.getEventosId());

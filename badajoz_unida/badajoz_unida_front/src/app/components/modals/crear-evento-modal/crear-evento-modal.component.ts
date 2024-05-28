@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import * as L from "leaflet";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModelNewEvent} from "../../../models/model-new-event";
@@ -21,6 +21,7 @@ export class CrearEventoModalComponent implements OnInit{
 
   @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
   @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
+    @ViewChild('buscadorMap') buscadorMap: ElementRef<HTMLInputElement>;
   eventoEdit: any;
   map: any;
   marker: any;
@@ -97,8 +98,23 @@ export class CrearEventoModalComponent implements OnInit{
       this.marker.setLatLng(latlng);
       this.lat = latlng.lat;
       this.long = latlng.lng;
+      this.obtenerDireccion(latlng.lat, latlng.lng);
     });
   }
+
+  obtenerDireccion(lat, lng) {
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+      console.log('Dirección:', `${data.address.road} - ${data.address.province}, ${data.address.country}`); // La dirección completa
+        this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
+
+    })
+    .catch(error => console.error('Error:', error));
+}
 
   /**
    Método que envia datos para la búsqueda de una ubicación segun los parametros introducidos
@@ -126,10 +142,10 @@ export class CrearEventoModalComponent implements OnInit{
         if (data.length > 0) {
           const result = data[0];
           const latlng = L.latLng(result.lat, result.lon);
+          console.log("RESULT", result);
 
           this.marker.setLatLng(latlng);
           this.map.setView(latlng, 13);
-
           console.log("Latitud:", result.lat);
           console.log("Longitud:", result.lon);
         }

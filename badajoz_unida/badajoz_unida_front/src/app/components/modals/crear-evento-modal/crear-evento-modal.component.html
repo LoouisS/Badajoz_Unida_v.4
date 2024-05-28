@@ -56,7 +56,7 @@
     </form>
     <div class="my-4">
       <label for="buscador-map" class="form-label">Búsqueda: </label>
-      <input type="text" id="buscador-map" placeholder="Calle Mayor 123, Badajoz, España" (keyup)="buscarUbi($event)"
+      <input type="text" id="buscador-map" #buscadorMap placeholder="Calle Mayor 123, Badajoz, España" (keyup)="buscarUbi($event)"
              class="form-control customForm">
       <div id="map" class="custom-map mt-3"></div>
     </div>

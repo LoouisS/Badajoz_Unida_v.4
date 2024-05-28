@@ -1,6 +1,5 @@
 package com.badajoz_unida.evg.dto;
 
-import com.badajoz_unida.evg.entity.Intereses;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,4 +26,9 @@ public class NewEventDTO {
     private String longitud;
     private Optional<MultipartFile> imagen;
     private List<Integer> intereses;
+
+    public Optional<Optional<MultipartFile>> getImagen() {
+        return Optional.ofNullable(this.imagen);
+    }
+
 }
