@@ -19,6 +19,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharethisAngularModule } from 'sharethis-angular';
 
 
 registerLocaleData(localeEs);
@@ -29,6 +30,7 @@ registerLocaleData(localeEs);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharethisAngularModule,
     HttpClientModule,
     SharedModule,
     DataTablesModule,

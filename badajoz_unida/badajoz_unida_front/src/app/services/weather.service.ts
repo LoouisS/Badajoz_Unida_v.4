@@ -20,6 +20,9 @@ export class WeatherService {
 
   private convertToFahrenheitToCelsius(data: any): any {
     const tempInCelsius = Math.round((data.days[0].temp - 32) * 5 / 9);;
-    return { ...data, temperature: tempInCelsius };
+    const maxTempInCelsius = Math.round((data.days[0].tempmax - 32) * 5 / 9);
+    const minTempInCelsius = Math.round((data.days[0].tempmin - 32) * 5 / 9);
+    const feelsLikeInCelsius = Math.round((data.days[0].feelslike - 32) * 5 / 9);
+    return { ...data, temperature: tempInCelsius, tempmax: maxTempInCelsius, tempmin: minTempInCelsius, feelslike: feelsLikeInCelsius};
   }
 }

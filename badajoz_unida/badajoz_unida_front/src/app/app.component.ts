@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StickyShareButtonsConfig } from 'sharethis-angular';
 
 @Component({
   selector: 'app-root',

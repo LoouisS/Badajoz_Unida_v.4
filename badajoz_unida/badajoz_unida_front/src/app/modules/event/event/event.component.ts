@@ -12,6 +12,7 @@ import { AlertsService } from '../../../services/alerts.service';
 import { TokenService } from '../../../security/services/auth/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WeatherService } from 'src/app/services/weather.service';
+import { StickyShareButtonsConfig } from 'sharethis-angular';
 
 @Component({
   selector: 'app-event',
@@ -31,6 +32,44 @@ export class EventComponent implements OnInit {
   registrado: boolean = false;
   @ViewChild('cesionImagen') cesionImagen: TemplateRef<any>;
     clima: any;
+    //Sticky Share Buttons
+
+ stickyShareButtonsConfig: StickyShareButtonsConfig={
+            alignment: 'right',    // alignment of buttons (left, right)
+            color: 'social',      // set the color of buttons (social, white)
+            enabled: true,        // show/hide buttons (true, false)
+            font_size: 16,        // font size for the buttons
+            hide_desktop: false,  // hide buttons on desktop (true, false)
+            labels: 'counts',     // button labels (cta, counts, null)
+            language: 'en',       // which language to use (see LANGUAGES)
+            min_count: 0,         // hide react counts less than min_count (INTEGER)
+            networks: [           // which networks to include (see SHARING NETWORKS)
+              'facebook',
+              'twitter',
+              'whatsapp',
+              'linkedin',
+              'email',
+              'sms'
+            ],
+            padding: 12,          // padding within buttons (INTEGER)
+            radius: 4,            // the corner radius on each button (INTEGER)
+            show_total: false,     // show/hide the total share count (true, false)
+            show_mobile: false,    // show/hide the buttons on mobile (true, false)
+            show_toggle: true,    // show/hide the toggle buttons (true, false)
+            size: 48,             // the size of each button (INTEGER)
+            top: 160,             // offset in pixels from the top of the page
+
+
+            // OPTIONAL PARAMETERS
+
+            image: 'https://bit.ly/2CMhCMC',  // (defaults to og:image or twitter:image)
+            description: 'Te gustaria participar en el proximo gran evento?',       // (defaults to og:description or twitter:description)
+            title: 'Badajoz unida',            // (defaults to og:title or twitter:title)
+            message: 'hola',     // (only for email sharing)
+            subject: 'holaasdf',  // (only for email sharing)
+            username: 'ffff' // (only for twitter sharing)
+};
+
 
   /**
    Constructor de la clase

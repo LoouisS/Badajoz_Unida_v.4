@@ -1,13 +1,12 @@
-<div class="display-inline-block position-absolute top-0 end-0 mt-2 me-2">
+<div class="position-absolute top-0 end-0 mt-2 me-md-2 d-flex d-md-inline-block justify-content-center weather-card">
   <!-- weather-card.component.html -->
   <!-- weather-card.component.html -->
-  <div class="card mb-4 gradient-custom separate-card" style="border-radius: 10px">
+  <div class="card mb-4 gradient-custom separate-card" style="border-radius: 10px;">
     <div class="card-body">
       <div class="d-flex flex-column">
         <div class="d-flex justify-content-between">
           <div class="date-location mb-3">
-            <div style="color: #F23B3B; font-weight: bolder;">{{ date }}</div>
-            <div class="location" style="color: #E8E8E8">{{ location }}</div>
+            <div style="color: #F23B3B; font-weight: bolder;">{{ getDayOfWeek(clima?.days[0].datetime) }}</div>
           </div>
           <div class="temperature mb-3">
             <span>{{ clima?.temperature }}°</span>
@@ -16,11 +15,11 @@
         <div class="condition-high-low mt-auto w-90">
           <div class="d-flex align-items-center w-100 justify-content-between pe-3">
             <div>
-              <p class="mb-0 condition-text" style="color: #FaF0e6">{{ condition }}</p>
-              <p class="mb-0 weather"><span style="color:#F23B3B;font-weight: bolder;">H:</span> {{ high }}° <span style="color:#F23B3B;font-weight: bolder;">L:</span> {{ low }}°</p>
+              <p class="mb-0 condition-text" style="color: #FaF0e6;font-size: 0.8rem;">{{ this.clima?.days[0].conditions }}</p>
+              <p class="mb-0 weather"><span style="color:#F23B3B;font-weight: bolder;">H:</span> {{ this.clima?.tempmax }}° <span style="color:#F23B3B;font-weight: bolder;">L:</span> {{ this.clima?.tempmin }}°</p>
             </div>
 
-            <img [src]="'../../../assets/weatherIcons/partly-cloudy-day.svg'" style="width: 35px;fill: #FaF0e6;margin-right: 10px;" alt="Weather Icon">
+            <img [src]="this.icon" style="width: 35px;fill: #FaF0e6;margin-right: 10px;">
 
           </div>
         </div>

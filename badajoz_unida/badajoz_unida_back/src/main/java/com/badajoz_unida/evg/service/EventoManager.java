@@ -14,9 +14,23 @@ import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import com.badajoz_unida.evg.repository.UsuarioEventosRepository;
 import com.badajoz_unida.evg.utils.EventosSpecification;
 import com.badajoz_unida.evg.utils.JavaUtils;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.SolidBorder;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 import freemarker.template.TemplateException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.hibernate.Hibernate;
@@ -44,7 +58,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import static java.lang.Integer.parseInt;
 import static java.nio.file.Paths.get;
@@ -306,7 +319,8 @@ public class EventoManager implements EventoService{
             headerRow.createCell(4).setCellValue("Localización");
             headerRow.createCell(5).setCellValue("Fecha y hora");
             headerRow.createCell(6).setCellValue("Teléfono de contacto");
-            for (Cell cell : headerRow) {
+            headerRow.createCell(7).setCellValue("Total participantes");
+            for (org.apache.poi.ss.usermodel.Cell cell : headerRow) {
                 cell.setCellStyle(titleStyle);
             }
             //Introducción de datos en la tabla del evento
@@ -318,6 +332,7 @@ public class EventoManager implements EventoService{
             dataRow.createCell(4).setCellValue(evento.getLocalizacion());
             dataRow.createCell(5).setCellValue(evento.getFechaHora().toString());
             dataRow.createCell(6).setCellValue(evento.getTelefonoContacto());
+            dataRow.createCell(7).setCellValue(evento.getUsuarios().size());
 
             // Creación de la tabla de usuarios inscritos
             Row usersHeaderRow = sheet.createRow(3);
@@ -328,9 +343,13 @@ public class EventoManager implements EventoService{
             usersHeaderRow.createCell(4).setCellValue("Correo electrónico");
             usersHeaderRow.createCell(5).setCellValue("Fecha de nacimiento");
             usersHeaderRow.createCell(6).setCellValue("Teléfono");
-            for (Cell cell : usersHeaderRow) {
+            for (org.apache.poi.ss.usermodel.Cell cell : usersHeaderRow) {
                 cell.setCellStyle(titleStyle);
             }
+            // Ajustar el ancho de las columnas automáticamente después de crear el header
+        for (int i = 0; i < headerRow.getPhysicalNumberOfCells(); i++) {
+            sheet.autoSizeColumn(i);
+        }
             // Crear las filas de datos para la tabla de usuarios
             int rowNum = 4;
             for (Usuarios usuario : evento.getUsuarios()) {
@@ -343,11 +362,11 @@ public class EventoManager implements EventoService{
                 userDataRow.createCell(5).setCellValue(usuario.getFchNacimiento().toString());
                 userDataRow.createCell(6).setCellValue(usuario.getTlf());
                 if (rowNum % 2 != 0) {
-                    for (Cell cell : userDataRow) {
+                    for (org.apache.poi.ss.usermodel.Cell cell : userDataRow) {
                         cell.setCellStyle(oddRowStyle);
                     }
                 } else { // Aplicar estilo a filas pares
-                    for (Cell cell : userDataRow) {
+                    for (org.apache.poi.ss.usermodel.Cell cell : userDataRow) {
                         cell.setCellStyle(evenRowStyle);
                     }
                 }
@@ -370,9 +389,122 @@ public class EventoManager implements EventoService{
         return null;
 
     }
+    public ResponseEntity<?> generatePdf(int idEvento) throws CustomException, IOException, SQLException {
+        Eventos evento = this.eventoRepository.findByEventosId(idEvento);
 
-    @Override
-    public ResponseEntity<?> generatePdf(int idEvento) throws CustomException, IOException, SQLException, TemplateException {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            PdfWriter writer = new PdfWriter(outputStream);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            // Add event title
+            Paragraph title = new Paragraph("Información del evento")
+                    .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD))
+                    .setFontSize(18)
+                    .setTextAlignment(TextAlignment.CENTER);
+            document.add(title);
+
+            // Add event information table
+            float[] columnWidths = {1, 3};
+            Table eventTable = new Table(UnitValue.createPercentArray(columnWidths)).useAllAvailableWidth();
+
+            addCell(eventTable, "Id", true);
+            addCell(eventTable, String.valueOf(evento.getEventosId()), false);
+
+            addCell(eventTable, "Nombre del evento", true);
+            addCell(eventTable, evento.getNombre(), false);
+
+            addCell(eventTable, "Descripción", true);
+            addCell(eventTable, evento.getDescripcion(), false);
+
+            addCell(eventTable, "Detalles", true);
+            addCell(eventTable, evento.getDetalles(), false);
+
+            addCell(eventTable, "Localización", true);
+            addCell(eventTable, evento.getLocalizacion(), false);
+
+            addCell(eventTable, "Fecha y hora", true);
+            addCell(eventTable, evento.getFechaHora().toString(), false);
+
+            addCell(eventTable, "Teléfono de contacto", true);
+            addCell(eventTable, String.valueOf(evento.getTelefonoContacto()), false);
+
+            addCell(eventTable, "Total participantes", true);
+            addCell(eventTable, String.valueOf(evento.getUsuarios().size()), false);
+
+            document.add(eventTable);
+
+            // Add a blank line
+            document.add(new Paragraph("\n"));
+
+            // Add users information table
+            Paragraph usersTitle = new Paragraph("Usuarios registrados")
+                    .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD))
+                    .setFontSize(18)
+                    .setTextAlignment(TextAlignment.CENTER);
+            document.add(usersTitle);
+
+            float[] userColumnWidths = {1, 3, 3, 3, 5, 3, 3};
+            Table usersTable = new Table(UnitValue.createPercentArray(userColumnWidths)).useAllAvailableWidth();
+
+            addHeaderCell(usersTable, "Id");
+            addHeaderCell(usersTable, "Apellidos");
+            addHeaderCell(usersTable, "Nombre");
+            addHeaderCell(usersTable, "Nick");
+            addHeaderCell(usersTable, "Correo electrónico");
+            addHeaderCell(usersTable, "Fecha de nacimiento");
+            addHeaderCell(usersTable, "Teléfono");
+
+            for (Usuarios usuario : evento.getUsuarios()) {
+                addCell(usersTable, String.valueOf(usuario.getUserId()), false);
+                addCell(usersTable, usuario.getApellidos(), false);
+                addCell(usersTable, usuario.getNombre(), false);
+                addCell(usersTable, usuario.getNombreUsuario(), false);
+                addCell(usersTable, usuario.getEmail(), false);
+                addCell(usersTable, usuario.getFchNacimiento().toString(), false);
+                addCell(usersTable, usuario.getTlf(), false);
+            }
+
+            document.add(usersTable);
+            document.close();
+
+            ByteArrayInputStream pdfStream = new ByteArrayInputStream(outputStream.toByteArray());
+            InputStreamResource inputStreamResource = new InputStreamResource(pdfStream);
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .contentLength(outputStream.size())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + evento.getEventosId() + evento.getNombre() + ".pdf")
+                    .body(inputStreamResource);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
+    private void addHeaderCell(Table table, String text) throws IOException {
+        table.addHeaderCell(new Cell()
+                .add(new Paragraph(text)
+                        .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD))
+                        .setFontColor(ColorConstants.WHITE)
+                        .setTextAlignment(TextAlignment.CENTER)
+                        .setPadding(5))
+                .setBackgroundColor(new DeviceRgb(209, 0, 0))
+                .setBorder(new SolidBorder(ColorConstants.RED, 1)));
+    }
+
+    private void addCell(Table table, String text, boolean isBold) throws IOException {
+        // Create the Paragraph object with common properties
+        Paragraph paragraph = new Paragraph(text)
+                .setFont(PdfFontFactory.createFont(isBold ? StandardFonts.HELVETICA_BOLD : StandardFonts.HELVETICA)) // Conditionally set the font
+                .setTextAlignment(TextAlignment.LEFT)
+                .setPadding(5); // This will actually not work directly on Paragraph. Read note below.
+
+        // Create and configure the Cell using the formatted Paragraph
+        Cell cell = new Cell().add(paragraph);
+
+        // Add the cell to the table
+        table.addCell(cell);
+    }
+
 }

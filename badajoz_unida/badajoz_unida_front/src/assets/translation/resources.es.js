@@ -58,7 +58,7 @@ export const resources = {
   'interestManagement': 'Gestión de intereses',
   'userManagement': 'Gestión de usuarios',
   // FOOTER
-  'meetUs': 'Conócenos',
+  'meetUs': '¡Conócenos!',
   // GESTION DE CATEGORIAS
   'searchFilters': 'Filtros de búsqueda',
   'title': 'Título',

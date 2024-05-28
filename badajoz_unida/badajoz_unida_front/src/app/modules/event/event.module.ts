@@ -6,6 +6,7 @@ import { EventComponent } from './event/event.component';
 import {DirectivesModule} from "../../directives/directives.module";
 import {ModalsModule} from "../../components/modals/modals.module";
 import { WeatherComponent } from 'src/app/components/weather/weather.component';
+import { SharethisAngularModule } from 'sharethis-angular';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { WeatherComponent } from 'src/app/components/weather/weather.component';
         CommonModule,
         EventRoutingModule,
         DirectivesModule,
-        ModalsModule
+        ModalsModule,
+        SharethisAngularModule,
     ]
 })
 export class EventModule { }
