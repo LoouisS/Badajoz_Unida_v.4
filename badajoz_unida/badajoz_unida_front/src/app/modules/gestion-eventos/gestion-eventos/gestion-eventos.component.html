@@ -1,7 +1,10 @@
 
-<app-eventos-table (mostrarModal)="mostrarModalEventos()" (editEvent)="mostrarModalEventos()"></app-eventos-table>
+<app-eventos-table #tablaEventos (mostrarModal)="mostrarModalEventos()" (editEvent)="editModalEventos()" (cerrarModalEventos)="tablaEventos.getEventos()"></app-eventos-table>
 <ng-template #eventosForm>
   <app-crear-evento-modal (cerrarModalEventos)="cerrarModalEventos()" #modalCrearEvento></app-crear-evento-modal>
+</ng-template>
+<ng-template #editEventos>
+  <app-editar-evento-modal (cerrarModalEventos)="cerrarModalEventos()" ></app-editar-evento-modal>
 </ng-template>
 <div class="footer-padding">
 

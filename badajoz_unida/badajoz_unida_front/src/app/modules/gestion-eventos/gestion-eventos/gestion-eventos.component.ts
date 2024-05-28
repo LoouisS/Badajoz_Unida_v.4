@@ -10,6 +10,7 @@ import * as jQuery from 'jquery';
 import {CategoriasService} from "../../../services/categorias.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CrearEventoModalComponent} from "../../../components/modals/crear-evento-modal/crear-evento-modal.component";
+import { EventosTableComponent } from '../eventos-table/eventos-table.component';
 
 declare var $: any;
 @Component({
@@ -24,7 +25,9 @@ declare var $: any;
 export class GestionEventosComponent implements OnInit{
 
   @ViewChild('eventosForm') eventosForm: TemplateRef<any>;
+  @ViewChild('editEventos') editarEventoModal: TemplateRef<any>;
   @ViewChild('modalCrearEvento',{static:false}) modalCrearEvento: CrearEventoModalComponent;
+  @ViewChild(EventosTableComponent) tablaEventos: EventosTableComponent;
 
 
   /**
@@ -48,10 +51,15 @@ export class GestionEventosComponent implements OnInit{
     this.modalService.open(this.eventosForm, {size: 'xl', backdrop: 'static'})
   }
 
+  editModalEventos(){
+    this.modalService.open(this.editarEventoModal, {size: 'xl', backdrop: 'static'})
+  }
+
   /**
    Método que cierra el modal de eventos
    **/
   cerrarModalEventos(){
     this.modalService.dismissAll(this.eventosForm);
+    this.tablaEventos.getEventos();
   }
 }

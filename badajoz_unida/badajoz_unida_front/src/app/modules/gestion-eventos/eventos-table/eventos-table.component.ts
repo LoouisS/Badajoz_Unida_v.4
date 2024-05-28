@@ -29,7 +29,7 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
   @Output() editEvent: EventEmitter<any> = new EventEmitter<any>();
   eventos: any;
   categorias: any;
-    @ViewChild('buscadorMap') buscadorMap: ElementRef<HTMLInputElement>;
+  @ViewChild('buscadorMap') buscadorMap: ElementRef<HTMLInputElement>;
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: any;
   dtTable: DataTables.Api;

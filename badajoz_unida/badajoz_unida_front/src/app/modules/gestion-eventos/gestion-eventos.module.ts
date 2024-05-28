@@ -10,13 +10,15 @@ import {DataTablesModule} from "angular-datatables";
 import {PipesModule} from "../../pipes/pipes.module";
 import {SharedModule} from "../../shared/shared.module";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
+import { EditarEventoModalComponent } from 'src/app/components/modals/editar-evento-modal/editar-evento-modal.component';
 
 
 @NgModule({
     declarations: [
         GestionEventosComponent,
         CrearEventoModalComponent,
-        EventosTableComponent
+        EventosTableComponent,
+        EditarEventoModalComponent
     ],
     exports: [
         EventosTableComponent

@@ -1,25 +1,25 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import * as L from "leaflet";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModelNewEvent} from "../../../models/model-new-event";
-import {CategoriasService} from "../../../services/categorias.service";
-import {EventosService} from "../../../services/eventos.service";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ModelNewEvent } from "../../../models/model-new-event";
+import { CategoriasService } from "../../../services/categorias.service";
+import { EventosService } from "../../../services/eventos.service";
 import Swal from "sweetalert2";
-import {ValidadoresService} from "../../../services/validadores.service";
-import {AngularMultiSelect} from "angular2-multiselect-dropdown";
+import { ValidadoresService } from "../../../services/validadores.service";
+import { AngularMultiSelect } from "angular2-multiselect-dropdown";
 
 @Component({
-  selector: 'app-crear-evento-modal',
-  templateUrl: './crear-evento-modal.component.html',
-  styleUrls: ['./crear-evento-modal.component.css']
+  selector: 'app-editar-evento-modal',
+  templateUrl: './editar-evento-modal.component.html',
+  styleUrls: ['./editar-evento-modal.component.css']
 })
 
 /**
  Vista del modal para la creación de eventos
  **/
-export class CrearEventoModalComponent implements OnInit{
+export class EditarEventoModalComponent implements OnInit {
 
-  @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
+  @ViewChild('multiselectIntereses', { static: false }) multiselect: AngularMultiSelect;
   @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('buscadorMap') buscadorMap: ElementRef<HTMLInputElement>;
   eventoEdit: any;
@@ -29,9 +29,9 @@ export class CrearEventoModalComponent implements OnInit{
   categorias: any;
   selectedCat: any;
   lat: number | undefined;
-  long: number | undefined;
+  long: number | undefined
   preview: boolean;
-  imgPreview:string;
+  imgPreview: string;
   multiselectSettings!: any;
   alert = Swal.mixin({
     allowOutsideClick: false,
@@ -53,7 +53,7 @@ export class CrearEventoModalComponent implements OnInit{
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
   constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService,
-              private validador: ValidadoresService) {this.initMultiselect();}
+    private validador: ValidadoresService) { this.initMultiselect(); }
 
   /**
    Método que inicializa la vista
@@ -67,13 +67,14 @@ export class CrearEventoModalComponent implements OnInit{
     this.initMap();
     this.eventoService.getEditEvent().subscribe((data) => {
       this.eventoEdit = data;
-      console.log("EN EL ONINIT",this.eventoEdit);
-      if (this.eventoEdit != null){
+      console.log("EN EL ONINIT", this.eventoEdit);
+      this.selectedCat = this.eventoEdit?.intereses;
+      if (this.eventoEdit != null) {
         setTimeout(() => {
           this.setFormEdit(this.eventoEdit);
-        },1000)
+        }, 1000)
 
-      }else{
+      } else {
         this.resetForm();
       }
 
@@ -103,22 +104,22 @@ export class CrearEventoModalComponent implements OnInit{
   }
 
   obtenerDireccion(lat, lng) {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
 
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
         console.log(data)
-      console.log('Dirección:', `${data.address.road} - ${data.address.province}, ${data.address.country}`); // La dirección completa
-        if(data.address.road !== undefined){
-        this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
+        console.log('Dirección:', `${data.address.road} - ${data.address.province}, ${data.address.country}`); // La dirección completa
+        if (data.address.road !== undefined) {
+          this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
         } else {
           this.buscadorMap.nativeElement.value = `${data.address.postcode} - ${data.address.province}, ${data.address.country}`;
         }
 
-    })
-    .catch(error => console.error('Error:', error));
-}
+      })
+      .catch(error => console.error('Error:', error));
+  }
 
   /**
    Método que envia datos para la búsqueda de una ubicación segun los parametros introducidos
@@ -171,7 +172,7 @@ export class CrearEventoModalComponent implements OnInit{
       localizacion: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(100)]],
       intereses: [],
       detalle: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
-     // img: ['', this.validador.validateImgExtension]
+      // img: ['', this.validador.validateImgExtension]
     });
   }
 
@@ -230,6 +231,8 @@ export class CrearEventoModalComponent implements OnInit{
    **/
   sendEvent() {
     if (this.formCreateEvent.invalid || this.formCreateEvent.pending) {
+      console.log("MAAAAAAAL");
+      console.log(this.formCreateEvent);
       Object.values(this.formCreateEvent.controls).forEach((control) => {
         if (control instanceof FormGroup)
           control.markAsTouched();
@@ -237,38 +240,38 @@ export class CrearEventoModalComponent implements OnInit{
       return;
     }
     this.alert.fire({
-      icon:'question',
-      title:'¿Estas seguro que deseas registrar un nuevo evento?',
-      html:'<ul class="list-group list-group-flush d-flex">'+
-        '<li class="list-group-item text-left">Nombre: ' + this.formCreateEvent.get('nombre')?.value + '</li>'+
-        '<li class="list-group-item text-left">Descripcion: ' + this.formCreateEvent.get('descripcion')?.value + '</li>'+
-        '<li class="list-group-item text-left">Detalles: ' + this.formCreateEvent.get('detalles')?.value + '</li>'+
-        '<li class="list-group-item text-left">Localización: ' + this.formCreateEvent.get('localizacion')?.value + '</li>'+
-        '<li class="list-group-item text-left">Fecha: ' + this.formCreateEvent.get('fechaHora')?.value + '</li>'+
-        '<li class="list-group-item text-left">Tlf: ' + this.formCreateEvent.get('tlf')?.value + '</li>'+
-        '<li class="list-group-item text-left">Intereses: ' + this.formCreateEvent.get('intereses')?.value + '</li>'+
+      icon: 'question',
+      title: '¿Estas seguro que deseas registrar un nuevo evento?',
+      html: '<ul class="list-group list-group-flush d-flex">' +
+        '<li class="list-group-item text-left">Nombre: ' + this.formCreateEvent.get('nombre')?.value + '</li>' +
+        '<li class="list-group-item text-left">Descripcion: ' + this.formCreateEvent.get('descripcion')?.value + '</li>' +
+        '<li class="list-group-item text-left">Detalles: ' + this.formCreateEvent.get('detalles')?.value + '</li>' +
+        '<li class="list-group-item text-left">Localización: ' + this.formCreateEvent.get('localizacion')?.value + '</li>' +
+        '<li class="list-group-item text-left">Fecha: ' + this.formCreateEvent.get('fechaHora')?.value + '</li>' +
+        '<li class="list-group-item text-left">Tlf: ' + this.formCreateEvent.get('tlf')?.value + '</li>' +
+        '<li class="list-group-item text-left">Intereses: ' + this.formCreateEvent.get('intereses')?.value + '</li>' +
         '</ul>',
 
       showConfirmButton: true,
       showCancelButton: true,
     }).then((result) => {
       this.alert.fire({
-        title:'Espereme mientras gestionamos su solicitud',
+        title: 'Espereme mientras gestionamos su solicitud',
         didOpen(popup: HTMLElement) {
           Swal.showLoading();
         }
       })
       if (result.isConfirmed) {
         const interesesAll = this.formCreateEvent.get('intereses').value;
-        const inter =[];
-        for (let int of interesesAll){
+        const inter = [];
+        for (let int of interesesAll) {
           console.log("INT", int.interesId);
           inter.push(parseInt(int.interesId));
 
         }
         console.log(inter);
         const formData = new FormData();
-        if (this.eventoEdit != null ){
+        if (this.eventoEdit != null) {
           formData.append('eventosId', this.eventoEdit.eventosId);
         }
         formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
@@ -279,28 +282,30 @@ export class CrearEventoModalComponent implements OnInit{
         formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
         formData.append('latitud', this.lat.toString());
         formData.append('longitud', this.long.toString());
-          console.log(this.getImg())
-        if (this.getImg() != null){
+        console.log(this.getImg())
+        if (this.getImg() != null) {
           formData.append('imagen', this.getImg());
         }
         formData.append('intereses', inter.join(','));
-          formData.forEach((value, key) => {
-});
+        formData.forEach((value, key) => {
+          console.log(`${key}: ${value}`);
+        });
 
         this.eventoService.createEvento(formData).subscribe((data) => {
           console.log("DATA", data);
           this.alert.fire({
-            icon:'success',
-            title:'Evento registrado con éxito',
-            timer:4000,
+            icon: 'success',
+            title: 'Evento registrado con éxito',
+            timer: 4000,
           })
-            this.cerrarModal()
-        },error => {
+          this.cerrarModal()
+
+        }, error => {
           this.alert.fire({
-            icon:'error',
-            title:'No se ha podido realizar el registro',
-            text:error.error,
-            timer:4000,
+            icon: 'error',
+            title: 'No se ha podido realizar el registro',
+            text: error.error,
+            timer: 4000,
           })
         })
 
@@ -320,10 +325,10 @@ export class CrearEventoModalComponent implements OnInit{
   /**
    Método que guarda la imagen seleccionada por el usuario
    **/
-  getImg(){
+  getImg() {
     const file = (document.getElementById('imgPortada') as HTMLInputElement).files[0];
     console.log("ENTRA EN OBTENER IMG", file);
-    if (file!=null || file != undefined){
+    if (file != null || file != undefined) {
       console.log("EL FILE", file);
       return file;
     }
@@ -353,7 +358,7 @@ export class CrearEventoModalComponent implements OnInit{
   /**
    * Método para el cierre del modal desarrollado en el template
    */
-  cerrarModal(){
+  cerrarModal() {
     this.cerrarModalEventos.emit();
     this.eventoService.deleteEditEvent();
   }
@@ -362,7 +367,7 @@ export class CrearEventoModalComponent implements OnInit{
    * Método para el seteo de valores en el formulario para la edición de un evento
    * @param evento
    */
-  setFormEdit(evento: any){
+  setFormEdit(evento: any) {
     console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
     let intereses = [];
     this.eventoEdit = evento;
@@ -374,16 +379,15 @@ export class CrearEventoModalComponent implements OnInit{
       descripcion: evento?.descripcion,
       tlf: evento?.telefonoContacto,
       localizacion: evento?.localizacion,
-      intereses: evento.intereses,
-      detalle: evento?.detalles
+      detalle: evento?.detalles,
+      intereses: evento?.intereses
     });
     this.marker.setLatLng(L.latLng([evento?.latitud, evento?.longitud]));
     this.map.setView(L.latLng([evento?.latitud, evento?.longitud]), 13);
 
     this.lat = evento?.latitud;
     this.long = evento?.longitud;
-    this.selectedCat=intereses;
-    this.multiselect.selectedItems = intereses
+    console.log("SELECCIONADOS", this.selectedCat);
   }
 
   padZero(num) {
@@ -408,8 +412,8 @@ export class CrearEventoModalComponent implements OnInit{
       singleSelection: false,
       text: 'Seleccione intereses relacionados',
       searchPlaceHolder: 'Buscar',
-      textField:'titulo',
-      labelKey:'titulo',
+      textField: 'titulo',
+      labelKey: 'titulo',
       idField: 'interesId',
       enableSearchFilter: true,
       badgeShowLimit: 6,
