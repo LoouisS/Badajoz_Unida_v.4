@@ -137,12 +137,6 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
       showCancelButton: true
     }).then((result) =>{
       if(result.isConfirmed){
-        this.alert.fire({
-          title:'Espere mientras procesamos su solicitud',
-          didOpen(popup: HTMLElement) {
-            Swal.showLoading();
-          }
-        })
         this.interesService.eliminarInteres(interes?.interesId).subscribe((data) =>{
           console.log("ELIMINADO", data);
           this.alert.fire({

@@ -7,6 +7,7 @@ import {DirectivesModule} from "../../directives/directives.module";
 import {ModalsModule} from "../../components/modals/modals.module";
 import { WeatherComponent } from 'src/app/components/weather/weather.component';
 import { SharethisAngularModule } from 'sharethis-angular';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SharethisAngularModule } from 'sharethis-angular';
         DirectivesModule,
         ModalsModule,
         SharethisAngularModule,
+    ToastModule,
     ]
 })
 export class EventModule { }

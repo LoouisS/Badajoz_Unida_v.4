@@ -8,6 +8,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import {PipesModule} from "../pipes/pipes.module";
 import {DirectivesModule} from "../directives/directives.module";
 import { LoadingComponent } from './loading/loading.component';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -23,7 +24,8 @@ import { LoadingComponent } from './loading/loading.component';
     CommonModule,
     RouterLink,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    ToastModule
   ],
   exports: [
     NavBarComponent,

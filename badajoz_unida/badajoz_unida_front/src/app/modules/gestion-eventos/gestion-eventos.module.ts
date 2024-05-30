@@ -11,6 +11,7 @@ import {PipesModule} from "../../pipes/pipes.module";
 import {SharedModule} from "../../shared/shared.module";
 import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 import { EditarEventoModalComponent } from 'src/app/components/modals/editar-evento-modal/editar-evento-modal.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { EditarEventoModalComponent } from 'src/app/components/modals/editar-eve
         CommonModule,
         GestionEventosRoutingModule,
         ReactiveFormsModule,
+    ToastModule,
         DataTablesModule,
         PipesModule,
         SharedModule,

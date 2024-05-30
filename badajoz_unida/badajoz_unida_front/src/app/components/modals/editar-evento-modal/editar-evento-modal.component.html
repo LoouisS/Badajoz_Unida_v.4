@@ -1,25 +1,25 @@
 <div class="modal-content">
   <div class="modal-header bgGeneral">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar evento</h1>
+    <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.editEvent}}</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
   </div>
   <div class="modal-body w-100 px-5">
     <form id="formCreateEvent" class="d-flex col-12" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
       <div class="col-6 p-3">
         <div>
-          <label for="nombreEvento" class="form-label">Nombre del evento:</label>
+          <label for="nombreEvento" class="form-label">{{resources.eventName}}:</label>
           <input formControlName="nombreEvento" [class.is-invalid]="validar('nombreEvento')"
                  type="text" class="form-control customForm" id="nombreEvento" >
           <small *ngIf="validar('nombreEvento')" class="error">{{validar('nombreEvento')}}</small>
         </div>
         <div class="my-3">
-          <label for="fechaHoraEvento" class="form-label">Fecha y hora:</label>
+          <label for="fechaHoraEvento" class="form-label">{{resources.eventDate}}:</label>
           <input formControlName="fecha" [class.is-invalid]="validar('fecha')"
                  type="datetime-local" class="form-control customForm" id="fechaHoraEvento" >
           <small *ngIf="validar('fecha')" class="error">{{validar('fecha')}}</small>
         </div>
         <div>
-          <label for="descripcionEvento" class="form-label">Descripción:</label>
+          <label for="descripcionEvento" class="form-label">{{resources.description}}:</label>
           <small *ngIf="validar('descripcion')" class="error">{{validar('descripcion')}}</small>
           <textarea formControlName="descripcion" [class.is-invalid]="validar('descripcion')"
                     class="form-control customForm" id="descripcionEvento" ></textarea>
@@ -27,19 +27,19 @@
       </div>
       <div class="col-6 p-3">
         <div>
-          <label for="tlfEvento" class="form-label">Teléfono de contacto:</label>
+          <label for="tlfEvento" class="form-label">{{resources.phone}}:</label>
           <input formControlName="tlf" [class.is-invalid]="validar('tlf')"
                  type="number" class="form-control customForm" id="tlfEvento" >
           <small *ngIf="validar('tlf')" class="error">{{validar('tlf')}}</small>
         </div>
         <div class="my-3">
-          <label for="localizacionEvento" class="form-label">Lugar:</label>
+          <label for="localizacionEvento" class="form-label">{{resources.place}}:</label>
           <input formControlName="localizacion" [class.is-invalid]="validar('localizacion')"
                  type="text" class="form-control customForm" id="localizacionEvento" >
           <small *ngIf="validar('localizacion')" class="error">{{validar('localizacion')}}</small>
         </div>
         <div>
-          <label for="detalleEvento" class="form-label">Detalle del evento</label>
+          <label for="detalleEvento" class="form-label">{{resources.eventDetails}}</label>
           <small *ngIf="validar('detalle')" class="error">{{validar('detalle')}}</small>
           <textarea  formControlName="detalle" [class.is-invalid]="validar('detalle')"
                      class="form-control customForm" id="detalleEvento" ></textarea>
@@ -55,20 +55,20 @@
       </div>
     </form>
     <div class="my-4">
-      <label for="buscador-map" class="form-label">Búsqueda: </label>
-      <input type="text" id="buscador-map" #buscadorMap placeholder="Introduce una direccion o haz click en el mapa" (keyup)="buscarUbi($event)"
+      <label for="buscador-map" class="form-label">{{resources.searchPlace}}: </label>
+      <input type="text" id="buscador-map" #buscadorMap placeholder="{{resources.searchPlaceholder}}" (keyup)="buscarUbi($event)"
              class="form-control customForm">
       <div id="map" class="custom-map mt-3"></div>
     </div>
     <div>
-      <label for="imgPortada" class="form-label">Seleccione una imagen de portada: </label>
+      <label for="imgPortada" class="form-label">{{resources.selectImage}}: </label>
       <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada" >
-      <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
+      <div *ngIf="preview" class="d-flex justify-content-center mt-2 preview"><img src="{{imgPreview}}"></div>
     </div>
 
   </div>
   <div class="modal-footer">
-    <button form="formCreateEvent" type="submit" class="btn button rounded-pill px-3 py-2 customBtn">Editar evento</button>
+    <button form="formCreateEvent" type="submit" class="btn button rounded-pill px-3 py-2 customBtn">{{resources.edit}}</button>
   </div>
 </div>
 <div *ngIf="loading">

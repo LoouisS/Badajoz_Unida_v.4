@@ -6,6 +6,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { MessageService } from 'primeng/api';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 import Swal from "sweetalert2";
 import {CategoriasService} from "../../../services/categorias.service";
 
@@ -14,7 +16,7 @@ import {CategoriasService} from "../../../services/categorias.service";
   templateUrl: './crear-categoria.component.html',
   styleUrls: ['./crear-categoria.component.css']
 })
-export class CrearCategoriaComponent implements OnInit{
+export class CrearCategoriaComponent extends LocalizedComponent implements OnInit{
   formCreateCat!: FormGroup;
   categoria: any;
   alert = Swal.mixin({
@@ -29,7 +31,8 @@ export class CrearCategoriaComponent implements OnInit{
     buttonsStyling: false
   });
   loading: boolean;
-  constructor(private formBuilder: FormBuilder, private catService: CategoriasService) {
+  constructor(private messageService: MessageService, private formBuilder: FormBuilder, private catService: CategoriasService) {
+    super();
   }
   ngOnInit() {
     this.initForm();
@@ -122,12 +125,6 @@ export class CrearCategoriaComponent implements OnInit{
       showConfirmButton: true,
       showCancelButton: true,
     }).then((result) => {
-      this.alert.fire({
-        title:'Espereme mientras gestionamos su solicitud',
-        didOpen(popup: HTMLElement) {
-          Swal.showLoading();
-        }
-      })
       if (result.isConfirmed) {
         const categoria ={
           titulo:this.formCreateCat.get('nombreCat').value,
@@ -140,32 +137,28 @@ export class CrearCategoriaComponent implements OnInit{
         }
         this.catService.registrarCategoria(categoria).subscribe((data) => {
           console.log("DATA", data);
-          this.alert.fire({
-            icon:'success',
-            title:'Evento registrado con éxito',
-            timer:4000,
-          });
+                                            this.messageService.add({
+          severity: 'success',
+          summary: 'Listo',
+          detail: 'Categoria creada correctamente',
+        }),
           setTimeout(() => {
             window.location.reload();
-          }, 4000)
+          }, 1000)
         },error => {
-          this.alert.fire({
-            icon:'error',
-            title:'No se ha podido realizar el registro',
-            text: error.error,
-            timer:4000,
-          })
+                            this.messageService.add({
+            severity: 'error',
+            summary: 'Error al registrar',
+            detail: 'No se ha podido registrar la categoria',
+          });
         })
 
       } else {
-        this.alert.fire({
-          title: 'Registro cancelado con éxito',
-          text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
-          icon: 'info',
-          timer: 4000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        })
+                        this.messageService.add({
+            severity: 'info',
+            summary: 'Registro cancelado',
+            detail: 'Vuelve a intentarlo cuando quieras',
+          });
       }
     })
   }

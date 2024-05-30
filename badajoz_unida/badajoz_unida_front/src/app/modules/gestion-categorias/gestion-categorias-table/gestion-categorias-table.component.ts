@@ -18,6 +18,7 @@ import { DataTableDirective } from "angular-datatables";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { LocalizedComponent } from "src/app/config/localize.component";
 import '@popperjs/core';
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-gestion-categorias-table",
@@ -55,6 +56,7 @@ export class GestionCategoriasTableComponent
   constructor(
     private catService: CategoriasService,
     private formBuilder: FormBuilder,
+    private messageService: MessageService
   ) {
     super();
   }
@@ -105,45 +107,30 @@ export class GestionCategoriasTableComponent
         icon: "question",
         title: "¿Estás seguro que deseas eliminar la categoría",
         text:
-          "Se eliminara el evento con nombre" +
+          "Se eliminara el evento con nombre '" +
           categoria?.titulo +
-          "de forma permanente",
+          "' de forma permanente",
         showConfirmButton: true,
         showCancelButton: true,
       })
       .then((result) => {
         if (result.isConfirmed) {
-          this.alert.fire({
-            title: "Espere mientras procesamos su solicitud",
-            didOpen(popup: HTMLElement) {
-              Swal.showLoading();
-            },
-          });
           this.catService.eliminarCategoria(categoriaId).subscribe(
             (data) => {
               console.log("ELIMINADO", data);
-              this.alert.fire({
-                title: "Eliminado con éxito!",
-                text:
-                  "La categoria con nombre" +
-                  categoria?.nombre +
-                  "ha sido eliminado correctamente.",
-                icon: "success",
-                timer: 4000,
-                showConfirmButton: false,
-                showCancelButton: false,
-              });
+                                              this.messageService.add({
+          severity: 'success',
+          summary: 'Eliminada con éxito',
+          detail: 'Categoria eliminada correctamente',
+        }),
               this.ngOnInit();
             },
             (error) => {
-              this.alert.fire({
-                title: "Ocurrió un problema!",
-                text: "Vuelva a intentarlo en otro momento",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false,
-                showCancelButton: false,
-              });
+                            this.messageService.add({
+            severity: 'error',
+            summary: 'Ocurrio un problema',
+            detail: 'Vuelva a intentarlo en otro momento',
+          });
             },
           );
         }

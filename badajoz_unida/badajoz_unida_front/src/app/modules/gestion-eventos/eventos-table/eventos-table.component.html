@@ -117,7 +117,7 @@
           class="dropdown-item border-bottom py-3"
           (click)="modEvent(evento?.eventosId)"
         >
-          <i class="fa-solid fa-pen-to-square me-2"></i>Modificar evento
+                  <i class="fa-solid fa-pen-to-square me-2"></i>{{resources.editEvent}}
         </button>
       </li>
       <li>
@@ -125,7 +125,7 @@
           class="dropdown-item border-bottom py-3"
           (click)="exportExcell(evento?.eventosId, evento)"
         >
-          <i class="fa-solid fa-file-export me-2"></i>Exportar a excell
+                  <i class="fa-solid fa-file-export me-2"></i>{{resources.exportExcel}}
         </button>
       </li>
       <li>
@@ -133,7 +133,7 @@
           class="dropdown-item border-bottom py-3"
           (click)="exportPdf(evento?.eventosId, evento)"
         >
-          <i class="fa-solid fa-file-pdf me-2"></i>Exportar a PDF
+                  <i class="fa-solid fa-file-pdf me-2"></i>{{resources.exportPdf}}
         </button>
       </li>
       <li>
@@ -141,7 +141,7 @@
           class="dropdown-item py-3"
           (click)="deleteEvent(evento?.eventosId, evento)"
         >
-          <i class="fa-solid fa-trash me-2"></i>Eliminar evento
+                  <i class="fa-solid fa-trash me-2"></i>{{resources.deleteEvent}}
         </button>
       <li>
     </ul>
@@ -155,4 +155,5 @@
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
 

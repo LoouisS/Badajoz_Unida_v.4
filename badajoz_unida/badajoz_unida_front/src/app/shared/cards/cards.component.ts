@@ -11,6 +11,7 @@ import {Util} from "leaflet";
 import formatNum = Util.formatNum;
 import {AlertsService} from "../../services/alerts.service";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cards',
@@ -30,7 +31,7 @@ export class CardsComponent extends LocalizedComponent implements OnInit{
    Constructor de la clase
    @param router {Router} Clase para la navegación entre componentes
    **/
-  constructor(private router: Router, private _eventosService: EventosService, private _alertsService: AlertsService) {
+  constructor(private messageService: MessageService, private router: Router, private _eventosService: EventosService, private _alertsService: AlertsService) {
     super();
   }
 
@@ -50,7 +51,18 @@ export class CardsComponent extends LocalizedComponent implements OnInit{
     if(respuesta){
       this._eventosService.removeUserFromEvent(eventoId).subscribe((data: any) => {
         if (data['status'] != 'error') {
-          this._alertsService.showInfoAlert('Te has desapuntado del evento', 'Que pena que no puedas acompañarnos, esperamos verte en otro evento');
+                              this.messageService.add({
+          severity: 'success',
+          summary: 'Participación cancelada',
+          detail: 'Esperamos verte pronto',
+        }),
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error al cancelar la participación',
+            detail: 'No se ha podido cancelar la participación',
+          });
+        }
           this._eventosService.setNotificationCards();
         }
       });

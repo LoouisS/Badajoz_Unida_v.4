@@ -100,14 +100,20 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right position-absolute py-0"
               aria-labelledby="dropdownPrivilegioMenuLink">
+                            <li>
+                <button class="dropdown-item py-3" (click)="asignarPrivilegio(1, user)">
+                  <i class="fa-sharp fa-solid fa-lock me-2"></i><span>{{resources.asignAdmin}}</span>
+                </button>
+              </li>
+
               <li>
                 <button class="dropdown-item py-3" (click)="asignarPrivilegio(2, user)">
-                  <i class="fa-sharp fa-solid fa-lock me-2"></i><span>Asignar usuario</span>
+                  <i class="fa-sharp fa-solid fa-lock me-2"></i><span>{{resources.asignUser}}</span>
                 </button>
               </li>
               <li>
                 <button class="dropdown-item py-3" (click)="asignarPrivilegio(3, user)">
-                  <i class="fa-solid fa-unlock me-2"></i><span>Asignar colaborador</span>
+                  <i class="fa-solid fa-unlock me-2"></i><span>{{resources.asignColaborator}}</span>
                 </button>
               </li>
             </ul>

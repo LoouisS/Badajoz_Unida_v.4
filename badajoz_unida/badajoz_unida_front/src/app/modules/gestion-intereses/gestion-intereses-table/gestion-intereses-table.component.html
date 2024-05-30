@@ -84,7 +84,7 @@
                     <button
                         class="dropdown-item border-bottom py-3"
                         (click)="editInteres(interes)"
-                        data-bs-toggle="modal"
+                  data-bs-toggle="modal"
                         data-bs-target="#createInteresModal"
                     >
                         <i class="fa-solid fa-pen-to-square me-2"></i>{{resources.modifyInterest}}
@@ -109,3 +109,5 @@
   <app-loading></app-loading>
 </div>
 <app-crear-interes></app-crear-interes>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+

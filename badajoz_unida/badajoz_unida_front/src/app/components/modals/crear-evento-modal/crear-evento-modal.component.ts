@@ -1,25 +1,41 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import * as L from "leaflet";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModelNewEvent} from "../../../models/model-new-event";
-import {CategoriasService} from "../../../services/categorias.service";
-import {EventosService} from "../../../services/eventos.service";
-import Swal from "sweetalert2";
-import {ValidadoresService} from "../../../services/validadores.service";
-import {AngularMultiSelect} from "angular2-multiselect-dropdown";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import * as L from 'leaflet';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ModelNewEvent } from '../../../models/model-new-event';
+import { CategoriasService } from '../../../services/categorias.service';
+import { EventosService } from '../../../services/eventos.service';
+import Swal from 'sweetalert2';
+import { ValidadoresService } from '../../../services/validadores.service';
+import { AngularMultiSelect } from 'angular2-multiselect-dropdown';
+import { LocalizedComponent } from 'src/app/config/localize.component';
+import { Message, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-evento-modal',
   templateUrl: './crear-evento-modal.component.html',
-  styleUrls: ['./crear-evento-modal.component.css']
+  styleUrls: ['./crear-evento-modal.component.css'],
 })
 
 /**
  Vista del modal para la creación de eventos
  **/
-export class CrearEventoModalComponent implements OnInit{
-
-  @ViewChild('multiselectIntereses',{static: false}) multiselect: AngularMultiSelect;
+export class CrearEventoModalComponent
+  extends LocalizedComponent
+  implements OnInit {
+  @ViewChild('multiselectIntereses', { static: false })
+  multiselect: AngularMultiSelect;
   @Output() cerrarModalEventos: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('buscadorMap') buscadorMap: ElementRef<HTMLInputElement>;
   eventoEdit: any;
@@ -31,7 +47,7 @@ export class CrearEventoModalComponent implements OnInit{
   lat: number | undefined;
   long: number | undefined;
   preview: boolean;
-  imgPreview:string;
+  imgPreview: string;
   multiselectSettings!: any;
   alert = Swal.mixin({
     allowOutsideClick: false,
@@ -42,7 +58,7 @@ export class CrearEventoModalComponent implements OnInit{
       confirmButton: 'btn btn-danger',
       cancelButton: 'btn btn-light',
     },
-    buttonsStyling: false
+    buttonsStyling: false,
   });
   loading: boolean;
 
@@ -52,8 +68,16 @@ export class CrearEventoModalComponent implements OnInit{
    @param catService {CategoriasService} Servicio que gestiona los datos de las categorías
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private formBuilder: FormBuilder, private catService: CategoriasService, private eventoService: EventosService,
-              private validador: ValidadoresService) {this.initMultiselect();}
+  constructor(
+    private formBuilder: FormBuilder,
+    private catService: CategoriasService,
+    private messageService: MessageService,
+    private eventoService: EventosService,
+    private validador: ValidadoresService,
+  ) {
+    super();
+    this.initMultiselect();
+  }
 
   /**
    Método que inicializa la vista
@@ -61,23 +85,21 @@ export class CrearEventoModalComponent implements OnInit{
   ngOnInit() {
     this.catService.getIntereses().subscribe((data) => {
       this.categorias = data;
-      console.log("LOS INTERESES", this.categorias);
+      console.log('LOS INTERESES', this.categorias);
     });
     this.initForm();
     this.initMap();
     this.eventoService.getEditEvent().subscribe((data) => {
       this.eventoEdit = data;
-      console.log("EN EL ONINIT",this.eventoEdit);
-      if (this.eventoEdit != null){
+      console.log('EN EL ONINIT', this.eventoEdit);
+      if (this.eventoEdit != null) {
         setTimeout(() => {
           this.setFormEdit(this.eventoEdit);
-        },1000)
-
-      }else{
+        }, 1000);
+      } else {
         this.resetForm();
       }
-
-    })
+    });
   }
   /**
    Método que carga el mapa interactivo
@@ -88,7 +110,7 @@ export class CrearEventoModalComponent implements OnInit{
     this.map = L.map('map').setView(defaultLatLng, 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
+      attribution: '© OpenStreetMap contributors',
     }).addTo(this.map);
 
     this.marker = L.marker(defaultLatLng).addTo(this.map);
@@ -103,22 +125,24 @@ export class CrearEventoModalComponent implements OnInit{
   }
 
   obtenerDireccion(lat, lng) {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
 
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-      console.log('Dirección:', `${data.address.road} - ${data.address.province}, ${data.address.country}`); // La dirección completa
-        if(data.address.road !== undefined){
-        this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log(
+          'Dirección:',
+          `${data.address.road} - ${data.address.province}, ${data.address.country}`,
+        ); // La dirección completa
+        if (data.address.road !== undefined) {
+          this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
         } else {
           this.buscadorMap.nativeElement.value = `${data.address.postcode} - ${data.address.province}, ${data.address.country}`;
         }
-
-    })
-    .catch(error => console.error('Error:', error));
-}
+      })
+      .catch((error) => console.error('Error:', error));
+  }
 
   /**
    Método que envia datos para la búsqueda de una ubicación segun los parametros introducidos
@@ -141,20 +165,20 @@ export class CrearEventoModalComponent implements OnInit{
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=1`;
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.length > 0) {
           const result = data[0];
           const latlng = L.latLng(result.lat, result.lon);
-          console.log("RESULT", result);
+          console.log('RESULT', result);
 
           this.marker.setLatLng(latlng);
           this.map.setView(latlng, 13);
-          console.log("Latitud:", result.lat);
-          console.log("Longitud:", result.lon);
+          console.log('Latitud:', result.lat);
+          console.log('Longitud:', result.lon);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al geocodificar la ubicación:', error);
       });
   }
@@ -164,14 +188,45 @@ export class CrearEventoModalComponent implements OnInit{
    **/
   private initForm() {
     this.formCreateEvent = this.formBuilder.group({
-      nombreEvento: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
+      nombreEvento: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(100),
+        ],
+      ],
       fecha: ['', [Validators.required, this.validador.validateFecha]],
-      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-      tlf: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-      localizacion: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(100)]],
+      descripcion: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(500),
+        ],
+      ],
+      tlf: [
+        '',
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      ],
+      localizacion: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(9),
+          Validators.maxLength(100),
+        ],
+      ],
       intereses: [],
-      detalle: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
-     // img: ['', this.validador.validateImgExtension]
+      detalle: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(200),
+        ],
+      ],
+      // img: ['', this.validador.validateImgExtension]
     });
   }
 
@@ -231,100 +286,123 @@ export class CrearEventoModalComponent implements OnInit{
   sendEvent() {
     if (this.formCreateEvent.invalid || this.formCreateEvent.pending) {
       Object.values(this.formCreateEvent.controls).forEach((control) => {
-        if (control instanceof FormGroup)
-          control.markAsTouched();
+        if (control instanceof FormGroup) control.markAsTouched();
       });
       return;
     }
-    this.alert.fire({
-      icon:'question',
-      title:'¿Estas seguro que deseas registrar un nuevo evento?',
-      html:'<ul class="list-group list-group-flush d-flex">'+
-        '<li class="list-group-item text-left">Nombre: ' + this.formCreateEvent.get('nombre')?.value + '</li>'+
-        '<li class="list-group-item text-left">Descripcion: ' + this.formCreateEvent.get('descripcion')?.value + '</li>'+
-        '<li class="list-group-item text-left">Detalles: ' + this.formCreateEvent.get('detalles')?.value + '</li>'+
-        '<li class="list-group-item text-left">Localización: ' + this.formCreateEvent.get('localizacion')?.value + '</li>'+
-        '<li class="list-group-item text-left">Fecha: ' + this.formCreateEvent.get('fechaHora')?.value + '</li>'+
-        '<li class="list-group-item text-left">Tlf: ' + this.formCreateEvent.get('tlf')?.value + '</li>'+
-        '<li class="list-group-item text-left">Intereses: ' + this.formCreateEvent.get('intereses')?.value + '</li>'+
-        '</ul>',
+    this.alert
+      .fire({
+        icon: 'question',
+        title: '¿Estas seguro que deseas registrar un nuevo evento?',
+        html:
+          '<ul class="list-group list-group-flush d-flex">' +
+          '<li class="list-group-item text-left">Nombre: ' +
+          this.formCreateEvent.get('nombreEvento')?.value +
+          '</li>' +
+          '<li class="list-group-item text-left">Descripcion: ' +
+          this.formCreateEvent.get('descripcion')?.value +
+          '</li>' +
+          '<li class="list-group-item text-left">Detalles: ' +
+          this.formCreateEvent.get('detalle')?.value +
+          '</li>' +
+          '<li class="list-group-item text-left">Localización: ' +
+          this.formCreateEvent.get('localizacion')?.value +
+          '</li>' +
+          '<li class="list-group-item text-left">Fecha: ' +
+          this.formCreateEvent.get('fecha')?.value +
+          '</li>' +
+          '<li class="list-group-item text-left">Tlf: ' +
+          this.formCreateEvent.get('tlf')?.value +
+          '</li>' +
+          '</ul>',
 
-      showConfirmButton: true,
-      showCancelButton: true,
-    }).then((result) => {
-      this.alert.fire({
-        title:'Espereme mientras gestionamos su solicitud',
-        didOpen(popup: HTMLElement) {
-          Swal.showLoading();
-        }
+        showConfirmButton: true,
+        showCancelButton: true,
       })
-      if (result.isConfirmed) {
-        const interesesAll = this.formCreateEvent.get('intereses').value;
-        const inter =[];
-        for (let int of interesesAll){
-          console.log("INT", int.interesId);
-          inter.push(parseInt(int.interesId));
+      .then((result) => {
+        if (result.isConfirmed) {
+          const interesesAll = this.formCreateEvent.get('intereses').value;
+          const inter = [];
+          for (let int of interesesAll) {
+            console.log('INT', int.interesId);
+            inter.push(parseInt(int.interesId));
+          }
+          console.log(inter);
+          const formData = new FormData();
+          if (this.eventoEdit != null) {
+            formData.append('eventosId', this.eventoEdit.eventosId);
+          }
+          formData.append(
+            'nombre',
+            this.formCreateEvent.get('nombreEvento').value,
+          );
+          formData.append(
+            'descripcion',
+            this.formCreateEvent.get('descripcion').value,
+          );
+          formData.append(
+            'detalles',
+            this.formCreateEvent.get('detalle').value,
+          );
+          formData.append(
+            'localizacion',
+            this.formCreateEvent.get('localizacion').value,
+          );
+          formData.append(
+            'fechaHora',
+            new Date(this.formCreateEvent.get('fecha').value).toISOString(),
+          );
+          formData.append(
+            'telefonoContacto',
+            this.formCreateEvent.get('tlf').value.toString(),
+          );
+          formData.append('latitud', this.lat.toString());
+          formData.append('longitud', this.long.toString());
+          console.log(this.getImg());
+          if (this.getImg() != null) {
+            formData.append('imagen', this.getImg());
+          }
+          formData.append('intereses', inter.join(','));
+          formData.forEach((value, key) => { });
 
-        }
-        console.log(inter);
-        const formData = new FormData();
-        if (this.eventoEdit != null ){
-          formData.append('eventosId', this.eventoEdit.eventosId);
-        }
-        formData.append('nombre', this.formCreateEvent.get('nombreEvento').value);
-        formData.append('descripcion', this.formCreateEvent.get('descripcion').value);
-        formData.append('detalles', this.formCreateEvent.get('detalle').value);
-        formData.append('localizacion', this.formCreateEvent.get('localizacion').value);
-        formData.append('fechaHora', new Date(this.formCreateEvent.get('fecha').value).toISOString());
-        formData.append('telefonoContacto', this.formCreateEvent.get('tlf').value.toString());
-        formData.append('latitud', this.lat.toString());
-        formData.append('longitud', this.long.toString());
-          console.log(this.getImg())
-        if (this.getImg() != null){
-          formData.append('imagen', this.getImg());
-        }
-        formData.append('intereses', inter.join(','));
-          formData.forEach((value, key) => {
-});
+          this.eventoService.createEvento(formData).subscribe(
+            (data) => {
+              console.log('DATA', data);
+                                  this.messageService.add({
+          severity: 'success',
+          summary: 'Evento creado',
+          detail: 'Evento creado con éxito',
+        }),
 
-        this.eventoService.createEvento(formData).subscribe((data) => {
-          console.log("DATA", data);
-          this.alert.fire({
-            icon:'success',
-            title:'Evento registrado con éxito',
-            timer:4000,
-          })
-            this.cerrarModal()
-        },error => {
-          this.alert.fire({
-            icon:'error',
-            title:'No se ha podido realizar el registro',
-            text:error.error,
-            timer:4000,
-          })
-        })
-
-      } else {
-        this.alert.fire({
-          title: 'Registro cancelado con éxito',
-          text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
-          icon: 'info',
-          timer: 4000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        })
-      }
-    })
+              this.cerrarModal();
+            },
+            (error) => {
+              this.messageService.add({
+            severity: 'error',
+            summary: 'Error al crear el evento',
+            detail: 'No se ha podido crear el evento',
+          });
+            },
+          );
+        } else {
+                        this.messageService.add({
+            severity: 'info',
+            summary: 'Registro cancelado',
+            detail: 'Vuelve a intentarlo cuando quieras',
+          });
+        }
+      });
   }
 
   /**
    Método que guarda la imagen seleccionada por el usuario
    **/
-  getImg(){
-    const file = (document.getElementById('imgPortada') as HTMLInputElement).files[0];
-    console.log("ENTRA EN OBTENER IMG", file);
-    if (file!=null || file != undefined){
-      console.log("EL FILE", file);
+  getImg() {
+    const file = (document.getElementById('imgPortada') as HTMLInputElement)
+      .files[0];
+    console.log('ENTRA EN OBTENER IMG', file);
+    if (file != null || file != undefined) {
+      console.log('EL FILE', file);
       return file;
     }
     return null;
@@ -339,13 +417,13 @@ export class CrearEventoModalComponent implements OnInit{
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.preview = true
+        this.preview = true;
         this.imgPreview = e.target.result;
-        console.log("PREVIEW", this.imgPreview);
+        console.log('PREVIEW', this.imgPreview);
       };
       reader.readAsDataURL(file);
     } else {
-      this.preview = false
+      this.preview = false;
       this.imgPreview = null;
     }
   }
@@ -353,7 +431,7 @@ export class CrearEventoModalComponent implements OnInit{
   /**
    * Método para el cierre del modal desarrollado en el template
    */
-  cerrarModal(){
+  cerrarModal() {
     this.cerrarModalEventos.emit();
     this.eventoService.deleteEditEvent();
   }
@@ -362,8 +440,8 @@ export class CrearEventoModalComponent implements OnInit{
    * Método para el seteo de valores en el formulario para la edición de un evento
    * @param evento
    */
-  setFormEdit(evento: any){
-    console.log("EVENTO EN MODAL DE CREAR MODAL", evento);
+  setFormEdit(evento: any) {
+    console.log('EVENTO EN MODAL DE CREAR MODAL', evento);
     let intereses = [];
     this.eventoEdit = evento;
     this.obtenerDireccion(evento.latitud, evento.longitud);
@@ -375,15 +453,15 @@ export class CrearEventoModalComponent implements OnInit{
       tlf: evento?.telefonoContacto,
       localizacion: evento?.localizacion,
       intereses: evento.intereses,
-      detalle: evento?.detalles
+      detalle: evento?.detalles,
     });
     this.marker.setLatLng(L.latLng([evento?.latitud, evento?.longitud]));
     this.map.setView(L.latLng([evento?.latitud, evento?.longitud]), 13);
 
     this.lat = evento?.latitud;
     this.long = evento?.longitud;
-    this.selectedCat=intereses;
-    this.multiselect.selectedItems = intereses
+    this.selectedCat = intereses;
+    this.multiselect.selectedItems = intereses;
   }
 
   padZero(num) {
@@ -394,7 +472,7 @@ export class CrearEventoModalComponent implements OnInit{
    * Método para el reinicio del formulario a valores en blanco
    */
   resetForm() {
-    console.log("reseteando formulario")
+    console.log('reseteando formulario');
     this.eventoEdit = null;
     this.formCreateEvent.reset();
   }
@@ -406,17 +484,17 @@ export class CrearEventoModalComponent implements OnInit{
   private initMultiselect() {
     this.multiselectSettings = {
       singleSelection: false,
-      text: 'Seleccione intereses relacionados',
+      text:`${this.resources.selectInterests}`,
       searchPlaceHolder: 'Buscar',
-      textField:'titulo',
-      labelKey:'titulo',
+      textField: 'titulo',
+      labelKey: 'titulo',
       idField: 'interesId',
       enableSearchFilter: true,
       badgeShowLimit: 6,
       primaryKey: 'interesId',
       searchBy: 'titulo',
       tagToBody: true,
-      noDataLabel: 'No disponibles'
-    }
+      noDataLabel: 'No disponibles',
+    };
   }
 }

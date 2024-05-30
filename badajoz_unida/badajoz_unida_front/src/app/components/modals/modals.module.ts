@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import { CrearInteresComponent } from './crear-interes/crear-interes.component';
 import { EditarInteresesComponent } from './editar-intereses/editar-intereses.component';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -19,7 +20,8 @@ import { EditarInteresesComponent } from './editar-intereses/editar-intereses.co
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+    ToastModule
     ],
     exports: [
         CesionImagenComponent,

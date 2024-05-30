@@ -12,6 +12,7 @@ import {CategoriasService} from "../../../services/categorias.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import Swal from "sweetalert2";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-eventos-table',
@@ -50,7 +51,7 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
    Constructor de la clase
    @param eventoService {EventosService} Servicio que gestiona los datos de los eventos
    **/
-  constructor(private eventoService: EventosService, private catService: CategoriasService, private formBuilder: FormBuilder) {
+  constructor(private eventoService: EventosService,private messageService: MessageService, private catService: CategoriasService, private formBuilder: FormBuilder) {
     super();
   }
 
@@ -199,32 +200,20 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
       showCancelButton: true
     }).then((result) =>{
       if(result.isConfirmed){
-        this.alert.fire({
-          title:'Espere mientras procesamos su solicitud',
-          didOpen(popup: HTMLElement) {
-            Swal.showLoading();
-          }
-        })
         this.eventoService.deleteEventById(eventosId).subscribe((data) =>{
-          console.log("ELIMINADO", data);
-          this.alert.fire({
-            title: 'Eliminado con éxito!',
-            text: 'El evento con nombre' + evento?.nombre +'ha sido eliminado correctamente.',
-            icon: 'success',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
+                                this.messageService.add({
+          severity: 'success',
+          summary: 'Eliminado con éxito',
+          detail: 'El evento ' + evento?.nombre +' ha sido eliminado',
+        }),
           this.getEventos();
         }, error=>{
-          this.alert.fire({
-            title: 'Ocurrió un problema!',
-            text: 'Vuelva a intentarlo en otro momento',
-            icon: 'error',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
+                            this.messageService.add({
+            severity: 'error',
+            summary: 'Ocurrion un problema',
+            detail: 'Vuelva a intentarlo en otro momento',
           });
+
         });
       }
     });

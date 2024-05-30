@@ -26,9 +26,9 @@ public class Categorias {
     @Column(name = "activo")
     private boolean activo;
 
-    @OneToMany(mappedBy = "categoria")
-    @JsonIgnoreProperties
-    private List<Intereses> intereses;
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+@JsonIgnoreProperties("categoria")
+private List<Intereses> intereses;
 
 
 }

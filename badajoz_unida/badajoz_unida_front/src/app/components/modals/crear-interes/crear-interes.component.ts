@@ -9,13 +9,14 @@ import Swal from "sweetalert2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {InteresesService} from "../../../services/intereses.service";
 import {CategoriasService} from "../../../services/categorias.service";
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-crear-interes',
   templateUrl: './crear-interes.component.html',
   styleUrls: ['./crear-interes.component.css']
 })
-export class CrearInteresComponent implements OnInit{
+export class CrearInteresComponent extends LocalizedComponent implements OnInit{
   formCreateInteres!: FormGroup;
   categorias: any;
   interes:any;
@@ -32,6 +33,7 @@ export class CrearInteresComponent implements OnInit{
     buttonsStyling: false
   });
   constructor(private formBuilder: FormBuilder, private intService: InteresesService, private catService: CategoriasService) {
+    super();
   }
   ngOnInit() {
     this.initForm();
@@ -175,9 +177,7 @@ export class CrearInteresComponent implements OnInit{
             title:'Evento registrado con éxito',
             timer:4000,
           });
-          setTimeout(() => {
             window.location.reload();
-          }, 4000)
         },error => {
           this.alert.fire({
             icon:'error',

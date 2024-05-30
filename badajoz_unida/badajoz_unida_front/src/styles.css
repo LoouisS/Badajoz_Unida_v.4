@@ -23,6 +23,15 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
 body{
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;

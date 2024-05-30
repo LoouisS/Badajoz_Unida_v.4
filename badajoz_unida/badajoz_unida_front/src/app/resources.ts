@@ -89,4 +89,26 @@ export abstract class Resources {
   public static hour: string = null;
   public static knowMore: string = null;
   public static notParticipate: string = null;
+  public static newEvent: string = null;
+  public static eventName: string = null;
+  public static eventDate: string = null;
+  public static eventDetails: string = null;
+  public static searchPlace: string = null;
+  public static searchPlaceholder: string = null;
+  public static selectImage: string = null;
+  public static selectInterests: string = null;
+  public static editEvent: string = null;
+  public static edit: string = null;
+  public static exportExcel: string = null;
+  public static exportPdf: string = null;
+  public static deleteEvent: string = null;
+  public static asignUser: string = null;
+  public static asignColaborator: string = null;
+  public static asignAdmin: string = null;
+  public static categoryName: string = null;
+  public static activate: string = null;
+  public static save: string = null;
+  public static interest: string = null;
+  public static interestName: string = null;
+  public static categoryAsocc: string = null;
 }

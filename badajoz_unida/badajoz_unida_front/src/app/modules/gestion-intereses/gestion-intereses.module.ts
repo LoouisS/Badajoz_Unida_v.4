@@ -8,6 +8,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
 import {ModalsModule} from "../../components/modals/modals.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         SharedModule,
         DataTablesModule,
         ModalsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ToastModule
     ]
 })
 export class GestionInteresesModule { }
