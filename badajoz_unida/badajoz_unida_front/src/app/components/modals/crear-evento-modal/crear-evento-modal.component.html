@@ -3,9 +3,9 @@
     <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.newEvent}}</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
   </div>
-  <div class="modal-body w-100 px-5">
-    <form id="formCreateEvent" class="d-flex col-12" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
-      <div class="col-6 p-3">
+  <div class="modal-body w-100 px-3 px-md-5">
+    <form id="formCreateEvent" class="row" [formGroup]="formCreateEvent" (ngSubmit)="sendEvent()">
+      <div class="col-12 col-md-6 p-3">
         <div>
           <label for="nombreEvento" class="form-label">{{resources.eventName}}:</label>
           <input formControlName="nombreEvento" [class.is-invalid]="validar('nombreEvento')"
@@ -63,7 +63,7 @@
     <div>
       <label for="imgPortada" class="form-label">{{resources.selectImage}}: </label>
       <input (change)="previewImg($event)" type="file" class="form-control" id="imgPortada" >
-      <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"></div>
+      <div *ngIf="preview" class="d-flex justify-content-center mt-2"><img src="{{imgPreview}}"  class="img-fluid"></div>
     </div>
 
   </div>

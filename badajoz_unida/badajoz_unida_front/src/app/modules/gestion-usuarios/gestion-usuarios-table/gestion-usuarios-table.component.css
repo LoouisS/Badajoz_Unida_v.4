@@ -3,3 +3,20 @@
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+
+/* Custom padding and margin adjustments */
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Hide previous and next buttons */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+  display: none;
+}

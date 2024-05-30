@@ -6,6 +6,24 @@
   background-color: #dadada;
 }
 
+.paginate_button.previous.disabled {
+  display: none !important;
+}
+
+.dataTables_info {
+  display: inline-block !important;
+  margin-top: 0.25em !important;
+  margin-bottom: 0.25em !important;
+}
+
+.table-responsive {
+  padding: 16px;
+}
+
+table.table {
+  margin-bottom: 20px;
+}
+
 .px-custom{
   padding-left: 1.5rem;
   padding-right: 1.5rem;

@@ -23,6 +23,14 @@ hr{
     width: 100%;
   }
 
+  label, .btn.bgGeneral.rounded-pill.w-20.py-2 {
+    width: 100%;
+  }
+
+  span {
+    margin: 5px;
+  }
+
   .d-flex {
     flex-direction: column;
   }
@@ -45,7 +53,7 @@ hr{
   }
 
   .card-footer button {
-    width: 48%; 
+    width: 48%;
   }
 
   .fa-solid {

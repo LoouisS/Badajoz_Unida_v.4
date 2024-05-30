@@ -1,6 +1,6 @@
 .cards-wrapper{
   display: flex;
-  gap: 10px
+  gap: 10px;
 }
 
 .card-1{
@@ -33,6 +33,30 @@
 button.btn{
   background-color: #ff0000;
   border: 0;
+}
+
+/* Mostrar flechas en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .carousel-control-prev div, .carousel-control-next div {
+    display: flex; /* Cambiar de none a flex para hacer visibles las flechas */
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Ajusta el tamaño según sea necesario */
+    height: 40px; /* Ajusta el tamaño según sea necesario */
+  }
+
+  .carousel-control-prev {
+    left: 10px; /* Ajusta el margen izquierdo */
+  }
+
+  .carousel-control-next {
+    right: 10px; /* Ajusta el margen derecho */
+  }
+}
+
+/* Opcional: Ajustes de padding para evitar que las flechas cubran el contenido */
+.carousel-item {
+  padding: 10px 40px; /* Añadir padding a los lados para que las flechas no cubran el contenido */
 }
 
 @media screen and (min-width: 100px) and (max-width: 768px) {

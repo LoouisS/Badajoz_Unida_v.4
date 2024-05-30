@@ -28,3 +28,42 @@
   max-height: 70vh;
   overflow-y: auto;
 }
+
+.customForm {
+  width: 100%;
+}
+
+.custom-map {
+  width: 100%;
+  height: 300px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.icon-column {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los iconos */
+}
+
+.icon-column i {
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .form-label {
+    font-size: 1rem;
+  }
+
+  .customBtn {
+    width: 100%;
+  }
+}

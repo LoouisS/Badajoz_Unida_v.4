@@ -88,5 +88,19 @@ export class CarouselComponent implements OnInit{
       this.eventosAgrupados.push(this.eventos.slice(i, i + 3));
     }
   }
+
+  /**
+   Método para verificar si hay más de un grupo de eventos
+   **/
+  hayMasDeUnGrupo(): boolean {
+    return this.eventosAgrupados.length > 1;
+  }
+
+  /**
+   Método para verificar si hay más de un evento
+   **/
+  hayMasDeUnEvento(): boolean {
+    return this.eventos.length > 1;
+  }
 }
 

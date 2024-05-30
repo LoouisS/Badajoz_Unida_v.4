@@ -1,6 +1,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import 'primeicons/primeicons.css';
+@import 'https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css';
 /*======Variables======*/
 :root{
   --bg-color: white;
@@ -108,8 +109,14 @@ body{
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
-  .footer-padding{
-    padding-bottom: 250px;
+  /*.footer-padding{*/
+  /*  padding-bottom: 250px;*/
+  /*}*/
+
+  .app-eventos-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -187,4 +194,13 @@ table.dataTable thead th:last-child {
 
 .p-button .p-button-icon-left{
   margin-right: 0 !important;
+}
+
+.paginate_button.previous.disabled, .paginate_button.next.disabled {
+  display: none !important;
+}
+
+.px-5.fs-6.mt-4 {
+  padding-left: 0 !important;
+  padding-right: 1.25rem !important;
 }
