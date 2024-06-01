@@ -111,4 +111,25 @@ export abstract class Resources {
   public static interest: string = null;
   public static interestName: string = null;
   public static categoryAsocc: string = null;
+  public static registerEvent: string = null;
+  public static errorCreateEvent: string = null;
+  public static errorDetailEvent: string = null;
+  public static eventCreated: string = null;
+  public static eventCreatedDetail: string = null;
+  public static eventCreationCancelled: string = null;
+  public static eventCreationCancelledDetail: string = null;
+  public static eventEdited: string = null;
+  public static eventEditedDetail: string = null;
+  public static errorEditEvent: string = null;
+  public static errorEditEventDetail: string = null;
+  public static eventEditionCancelled: string = null;
+  public static eventEditionCancelledDetail: string = null;
+  public static editEventTitle: string = null;
+  public static registerCategory: string = null;
+  public static ready: string = null;
+  public static categoryCreated: string = null;
+  public static errorRegisterCategory: string = null;
+  public static errorRegisterCategoryDetail: string = null;
+  public static categoryEditionCancelled: string = null;
+  public static categoryEditionCancelledDetail: string = null;
 }

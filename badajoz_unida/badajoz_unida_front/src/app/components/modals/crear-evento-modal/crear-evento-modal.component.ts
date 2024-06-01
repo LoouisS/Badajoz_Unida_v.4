@@ -290,36 +290,21 @@ export class CrearEventoModalComponent
       });
       return;
     }
-    this.alert
-      .fire({
-        icon: 'question',
-        title: '¿Estas seguro que deseas registrar un nuevo evento?',
-        html:
-          '<ul class="list-group list-group-flush d-flex">' +
-          '<li class="list-group-item text-left">Nombre: ' +
-          this.formCreateEvent.get('nombreEvento')?.value +
-          '</li>' +
-          '<li class="list-group-item text-left">Descripcion: ' +
-          this.formCreateEvent.get('descripcion')?.value +
-          '</li>' +
-          '<li class="list-group-item text-left">Detalles: ' +
-          this.formCreateEvent.get('detalle')?.value +
-          '</li>' +
-          '<li class="list-group-item text-left">Localización: ' +
-          this.formCreateEvent.get('localizacion')?.value +
-          '</li>' +
-          '<li class="list-group-item text-left">Fecha: ' +
-          this.formCreateEvent.get('fecha')?.value +
-          '</li>' +
-          '<li class="list-group-item text-left">Tlf: ' +
-          this.formCreateEvent.get('tlf')?.value +
-          '</li>' +
-          '</ul>',
-
-        showConfirmButton: true,
-        showCancelButton: true,
-      })
-      .then((result) => {
+    this.alert.fire({
+  icon: 'question',
+  title: this.resources.registerEvent,
+  html: `
+    <ul class="list-group list-group-flush d-flex">
+      <li class="list-group-item text-left">${this.resources.title}: ${this.formCreateEvent.get('nombreEvento')?.value}</li>
+      <li class="list-group-item text-left">${this.resources.description}: ${this.formCreateEvent.get('descripcion')?.value}</li>
+      <li class="list-group-item text-left">${this.resources.details}: ${this.formCreateEvent.get('detalle')?.value}</li>
+      <li class="list-group-item text-left">${this.resources.location}: ${this.formCreateEvent.get('localizacion')?.value}</li>
+      <li class="list-group-item text-left">${this.resources.date}: ${this.formCreateEvent.get('fecha')?.value}</li>
+      <li class="list-group-item text-left">${this.resources.phone}: ${this.formCreateEvent.get('tlf')?.value}</li>
+    </ul>`,
+  showConfirmButton: true,
+  showCancelButton: true,
+}).then((result) => {
         if (result.isConfirmed) {
           const interesesAll = this.formCreateEvent.get('intereses').value;
           const inter = [];
@@ -370,8 +355,8 @@ export class CrearEventoModalComponent
               console.log('DATA', data);
                                   this.messageService.add({
           severity: 'success',
-          summary: 'Evento creado',
-          detail: 'Evento creado con éxito',
+          summary:`${this.resources.eventCreated}`,
+          detail:`${this.resources.eventCreatedDetail}`,
         }),
 
               this.cerrarModal();
@@ -379,16 +364,16 @@ export class CrearEventoModalComponent
             (error) => {
               this.messageService.add({
             severity: 'error',
-            summary: 'Error al crear el evento',
-            detail: 'No se ha podido crear el evento',
+            summary:`${this.resources.errorCreateEvent}`,
+            detail:`${this.resources.errorDetailEvent}`
           });
             },
           );
         } else {
                         this.messageService.add({
             severity: 'info',
-            summary: 'Registro cancelado',
-            detail: 'Vuelve a intentarlo cuando quieras',
+            summary:`${this.resources.eventCreationCancelled}`,
+            detail:`${this.resources.eventCreationCancelledDetail}`,
           });
         }
       });

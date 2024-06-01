@@ -4,19 +4,21 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { LocalizedComponent } from 'src/app/config/localize.component';
-import Swal from "sweetalert2";
-import {CategoriasService} from "../../../services/categorias.service";
+import Swal from 'sweetalert2';
+import { CategoriasService } from '../../../services/categorias.service';
 
 @Component({
   selector: 'app-crear-categoria',
   templateUrl: './crear-categoria.component.html',
-  styleUrls: ['./crear-categoria.component.css']
+  styleUrls: ['./crear-categoria.component.css'],
 })
-export class CrearCategoriaComponent extends LocalizedComponent implements OnInit{
+export class CrearCategoriaComponent
+  extends LocalizedComponent
+  implements OnInit {
   formCreateCat!: FormGroup;
   categoria: any;
   alert = Swal.mixin({
@@ -26,12 +28,16 @@ export class CrearCategoriaComponent extends LocalizedComponent implements OnIni
     stopKeydownPropagation: true,
     customClass: {
       confirmButton: 'btn btn-danger',
-      cancelButton: 'btn btn-light'
+      cancelButton: 'btn btn-light',
     },
-    buttonsStyling: false
+    buttonsStyling: false,
   });
   loading: boolean;
-  constructor(private messageService: MessageService, private formBuilder: FormBuilder, private catService: CategoriasService) {
+  constructor(
+    private messageService: MessageService,
+    private formBuilder: FormBuilder,
+    private catService: CategoriasService,
+  ) {
     super();
   }
   ngOnInit() {
@@ -39,29 +45,41 @@ export class CrearCategoriaComponent extends LocalizedComponent implements OnIni
     this.loading = true;
     this.catService.getEditCategoria().subscribe((data) => {
       this.categoria = data;
-      console.log("EN EL ONINIT",this.categoria);
-      if (this.categoria != null){
+      console.log('EN EL ONINIT', this.categoria);
+      if (this.categoria != null) {
         setTimeout(() => {
           this.loading = false;
           this.setFormEdit(this.categoria);
-        },1000)
-
-      }else{
+        }, 1000);
+      } else {
         this.resetForm();
         this.loading = false;
       }
-
-    })
+    });
   }
 
   /**
    Método que inicializa el formulario
    **/
   private initForm() {
-  this.formCreateCat = this.formBuilder.group({
-    nombreCat:['',[Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-    descripcionCategoria:['',[Validators.required,Validators.minLength(10), Validators.maxLength(500)]],
-    activar:['']
+    this.formCreateCat = this.formBuilder.group({
+      nombreCat: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.minLength(2),
+        ],
+      ],
+      descripcionCategoria: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(500),
+        ],
+      ],
+      activar: [''],
     });
   }
 
@@ -111,68 +129,70 @@ export class CrearCategoriaComponent extends LocalizedComponent implements OnIni
    **/
   sendCat() {
     if (this.formCreateCat.invalid || this.formCreateCat.pending) {
-      console.log("MAAAAAAAL");
+      console.log('MAAAAAAAL');
       console.log(this.formCreateCat);
       Object.values(this.formCreateCat.controls).forEach((control) => {
-        if (control instanceof FormGroup)
-          control.markAsTouched();
+        if (control instanceof FormGroup) control.markAsTouched();
       });
       return;
     }
-    this.alert.fire({
-      icon:'question',
-      title:'¿Estas seguro que deseas registrar una nueva categoría?',
-      showConfirmButton: true,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const categoria ={
-          titulo:this.formCreateCat.get('nombreCat').value,
-          descripcion:this.formCreateCat.get('descripcionCategoria').value,
-          activo:this.formCreateCat.get('activar').value,
-          categoriaId: null
-        }
-        if (this.categoria != null){
-          categoria.categoriaId = this.categoria.categoriaId
-        }
-        this.catService.registrarCategoria(categoria).subscribe((data) => {
-          console.log("DATA", data);
-                                            this.messageService.add({
-          severity: 'success',
-          summary: 'Listo',
-          detail: 'Categoria creada correctamente',
-        }),
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000)
-        },error => {
-                            this.messageService.add({
-            severity: 'error',
-            summary: 'Error al registrar',
-            detail: 'No se ha podido registrar la categoria',
-          });
-        })
-
-      } else {
-                        this.messageService.add({
+    this.alert
+      .fire({
+        icon: 'question',
+        title: `${this.resources.registerCategory}`,
+        showConfirmButton: true,
+        showCancelButton: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          const categoria = {
+            titulo: this.formCreateCat.get('nombreCat').value,
+            descripcion: this.formCreateCat.get('descripcionCategoria').value,
+            activo: this.formCreateCat.get('activar').value,
+            categoriaId: null,
+          };
+          if (this.categoria != null) {
+            categoria.categoriaId = this.categoria.categoriaId;
+          }
+          this.catService.registrarCategoria(categoria).subscribe(
+            (data) => {
+              this.messageService.add({
+                severity: 'success',
+                summary: `${this.resources.ready}`,
+                detail: `${this.resources.categoryCreated}`,
+              }),
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1000);
+            },
+            (error) => {
+              this.messageService.add({
+                severity: 'error',
+                summary:`${this.resources.errorRegisterCategory}`,
+                detail:`${this.resources.errorRegisterCategoryDetail}`,
+              });
+            },
+          );
+        } else {
+          this.messageService.add({
             severity: 'info',
-            summary: 'Registro cancelado',
-            detail: 'Vuelve a intentarlo cuando quieras',
+            summary:`${this.resources.categoryEditionCancelled}`,
+            detail:`${this.resources.eventEditionCancelledDetail}`,
           });
-      }
-    })
+        }
+      });
   }
 
   /**
    * Método para el seteo de valores en el formulario para la edición de una categoria
    * @param evento
    */
-  setFormEdit(categoria: any){
+  setFormEdit(categoria: any) {
     this.categoria = categoria;
     this.formCreateCat.setValue({
       nombreCat: categoria?.titulo,
       descripcionCategoria: categoria?.descripcion,
-      activar: categoria?.activo
+      activar: categoria?.activo,
     });
   }
 
@@ -180,7 +200,7 @@ export class CrearCategoriaComponent extends LocalizedComponent implements OnIni
    * Método para el reinicio del formulario a valores en blanco
    */
   resetForm() {
-    console.log("reseteando formulario")
+    console.log('reseteando formulario');
     this.categoria = null;
     this.formCreateCat.reset();
   }
