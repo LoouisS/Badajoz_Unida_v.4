@@ -48,8 +48,8 @@
     </div>
   </div>
 </div>
-<div class=" px-custom fs-6" [ngClass]="{'d-none': loading}">
-  <table #dataTable class="w-100 table table-striped " datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<div class=" px-custom fs-6" [ngClass]="{'d-none': loading}" style="overflow-x: scroll;">
+  <table #dataTable class="w-100 table table-striped" style="overflow-x: scroll;" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
     <tr>
       <th class="col-1"></th>
