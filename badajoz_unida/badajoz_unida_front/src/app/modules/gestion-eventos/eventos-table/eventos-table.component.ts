@@ -179,6 +179,17 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
     });
   }
 
+  limpiarFiltros() {
+  // Resetear el formulario
+  this.formFilter.reset();
+  console.log('Formulario después de resetear', this.formFilter.value);
+ this.eventoService.getAllEventos().subscribe((data) => {
+      this.eventos = data;
+      console.log("EVENTOS:", this.eventos);
+      this.cargarTabla();
+    });
+  // Verifica también resetear cualquier estado interno que pueda ser usado en las consultas del servicio
+  }
   /**
    * Método para la emisión al componente padre de la señal para desplegar el modal
    */

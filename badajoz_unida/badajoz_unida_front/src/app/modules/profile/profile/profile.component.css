@@ -4,6 +4,10 @@ hr{
   border: red;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .profileIcon{
   width: 150px;
   height: 150px;

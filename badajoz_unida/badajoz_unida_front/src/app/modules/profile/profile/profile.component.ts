@@ -39,6 +39,7 @@ export class ProfileComponent extends LocalizedComponent implements OnInit {
     },
     buttonsStyling: false,
   });
+    allUsuarios: any;
 
   /**
    Constructor de la clase
@@ -67,12 +68,17 @@ export class ProfileComponent extends LocalizedComponent implements OnInit {
     this.crearFormulario();
     this._usuarioService.getDatosUsuario().subscribe((data: any) => {
       this.usuario = data;
+      console.log(this.usuario);
       this.cargarFormulario();
     });
     this._idiomasService.getIdiomas().subscribe((data: any) => {
       this.idiomas = data;
     });
+        this._usuarioService.getAll().subscribe((data) => {
+      this.allUsuarios = data;
+    });
   }
+
 
   /**
    Método que inicializa el formulario reactivo
@@ -268,4 +274,37 @@ export class ProfileComponent extends LocalizedComponent implements OnInit {
       },
     });
   }
+  esAdminUnico() {
+  if (!this.allUsuarios) {
+    // Si los datos aún no están disponibles, puedes optar por una acción, como retornar false
+    // o incluso mejor, deshabilitar el botón que depende de esta condición hasta que la información esté disponible.
+    return false;
+  }
+
+  let adminCount = 0;
+  let esAdmin = false;
+
+  this.allUsuarios.forEach(usuario => {
+    const tieneRolAdmin = usuario.roles.some(rol => rol.id === 1); // Verifica si el usuario tiene rol de admin
+    if (tieneRolAdmin) {
+      adminCount++; // Incrementa por cada admin encontrado
+    }
+    // Considera usar usuario.userId si el backend envía userId en lugar de id
+    if (usuario.userId === this.usuario?.id && tieneRolAdmin) {
+      esAdmin = true; // Verdadero si el usuario específico es admin
+    }
+  });
+
+  return esAdmin && adminCount === 1; // Verdad si es admin y es el único admin
+}
+
+  infoAdmin(){
+    this.messageService.add({
+      severity: 'info',
+      summary: `Atención!`,
+      detail: `Eres el unico admin`,
+    });
+  }
+
+
 }

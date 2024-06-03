@@ -3,9 +3,11 @@
     <app-cards [evento]="evento" [desapuntarse]="true"></app-cards>
   </div>
 </div>
-<div class="footer-padding"></div>
 <ng-template #cargando>
   <app-loading></app-loading>
 </ng-template>
 <p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
-
+<div *ngIf="listaInscripciones.length === 0" class="alerta" role="alert">
+  <i class="fa fa-calendar-check-o me-2"></i>
+  Actualmente no participas en ningún evento, animate a inscribirte en alguno de los eventos disponibles.
+</div>

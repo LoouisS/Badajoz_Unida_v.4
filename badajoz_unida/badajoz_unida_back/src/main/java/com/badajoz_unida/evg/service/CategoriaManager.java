@@ -42,10 +42,6 @@ public class CategoriaManager implements CategoriaService{
 
     @Override
     public ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException {
-        if (this.catRepository.existsCategoriasByTitulo(categoria.getTitulo())){
-            throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
-        }
-        this.javaUtils.validarNuevaCategoria(categoria);
         this.catRepository.save(categoria);
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }

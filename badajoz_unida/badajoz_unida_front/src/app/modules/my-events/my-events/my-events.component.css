@@ -1,1 +1,9 @@
 
+.alerta {
+    padding: 20px 10px; /* Más padding verticalmente */
+  background-color: rgba(209, 0, 0, 0.8); /* Transparencia en el fondo rojo */
+  color: white; /* Texto blanco para buen contraste */
+  border: 3px solid #D10000; /* Borde sólido del mismo color */
+  border-radius: 5px; /* Bordes redondeados */
+  margin: 10px; /* Espaciado exterior */
+}

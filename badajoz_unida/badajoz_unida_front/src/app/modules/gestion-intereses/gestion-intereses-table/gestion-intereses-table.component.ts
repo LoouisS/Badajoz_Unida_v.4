@@ -175,6 +175,29 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
       this.cargarTabla();
     })
   }
+      limpiarFiltros() {
+  // Resetear el formulario
+  this.formFilter.reset();
+  console.log('Formulario después de resetear', this.formFilter.value);
+        this.catService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+      console.log("CATEGORÍAS", data);
+      this.interesService.getAll().subscribe((data) => {
+        console.log("INTERESES", data);
+        // @ts-ignore
+        for (let interes of data) {
+          interes.categoria = this.categorias.find((categoria) => {
+            return categoria.intereses.some((int) => int.titulo === interes.titulo);
+          });
+        }
+        this.intereses = data;
+        console.log("LOS INTERESES DESPUÉS DE MONTARLO", this.intereses);
+        this.cargarTabla();
+      })
+    });
+
+  }
+
   /**
    * Método para la inicialización del formulario del componente
    * @private

@@ -1,159 +1,156 @@
 <div class="card mx-4 my-4">
   <div>
     <div class="card-header bgGeneral">
-      {{resources.searchFilters}}
+      {{ resources.searchFilters }}
     </div>
     <div class="card-body">
       <form class="col-12" [formGroup]="formFilter" (ngSubmit)="filtrarBusqueda()">
         <div class="d-flex col-12">
           <div class="d-flex mb-3 col-5 me-5">
-            <label for="nombreEvento" class="form-label pt-2 me-3">{{resources.nombre}}</label>
-            <input formControlName="nombre" type="text" class="form-control" id="nombreEvento" aria-describedby="emailHelp">
+            <label for="nombreEvento" class="form-label pt-2 me-3">{{
+              resources.nombre
+              }}</label>
+            <input formControlName="nombre" type="text" class="form-control" id="nombreEvento"
+              aria-describedby="emailHelp" />
           </div>
           <div class="d-flex mb-3 col-5">
-            <label for="localizacion" class="form-label pt-2 me-3">{{resources.location}}</label>
-            <input formControlName="localizacion" type="text" class="form-control" id="localizacion" aria-describedby="emailHelp">
+            <label for="localizacion" class="form-label pt-2 me-3">{{
+              resources.location
+              }}</label>
+            <input formControlName="localizacion" type="text" class="form-control" id="localizacion"
+              aria-describedby="emailHelp" />
           </div>
         </div>
         <div class="d-flex">
           <div class="col-5 d-flex">
-            <label for="dateInit" class="form-label pt-2 me-5">{{resources.date}}
+            <label for="dateInit" class="form-label pt-2 me-5">{{ resources.date }}
             </label>
             <div class="d-flex col-12">
               <div>
-                <input formControlName="fechaInit" type="date" class="form-control" id="dateInit">
+                <input formControlName="fechaInit" type="date" class="form-control" id="dateInit" />
               </div>
               <div>
-                <input formControlName="fechaEnd" type="date" class="form-control" id="dateEnd">
+                <input formControlName="fechaEnd" type="date" class="form-control" id="dateEnd" />
               </div>
             </div>
           </div>
           <div class="col-6 d-flex">
-            <label for="intereses" class="form-label pt-2 me-3">{{resources.intereses}}</label>
-            <select  formControlName="intereses"
-                     class="form-control" id="intereses" >
-              <optgroup *ngFor="let categoria of categorias" label="{{categoria?.titulo}}">
-                <option *ngFor="let interes of categoria?.intereses" value="{{interes?.interesId}}">{{interes?.titulo}}</option>
+            <label for="intereses" class="form-label pt-2 me-3">{{
+              resources.intereses
+              }}</label>
+            <select formControlName="intereses" class="form-control" id="intereses">
+              <optgroup *ngFor="let categoria of categorias" label="{{ categoria?.titulo }}">
+                <option *ngFor="let interes of categoria?.intereses" value="{{ interes?.interesId }}">
+                  {{ interes?.titulo }}
+                </option>
               </optgroup>
             </select>
           </div>
         </div>
         <div class="mt-3">
-          <button type="submit" class="btn bgGeneral">{{resources.filter}}</button>
+          <button type="submit" class="btn bgGeneral">
+            {{ resources.filter }}
+          </button>
           <button type="button" class="btn btn-primary ms-2" (click)="mostrarModalEventos()">
-            {{resources.createEvent}}
+            {{ resources.createEvent }}
+          </button>
+          <button type="button" (click)="limpiarFiltros()" class="btn bgGeneral ms-2">
+            <i class="fa fa-broom"></i>
           </button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class=" px-custom fs-6" [ngClass]="{'d-none': loading}" style="overflow-x: scroll;">
-  <table #dataTable class="w-100 table table-striped" style="overflow-x: scroll;" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<div class="px-custom fs-6" [ngClass]="{ 'd-none': loading }">
+  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
-    <tr>
-      <th class="col-1"></th>
-        <th class="col-1">{{resources.nombre}}</th>
-        <th class="col-1">{{resources.location}}</th>
-        <th class="col-1">{{resources.date}}</th>
-        <th class="col-1">{{resources.phone}}</th>
-        <th class="col-1">{{resources.place}}</th>
-        <th class="col-1">{{resources.details}}</th>
-        <th class="col-1">{{resources.description}}</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th class="col-1"></th>
+        <th class="col-1">{{ resources.nombre }}</th>
+        <th class="col-1">{{ resources.location }}</th>
+        <th class="col-1">{{ resources.date }}</th>
+        <th class="col-1">{{ resources.phone }}</th>
+        <th class="col-1">{{ resources.place }}</th>
+        <th class="col-1">{{ resources.details }}</th>
+        <th class="col-1">{{ resources.description }}</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let evento of eventos">
-      <td class="col-1 text-center">
-        <div class="text-center pt-2">
-          <div class="btn-group text-center">
-            <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action" *ngFor="let usuario of evento?.usuarios">
-                  {{usuario.nombre + ' ' +usuario.apellidos}}
-                </button>
-              </div>
-            </ul>
+      <tr *ngFor="let evento of eventos">
+        <td class="col-1 text-center">
+          <div class="text-center pt-2">
+            <div class="btn-group text-center">
+              <i class="fa-solid fa-users me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <div class="list-group">
+                  <button type="button" class="list-group-item list-group-item-action"
+                    *ngFor="let usuario of evento?.usuarios">
+                    {{ usuario.nombre + " " + usuario.apellidos }}
+                  </button>
+                </div>
+              </ul>
+            </div>
+            <div class="btn-group text-center" *ngIf="evento?.intereses != null">
+              <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu">
+                <li *ngFor="let interes of evento?.intereses" class="text-center">
+                  <span class="badge rounded-pill text-bg-danger">
+                    {{ interes?.titulo }}
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="btn-group text-center" *ngIf="evento?.intereses != null">
-            <i class="fa-solid fa-fire me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu">
-              <li *ngFor="let interes of evento?.intereses" class="text-center">
-                <span class="badge rounded-pill text-bg-danger">
-                  {{interes?.titulo}}
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </td>
-      <td>{{evento?.nombre}}</td>
-      <td>{{evento?.localizacion| cortarTexto:10}}</td>
-      <td>{{evento?.fechaHora | date:'dd/MM/yyyy hh:mm'}}</td>
-      <td>{{evento?.telefonoContacto}}</td>
-      <td>{{evento?.latitud + '/' + evento?.longitud}}</td>
-      <td>{{evento?.detalles| cortarTexto:10}}</td>
-      <td>{{evento?.descripcion| cortarTexto:10}}</td>
+        </td>
+        <td>{{ evento?.nombre }}</td>
+        <td>{{ evento?.localizacion | cortarTexto: 10 }}</td>
+        <td>{{ evento?.fechaHora | date: "dd/MM/yyyy hh:mm" }}</td>
+        <td>{{ evento?.telefonoContacto }}</td>
+        <td>{{ evento?.latitud + "/" + evento?.longitud }}</td>
+        <td>{{ evento?.detalles | cortarTexto: 10 }}</td>
+        <td>{{ evento?.descripcion | cortarTexto: 10 }}</td>
         <td class="text-end px-0">
-  <div class="dropdown">
-    <button
-      class="btn btn-link"
-      id="dropdownEventoMenuLink"
-      role="button"
-      data-bs-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <i class="fa-solid fa-ellipsis-vertical" style="color: red;"></i>
-    </button>
-    <ul
-      class="dropdown-menu dropdown-menu-right position-absolute py-0"
-      aria-labelledby="dropdownEventoMenuLink"
-    >
-      <li>
-        <button
-          class="dropdown-item border-bottom py-3"
-          (click)="modEvent(evento?.eventosId)"
-        >
-                  <i class="fa-solid fa-pen-to-square me-2"></i>{{resources.editEvent}}
-        </button>
-      </li>
-      <li>
-        <button
-          class="dropdown-item border-bottom py-3"
-          (click)="exportExcell(evento?.eventosId, evento)"
-        >
-                  <i class="fa-solid fa-file-export me-2"></i>{{resources.exportExcel}}
-        </button>
-      </li>
-      <li>
-        <button
-          class="dropdown-item border-bottom py-3"
-          (click)="exportPdf(evento?.eventosId, evento)"
-        >
-                  <i class="fa-solid fa-file-pdf me-2"></i>{{resources.exportPdf}}
-        </button>
-      </li>
-      <li>
-        <button
-          class="dropdown-item py-3"
-          (click)="deleteEvent(evento?.eventosId, evento)"
-        >
-                  <i class="fa-solid fa-trash me-2"></i>{{resources.deleteEvent}}
-        </button>
-      <li>
-    </ul>
-  </div>
-</td>
+          <div class="dropdown">
+            <button class="btn btn-link" id="dropdownEventoMenuLink" role="button" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-ellipsis-vertical" style="color: red"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right position-absolute py-0"
+              aria-labelledby="dropdownEventoMenuLink">
+              <li>
+                <button class="dropdown-item border-bottom py-3" (click)="modEvent(evento?.eventosId)">
+                  <i class="fa-solid fa-pen-to-square me-2"></i>{{ resources.editEvent }}
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item border-bottom py-3" (click)="exportExcell(evento?.eventosId, evento)">
+                  <i class="fa-solid fa-file-export me-2"></i>{{ resources.exportExcel }}
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item border-bottom py-3" (click)="exportPdf(evento?.eventosId, evento)">
+                  <i class="fa-solid fa-file-pdf me-2"></i>{{ resources.exportPdf }}
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item py-3" (click)="deleteEvent(evento?.eventosId, evento)">
+                  <i class="fa-solid fa-trash me-2"></i>{{ resources.deleteEvent }}
+                </button>
+              </li>
 
-    </tr>
+              <li></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
-
+<p-toast [breakpoints]="{
+    '700px': { width: '100%', right: '0', left: '0', padding: '0 10px' }
+  }"></p-toast>

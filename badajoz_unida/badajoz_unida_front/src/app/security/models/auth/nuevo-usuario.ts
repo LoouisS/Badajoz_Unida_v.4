@@ -9,7 +9,7 @@ export class NuevoUsuario {
   idioma: any;
   roles: any[] = [{titulo: "user"}];
   intereses: any[] = [];
-  constructor(nombre: string, apellidos: string, nombreUsuario: string, email: string, password: string, tlf: string, fchNacimiento: Date, idioma: number) {
+  constructor(nombre: string, apellidos: string, nombreUsuario: string, email: string, password: string, tlf: string, fchNacimiento: Date, idioma: string) {
     this.nombre = nombre;
     this.apellidos = apellidos;
     this.nombreUsuario = nombreUsuario;
@@ -17,7 +17,7 @@ export class NuevoUsuario {
     this.password = password;
     this.tlf = tlf;
     this.fchNacimiento = fchNacimiento;
-    this.idioma = {idiomaId: Number(idioma)};
+    this.idioma = {idiomaId: idioma}
   }
 
 }

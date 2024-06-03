@@ -137,6 +137,19 @@ export class GestionCategoriasTableComponent
       });
   }
 
+    limpiarFiltros() {
+  // Resetear el formulario
+  this.formFilter.reset();
+  console.log('Formulario después de resetear', this.formFilter.value);
+        this.catService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+      this.loading = false;
+      this.cargarTabla();
+    });
+
+  // Verifica también resetear cualquier estado interno que pueda ser usado en las consultas del servicio
+  }
+
   /**
    * Método para la edición de una categoría preexistente
    * @param cat

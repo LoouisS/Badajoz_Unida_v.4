@@ -151,6 +151,33 @@ super();
     });
   }
 
+    limpiarFiltros() {
+  // Resetear el formulario
+  this.formFilter.reset();
+  console.log('Formulario después de resetear', this.formFilter.value);
+        this.usuarioService.getAll().subscribe((data) => {
+      this.usuarios = data;
+      this.cargarTabla();
+      this.loading = false;
+      console.log("Los usuarios de la aplicación",this.usuarios);
+    });
+  }
+
+  checkUniqueAdmin() {
+    let contador = 0; // Contador para saber cuántos usuarios tienen el rolId específico
+
+    this.usuarios.forEach(usuario => {
+        if (usuario.roles.some(rol => rol.id === 1)) { // Verifica si alguno de los roles del usuario tiene el id especificado
+            contador++;
+        }
+    });
+
+    return contador === 1; // Retorna true si exactamente uno tiene el rolId, sino false
+}
+
+  // Verifica también resetear cualquier estado interno que pueda ser usado en las consultas del servicio
+
+
   /**
    * Método para la obtención de todos los usuarios filtrados por el formulario de filtraddo del template
    */

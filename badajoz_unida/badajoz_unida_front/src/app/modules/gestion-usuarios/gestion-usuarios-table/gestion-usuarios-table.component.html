@@ -39,13 +39,17 @@
           <button type="submit" class="btn bgGeneral">
             {{ resources.filter }}
           </button>
+                            <button type="button" (click)="limpiarFiltros()" class="btn bgGeneral ms-2">
+            <i class="fa fa-broom"></i>
+          </button>
+
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="px-custom fs-6" [ngClass]="{ 'd-none': loading }" style="overflow-x: scroll;">
-  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" style="overflow-x: scroll;" [dtTrigger]="dtTrigger">
+<div class="px-custom fs-6" [ngClass]="{ 'd-none': loading }">
+  <table #dataTable class="w-100 table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead class="bgGeneral">
       <tr>
         <th class="col-1"></th>
@@ -101,18 +105,24 @@
             <ul class="dropdown-menu dropdown-menu-right position-absolute py-0"
               aria-labelledby="dropdownPrivilegioMenuLink">
                             <li>
-                <button class="dropdown-item py-3" (click)="asignarPrivilegio(1, user)">
+                <button class="dropdown-item py-3" (click)="asignarPrivilegio(1, user)" *ngIf="user.roles[0].id !== 1 || !checkUniqueAdmin()">
                   <i class="fa-sharp fa-solid fa-lock me-2"></i><span>{{resources.asignAdmin}}</span>
                 </button>
               </li>
 
               <li>
-                <button class="dropdown-item py-3" (click)="asignarPrivilegio(2, user)">
+                <button class="dropdown-item py-3" (click)="asignarPrivilegio(2, user)" *ngIf="user.roles[0].id !== 1 || !checkUniqueAdmin()">
                   <i class="fa-sharp fa-solid fa-lock me-2"></i><span>{{resources.asignUser}}</span>
                 </button>
               </li>
+                            <li>
+                <button class="dropdown-item py-3" *ngIf="user.roles[0].id === 1 && checkUniqueAdmin()">
+                  <i class="fa-sharp fa-solid fa-circle-info me-2"></i><span>Eres el unico admin</span>
+                </button>
+              </li>
+
               <li>
-                <button class="dropdown-item py-3" (click)="asignarPrivilegio(3, user)">
+                <button class="dropdown-item py-3" (click)="asignarPrivilegio(3, user)" *ngIf="user.roles[0].id !== 1 || !checkUniqueAdmin()">
                   <i class="fa-solid fa-unlock me-2"></i><span>{{resources.asignColaborator}}</span>
                 </button>
               </li>

@@ -2,23 +2,25 @@
   <section class="d-flex">
     <div class="d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4">
       <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center">
-        <span class="text-white h1">{{(usuario?.nombre + ' ' + usuario?.apellidos) | inicialesNombre}}</span>
+        <span class="text-white h1">{{
+          usuario?.nombre + " " + usuario?.apellidos | inicialesNombre
+          }}</span>
       </div>
       <div>
         <ol class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between align-items-start py-3">
             <div class="ms-2 me-auto">
-              <span class="fw-bold">{{usuario?.nombre}} </span>
-              {{usuario?.apellidos}}
+              <span class="fw-bold">{{ usuario?.nombre }} </span>
+              {{ usuario?.apellidos }}
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-center align-items-center py-3">
             <span class="fa-solid fa-user me-3"></span>
-            {{usuario?.usuario}}
+            {{ usuario?.usuario }}
           </li>
           <li class="list-group-item d-flex justify-content-center align-items-start py-3">
             <span class="fa-solid fa-cake-candles me-3"></span>
-            {{usuario?.fechaNacimiento |  date:'dd MMM yyyy':'':'es'}}
+            {{ usuario?.fechaNacimiento | date: "dd MMM yyyy" : "" : "es" }}
           </li>
         </ol>
       </div>
@@ -32,26 +34,34 @@
           <div class="card-body d-flex justify-content-between col-12 py-3">
             <div class="col-12">
               <div class="d-flex col-12 px-4 py-3">
-                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{ resources.email }}</label>
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{
+                  resources.email
+                  }}</label>
                 <div class="col-10">
-                  <input type="text" class="form-control" formControlName="email" [class.is-invalid]="validar('email')">
-                  <small *ngIf="validar('email')" class="error d-block col-12">{{validar('email')}}</small>
+                  <input type="text" class="form-control" formControlName="email"
+                    [class.is-invalid]="validar('email')" />
+                  <small *ngIf="validar('email')" class="error d-block col-12">{{ validar("email") }}</small>
                 </div>
               </div>
               <div class="d-flex col-12 px-4 py-3">
-                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{resources.phone}}</label>
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{
+                  resources.phone
+                  }}</label>
                 <div class="col-10">
-                  <input type="text" class="form-control" maxlength="9" formControlName="tlf" [class.is-invalid]="validar('tlf')">
-                  <small *ngIf="validar('tlf')" class="error d-block col-12">{{validar('tlf')}}</small>
+                  <input type="text" class="form-control" maxlength="9" formControlName="tlf"
+                    [class.is-invalid]="validar('tlf')" />
+                  <small *ngIf="validar('tlf')" class="error d-block col-12">{{
+                    validar("tlf")
+                    }}</small>
                 </div>
               </div>
               <div class="d-flex col-12 px-4 py-3">
-                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{ resources.lang}}</label>
+                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{
+                  resources.lang
+                  }}</label>
                 <select class="form-select" formControlName="idiomaId">
-                  <option
-                    *ngFor="let idioma of idiomas"
-                    [value]="idioma.idiomaId">
-                    {{idioma.titulo}}
+                  <option *ngFor="let idioma of idiomas" [value]="idioma.idiomaId">
+                    {{ idioma.titulo }}
                   </option>
                 </select>
               </div>
@@ -59,8 +69,20 @@
           </div>
           <div class="card-footer py-3 d-flex justify-content-end">
             <div class="button-container">
-              <button class="btn bgGeneral rounded-pill py-2" type="submit" [attr.disabled]="formProfile.invalid ? true : null">{{ resources.saveChanges}}</button>
-              <button class="btn rounded-pill py-2" type="button" (click)="eliminarCuenta(usuario?.id)">{{resources.deleteAcc}}</button>
+              <button class="btn bgGeneral rounded-pill py-2" type="submit"
+                [attr.disabled]="formProfile.invalid ? true : null">
+                {{ resources.saveChanges }}
+              </button>
+              <button class="btn cursor-pointer rounded-pill py-2 ms-2" type="button" *ngIf="!esAdminUnico()"
+                (click)="eliminarCuenta(usuario?.id)">
+                {{ resources.deleteAcc }}
+              </button>
+                            <button class="btn rounded-pill py-2 ms-2 btn-outline-secondary" type="button" *ngIf="esAdminUnico()">
+                              <i class="fa-sharp cursor-pointer fa-solid fa-circle-info me-2" (click)="infoAdmin()"  pTooltip="Eres el único admin" tooltipPosition="top"></i>
+
+                {{ resources.deleteAcc }}
+              </button>
+
             </div>
           </div>
         </div>
@@ -73,19 +95,23 @@
         <h5 class="m-0">{{ resources.interests }}</h5>
       </div>
       <div class="card-body d-flex col-12 py-4 flex-wrap">
-        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">{{interes.titulo}}</span>
+        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">{{
+          interes.titulo }}</span>
       </div>
       <div class="card-footer py-3 d-flex justify-content-end">
-        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">{{ resources.changeInterests }}</button>
+        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">
+          {{ resources.changeInterests }}
+        </button>
       </div>
     </div>
   </section>
 </main>
-<div class="footer-padding">
-</div>
-<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+<div class="footer-padding"></div>
+<p-toast [breakpoints]="{
+    '700px': { width: '100%', right: '0', left: '0', padding: '0 10px' }
+  }"></p-toast>
 <p-confirmDialog></p-confirmDialog>
 <ng-template #editarIntereses>
-  <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses>
+  <app-editar-intereses [interesesUsuario]="usuario?.intereses"
+    (cerrar)="cerrarModalIntereses()"></app-editar-intereses>
 </ng-template>
-

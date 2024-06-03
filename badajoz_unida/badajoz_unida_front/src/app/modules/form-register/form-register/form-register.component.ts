@@ -138,8 +138,9 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
         [
           Validators.required,
           Validators.pattern(
-            /^([a-zA-ZÀ-ÿ\u00f1\u00d1]{4,30})(\s{0,1}[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,29}){0,1}$/
-          ),
+  /^$|^([a-zA-ZÀ-ÿ\u00f1\u00d1]+)(\s{0,1}[a-zA-ZÀ-ÿ\u00f1\u00d1]+)*$/
+)
+
         ],
       ],
       apellidos: [
@@ -172,7 +173,7 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
       password2: ['', [Validators.required]],
       fechaNacimiento: [null, [Validators.required, this._validadorService.comprobarEdad]],
       telefono: ['', [Validators.required, Validators.minLength(9)]],
-      usuario: ['', [Validators.required]],
+      usuario: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,}$/)]],
       idioma: [-1, [Validators.required, this._validadorService.comprobarIdioma]]
     }, {validators:this._validadorService.passwordsIguales('password', 'password2')});
   }
@@ -239,7 +240,7 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
 
     let user: NuevoUsuario = new NuevoUsuario(datos.nombre, datos.apellidos, datos.usuario, datos.email, datos.password, datos.telefono, datos.fechaNacimiento, datos.idioma);
     user.intereses = this.interesesSelected;
-
+console.log(datos);
     this._authService.nuevo(user).subscribe(
       (data: any) => {
         if (data['status'] != 'error') {
