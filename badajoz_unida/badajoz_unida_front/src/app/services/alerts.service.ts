@@ -6,19 +6,20 @@
 
 import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
+import { LocalizedComponent } from '../config/localize.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlertsService {
+export class AlertsService extends LocalizedComponent {
 
   alert = Swal.mixin({
     allowOutsideClick: false,
     allowEscapeKey: false,
     allowEnterKey: false,
     stopKeydownPropagation: true,
-    confirmButtonText: 'Confirmar',
-    cancelButtonText: 'Cancelar',
+    confirmButtonText: `${this.resources.confirm}`,
+    cancelButtonText: `${this.resources.cancel}`,
     customClass: {
       confirmButton: 'btn btn-danger me-3',
       cancelButton: 'btn btn-light'
@@ -26,7 +27,7 @@ export class AlertsService {
     buttonsStyling: false
   });
 
-  constructor() { }
+  constructor() { super();}
 
   /**
    Método que muestra una alerta informativa

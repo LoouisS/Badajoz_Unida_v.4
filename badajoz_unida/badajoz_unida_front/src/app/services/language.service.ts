@@ -40,29 +40,23 @@ export class LanguageService {
           // Si la configuración regional del navegador comienza con una de las implementadas
           // (por ejemplo, el navegador tiene `es-CL` y la implementada es `es`),
           // almacena la implementada en `partialLocaleMatch`
-          console.log('navigator.language', navigator.language);
           partialLocaleMatch = implementedLocaleId;
         } else if (implementedLocaleId.startsWith(navigator.language)) {
           // Si la configuración regional implementada comienza con la configuración regional del navegador
           // (por ejemplo, el navegador tiene `es` y la implementada es `es-CL`)
           // almacena la implementada en `partialLocaleMatch`
-          console.log('navigator.language', navigator.language);
           partialLocaleMatch = implementedLocaleId;
         }
       }
 
       // Si se encontró una coincidencia parcial, la retorna
       if (partialLocaleMatch != null) {
-        console.log('partialLocaleMatch', partialLocaleMatch);
         return partialLocaleMatch;
       }
     }
 
     // Si no se encontró una coincidencia en la configuración regional almacenada en la URL ni en las implementadas,
     // retorna la configuración regional por defecto
-    console.log('storedLocaleId', storedLocaleId);
-    console.log('LocaleHelper.defaultLocaleId', LocaleHelper.defaultLocaleId);
-    console.log('navigator.language', navigator.language);
     return storedLocaleId || LocaleHelper.defaultLocaleId;
   }
 }

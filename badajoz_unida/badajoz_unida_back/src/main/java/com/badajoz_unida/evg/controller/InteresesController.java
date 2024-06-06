@@ -51,9 +51,9 @@ public class InteresesController {
      * @return
      */
     @PostMapping("/save")
-    public ResponseEntity<?> saveInteres(@RequestBody InteresesUsuariosDTO interes){
+    public ResponseEntity<?> saveInteres(@RequestBody InteresesUsuariosDTO interes, @RequestParam Boolean create){
         try{
-            return this.interesService.save(interes);
+            return this.interesService.save(interes, create);
         }catch (CustomException e){
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.CONFLICT);
         } catch (Exception e){

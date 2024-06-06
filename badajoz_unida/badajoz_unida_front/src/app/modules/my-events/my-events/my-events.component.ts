@@ -5,6 +5,7 @@
  **/
 
 import {Component, OnInit} from '@angular/core';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 import {EventosService} from "../../../services/eventos.service";
 
 @Component({
@@ -16,12 +17,13 @@ import {EventosService} from "../../../services/eventos.service";
 /**
  Vista del componente que muestra los eventos a los que esta inscrito el usuario
  **/
-export class MyEventsComponent implements OnInit{
+export class MyEventsComponent extends LocalizedComponent implements OnInit{
 
   listaInscripciones : any[];
   loading: boolean = true;
 
   constructor(private _eventosServices: EventosService) {
+    super();
   }
 
   /**

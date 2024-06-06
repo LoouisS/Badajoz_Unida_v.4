@@ -14,7 +14,7 @@
                placeholder="{{resources.offName}}"
                [class.is-invalid]="!validar('nombre')"
         />
-        <small *ngIf="!validar('nombre')" class="error">El nombre es un campo requerido.</small>
+        <small *ngIf="!validar('nombre')" class="error">{{resources.nameRequired}}</small>
       </div>
       <div class="input-group ps-lg-1">
         <label for="iApellidos">{{resources.surname}}</label>
@@ -27,7 +27,7 @@
                placeholder="{{resources.surname}}"
                [class.is-invalid]="!validar('apellidos')"
         />
-        <small *ngIf="!validar('apellidos')" class="error">El apellido es un campo requerido.</small>
+        <small *ngIf="!validar('apellidos')" class="error">{{resources.surnameRequired}}</small>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
                placeholder="{{resources.email}}"
                [class.is-invalid]="!validar('email')"
         />
-        <small *ngIf="!validar('email')" class="error">El formato del email debe ser: ejemplo@ejemplo.com</small>
+        <small *ngIf="!validar('email')" class="error">{{resources.emailRequired}}</small>
       </div>
       <div class="input-group ps-lg-1">
         <label for="iUsuario">{{ resources.username }}</label>
@@ -56,7 +56,8 @@
                placeholder="{{ resources.username}}"
                [class.is-invalid]="!validar('usuario')"
         />
-        <small *ngIf="!validar('usuario')" class="error">El usuario es un campo requerido.</small>
+        <small *ngIf="!validar('usuario') && forma.get('usuario').errors && !forma.get('usuario')?.errors['usuarioExiste']" class="error">{{resources.usernameRequired}}</small>
+        <small *ngIf="forma.get('usuario').errors && forma.get('usuario')?.errors['usuarioExiste']" class="error">{{resources.userExists}}</small>
       </div>
     </div>
 
@@ -72,8 +73,7 @@
              onpaste="return false">
       <i id="ieye"class="bi bi-eye-fill" (click)="showHide()"></i>
       <small *ngIf="!validar('password')" class="error">
-        La contraseña debe incluir mínimo 8 caracteres y contener al menos una letra minúscula, mayúscula,
-        un número y un caracter especial. No se permiten espacios en blanco.
+        {{resources.passwordRequired}}
       </small>
     </div>
 
@@ -89,7 +89,7 @@
              onpaste="return false"
       />
       <i id="ieye2"class="bi bi-eye-fill" (click)="showHide2()"></i>
-      <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">Las contraseñas no son iguales.</small>
+      <small *ngIf="!comprobarPasswords || !validar('password2')" class="error">{{resources.passwordMatch}}</small>
     </div>
 
     <div class="d-flex my-2 flex-wrap flex-lg-nowrap">
@@ -101,7 +101,7 @@
                name="fechaNacimiento"
                id="ifechaNacimiento"
         />
-        <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">Tienes que ser mayor de 16 años para registrarte.</small>
+        <small *ngIf="comprobarEdad() || !validar('fechaNacimiento')" class="error">{{resources.birthRequired}}</small>
       </div>
       <div class="input-group ps-lg-1">
         <label for="iTelefono"> {{ resources.phone }}</label>
@@ -114,7 +114,7 @@
                placeholder="{{ resources.phone }}"
                [class.is-invalid]="!validar('telefono')"
         />
-        <small *ngIf="!validar('telefono')" class="error">El teléfono es un campo necesario, debe tener 9 digitos.</small>
+        <small *ngIf="!validar('telefono')" class="error">{{resources.phoneRequired}}</small>
       </div>
     </div>
 
@@ -128,7 +128,7 @@
           {{idioma.titulo}}
         </option>
       </select>
-      <small *ngIf="comprobarIdioma()" class="error">Tienes que seleccionar un idioma.</small>
+      <small *ngIf="comprobarIdioma()" class="error">{{resources.langRequired}}</small>
     </div>
 
     <div class="input-group">
@@ -155,3 +155,5 @@
     </div>
   </div>
 </form>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+

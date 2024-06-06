@@ -2,11 +2,7 @@
   background-color: var(--primary-color);
   color: white;
 }
-.customForm{
-  border: 0px;
-  border-bottom: 3px solid var(--primary-color);
-  border-radius: 0px;
-}
+
 .customBtn:hover{
   background-color: var(--primary-color-hover);
   transform: scale(1.02);
@@ -15,18 +11,6 @@
   background-color: var(--primary-color-hover);
   color: white;
 }
-.custom-map{
-  width: 100%;
-  height: 200px;
-}
-.error{
-  font-size: .7rem;
-  color: var(--primary-color);
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
 
 .btn-close{
   filter: brightness(0) invert(1);
@@ -35,10 +19,4 @@
 .modal-body{
   max-height: 70vh;
   overflow-y: auto;
-}
-
-.preview{
-  width: 100%;
- height: 200px;
-  object-fit: cover;
 }

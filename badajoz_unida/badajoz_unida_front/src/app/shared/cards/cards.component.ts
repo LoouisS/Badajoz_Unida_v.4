@@ -47,20 +47,23 @@ export class CardsComponent extends LocalizedComponent implements OnInit{
   }
 
   async removeUserFromEvent(eventoId: number){
-    let respuesta = await this._alertsService.askConfirmation('Quieres desapuntarte de ' + this.evento.nombre, '¿Estas seguro de querer desapuntarte de este evento?');
+        let respuesta = await this._alertsService.askConfirmation(
+      `${this.resources.cancelParticipationTitle}`,
+      `${this.resources.cancelParticipation}`,
+    );
     if(respuesta){
       this._eventosService.removeUserFromEvent(eventoId).subscribe((data: any) => {
         if (data['status'] != 'error') {
                               this.messageService.add({
           severity: 'success',
-          summary: 'Participación cancelada',
-          detail: 'Esperamos verte pronto',
+          summary:`${this.resources.participationCancelled}`,
+          detail:`${this.resources.participationCancelledDetail}`,
         }),
         (error) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error al cancelar la participación',
-            detail: 'No se ha podido cancelar la participación',
+            summary:`${this.resources.errorCancelParticipation}`,
+            detail:`${this.resources.errorCancelParticipationDetail}`,
           });
         }
           this._eventosService.setNotificationCards();

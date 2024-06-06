@@ -8,20 +8,23 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EventosService} from "../../../services/eventos.service";
 import {CategoriasService} from "../../../services/categorias.service";
 import {UsuariosService} from "../../../services/usuarios.service";
+import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-editar-intereses',
   templateUrl: './editar-intereses.component.html',
   styleUrls: ['./editar-intereses.component.css']
 })
-export class EditarInteresesComponent implements OnInit{
+export class EditarInteresesComponent extends LocalizedComponent implements OnInit{
 
   @Input() interesesUsuario: any[];
   @Output() cerrar: EventEmitter<any> = new EventEmitter<any>();
   interesesList: any[] = [];
   loading: boolean = true;
 
-  constructor(private _categoriasService: CategoriasService, private _usuariosService: UsuariosService) {
+  constructor(private messageService: MessageService, private _categoriasService: CategoriasService, private _usuariosService: UsuariosService) {
+    super();
   }
 
   /**
@@ -106,6 +109,11 @@ export class EditarInteresesComponent implements OnInit{
     this.loading = true;
     this._usuariosService.changeIntereses(this.interesesUsuario).subscribe((data: any) => {
       this.loading = false;
+                          this.messageService.add({
+          severity: 'success',
+          summary:`${this.resources.ready}`,
+          detail:`${this.resources.interestChanged}`,
+        }),
       this.cerrar.emit();
     });
   }

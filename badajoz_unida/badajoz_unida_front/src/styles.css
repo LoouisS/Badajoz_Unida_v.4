@@ -36,6 +36,7 @@ html::-webkit-scrollbar {
 body{
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
+  padding: 0 !important;
 }
 
 .animated {

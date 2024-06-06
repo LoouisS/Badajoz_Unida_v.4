@@ -7,6 +7,7 @@ import { GestionUsuariosTableComponent } from './gestion-usuarios-table/gestion-
 import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         GestionUsuariosRoutingModule,
         SharedModule,
         DataTablesModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+    ToastModule
     ]
 })
 export class GestionUsuariosModule { }

@@ -27,7 +27,7 @@ public interface CategoriaService {
      * @return
      * @throws CustomException
      */
-    ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException;
+    ResponseEntity<?> saveCategoria(Categorias categoria, Boolean create) throws CustomException;
 
     /**
      * Método para borrar un registro de Categorias a través de su id

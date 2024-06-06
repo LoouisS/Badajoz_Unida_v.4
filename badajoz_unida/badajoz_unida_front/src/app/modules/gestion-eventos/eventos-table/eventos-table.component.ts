@@ -86,7 +86,6 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
   getEventos(){
     this.eventoService.getAllEventos().subscribe((data) => {
       this.eventos = data;
-      console.log("EVENTOS:", this.eventos);
       this.cargarTabla();
     });
   }
@@ -171,10 +170,8 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
       intereses: Array.isArray(intereses) ? intereses : [intereses]
     };
 
-    console.log("ENVIANDO");
     this.eventoService.getEventosFiltered(filtros).subscribe((data) => {
       this.eventos = data;
-      console.log("EVENTOS FILTRADOS", this.eventos);
       this.cargarTabla();
     });
   }
@@ -182,10 +179,8 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
   limpiarFiltros() {
   // Resetear el formulario
   this.formFilter.reset();
-  console.log('Formulario después de resetear', this.formFilter.value);
  this.eventoService.getAllEventos().subscribe((data) => {
       this.eventos = data;
-      console.log("EVENTOS:", this.eventos);
       this.cargarTabla();
     });
   // Verifica también resetear cualquier estado interno que pueda ser usado en las consultas del servicio
@@ -205,8 +200,8 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
   deleteEvent(eventosId: number, evento:any) {
     this.alert.fire({
       icon:'question',
-      title:'¿Estás seguro que deseas eliminar el Evento',
-      text:'Se eliminara el evento con nombre' + evento?.nombre + 'de forma permanente',
+      title:`${this.resources.deleteEventMessage}`,
+      text:`${this.resources.deleteEventMessageDetail}`,
       showConfirmButton: true,
       showCancelButton: true
     }).then((result) =>{
@@ -214,15 +209,15 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
         this.eventoService.deleteEventById(eventosId).subscribe((data) =>{
                                 this.messageService.add({
           severity: 'success',
-          summary: 'Eliminado con éxito',
-          detail: 'El evento ' + evento?.nombre +' ha sido eliminado',
+          summary:`${this.resources.deletedEvent}`,
+          detail: `${this.resources.deletedEventDetail}`,
         }),
           this.getEventos();
         }, error=>{
                             this.messageService.add({
             severity: 'error',
-            summary: 'Ocurrion un problema',
-            detail: 'Vuelva a intentarlo en otro momento',
+            summary:`${this.resources.problemOcurred}`,
+            detail:`${this.resources.problemOcurredDetail}`,
           });
 
         });

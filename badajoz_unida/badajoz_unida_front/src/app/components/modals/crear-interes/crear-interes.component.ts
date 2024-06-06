@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {InteresesService} from "../../../services/intereses.service";
 import {CategoriasService} from "../../../services/categorias.service";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { Message, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-interes',
@@ -32,7 +33,7 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
     },
     buttonsStyling: false
   });
-  constructor(private formBuilder: FormBuilder, private intService: InteresesService, private catService: CategoriasService) {
+  constructor(private formBuilder: FormBuilder, private messageService: MessageService, private intService: InteresesService, private catService: CategoriasService) {
     super();
   }
   ngOnInit() {
@@ -44,7 +45,6 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
     })
     this.intService.getEditInteres().subscribe((data) => {
       this.interes = data;
-      console.log("EN EL ONINIT",this.interes);
       if (this.interes != null){
         setTimeout(() => {
           this.loading = false;
@@ -79,33 +79,33 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
 
     if (control.invalid && control.touched) {
       if (control.errors?.['required']) {
-        return 'Este campo es requerido.';
+        return `${this.resources.categoryRequired}`;
       }
 
       if (control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `El valor mínimo es de ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       if (control.errors?.['maxlength']) {
         const maxLength = control.errors['maxlength'].requiredLength;
-        return `El valor máximo es de ${maxLength} caracteres.`;
+        return `${this.resources.maxChar} ${maxLength}`;
       }
 
       // Validación adicional para el campo de nombreCat
       if (campo === 'nombreInt' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `El nombre debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Validación adicional para el campo de descripcion
       if (campo === 'descripcionInt' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `La descripción debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Si no se encuentra ningún error específico, devuelve el mensaje genérico
-      return 'El valor ingresado no es válido.';
+      return `${this.resources.notValidValue}`;
     }
 
     return null;
@@ -126,7 +126,6 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
    * Método para el reinicio del formulario a valores en blanco
    */
   private resetForm() {
-    console.log("reseteando formulario")
     this.interes = null;
     this.formCreateInteres.reset();
   }
@@ -136,8 +135,6 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
    **/
   sendCat() {
     if (this.formCreateInteres.invalid || this.formCreateInteres.pending) {
-      console.log("MAAAAAAAL");
-      console.log(this.formCreateInteres);
       Object.values(this.formCreateInteres.controls).forEach((control) => {
         if (control instanceof FormGroup)
           control.markAsTouched();
@@ -146,16 +143,10 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
     }
     this.alert.fire({
       icon:'question',
-      title:'¿Estas seguro que deseas registrar una nueva categoría?',
+      title:`${this.resources.createInterestMessage}`,
       showConfirmButton: true,
       showCancelButton: true,
     }).then((result) => {
-      this.alert.fire({
-        title:'Espereme mientras gestionamos su solicitud',
-        didOpen(popup: HTMLElement) {
-          Swal.showLoading();
-        }
-      })
       if (result.isConfirmed) {
         const interes ={
           titulo:this.formCreateInteres.get('nombreInt').value,
@@ -169,33 +160,16 @@ export class CrearInteresComponent extends LocalizedComponent implements OnInit{
         if (this.interes != null){
           interes.interesId = this.interes.interesId
         }
-        console.log("EL INTERES",interes)
-        this.intService.registrarInteres(interes).subscribe((data) => {
-          console.log("DATA", data);
-          this.alert.fire({
-            icon:'success',
-            title:'Evento registrado con éxito',
-            timer:4000,
-          });
+        const create = this.intService.create;
+        this.intService.registrarInteres(interes, create).subscribe((data) => {
+            this.messageService.add({severity:'success', summary:`${this.resources.ready}`, detail:`${this.resources.interestCreated}`});
             window.location.reload();
         },error => {
-          this.alert.fire({
-            icon:'error',
-            title:'No se ha podido realizar el registro',
-            text: error.error,
-            timer:4000,
-          })
+              this.messageService.add({severity:'error', summary:`${this.resources.problemOcurred}`, detail:`${this.resources.sameInterest}`});
         })
 
       } else {
-        this.alert.fire({
-          title: 'Registro cancelado con éxito',
-          text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
-          icon: 'info',
-          timer: 4000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        })
+          this.messageService.add({severity:'info', summary:`${this.resources.info}`, detail:`${this.resources.eventCreationCancelled}`});
       }
     })
   }

@@ -11,6 +11,7 @@ import {Subject} from "rxjs";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-gestion-usuarios-table',
@@ -46,7 +47,7 @@ export class GestionUsuariosTableComponent extends LocalizedComponent implements
    @param usuarioService {UsuariosService} Servicio que gestiona los datos de los usuarios
    @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
    **/
-  constructor(private usuarioService: UsuariosService, private formBuilder: FormBuilder) {
+  constructor(private messageService: MessageService, private usuarioService: UsuariosService, private formBuilder: FormBuilder) {
 super();
   }
 
@@ -99,41 +100,28 @@ super();
     }
     this.alert.fire({
       icon:'question',
-      title:'¿Seguro que deseas asignar estos privilegios?',
-      text:'Vas a asignar a ' + usuario?.nombreUsuario + ' los privilegios de ' + privilegio +
-        ', estos privilegios pueden volver a cambiar por el administrador del sistema.',
+      title:`${this.resources.changePrivileges}`,
+      text:`${this.resources.changePrivilegesDetail}`,
       showConfirmButton: true,
       showCancelButton: true
     }).then((result) =>{
       if(result.isConfirmed){
-        this.alert.fire({
-          title:'Espere mientras procesamos su solicitud',
-          didOpen(popup: HTMLElement) {
-            Swal.showLoading();
-          }
-        })
         this.usuarioService.cambioRol(usuario.userId,number).subscribe((data) => {
           console.log('USUARIO ROLEADO',data);
-          this.alert.fire({
-            title: 'Actualizado con éxito!',
-            text: 'El usuario con nombre' + usuario?.nombreUsuario +'ha sido actualizado correctamente.',
-            icon: 'success',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
+            this.messageService.add({
+              severity:'success',
+              summary:`${this.resources.ready}`,
+              detail:`${this.resources.rolUpdated}`
+            });
           setTimeout(()=>{
             this.ngOnInit();
-          },4000)
+          },1000)
         }, error => {
-          this.alert.fire({
-            title: 'Hubo un problema!',
-            text: 'El usuario con nombre' + usuario?.nombreUsuario +'no ha sido actualizado correctamente.',
-            icon: 'error',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
+              this.messageService.add({
+                severity:'error',
+                summary:`${this.resources.problemOcurred}`,
+                detail:`${this.resources.problemOcurredDetail}`
+              });
         })
       }
     });

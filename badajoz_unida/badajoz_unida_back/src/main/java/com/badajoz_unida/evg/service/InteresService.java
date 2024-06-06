@@ -18,7 +18,7 @@ public interface InteresService {
      * @param interes
      * @return
      */
-    ResponseEntity<?> save(InteresesUsuariosDTO interes) throws CustomException;
+    ResponseEntity<?> save(InteresesUsuariosDTO interes, Boolean create) throws CustomException;
 
     /**
      * Método para eliminar un interés registrado en la base de datos

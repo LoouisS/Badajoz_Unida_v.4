@@ -29,6 +29,14 @@
   overflow-y: auto;
 }
 
+.error{
+  font-size: .7rem;
+  color: var(--primary-color);
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 .customForm {
   width: 100%;
 }

@@ -5,7 +5,7 @@
  **/
 
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
@@ -19,6 +19,7 @@ export class CategoriasService {
 
   authURL = 'http://localhost:8080/categorias/';
   editCategoria: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  create: boolean = true;
 
 
   /**
@@ -46,9 +47,13 @@ export class CategoriasService {
    * Método para el registro de una nueva categoría
    * @param categoria
    */
-  registrarCategoria(categoria: any){
-    console.log("LA CATEGORIA A REGISTRAR", categoria)
-    return this.httpClient.post(this.authURL + 'registrarCategoria',categoria);
+  registrarCategoria(categoria: any, create:boolean){
+    // Configura los parámetros de la solicitud
+    const params = new HttpParams().set('create', create.toString());  // Asume que `create` es un booleano
+
+    console.log(categoria);
+    // Realiza la solicitud HTTP POST
+    return this.httpClient.post(this.authURL + 'registrarCategoria', categoria, { params });
   }
 
   /**
@@ -65,6 +70,7 @@ export class CategoriasService {
    */
   setEditCategoria(categoria: any){
     this.editCategoria.next(categoria);
+    this.create = false;
   }
 
   /**

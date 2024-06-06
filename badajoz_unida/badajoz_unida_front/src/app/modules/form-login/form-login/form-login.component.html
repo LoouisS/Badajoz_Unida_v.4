@@ -5,9 +5,13 @@
   <div class="col-8 col-lg-6 pt-0 pt-lg-3 mt-3 mt-lg-5 mt-lg-0 d-flex justify-content-center">
     <img class="w-65" src="assets/logo.png">
   </div>
-  <div *ngIf="showAlert" class="alert alert-danger col-10 mt-2" role="alert">
-    Nombre de usuario o contraseña incorrectos
+  <div *ngIf="showAlert" class="alert showAlert alert-danger col-10 mt-2" role="alert">
+    {{resources.incorrectData}}
   </div>
+    <div *ngIf="showRegister" class="alert alert-danger col-10 mt-2" role="alert">
+    {{resources.registerSugestion}} <span style="color: darkred;cursor: pointer;font-weight: bolder;" (click)="goToRegistro()">{{resources.registerLink}}</span>
+  </div>
+
   <div class="input-group">
     <input type="text" class="form-control" maxlength="100" formControlName="user" name="user" id="input-user" placeholder=" {{ resources.username }}"/>
   </div>
@@ -37,3 +41,5 @@
 <ng-template #loading>
   <app-loading></app-loading>
 </ng-template>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+

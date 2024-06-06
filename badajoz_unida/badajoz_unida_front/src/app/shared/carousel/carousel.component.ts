@@ -75,8 +75,10 @@ export class CarouselComponent implements OnInit{
    Método que filtra los eventos para excluir aquellos en los que el usuario ya participa
    **/
   filtrarEventos() {
-    const inscripcionesNombres = this.listaInscripciones.map(inscripcion => inscripcion.nombre);
-    this.eventos = this.eventos.filter(evento => !inscripcionesNombres.includes(evento.nombre));
+    console.log(this.listaInscripciones)
+    console.log(this.eventos)
+    const inscripcionesNombres = this.listaInscripciones.map(inscripcion => inscripcion.eventosId);
+    this.eventos = this.eventos.filter(evento => !inscripcionesNombres.includes(evento.eventosId));
   }
 
   /**

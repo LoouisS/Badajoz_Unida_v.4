@@ -16,6 +16,8 @@ import {CategoriasService} from "../../../services/categorias.service";
 import {ValidadoresService} from "../../../services/validadores.service";
 import Swal from 'sweetalert2'
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
+import { ValidadorService } from 'src/app/services/validators/validador-service';
 
 @Component({
   selector: 'app-form-register',
@@ -60,10 +62,12 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
    **/
   constructor(
     private formBuilder: FormBuilder,
+    private messageService: MessageService,
     private _authService: AuthService,
     private _categoriaService: CategoriasService,
     private _idiomasService: IdiomasService,
     private _validadorService: ValidadoresService,
+    private _asyncValidator: ValidadorService,
     private router: Router
   ) {
     super();
@@ -116,6 +120,7 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
     // this.removeIntereses.subscribe((data: any) => {
     //   this.interesesList = data;
     // });
+    console.log(this.interesesList)
     console.log(this.forma);
   }
 
@@ -148,7 +153,7 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
         [
           Validators.required,
           Validators.pattern(
-            /^(([a-zA-ZÀ-ÿ\u00f1\u00d1]){4,30})(\s{0,1}[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,29}){0,1}$/
+            /^(([a-zA-ZÀ-ÿ\u00f1\u00d1]){2,30})(\s{0,1}[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,29}){0,1}$/
           ),
         ],
       ],
@@ -173,7 +178,10 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
       password2: ['', [Validators.required]],
       fechaNacimiento: [null, [Validators.required, this._validadorService.comprobarEdad]],
       telefono: ['', [Validators.required, Validators.minLength(9)]],
-      usuario: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]{3,}$/)]],
+      usuario: ['',
+    [Validators.required, Validators.pattern(/^[a-zA-zA-Z0-9À-ÿ\u00f1\u00d1]{3,}$/)],
+    [this._asyncValidator.usuarioExiste()]  // Añadido como validador asíncrono
+  ],
       idioma: [-1, [Validators.required, this._validadorService.comprobarIdioma]]
     }, {validators:this._validadorService.passwordsIguales('password', 'password2')});
   }
@@ -192,32 +200,29 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
       return;
     }
   this.alert.fire({
-    title: '¿Estás seguro que deseas continuar?',
-    text: 'Algunos de tus datos podrán no ser modificados posteriormente',
-    html: '<ul class="list-group list-group-flush d-flex">'+
-            '<li class="list-group-item text-left">Nombre: ' + this.forma.get('nombre')?.value + '</li>'+
-            '<li class="list-group-item text-left">Apellidos: ' + this.forma.get('apellidos')?.value + '</li>'+
-            '<li class="list-group-item text-left">Email: ' + this.forma.get('email')?.value + '</li>'+
-            '<li class="list-group-item text-left">Fecha Nacimiento: ' + this.forma.get('fechaNacimiento')?.value + '</li>'+
-            '<li class="list-group-item text-left">Teléfono: ' + this.forma.get('telefono')?.value + '</li>'+
-            '<li class="list-group-item text-left">Usuario: ' + this.forma.get('usuario')?.value + '</li>'+
-            '<li class="list-group-item text-left">Idioma: ' + this.forma.get('idioma')?.value + '</li>'+
-          '</ul>',
-    icon: 'question',
+    title: `${this.resources.sureContinue}`,
+    text: `${this.resources.sureContinueDetail}`,
+        html: `<ul class="list-group list-group-flush d-flex">
+            <li class="list-group-item text-left">${this.resources.offName}: ${this.forma.get('nombre')?.value}</li>
+            <li class="list-group-item text-left">${this.resources.surname}: ${this.forma.get('apellidos')?.value}</li>
+            <li class="list-group-item text-left">Email: ${this.forma.get('email')?.value}</li>
+            <li class="list-group-item text-left">${this.resources.birth}: ${this.forma.get('fechaNacimiento')?.value}</li>
+            <li class="list-group-item text-left">${this.resources.phone}: ${this.forma.get('telefono')?.value}</li>
+            <li class="list-group-item text-left">${this.resources.username}: ${this.forma.get('usuario')?.value}</li>
+            <li class="list-group-item text-left">${this.resources.lang}: ${this.forma.get('idioma')?.value}</li>
+         </ul>`,
+  icon: 'question',
     showConfirmButton: true,
     showCancelButton: true,
   }).then((result) => {
     if (result.isConfirmed) {
       this.registro(forma);
     } else {
-      this.alert.fire({
-        title: 'Registro cancelado con éxito',
-        text: 'Te seguimos esperando, vuelve a intentarlo cuando quieras',
-        icon: 'info',
-        timer: 4000,
-        showConfirmButton: false,
-        showCancelButton: false,
-      })
+          this.messageService.add({
+            severity: 'info',
+            summary:`${this.resources.eventCreationCancelled}`,
+            detail: `${this.resources.eventCreationCancelledDetail}`
+          });
     }
   })
 
@@ -240,35 +245,27 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
 
     let user: NuevoUsuario = new NuevoUsuario(datos.nombre, datos.apellidos, datos.usuario, datos.email, datos.password, datos.telefono, datos.fechaNacimiento, datos.idioma);
     user.intereses = this.interesesSelected;
-console.log(datos);
     this._authService.nuevo(user).subscribe(
       (data: any) => {
         if (data['status'] != 'error') {
-          this.alert.fire({
-            title: 'Registrado con éxito!',
-            text: 'El usuario se ha registrado con éxito en la aplicación',
-            icon: 'success',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
+          this.messageService.add({
+            severity: 'success',
+            summary:`${this.resources.registerCompleted}`,
+            detail: `${this.resources.registerCompletedDetail}`,
           });
          setTimeout(() => {
            this.router.navigate(['/auth']);
-         }, 4000);
+         }, 1000);
         }
       },
       async (errorServicio: any) => {
         console.log('he fallado');
         console.log(errorServicio);
-        this.alert.fire({
-          title: 'Ha ocurrido un problema',
-          text: errorServicio.error,
-          icon: 'error',
-          timer: 4000,
-          showConfirmButton: false,
-          showCancelButton: false,
+        this.messageService.add({
+          severity: 'error',
+          summary:`${this.resources.registerError}`,
+          detail:`${this.resources.userExists}`,
         });
-        //this.toast=true;
       }
     );
   }
@@ -401,7 +398,6 @@ console.log(datos);
     } else {
       this.interesesSelected.splice(this.interesesSelected.indexOf({"interesId": interes.interesId}), 1);
     }
-    console.log(this.interesesSelected);
   }
 
   /**

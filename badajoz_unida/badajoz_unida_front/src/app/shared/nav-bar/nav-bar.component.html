@@ -31,7 +31,8 @@
       <div class="perfil perfil-mobile" aria-expanded="false" (click)="toggleDropdown()">
         <div class="perfil-detalles ms-2">
           <div class="col-3 perfil-img rounded-pill log-text">
-            <i class="logout-icon fa fa-ellipsis-v" aria-hidden="true"></i>
+            <i *ngIf="isAdmin" class="logout-icon fa fa-ellipsis-v" aria-hidden="true"></i>
+            <i *ngIf="!isAdmin" class="fa fa-sign-out logout-icon"></i>
           </div>
           <div *ngIf="isOpened" class="col-9 perfil-nombre d-flex flex-wrap ps-2">
             {{ nombreUsuario }}

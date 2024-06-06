@@ -38,7 +38,6 @@ export class NavBarComponent extends LocalizedComponent implements OnInit {
    **/
   ngOnInit() {
     this.nombreUsuario = this._tokenService.getNombreApellidos();
-    console.log(this.nombreUsuario);
     this.isAdmin = this._tokenService.getIsAdmin();
   }
 
@@ -51,7 +50,11 @@ export class NavBarComponent extends LocalizedComponent implements OnInit {
   }
 
   toggleDropdown() {
+    if(this.isAdmin){
     this.dropdownOpen = !this.dropdownOpen;
+    } else {
+      this.cerrarSesion();
+    }
   }
 
   /**

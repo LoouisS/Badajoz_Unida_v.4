@@ -2,8 +2,8 @@ import { environment } from "../environments/environment";
 
 
 export abstract class LocaleHelper {
-    public static defaultLocaleId = 'es';
-public static implementedLocales = ['en', LocaleHelper.defaultLocaleId, 'fr'];
+    public static defaultLocaleId = 'en';
+public static implementedLocales = ['es', LocaleHelper.defaultLocaleId, 'fr'];
 
 public language = environment.language;
 

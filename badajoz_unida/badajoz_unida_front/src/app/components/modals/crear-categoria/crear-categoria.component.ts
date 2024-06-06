@@ -45,7 +45,6 @@ export class CrearCategoriaComponent
     this.loading = true;
     this.catService.getEditCategoria().subscribe((data) => {
       this.categoria = data;
-      console.log('EN EL ONINIT', this.categoria);
       if (this.categoria != null) {
         setTimeout(() => {
           this.loading = false;
@@ -92,33 +91,33 @@ export class CrearCategoriaComponent
 
     if (control.invalid && control.touched) {
       if (control.errors?.['required']) {
-        return 'Este campo es requerido.';
+        return `${this.resources.categoryRequired}`;
       }
 
       if (control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `El valor mínimo es de ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       if (control.errors?.['maxlength']) {
         const maxLength = control.errors['maxlength'].requiredLength;
-        return `El valor máximo es de ${maxLength} caracteres.`;
+        return `${this.resources.maxChar} ${maxLength}`;
       }
 
       // Validación adicional para el campo de nombreCat
       if (campo === 'nombreCat' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `El nombre debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Validación adicional para el campo de descripcion
       if (campo === 'descripcion' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `La descripción debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Si no se encuentra ningún error específico, devuelve el mensaje genérico
-      return 'El valor ingresado no es válido.';
+      return `${this.resources.notValidValue}`;
     }
 
     return null;
@@ -129,8 +128,6 @@ export class CrearCategoriaComponent
    **/
   sendCat() {
     if (this.formCreateCat.invalid || this.formCreateCat.pending) {
-      console.log('MAAAAAAAL');
-      console.log(this.formCreateCat);
       Object.values(this.formCreateCat.controls).forEach((control) => {
         if (control instanceof FormGroup) control.markAsTouched();
       });
@@ -150,11 +147,14 @@ export class CrearCategoriaComponent
             descripcion: this.formCreateCat.get('descripcionCategoria').value,
             activo: this.formCreateCat.get('activar').value,
             categoriaId: null,
+            intereses: null,
           };
           if (this.categoria != null) {
-            categoria.categoriaId = this.categoria.categoriaId;
+            categoria.categoriaId = this.categoria?.categoriaId;
+            categoria.intereses = this.categoria?.intereses;
           }
-          this.catService.registrarCategoria(categoria).subscribe(
+          const create = this.catService.create;
+          this.catService.registrarCategoria(categoria,create).subscribe(
             (data) => {
               this.messageService.add({
                 severity: 'success',
@@ -200,7 +200,6 @@ export class CrearCategoriaComponent
    * Método para el reinicio del formulario a valores en blanco
    */
   resetForm() {
-    console.log('reseteando formulario');
     this.categoria = null;
     this.formCreateCat.reset();
   }

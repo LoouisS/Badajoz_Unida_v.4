@@ -210,32 +210,32 @@ export class ProfileComponent extends LocalizedComponent implements OnInit {
 
     if (control.invalid && control.touched) {
       if (control.errors?.['required']) {
-        return 'Este campo es requerido.';
+        return `${this.resources.categoryRequired}`;
       }
 
       if (control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `El valor mínimo es de ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       if (control.errors?.['maxlength']) {
         const maxLength = control.errors['maxlength'].requiredLength;
-        return `El valor máximo es de ${maxLength} caracteres.`;
+        return `${this.resources.maxChar} ${maxLength}`;
       }
 
       // Validación adicional para el campo de nombreCat
       if (campo === 'email' && control.errors?.['pattern']) {
-        return `El formato del correo electrónico debe ser ejemplo@ejemplo.com`;
+        return `${this.resources.emailRequired}`;
       }
 
       // Validación adicional para el campo de descripcion
       if (campo === 'descripcion' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength'].requiredLength;
-        return `La descripción debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Si no se encuentra ningún error específico, devuelve el mensaje genérico
-      return 'El valor ingresado no es válido.';
+      return `${this.resources.notValidValue}`;
     }
 
     return null;

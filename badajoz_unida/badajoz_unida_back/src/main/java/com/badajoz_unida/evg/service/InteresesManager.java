@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InteresesManager implements InteresService{
@@ -61,8 +62,8 @@ public class InteresesManager implements InteresService{
     }
 
     @Override
-    public ResponseEntity<?> save(InteresesUsuariosDTO interesDto) throws CustomException {
-        if (this.interesesRepository.existsInteresesByTitulo(interesDto.getTitulo())){
+    public ResponseEntity<?> save(InteresesUsuariosDTO interesDto, Boolean create) throws CustomException {
+        if (this.interesesRepository.existsInteresesByTitulo(interesDto.getTitulo()) && create){
             throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
         }
         this.javaUtils.validateNewInteres(interesDto);

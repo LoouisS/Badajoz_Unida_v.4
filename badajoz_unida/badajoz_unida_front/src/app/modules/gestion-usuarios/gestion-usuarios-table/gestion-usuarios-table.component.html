@@ -29,8 +29,9 @@
               }}</label>
             <select formControlName="rol" class="form-control" id="rol">
               <optgroup>
-                <option value="2">Usuario</option>
-                <option value="3">Colaborador</option>
+                <option value="1">{{resources.administrator}}</option>
+                <option value="2">{{resources.user}}</option>
+                <option value="3">{{resources.collaborator}}</option>
               </optgroup>
             </select>
           </div>
@@ -136,3 +137,5 @@
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
+

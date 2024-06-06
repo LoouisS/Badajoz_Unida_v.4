@@ -10,4 +10,13 @@
 
 .dropdown-menu > li {
   font-size: 0.8rem;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  padding: 0;
+  min-height: 40px;
 }

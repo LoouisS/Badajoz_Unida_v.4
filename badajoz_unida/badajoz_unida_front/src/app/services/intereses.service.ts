@@ -5,7 +5,7 @@
  **/
 
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
@@ -19,6 +19,7 @@ export class InteresesService {
 
   apiUrl: string ='http://localhost:8080/intereses/';
   editInteres: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  create: boolean = true;
   constructor(private httpClient: HttpClient) { }
 
   /**
@@ -32,16 +33,22 @@ export class InteresesService {
    * Método para el registro de un nuevo interés
    * @param interes
    */
-  registrarInteres(interes: any ) {
-    return this.httpClient.post(this.apiUrl+'save',interes);
-  }
+registrarInteres(interes: any, create: boolean) {
+    // Configura los parámetros de la solicitud
+    const params = new HttpParams().set('create', create.toString());  // Asume que `create` es un booleano
 
+    console.log(create);
+
+    // Realiza la solicitud HTTP POST
+    return this.httpClient.post(this.apiUrl + 'save', interes, { params });
+  }
   /**
    * Método para el almacenamiento de un interés en el observable editInteres
    * @param categoria
    */
   setEditInteres(categoria: any){
     this.editInteres.next(categoria);
+    this.create = false;
   }
 
   /**

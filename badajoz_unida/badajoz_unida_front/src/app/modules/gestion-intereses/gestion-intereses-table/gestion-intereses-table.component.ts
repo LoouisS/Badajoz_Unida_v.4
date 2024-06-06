@@ -12,6 +12,7 @@ import {InteresesService} from "../../../services/intereses.service";
 import Swal from "sweetalert2";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import { LocalizedComponent } from 'src/app/config/localize.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-gestion-intereses-table',
@@ -50,7 +51,7 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
    @param interesService {InteresesService} Servicio que gestiona los datos de los intereses
    @param formBuilder {FormBuilder} Clase que gestiona el formulario reactivo
    **/
-  constructor(private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
+  constructor(private messageService: MessageService, private catService: CategoriasService, private interesService: InteresesService, private formBuilder: FormBuilder) {
     super();
   }
 
@@ -62,9 +63,7 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
     this.loading = true;
     this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
-      console.log("CATEGORÍAS", data);
       this.interesService.getAll().subscribe((data) => {
-        console.log("INTERESES", data);
         // @ts-ignore
         for (let interes of data) {
           interes.categoria = this.categorias.find((categoria) => {
@@ -72,7 +71,6 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
           });
         }
         this.intereses = data;
-        console.log("LOS INTERESES DESPUÉS DE MONTARLO", this.intereses);
         this.cargarTabla();
       })
     });
@@ -131,32 +129,17 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
   deleteInteres(interes: any) {
     this.alert.fire({
       icon:'question',
-      title:'¿Estás seguro que deseas eliminar el interés',
-      text:'Se eliminara el interés con nombre' + interes?.titulo + 'de forma permanente',
+      title:  `${this.resources.deleteInterestMessage}`,
+      text:`${this.resources.deleteInterestMessageDetail}`,
       showConfirmButton: true,
       showCancelButton: true
     }).then((result) =>{
       if(result.isConfirmed){
         this.interesService.eliminarInteres(interes?.interesId).subscribe((data) =>{
-          console.log("ELIMINADO", data);
-          this.alert.fire({
-            title: 'Eliminado con éxito!',
-            text: 'El interes con nombre' + interes?.titulo +'ha sido eliminado correctamente.',
-            icon: 'success',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
+            this.messageService.add({severity:'success', summary:`${this.resources.deletedEvent}`, detail:`${this.resources.interestDeleted}`});
           this.ngOnInit();
         }, error=>{
-          this.alert.fire({
-            title: 'Ocurrió un problema!',
-            text: 'Vuelva a intentarlo en otro momento',
-            icon: 'error',
-            timer: 4000,
-            showConfirmButton: false,
-            showCancelButton: false,
-          });
+              this.messageService.add({severity:'error', summary:`${this.resources.problemOcurred}`, detail:`${this.resources.problemOcurredDetail}`});
         });
       }
     });
@@ -169,7 +152,6 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
       titulo: this.formFilter.get('titulo').value,
       activo: this.formFilter.get('activo').value
     };
-    console.log(filtros);
     this.interesService.getInteresesFiltered(filtros).subscribe((data) => {
       this.intereses = data;
       this.cargarTabla();
@@ -178,12 +160,9 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
       limpiarFiltros() {
   // Resetear el formulario
   this.formFilter.reset();
-  console.log('Formulario después de resetear', this.formFilter.value);
         this.catService.getCategorias().subscribe((data) => {
       this.categorias = data;
-      console.log("CATEGORÍAS", data);
       this.interesService.getAll().subscribe((data) => {
-        console.log("INTERESES", data);
         // @ts-ignore
         for (let interes of data) {
           interes.categoria = this.categorias.find((categoria) => {
@@ -191,7 +170,6 @@ export class GestionInteresesTableComponent extends LocalizedComponent implement
           });
         }
         this.intereses = data;
-        console.log("LOS INTERESES DESPUÉS DE MONTARLO", this.intereses);
         this.cargarTabla();
       })
     });

@@ -42,7 +42,7 @@ export class CrearEventoModalComponent
   map: any;
   marker: any;
   formCreateEvent!: FormGroup;
-  categorias: any;
+  categorias: any[] = [];
   selectedCat: any;
   lat: number | undefined;
   long: number | undefined;
@@ -83,15 +83,13 @@ export class CrearEventoModalComponent
    Método que inicializa la vista
    **/
   ngOnInit() {
-    this.catService.getIntereses().subscribe((data) => {
+    this.catService.getIntereses().subscribe((data: any[]) => {
       this.categorias = data;
-      console.log('LOS INTERESES', this.categorias);
     });
     this.initForm();
     this.initMap();
     this.eventoService.getEditEvent().subscribe((data) => {
       this.eventoEdit = data;
-      console.log('EN EL ONINIT', this.eventoEdit);
       if (this.eventoEdit != null) {
         setTimeout(() => {
           this.setFormEdit(this.eventoEdit);
@@ -130,11 +128,6 @@ export class CrearEventoModalComponent
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        console.log(
-          'Dirección:',
-          `${data.address.road} - ${data.address.province}, ${data.address.country}`,
-        ); // La dirección completa
         if (data.address.road !== undefined) {
           this.buscadorMap.nativeElement.value = `${data.address.road} - ${data.address.province}, ${data.address.country}`;
         } else {
@@ -170,12 +163,9 @@ export class CrearEventoModalComponent
         if (data.length > 0) {
           const result = data[0];
           const latlng = L.latLng(result.lat, result.lon);
-          console.log('RESULT', result);
 
           this.marker.setLatLng(latlng);
           this.map.setView(latlng, 13);
-          console.log('Latitud:', result.lat);
-          console.log('Longitud:', result.lon);
         }
       })
       .catch((error) => {
@@ -204,11 +194,13 @@ export class CrearEventoModalComponent
           Validators.minLength(10),
           Validators.maxLength(500),
         ],
-      ],
-      tlf: [
-        '',
-        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
-      ],
+      ],tlf: [
+    '',
+    [
+        Validators.required,
+        Validators.pattern(/^\d{9}$/)  // Asegura que solo hay 9 dígitos y nada más
+    ],
+],
       localizacion: [
         '',
         [
@@ -239,42 +231,42 @@ export class CrearEventoModalComponent
 
     if (control.invalid && control.touched) {
       if (control.errors?.['required']) {
-        return 'Este campo es requerido.';
+        return `${this.resources.categoryRequired}`;
       }
 
       if (control.errors?.['minlength']) {
         const minLength = control.errors['minlength']['requiredLength'];
-        return `El valor mínimo es de ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       if (control.errors?.['maxlength']) {
         const maxLength = control.errors['maxlength']['requiredLength'];
-        return `El valor máximo es de ${maxLength} caracteres.`;
+        return `${this.resources.maxChar} ${maxLength}`;
       }
 
       // Validación adicional para el campo de fecha
-      if (campo === 'fecha' && control.errors?.['minDate']) {
-        return 'La fecha debe ser mayor a la fecha actual.';
+      if (campo === 'fecha' && control.errors?.['invalidFecha']) {
+        return `${this.resources.dateRequired}`;
       }
 
       // Validación adicional para el campo de teléfono
-      if (campo === 'tlf' && control.errors?.['minlength']) {
-        return 'El número de teléfono debe tener 9 dígitos.';
+      if (campo === 'tlf' && control.errors?.['pattern']) {
+        return `${this.resources.phoneInvalid}`;
       }
 
       // Validación adicional para el campo de localización
       if (campo === 'localizacion' && control.errors?.['minlength']) {
         const minLength = control.errors['minlength']['requiredLength'];
-        return `La localización debe tener al menos ${minLength} caracteres.`;
+        return `${this.resources.minChar} ${minLength}`;
       }
 
       // Validación adicional para el campo de imagen
       if (campo === 'imagen' && control.errors?.['extension']) {
-        return 'La imagen debe tener una extensión válida (png, jpg, jpeg).';
+        return `${this.resources.imageRequired}`;
       }
 
       // Si no se encuentra ningún error específico, devuelve el mensaje genérico
-      return 'El valor ingresado no es válido.';
+      return `${this.resources.notValidValue}`;
     }
 
     return null;
@@ -309,10 +301,8 @@ export class CrearEventoModalComponent
           const interesesAll = this.formCreateEvent.get('intereses').value;
           const inter = [];
           for (let int of interesesAll) {
-            console.log('INT', int.interesId);
             inter.push(parseInt(int.interesId));
           }
-          console.log(inter);
           const formData = new FormData();
           if (this.eventoEdit != null) {
             formData.append('eventosId', this.eventoEdit.eventosId);
@@ -343,7 +333,6 @@ export class CrearEventoModalComponent
           );
           formData.append('latitud', this.lat.toString());
           formData.append('longitud', this.long.toString());
-          console.log(this.getImg());
           if (this.getImg() != null) {
             formData.append('imagen', this.getImg());
           }
@@ -352,7 +341,6 @@ export class CrearEventoModalComponent
 
           this.eventoService.createEvento(formData).subscribe(
             (data) => {
-              console.log('DATA', data);
                                   this.messageService.add({
           severity: 'success',
           summary:`${this.resources.eventCreated}`,
@@ -385,9 +373,7 @@ export class CrearEventoModalComponent
   getImg() {
     const file = (document.getElementById('imgPortada') as HTMLInputElement)
       .files[0];
-    console.log('ENTRA EN OBTENER IMG', file);
     if (file != null || file != undefined) {
-      console.log('EL FILE', file);
       return file;
     }
     return null;
@@ -404,7 +390,6 @@ export class CrearEventoModalComponent
       reader.onload = (e: any) => {
         this.preview = true;
         this.imgPreview = e.target.result;
-        console.log('PREVIEW', this.imgPreview);
       };
       reader.readAsDataURL(file);
     } else {
@@ -426,7 +411,6 @@ export class CrearEventoModalComponent
    * @param evento
    */
   setFormEdit(evento: any) {
-    console.log('EVENTO EN MODAL DE CREAR MODAL', evento);
     let intereses = [];
     this.eventoEdit = evento;
     this.obtenerDireccion(evento.latitud, evento.longitud);
@@ -457,7 +441,6 @@ export class CrearEventoModalComponent
    * Método para el reinicio del formulario a valores en blanco
    */
   resetForm() {
-    console.log('reseteando formulario');
     this.eventoEdit = null;
     this.formCreateEvent.reset();
   }

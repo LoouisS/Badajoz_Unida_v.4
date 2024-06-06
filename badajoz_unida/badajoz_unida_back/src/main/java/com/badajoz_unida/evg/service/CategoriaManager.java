@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaManager implements CategoriaService{
@@ -41,9 +42,23 @@ public class CategoriaManager implements CategoriaService{
     }
 
     @Override
-    public ResponseEntity<?> saveCategoria(Categorias categoria) throws CustomException {
-        this.catRepository.save(categoria);
-        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    public ResponseEntity<?> saveCategoria(Categorias categoria, Boolean create) throws CustomException {
+        if (this.catRepository.existsCategoriasByTitulo(categoria.getTitulo()) && create){
+            throw new CustomException(ErrorCode.ERROR_EQUALS_NAME);
+        }
+
+        this.javaUtils.validarNuevaCategoria(categoria);
+        if(create){
+            this.catRepository.save(categoria);
+            return new ResponseEntity<>(categoria,HttpStatus.CREATED);
+        } else {
+            Optional<Categorias> categoriaToSave = this.catRepository.findById(categoria.getCategoriaId());
+            categoriaToSave.get().setTitulo(categoria.getTitulo());
+            categoriaToSave.get().setActivo(categoria.isActivo());
+            categoriaToSave.get().setDescripcion(categoria.getDescripcion());
+            this.catRepository.save(categoriaToSave.get());
+            return new ResponseEntity<>(categoriaToSave.get(), HttpStatus.OK);
+        }
     }
 
     @Override

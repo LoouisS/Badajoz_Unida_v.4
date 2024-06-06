@@ -14,6 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WeatherService } from 'src/app/services/weather.service';
 import { StickyShareButtonsConfig } from 'sharethis-angular';
 import { MessageService } from 'primeng/api';
+import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
   selector: 'app-event',
@@ -24,7 +25,7 @@ import { MessageService } from 'primeng/api';
 /**
  Vista de la vista que muestra el contenido de un evento
  **/
-export class EventComponent implements OnInit {
+export class EventComponent extends LocalizedComponent implements OnInit {
   eventoId!: number;
   evento: any;
   map: any;
@@ -85,7 +86,7 @@ export class EventComponent implements OnInit {
     private _tokenService: TokenService,
     private _modalService: NgbModal,
     private messageService: MessageService
-  ) { }
+  ) { super();}
 
   /**
    Método que inicializa la vista
@@ -146,14 +147,14 @@ export class EventComponent implements OnInit {
       .subscribe((data: any) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Te has registrado correctamente',
-          detail: 'Esperamos verte en el evento',
+          summary: `${this.resources.registeredEvent}`,
+          detail:`${this.resources.hopeSeeYou}`,
         }),
         (error) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error al registrarse',
-            detail: 'No se ha podido registrar al usuario',
+            summary: `${this.resources.registerError}`,
+            detail: `${this.resources.registerErrorDetail}`,
           });
         }
         this.checkUserRegister();
@@ -168,8 +169,8 @@ export class EventComponent implements OnInit {
    **/
   async removeUserFromEvent() {
     let respuesta = await this._alertsService.askConfirmation(
-      'Quieres desapuntarte de ' + this.evento.nombre,
-      '¿Estas seguro de querer desapuntarte de este evento?',
+      `${this.resources.cancelParticipationTitle}`,
+      `${this.resources.cancelParticipation}`,
     );
     if (respuesta) {
       this._eventosService
@@ -179,14 +180,14 @@ export class EventComponent implements OnInit {
           if (data['status'] != 'error') {
                     this.messageService.add({
           severity: 'success',
-          summary: 'Participación cancelada',
-          detail: 'Esperamos verte pronto',
+          summary:`${this.resources.participationCancelled}`,
+          detail:`${this.resources.participationCancelledDetail}`,
         }),
         (error) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error al cancelar la participación',
-            detail: 'No se ha podido cancelar la participación',
+            summary:`${this.resources.errorCancelParticipation}`,
+            detail:`${this.resources.errorCancelParticipationDetail}`,
           });
         }
 

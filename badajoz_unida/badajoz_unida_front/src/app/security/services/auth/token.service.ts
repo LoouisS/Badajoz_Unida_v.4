@@ -103,7 +103,6 @@ export class TokenService {
     const payloadDecoded = decodeURIComponent(window.atob(payload).split('').map(function(c) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-    console.log(payloadDecoded)
     const values=JSON.parse(payloadDecoded);
     const nombre = values.nombre;
     const apellidos = values.apellidos;

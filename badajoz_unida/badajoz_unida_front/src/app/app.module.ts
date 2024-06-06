@@ -54,14 +54,12 @@ export class AppModule {
     registerLocaleData(localeEs, 'es', localeEsExtra);
 
     this.userService.getUser().subscribe((user:any) => {
-      console.log(user);
       // Este bloque se ejecuta cada vez que el observador user de 'usuarios.service' emite un nuevo valor
 
       // Si el usuario es válido
       if (user) {
         // Obtiene el idioma asociado al usuario basado en su identificador
         const idioma = user.idiomaId;
-        console.log(idioma);
 
         // Si el idioma es válido
         if (idioma) {
@@ -72,7 +70,6 @@ export class AppModule {
     });
 
     this.languageService.language$.subscribe((language) => {
-      console.log(language);
       // Este bloque se ejecuta cada vez que el observador de idioma (language$) del 'languageService' emite un nuevo valor
 
       // Importa el recurso de traducción correspondiente al idioma actual

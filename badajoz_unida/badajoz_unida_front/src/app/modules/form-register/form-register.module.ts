@@ -6,6 +6,7 @@ import { FormRegisterComponent } from './form-register/form-register.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
     import { Comment } from '@angular/compiler';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         FormRegisterRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ToastModule
     ]
 })
 export class FormRegisterModule { }

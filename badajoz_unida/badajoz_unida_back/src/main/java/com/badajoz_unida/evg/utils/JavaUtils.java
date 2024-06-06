@@ -157,6 +157,7 @@ public class JavaUtils {
         if (cat.getDescripcion().length() < 10 || cat.getDescripcion().length() > 500){
             throw new CustomException(ErrorCode.ERROR_DATA_FORMAT);
         }
+        System.out.println(cat.getCategoriaId());
     }
     /**
      * Método para la validación de una actualización de categoría

@@ -105,11 +105,8 @@ export class GestionCategoriasTableComponent
     this.alert
       .fire({
         icon: "question",
-        title: "¿Estás seguro que deseas eliminar la categoría",
-        text:
-          "Se eliminara el evento con nombre '" +
-          categoria?.titulo +
-          "' de forma permanente",
+        title:`${this.resources.deleteCategoryMessage}`,
+        text: `${this.resources.deleteCategoryMessageDetail}`,
         showConfirmButton: true,
         showCancelButton: true,
       })
@@ -120,16 +117,16 @@ export class GestionCategoriasTableComponent
               console.log("ELIMINADO", data);
                                               this.messageService.add({
           severity: 'success',
-          summary: 'Eliminada con éxito',
-          detail: 'Categoria eliminada correctamente',
+          summary:`${this.resources.deletedEvent}`,
+          detail:`${this.resources.categoryDeleted}`,
         }),
               this.ngOnInit();
             },
             (error) => {
                             this.messageService.add({
             severity: 'error',
-            summary: 'Ocurrio un problema',
-            detail: 'Vuelva a intentarlo en otro momento',
+            summary:`${this.resources.problemOcurred}`,
+            detail:`${this.resources.problemOcurredDetail}`,
           });
             },
           );

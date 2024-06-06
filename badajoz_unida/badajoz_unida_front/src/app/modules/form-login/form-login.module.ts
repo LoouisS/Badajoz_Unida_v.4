@@ -5,6 +5,7 @@ import { FormLoginRoutingModule } from './form-login-routing.module';
 import { FormLoginComponent } from './form-login/form-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {SharedModule} from "../../shared/shared.module";
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {SharedModule} from "../../shared/shared.module";
     CommonModule,
     FormLoginRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ToastModule
   ]
 })
 export class FormLoginModule { }

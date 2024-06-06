@@ -9,6 +9,7 @@ import {PipesModule} from "../pipes/pipes.module";
 import {DirectivesModule} from "../directives/directives.module";
 import { LoadingComponent } from './loading/loading.component';
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -25,7 +26,8 @@ import { ToastModule } from 'primeng/toast';
     RouterLink,
     PipesModule,
     DirectivesModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
   exports: [
     NavBarComponent,

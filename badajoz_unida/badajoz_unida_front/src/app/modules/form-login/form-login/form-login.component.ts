@@ -13,6 +13,7 @@ import {TokenService} from "../../../security/services/auth/token.service";
 import Swal from "sweetalert2";
 import { LocalizedComponent } from 'src/app/config/localize.component';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-form-login',
@@ -27,6 +28,7 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
 
   loginForm!: FormGroup;
   showAlert: boolean = false;
+  showRegister: boolean = false;
   verificandoLogin: boolean = false;
   alert = Swal.mixin({
     allowOutsideClick: false,
@@ -54,6 +56,7 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
     private _authService: AuthService,
     private _tokenService: TokenService,
     private router: Router,
+    private messageService: MessageService,
     private userService: UsuariosService
     // private usuarioService: UsuarioService
   ) {
@@ -101,40 +104,54 @@ export class FormLoginComponent extends LocalizedComponent implements OnInit{
    Hace una llamada a la API para validar que el usuario exista y los datos sean correctos.
    @param loginForm {FormGroup} Conjunto de campos que hacen parte del formulario
    **/
-  ComprobarUsuario(loginForm: FormGroup) {
-    let usuario:any = this.loginForm.get('user')?.value;
-    let clave:any = this.loginForm.get('password')?.value;
-    let user: LoginUsuario = new LoginUsuario(usuario, clave);
-    this.verificandoLogin = true;
-    this._authService.login(user).subscribe(
-      (data) => {
-        this._tokenService.setToken(data.token);
-        console.log("Se ha iniciado sesión exitosamente");
-        this.router.navigate(['/']);
-        this.showAlert = false;
-        this.verificandoLogin = false;
-        this.userService.getDatosUsuario().subscribe((data: any) => {
-          const usuario = data;
-          this.userService.setUser(usuario);
-        })
-      },
-      async (errorServicio) => {
-        this.verificandoLogin = false;
-        this.showAlert = true;
-        this.alert.fire({
-          title: 'Ha ocurrido un problema',
-          text: errorServicio.error,
-          icon: 'error',
-          timer: 4000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        })
-        console.log('fallo al conectar con el servidor');
-        console.log(errorServicio);
-      }
-    );
-  }
+ComprobarUsuario(loginForm: FormGroup) {
+  let usuario:any = this.loginForm.get('user')?.value;
+  let clave:any = this.loginForm.get('password')?.value;
+  let user: LoginUsuario = new LoginUsuario(usuario, clave);
 
+  this.userService.getAll().subscribe((data: any[]) => {
+    let nombreUsuario = this.loginForm.get('user')?.value; // Acceso al nombre de usuario ingresado
+    let existeUsuario = data.some(user => user.nombreUsuario === nombreUsuario);
+
+    if (!existeUsuario) {
+      this.showRegister = true;
+      this.showAlert = false;
+      this.messageService.add({
+        severity: 'error',
+        summary:`${this.resources.loginError}`,
+        detail:`${this.resources.userNotFound}`,
+      });
+      return; // Importante para evitar la ejecución de código adicional
+    } else {
+      // Procedemos con la verificación de login solo si el usuario existe
+      this.verificandoLogin = true;
+      this._authService.login(user).subscribe(
+        (data) => {
+          this._tokenService.setToken(data.token);
+          this.router.navigate(['/']);
+          this.showAlert = false;
+          this.verificandoLogin = false;
+          this.userService.getDatosUsuario().subscribe((data: any) => {
+            const usuario = data;
+            this.userService.setUser(usuario);
+            console.log("Usuario", usuario);
+          });
+        },
+        (errorServicio) => {
+          this.verificandoLogin = false;
+          this.showAlert = true;
+            this.showRegister = false;
+          this.messageService.add({
+            severity: 'error',
+            summary:`${this.resources.loginError}`,
+            detail:`${this.resources.loginErrorDetail}`,
+          });
+
+        }
+      );
+    }
+  });
+}
   /**
    Permite visualizar la contraseña introducida en el campo.
    **/

@@ -80,9 +80,9 @@ public class CategoriaController {
      * @return
      */
     @PostMapping("registrarCategoria")
-    public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria){
+    public ResponseEntity<?> registrarCategoria(@RequestBody Categorias categoria, @RequestParam Boolean create){
         try {
-            return this.catService.saveCategoria(categoria);
+            return this.catService.saveCategoria(categoria,create);
         }catch (CustomException e){
             return new ResponseEntity<>(e.getErrorCode().getMensaje(), HttpStatus.CONFLICT);
         }

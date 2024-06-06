@@ -15,9 +15,9 @@
           </div>
           <div class="mt-3">
             <label for="descripcionInt" class="form-label">{{resources.description}}:</label>
-            <small *ngIf="validar('descripcionInt')" class="error">{{validar('descripcionInt')}}</small>
             <textarea formControlName="descripcionInt" [class.is-invalid]="validar('descripcionInt')"
                       class="form-control customForm" id="descripcionInt" ></textarea>
+            <small *ngIf="validar('descripcionInt')" class="error">{{validar('descripcionInt')}}</small>
           </div>
           <div class="mt-3">
             <label for="categoria" class="form-label pt-2 me-3">{{resources.categoryAsocc}}</label>
@@ -43,4 +43,5 @@
     </div>
   </div>
 </div>
+<p-toast [breakpoints]="{'700px': {width: '100%', right: '0', left: '0',padding: '0 10px'}}"></p-toast>
 

@@ -8,11 +8,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
-  selector: 'app-cesion-imagen',
-  templateUrl: './cesion-imagen.component.html',
-  styleUrls: ['./cesion-imagen.component.css']
+  selector: 'app-politica-privacidad',
+  templateUrl: './politica-privacidad.component.html',
+  styleUrls: ['./politica-privacidad.component.css']
 })
-export class CesionImagenComponent extends LocalizedComponent {
+export class PoliticaPrivacidadComponent extends LocalizedComponent {
   @Input('usuario') usuario: any;
   @Input('evento') evento: any;
   @Output() cerrarCesionImagen: EventEmitter<any> = new EventEmitter<any>();

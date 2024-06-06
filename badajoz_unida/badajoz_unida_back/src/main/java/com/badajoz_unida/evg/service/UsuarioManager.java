@@ -78,15 +78,20 @@ public class UsuarioManager implements UsuarioService{
     }
 
     @Override
-    public ResponseEntity<?> getAllUsersFilter(UserFilter filtro) throws CustomException{
-        Roles rol = new Roles();
-        rol.setId(filtro.getRolId());
+    public ResponseEntity<?> getAllUsersFilter(UserFilter filtro) throws CustomException {
+        Roles rol = null;
+        if(filtro.getRolId() != null) {
+            rol = new Roles();
+            rol.setId(filtro.getRolId());
+        }
+
         Specification<Usuarios> specification = UsuarioSpecification.withFilters(
                 filtro.getNombre(),
                 filtro.getNombreUsuario(),
                 filtro.getEmail(),
                 rol
         );
+
         return new ResponseEntity<>(this.usuarioDatosRepository.findAll(specification), HttpStatus.OK);
     }
 

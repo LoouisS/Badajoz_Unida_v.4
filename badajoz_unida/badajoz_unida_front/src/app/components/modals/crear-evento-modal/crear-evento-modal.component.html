@@ -20,9 +20,9 @@
         </div>
         <div>
           <label for="descripcionEvento" class="form-label">{{resources.description}}:</label>
-          <small *ngIf="validar('descripcion')" class="error">{{validar('descripcion')}}</small>
           <textarea formControlName="descripcion" [class.is-invalid]="validar('descripcion')"
                     class="form-control customForm" id="descripcionEvento" ></textarea>
+          <small *ngIf="validar('descripcion')" class="error">{{validar('descripcion')}}</small>
         </div>
       </div>
       <div class="col-6 p-3">
@@ -40,9 +40,9 @@
         </div>
         <div>
           <label for="detalleEvento" class="form-label">{{resources.eventDetails}}:</label>
-          <small *ngIf="validar('detalle')" class="error">{{validar('detalle')}}</small>
           <textarea  formControlName="detalle" [class.is-invalid]="validar('detalle')"
                      class="form-control customForm" id="detalleEvento" ></textarea>
+          <small *ngIf="validar('detalle')" class="error">{{validar('detalle')}}</small>
         </div>
         <div>
           <label for="intereses" class="form-label">{{validar('intereses')}}</label>
