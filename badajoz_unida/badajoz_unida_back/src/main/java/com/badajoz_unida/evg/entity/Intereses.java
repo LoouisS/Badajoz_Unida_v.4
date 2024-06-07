@@ -37,7 +37,7 @@ public class Intereses {
     @JsonIgnore
     private List<Usuarios> usuarios;
 
-    @ManyToMany(mappedBy = "intereses")
+    @ManyToMany(mappedBy = "intereses", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Eventos> eventos;
 

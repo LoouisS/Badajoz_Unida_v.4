@@ -8,6 +8,7 @@ import com.badajoz_unida.evg.exception.ErrorCode;
 import com.badajoz_unida.evg.repository.InteresesEventosRepository;
 import com.badajoz_unida.evg.repository.InteresesRepository;
 import com.badajoz_unida.evg.repository.UsuarioInteresesRepository;
+import com.badajoz_unida.evg.security.entity.Usuario;
 import com.badajoz_unida.evg.utils.CategoriaSpecification;
 import com.badajoz_unida.evg.utils.JavaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
