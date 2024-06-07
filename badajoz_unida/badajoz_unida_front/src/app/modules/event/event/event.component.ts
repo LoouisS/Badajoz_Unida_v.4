@@ -187,7 +187,7 @@ export class EventComponent extends LocalizedComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary:`${this.resources.errorCancelParticipation}`,
-            detail:`${this.resources.errorCancelParticipationDetail}`,
+            detail: 'No se ha podido cancelar la participación',
           });
         }
 

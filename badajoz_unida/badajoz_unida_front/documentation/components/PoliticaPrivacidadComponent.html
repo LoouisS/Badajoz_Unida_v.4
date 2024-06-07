@@ -1,0 +1,826 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>badajoz-unida documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PoliticaPrivacidadComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/modals/politica-privacidad/politica-privacidad.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+    </p>
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-politica-privacidad</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./politica-privacidad.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./politica-privacidad.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#localeId" >localeId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resources" >resources</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cerrarModal" >cerrarModal</a>
+                            </li>
+                            <li>
+                                <a href="#registrarUsuario" >registrarUsuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#evento" >evento</a>
+                            </li>
+                            <li>
+                                <a href="#usuario" >usuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cerrarCesionImagen" >cerrarCesionImagen</a>
+                            </li>
+                            <li>
+                                <a href="#inscribirUsuario" >inscribirUsuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="evento"></a>
+                        <b>evento</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:17</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="usuario"></a>
+                        <b>usuario</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:16</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cerrarCesionImagen"></a>
+                        <b>cerrarCesionImagen</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inscribirUsuario"></a>
+                        <b>inscribirUsuario</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarModal"></a>
+                    <span class="name">
+                        <span ><b>cerrarModal</b></span>
+                        <a href="#cerrarModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cerrarModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que emite una señal para cerrar el modal</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarUsuario"></a>
+                    <span class="name">
+                        <span ><b>registrarUsuario</b></span>
+                        <a href="#registrarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registrarUsuario()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que inicializa el proceso de registro de un usuario en un evento</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localeId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>localeId</b></span>
+                        <a href="#localeId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:7</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resources</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:6</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, EventEmitter, Input, Output} from &#x27;@angular/core&#x27;;
+import { LocalizedComponent } from &#x27;src/app/config/localize.component&#x27;;
+
+@Component({
+  selector: &#x27;app-politica-privacidad&#x27;,
+  templateUrl: &#x27;./politica-privacidad.component.html&#x27;,
+  styleUrls: [&#x27;./politica-privacidad.component.css&#x27;]
+})
+export class PoliticaPrivacidadComponent extends LocalizedComponent {
+  @Input(&#x27;usuario&#x27;) usuario: any;
+  @Input(&#x27;evento&#x27;) evento: any;
+  @Output() cerrarCesionImagen: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() inscribirUsuario: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
+
+  constructor() {
+    super();
+  }
+
+  /**
+   Método que inicializa el proceso de registro de un usuario en un evento
+   **/
+  registrarUsuario(){
+    this.inscribirUsuario.emit();
+  }
+
+  /**
+   Método que emite una señal para cerrar el modal
+   **/
+  cerrarModal(){
+    this.cerrarCesionImagen.emit();
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-content&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-header bgGeneral&quot;&gt;
+    &lt;h1 class&#x3D;&quot;modal-title fs-5&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;{{resources.privacyPolicyAndCookies}}&lt;/h1&gt;
+    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; data-bs-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot; (click)&#x3D;&quot;cerrarModal()&quot;&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;modal-body w-100 px-5&quot;&gt;
+    &lt;h3&gt;{{resources.welcomeTo}} Badajoz Unida&lt;/h3&gt;
+    &lt;main&gt;
+        &lt;section id&#x3D;&quot;responsable&quot;&gt;
+            &lt;p&gt;&lt;strong&gt;Responsables:&lt;/strong&gt; Nacho Acedo / Guillermo Sanchez&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;NIF/CIF:&lt;/strong&gt; 80241387E / 08898699E&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Correo Electrónico:&lt;/strong&gt; nacedo.dev@gmail.com / guillesb112@gmail.com&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id&#x3D;&quot;datos-personales&quot;&gt;
+            &lt;h2&gt;Datos Personales que Recogemos&lt;/h2&gt;
+            &lt;p&gt;Cuando visitas nuestro sitio, podemos recoger diferentes tipos de información para mejorar tu experiencia en nuestra plataforma:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Datos Identificativos: como tu nombre, correo electrónico, dirección, etc., principalmente desde nuestros formularios de contacto.&lt;/li&gt;
+                &lt;li&gt;Datos de Conexión y Navegación: como tu dirección IP, qué páginas visitas y qué recursos usas en nuestro sitio.&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;finalidades&quot;&gt;
+            &lt;h2&gt;Finalidades del Tratamiento&lt;/h2&gt;
+            &lt;p&gt;Utilizamos la información recogida por varios motivos:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Para proveer, operar y mantener nuestro sitio web&lt;/li&gt;
+                &lt;li&gt;Para mejorar, personalizar y expandir nuestro sitio web&lt;/li&gt;
+                &lt;li&gt;Para entender y analizar cómo utilizas nuestro sitio web&lt;/li&gt;
+                &lt;li&gt;Para desarrollar nuevos productos, servicios, características y funcionalidades&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;legitimacion&quot;&gt;
+            &lt;h2&gt;Legitimación para el Tratamiento de Datos&lt;/h2&gt;
+            &lt;p&gt;El tratamiento de tus datos personales puede estar basado en:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Tu consentimiento explícito que nos proporcionas activamente.&lt;/li&gt;
+                &lt;li&gt;La necesidad de ejecutar un contrato en el que eres parte.&lt;/li&gt;
+                &lt;li&gt;Nuestros intereses legítimos, que no se ven superados por tus derechos.&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;destinatarios&quot;&gt;
+            &lt;h2&gt;Destinatarios de tus Datos&lt;/h2&gt;
+            &lt;p&gt;Tus datos pueden ser compartidos con:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Proveedores de servicios tecnológicos y de análisis.&lt;/li&gt;
+                &lt;li&gt;Entidades reguladoras u otras autoridades cuando esté requerido por ley.&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;derechos&quot;&gt;
+            &lt;h2&gt;Derechos de los Usuarios&lt;/h2&gt;
+            &lt;p&gt;Tienes derecho a:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Acceder, rectificar o eliminar los datos que tenemos sobre ti.&lt;/li&gt;
+                &lt;li&gt;Limitar o oponerte al tratamiento de tus datos.&lt;/li&gt;
+                &lt;li&gt;Solicitar la portabilidad de tus datos.&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;p&gt;Para ejercer cualquier derecho, puedes contactarnos directamente a través de [Email].&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;cookies&quot;&gt;
+            &lt;h2&gt;Política de Cookies&lt;/h2&gt;
+            &lt;p&gt;Utilizamos cookies para mejorar tu experiencia en nuestro sitio. Las cookies nos ayudan a recordar tus preferencias y recoger datos analíticos. Puedes ajustar tus preferencias de cookies desde tu navegador.&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;seguridad&quot;&gt;
+            &lt;h2&gt;Medidas de Seguridad&lt;/h2&gt;
+            &lt;p&gt;Tomamos la seguridad de tus datos con seriedad y usamos medidas razonables y adecuadas para protegerlos.&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;cambios&quot;&gt;
+            &lt;h2&gt;Cambios en la Política de Privacidad&lt;/h2&gt;
+            &lt;p&gt; Nos reservamos el derecho de hacer cambios a esta política. Los cambios importantes se comunicarán a través de nuestro sitio web o por email.&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;section id&#x3D;&quot;contacto&quot;&gt;
+            &lt;h2&gt;Contacto&lt;/h2&gt;
+            &lt;p&gt;Para más información, puedes contactarnos via:&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Email: nacedo.dev@gmail.com / guillesb112@gmail.com&lt;/li&gt;
+                &lt;li&gt;Teléfono: [Teléfono]&lt;/li&gt;
+                &lt;li&gt;Dirección: [Dirección Completa]&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn button rounded-pill px-3 py-2 customBtn&quot; (click)&#x3D;&quot;cerrarModal()&quot; &gt;{{resources.acceptDoc}}&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./politica-privacidad.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.bgGeneral{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.customBtn:hover{
+  background-color: var(--primary-color-hover);
+  transform: scale(1.02);
+}
+.customBtn{
+  background-color: var(--primary-color-hover);
+  color: white;
+}
+
+.btn-close{
+  filter: brightness(0) invert(1);
+}
+
+.modal-body{
+  max-height: 70vh;
+  overflow-y: auto;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="modal-content">  <div class="modal-header bgGeneral">    <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.privacyPolicyAndCookies}}</h1>    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>  </div>  <div class="modal-body w-100 px-5">    <h3>{{resources.welcomeTo}} Badajoz Unida</h3>    <main>        <section id="responsable">            <p><strong>Responsables:</strong> Nacho Acedo / Guillermo Sanchez</p>            <p><strong>NIF/CIF:</strong> 80241387E / 08898699E</p>            <p><strong>Correo Electrónico:</strong> nacedo.dev@gmail.com / guillesb112@gmail.com</p>        </section>        <section id="datos-personales">            <h2>Datos Personales que Recogemos</h2>            <p>Cuando visitas nuestro sitio, podemos recoger diferentes tipos de información para mejorar tu experiencia en nuestra plataforma:</p>            <ul>                <li>Datos Identificativos: como tu nombre, correo electrónico, dirección, etc., principalmente desde nuestros formularios de contacto.</li>                <li>Datos de Conexión y Navegación: como tu dirección IP, qué páginas visitas y qué recursos usas en nuestro sitio.</li>            </ul>        </section>        <section id="finalidades">            <h2>Finalidades del Tratamiento</h2>            <p>Utilizamos la información recogida por varios motivos:</p>            <ul>                <li>Para proveer, operar y mantener nuestro sitio web</li>                <li>Para mejorar, personalizar y expandir nuestro sitio web</li>                <li>Para entender y analizar cómo utilizas nuestro sitio web</li>                <li>Para desarrollar nuevos productos, servicios, características y funcionalidades</li>            </ul>        </section>        <section id="legitimacion">            <h2>Legitimación para el Tratamiento de Datos</h2>            <p>El tratamiento de tus datos personales puede estar basado en:</p>            <ul>                <li>Tu consentimiento explícito que nos proporcionas activamente.</li>                <li>La necesidad de ejecutar un contrato en el que eres parte.</li>                <li>Nuestros intereses legítimos, que no se ven superados por tus derechos.</li>            </ul>        </section>        <section id="destinatarios">            <h2>Destinatarios de tus Datos</h2>            <p>Tus datos pueden ser compartidos con:</p>            <ul>                <li>Proveedores de servicios tecnológicos y de análisis.</li>                <li>Entidades reguladoras u otras autoridades cuando esté requerido por ley.</li>            </ul>        </section>        <section id="derechos">            <h2>Derechos de los Usuarios</h2>            <p>Tienes derecho a:</p>            <ul>                <li>Acceder, rectificar o eliminar los datos que tenemos sobre ti.</li>                <li>Limitar o oponerte al tratamiento de tus datos.</li>                <li>Solicitar la portabilidad de tus datos.</li>            </ul>            <p>Para ejercer cualquier derecho, puedes contactarnos directamente a través de [Email].</p>        </section>        <section id="cookies">            <h2>Política de Cookies</h2>            <p>Utilizamos cookies para mejorar tu experiencia en nuestro sitio. Las cookies nos ayudan a recordar tus preferencias y recoger datos analíticos. Puedes ajustar tus preferencias de cookies desde tu navegador.</p>        </section>        <section id="seguridad">            <h2>Medidas de Seguridad</h2>            <p>Tomamos la seguridad de tus datos con seriedad y usamos medidas razonables y adecuadas para protegerlos.</p>        </section>        <section id="cambios">            <h2>Cambios en la Política de Privacidad</h2>            <p> Nos reservamos el derecho de hacer cambios a esta política. Los cambios importantes se comunicarán a través de nuestro sitio web o por email.</p>        </section>        <section id="contacto">            <h2>Contacto</h2>            <p>Para más información, puedes contactarnos via:</p>            <ul>                <li>Email: nacedo.dev@gmail.com / guillesb112@gmail.com</li>                <li>Teléfono: [Teléfono]</li>                <li>Dirección: [Dirección Completa]</li>            </ul>        </section>    </main>  <div class="modal-footer">    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()" >{{resources.acceptDoc}}</button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarEventoModalComponent', 'selector': 'app-editar-evento-modal'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PoliticaPrivacidadComponent', 'selector': 'app-politica-privacidad'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
+    var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
+    var ACTUAL_COMPONENT = {'name': 'PoliticaPrivacidadComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PoliticaPrivacidadComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

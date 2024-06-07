@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   EventsComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -69,19 +125,26 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+    </p>
 
     <p class="comment">
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code>OnInit</code>
     </p>
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
+
 
 
 
@@ -97,6 +160,8 @@
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>app-events</code></td>
             </tr>
+
+
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -121,10 +186,29 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#localeId" >localeId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resources" >resources</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -149,7 +233,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -160,7 +244,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/modules/events/events/events.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/modules/events/events/events.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -178,7 +262,7 @@
 
 
 
-    <section>
+    <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -201,25 +285,103 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/app/modules/events/events/events.component.ts:30</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/app/modules/events/events/events.component.ts:32</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que inicializa la vista</p>
+                        <div class="io-description"><p>Método que inicializa la vista</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localeId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>localeId</b></span>
+                        <a href="#localeId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:7</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resources</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:6</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
         </tbody>
     </table>
 </section>
@@ -227,8 +389,9 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import { LocalizedComponent } from &#x27;src/app/config/localize.component&#x27;;
 import {EventosService} from &quot;../../../services/eventos.service&quot;;
 
 @Component({
@@ -240,12 +403,13 @@ import {EventosService} from &quot;../../../services/eventos.service&quot;;
 /**
  Vista de la vista que muestra los eventos disponibles por categorías
  **/
-export class EventsComponent implements OnInit{
+export class EventsComponent extends LocalizedComponent implements OnInit{
 
   /**
    Constructor de la clase
    **/
   constructor() {
+    super();
   }
 
   /**
@@ -258,16 +422,16 @@ export class EventsComponent implements OnInit{
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;recientes&quot;&gt;
   &lt;div class&#x3D;&quot;pt-5&quot;&gt;
-    &lt;h1 class&#x3D;&quot;px-5&quot;&gt;Eventos más recientes&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;px-5&quot;&gt;{{resources.recentEvents}}&lt;/h1&gt;
     &lt;app-carousel [tipo]&#x3D;&quot;&#x27;recientes&#x27;&quot;&gt;&lt;/app-carousel&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;intereses&quot;&gt;
   &lt;div class&#x3D;&quot;pt-5&quot;&gt;
-    &lt;h1 class&#x3D;&quot;px-5&quot;&gt;Eventos de tu interes&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;px-5&quot;&gt;{{resources.interestedEvents}}&lt;/h1&gt;
     &lt;app-carousel [tipo]&#x3D;&quot;&#x27;interes&#x27;&quot;&gt;&lt;/app-carousel&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -276,7 +440,7 @@ export class EventsComponent implements OnInit{
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./events.component.css</code>
                 </p>
@@ -291,7 +455,7 @@ export class EventsComponent implements OnInit{
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -316,8 +480,8 @@ export class EventsComponent implements OnInit{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="recientes">  <div class="pt-5">    <h1 class="px-5">Eventos más recientes</h1>    <app-carousel [tipo]="\'recientes\'"></app-carousel>  </div></div><div class="intereses">  <div class="pt-5">    <h1 class="px-5">Eventos de tu interes</h1>    <app-carousel [tipo]="\'interes\'"></app-carousel>  </div></div><div class="footer-padding"></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+        var COMPONENT_TEMPLATE = '<div><div class="recientes">  <div class="pt-5">    <h1 class="px-5">{{resources.recentEvents}}</h1>    <app-carousel [tipo]="\'recientes\'"></app-carousel>  </div></div><div class="intereses">  <div class="pt-5">    <h1 class="px-5">{{resources.interestedEvents}}</h1>    <app-carousel [tipo]="\'interes\'"></app-carousel>  </div></div><div class="footer-padding"></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarEventoModalComponent', 'selector': 'app-editar-evento-modal'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PoliticaPrivacidadComponent', 'selector': 'app-politica-privacidad'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'EventsComponent'};
 </script>
@@ -368,6 +532,19 @@ export class EventsComponent implements OnInit{
             var COMPODOC_CURRENT_PAGE_URL = 'EventsComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

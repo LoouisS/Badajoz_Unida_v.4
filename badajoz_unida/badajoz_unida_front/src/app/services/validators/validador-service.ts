@@ -26,9 +26,18 @@ export class ValidadorService {
       if (!control.value.trim()) {
         return of(null);
       }
-      const existe = this.allUsuarios.some(user => user.nombreUsuario === control.value);  // Asumiendo 'username' es la propiedad a comparar
-      console.log(existe)
+      const existe = this.allUsuarios.some(user => user.nombreUsuario.toLowerCase() === control.value.toLowerCase());  // Asumiendo 'username' es la propiedad a comparar
       return of(existe ? { usuarioExiste: true } : null);
     };
   }
+
+  usuarioEmailExiste(): AsyncValidatorFn{
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    if (!control.value.trim()) {
+      return of(null);
+    }
+    const existeEmail = this.allUsuarios.some(user => user.email.toLowerCase() === control.value.toLowerCase());  // Asumiendo 'email' es la propiedad a comparar
+    return of(existeEmail ? { emailExiste: true } : null);
+  };
+}
 }

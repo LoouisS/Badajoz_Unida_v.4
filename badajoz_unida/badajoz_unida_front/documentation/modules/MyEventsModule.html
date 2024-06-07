@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -34,8 +85,8 @@
 
 
 <ol class="breadcrumb">
-    <li>Modules</li>
-    <li >MyEventsModule</li>
+    <li class="breadcrumb-item">Modules</li>
+    <li class="breadcrumb-item" >MyEventsModule</li>
 </ol>
 
 <div class="text-center module-graph-container">
@@ -66,55 +117,55 @@
 <title>cluster_MyEventsModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="12,-70 12,-195 484,-195 484,-70 12,-70"/>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_MyEventsModule_declarations</title>
-<polygon fill="none" stroke="black" points="322,-78 322,-130 476,-130 476,-78 322,-78"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_MyEventsModule_imports</title>
-<polygon fill="none" stroke="black" points="20,-78 20,-130 314,-130 314,-78 20,-78"/>
+<polygon fill="none" stroke="black" points="182,-78 182,-130 476,-130 476,-78 182,-78"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_MyEventsModule_declarations</title>
+<polygon fill="none" stroke="black" points="20,-78 20,-130 174,-130 174,-78 20,-78"/>
 </g>
 <!-- MyEventsComponent -->
 <g id="node1" class="node">
 <title>MyEventsComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="468.38,-122 329.62,-122 329.62,-86 468.38,-86 468.38,-122"/>
-<text text-anchor="middle" x="399" y="-99.8" font-family="Times,serif" font-size="14.00">MyEventsComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="166.38,-122 27.62,-122 27.62,-86 166.38,-86 166.38,-122"/>
+<text text-anchor="middle" x="97" y="-99.8" font-family="Times,serif" font-size="14.00">MyEventsComponent</text>
 </g>
 <!-- MyEventsModule -->
 <g id="node2" class="node">
 <title>MyEventsModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="283.6,-187 280.6,-191 259.6,-191 256.6,-187 166.4,-187 166.4,-151 283.6,-151 283.6,-187"/>
-<text text-anchor="middle" x="225" y="-164.8" font-family="Times,serif" font-size="14.00">MyEventsModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="297.6,-187 294.6,-191 273.6,-191 270.6,-187 180.4,-187 180.4,-151 297.6,-151 297.6,-187"/>
+<text text-anchor="middle" x="239" y="-164.8" font-family="Times,serif" font-size="14.00">MyEventsModule</text>
 </g>
 <!-- MyEventsComponent&#45;&gt;MyEventsModule -->
 <g id="edge1" class="edge">
 <title>MyEventsComponent&#45;&gt;MyEventsModule</title>
-<path fill="none" stroke="black" d="M399,-122.11C399,-141.34 399,-169 399,-169 399,-169 293.91,-169 293.91,-169"/>
-<polygon fill="black" stroke="black" points="293.91,-165.5 283.91,-169 293.91,-172.5 293.91,-165.5"/>
+<path fill="none" stroke="black" d="M166.43,-104C177.35,-104 185.12,-104 185.12,-104 185.12,-104 185.12,-140.89 185.12,-140.89"/>
+<polygon fill="black" stroke="black" points="181.62,-140.89 185.12,-150.89 188.62,-140.89 181.62,-140.89"/>
 </g>
 <!-- MyEventsRoutingModule -->
 <g id="node3" class="node">
 <title>MyEventsRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="306.21,-122 303.21,-126 282.21,-126 279.21,-122 143.79,-122 143.79,-86 306.21,-86 306.21,-122"/>
-<text text-anchor="middle" x="225" y="-99.8" font-family="Times,serif" font-size="14.00">MyEventsRoutingModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="468.21,-122 465.21,-126 444.21,-126 441.21,-122 305.79,-122 305.79,-86 468.21,-86 468.21,-122"/>
+<text text-anchor="middle" x="387" y="-99.8" font-family="Times,serif" font-size="14.00">MyEventsRoutingModule</text>
 </g>
 <!-- MyEventsRoutingModule&#45;&gt;MyEventsModule -->
 <g id="edge2" class="edge">
 <title>MyEventsRoutingModule&#45;&gt;MyEventsModule</title>
-<path fill="none" stroke="black" d="M225,-122.11C225,-122.11 225,-140.99 225,-140.99"/>
-<polygon fill="black" stroke="black" points="221.5,-140.99 225,-150.99 228.5,-140.99 221.5,-140.99"/>
+<path fill="none" stroke="black" d="M305.57,-104C297.88,-104 292.88,-104 292.88,-104 292.88,-104 292.88,-140.89 292.88,-140.89"/>
+<polygon fill="black" stroke="black" points="289.38,-140.89 292.88,-150.89 296.38,-140.89 289.38,-140.89"/>
 </g>
 <!-- SharedModule -->
 <g id="node4" class="node">
 <title>SharedModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="126.42,-122 123.42,-126 102.42,-126 99.42,-122 27.58,-122 27.58,-86 126.42,-86 126.42,-122"/>
-<text text-anchor="middle" x="77" y="-99.8" font-family="Times,serif" font-size="14.00">SharedModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="288.42,-122 285.42,-126 264.42,-126 261.42,-122 189.58,-122 189.58,-86 288.42,-86 288.42,-122"/>
+<text text-anchor="middle" x="239" y="-99.8" font-family="Times,serif" font-size="14.00">SharedModule</text>
 </g>
 <!-- SharedModule&#45;&gt;MyEventsModule -->
 <g id="edge3" class="edge">
 <title>SharedModule&#45;&gt;MyEventsModule</title>
-<path fill="none" stroke="black" d="M77,-122.11C77,-141.34 77,-169 77,-169 77,-169 156.08,-169 156.08,-169"/>
-<polygon fill="black" stroke="black" points="156.08,-172.5 166.08,-169 156.08,-165.5 156.08,-172.5"/>
+<path fill="none" stroke="black" d="M239,-122.11C239,-122.11 239,-140.99 239,-140.99"/>
+<polygon fill="black" stroke="black" points="235.5,-140.99 239,-150.99 242.5,-140.99 235.5,-140.99"/>
 </g>
 </g>
 </svg>
@@ -131,16 +182,22 @@
 <script src="../js/svg-pan-zoom.controls.js"></script>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li  class="active" >
-        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    <li class="nav-item">
+        <a href="#info" 
+            class="nav-link"
+            class="nav-link active"
+            role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
     </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    <li class="nav-item">
+        <a href="#source" 
+            class="nav-link"
+            
+            role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
     </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
+    <div class="tab-pane fade active in" id="info">
 
         <p class="comment">
             <h3>File</h3>
@@ -156,7 +213,7 @@
         <div class="container-fluid module">
             <div class="row">
                 <div class="col-sm-3">
-                    <h3>Declarations<a href="https://angular.io/api/core/NgModule#declarations" target="_blank"
+                    <h3>Declarations<a href="https://angular.io/api/core/NgModule#declarations" target="_blank" rel="noopener noreferrer"
                             title="Official documentation about module declarations"><span class="icon ion-ios-information-circle-outline"></span></a></h3>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -165,7 +222,8 @@
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
+                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" rel="noopener noreferrer"
+                            title="Official documentation about module imports"><span
                                 class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -183,13 +241,14 @@
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 
 import { MyEventsRoutingModule } from &#x27;./my-events-routing.module&#x27;;
 import { MyEventsComponent } from &#x27;./my-events/my-events.component&#x27;;
 import {SharedModule} from &quot;../../shared/shared.module&quot;;
+import { ToastModule } from &#x27;primeng/toast&#x27;;
 
 
 @NgModule({
@@ -198,6 +257,7 @@ import {SharedModule} from &quot;../../shared/shared.module&quot;;
   ],
   imports: [
     CommonModule,
+    ToastModule,
     MyEventsRoutingModule,
     SharedModule
   ]
@@ -252,6 +312,19 @@ export class MyEventsModule { }
             var COMPODOC_CURRENT_PAGE_URL = 'MyEventsModule.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

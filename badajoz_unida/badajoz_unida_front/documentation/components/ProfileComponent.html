@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   ProfileComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -69,19 +125,26 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+    </p>
 
     <p class="comment">
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code>OnInit</code>
     </p>
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
+
 
 
 
@@ -97,6 +160,8 @@
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>app-profile</code></td>
             </tr>
+
+
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -121,7 +186,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -134,6 +199,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#alert" >alert</a>
+                            </li>
+                            <li>
+                                <a href="#allUsuarios" >allUsuarios</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                 <a href="#editarIntereses" >editarIntereses</a>
                             </li>
                             <li>
@@ -144,6 +216,14 @@
                             </li>
                             <li>
                                 <a href="#usuario" >usuario</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#localeId" >localeId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resources" >resources</a>
                             </li>
                         </ul>
                     </td>
@@ -171,6 +251,15 @@
                                 <a href="#crearFormulario" >crearFormulario</a>
                             </li>
                             <li>
+                                <a href="#eliminarCuenta" >eliminarCuenta</a>
+                            </li>
+                            <li>
+                                <a href="#esAdminUnico" >esAdminUnico</a>
+                            </li>
+                            <li>
+                                <a href="#infoAdmin" >infoAdmin</a>
+                            </li>
+                            <li>
                                 <a href="#mostrarModalIntereses" >mostrarModalIntereses</a>
                             </li>
                             <li>
@@ -191,18 +280,18 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(_usuarioService: <a href="../injectables/UsuariosService.html" target="_self">UsuariosService</a>, _idiomasService: <a href="../injectables/IdiomasService.html" target="_self">IdiomasService</a>, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, modalService: NgbModal, alertsService: <a href="../injectables/AlertsService.html" target="_self">AlertsService</a>)</code>
+<code>constructor(_usuarioService: <a href="../injectables/UsuariosService.html" target="_self">UsuariosService</a>, _idiomasService: <a href="../injectables/IdiomasService.html" target="_self">IdiomasService</a>, formBuilder: FormBuilder, modalService: NgbModal, alertsService: <a href="../injectables/AlertsService.html" target="_self">AlertsService</a>, confirmationService: ConfirmationService, messageService: MessageService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -258,7 +347,7 @@
                                                         <td>formBuilder</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                                    <code>FormBuilder</code>
                                                         </td>
                                                   
                                                     <td>
@@ -302,6 +391,34 @@
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>confirmationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfirmationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>messageService</td>
+                                                  
+                                                        <td>
+                                                                    <code>MessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -315,7 +432,7 @@
 
 
 
-    <section>
+    <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -326,7 +443,7 @@
                 <td class="col-md-4">
                     <a name="cambiarDatosUsuario"></a>
                     <span class="name">
-                        <span class="modifier">Async</span>
+                            <span class="modifier">Async</span>
                         <span ><b>cambiarDatosUsuario</b></span>
                         <a href="#cambiarDatosUsuario"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -334,66 +451,64 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>cambiarDatosUsuario(formProfile: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cambiarDatosUsuario(formProfile: FormGroup)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="106"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:106</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:120</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que guarda los cambios en los datos del usuario</p>
+                        <div class="io-description"><p>Método que guarda los cambios en los datos del usuario</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>formProfile</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>formProfile</td>
+                                            <td>
+                                                        <code>FormGroup</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>Datos del formulario reactivo</p>
+                                            <td>
+                                                    <p>Datos del formulario reactivo</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -416,23 +531,23 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="94"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:94</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:108</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que carga los datos en el formulario</p>
+                        <div class="io-description"><p>Método que carga los datos en el formulario</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -455,23 +570,23 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="136"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:136</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:199</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Cerrar el modal de modificación de intereses</p>
+                        <div class="io-description"><p>Cerrar el modal de modificación de intereses</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -494,23 +609,166 @@
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:63</a></div>
+                        <div class="io-description"><p>Método que inicializa el formulario reactivo</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarCuenta"></a>
+                    <span class="name">
+                        <span ><b>eliminarCuenta</b></span>
+                        <a href="#eliminarCuenta"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminarCuenta(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que inicializa el formulario reactivo</p>
+                        <div class="io-description"><p>Método para eliminar una cuenta de un usuario</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
 
-                    </div>
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="esAdminUnico"></a>
+                    <span class="name">
+                        <span ><b>esAdminUnico</b></span>
+                        <a href="#esAdminUnico"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>esAdminUnico()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:277</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="infoAdmin"></a>
+                    <span class="name">
+                        <span ><b>infoAdmin</b></span>
+                        <a href="#infoAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>infoAdmin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -533,23 +791,23 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="129"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:129</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:189</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que muestra el modal para modificar intereses</p>
+                        <div class="io-description"><p>Método que muestra el modal para modificar intereses</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -572,23 +830,23 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:49</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:67</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que inicializa la vista</p>
+                        <div class="io-description"><p>Método que inicializa la vista</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -611,67 +869,65 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="145"
-                            class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:145</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:208</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método de validaciones generales</p>
+                        <div class="io-description"><p>Método de validaciones generales</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>campo</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>campo</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>Nombre del campo del formulario</p>
+                                            <td>
+                                                    <p>Nombre del campo del formulario</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>string | null</code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
 
-                    </div>
-                    <div class="io-description">
-                        <p>texto de la validación</p>
+                        </div>
+                            <div class="io-description">
+                                <p>texto de la validación</p>
 
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
-    <section>
+    <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
@@ -680,8 +936,70 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="alert"></a>
+                    <span class="name">
+                        <span ><b>alert</b></span>
+                        <a href="#alert"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: &#x27;btn btn-danger&#x27;,
+      cancelButton: &#x27;btn btn-light&#x27;,
+    },
+    buttonsStyling: false,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allUsuarios"></a>
+                    <span class="name">
+                        <span ><b>allUsuarios</b></span>
+                        <a href="#allUsuarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="editarIntereses"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                         <span ><b>editarIntereses</b></span>
                         <a href="#editarIntereses"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -704,7 +1022,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -724,13 +1042,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                        <i>Type : </i>    <code>FormGroup</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -756,7 +1074,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -782,7 +1100,79 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/modules/profile/profile/profile.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localeId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>localeId</b></span>
+                        <a href="#localeId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:7</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resources</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:6</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -794,29 +1184,43 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit, TemplateRef, ViewChild} from &#x27;@angular/core&#x27;;
-import {UsuariosService} from &quot;../../../services/usuarios.service&quot;;
-import {IdiomasService} from &quot;../../../services/idiomas.service&quot;;
-import {FormBuilder, FormGroup, Validators} from &quot;@angular/forms&quot;;
-import {NgbModal} from &quot;@ng-bootstrap/ng-bootstrap&quot;;
-import {AlertsService} from &quot;../../../services/alerts.service&quot;;
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, TemplateRef, ViewChild } from &#x27;@angular/core&#x27;;
+import { UsuariosService } from &#x27;../../../services/usuarios.service&#x27;;
+import { IdiomasService } from &#x27;../../../services/idiomas.service&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { NgbModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import { AlertsService } from &#x27;../../../services/alerts.service&#x27;;
+import Swal from &#x27;sweetalert2&#x27;;
+import { LocalizedComponent } from &#x27;src/app/config/localize.component&#x27;;
+import { ConfirmationService, MessageService } from &#x27;primeng/api&#x27;;
 
 @Component({
   selector: &#x27;app-profile&#x27;,
   templateUrl: &#x27;./profile.component.html&#x27;,
-  styleUrls: [&#x27;./profile.component.css&#x27;]
+  styleUrls: [&#x27;./profile.component.css&#x27;],
 })
 
 /**
  Vista del perfil del usuario
  **/
-export class ProfileComponent implements OnInit{
-
+export class ProfileComponent extends LocalizedComponent implements OnInit {
   @ViewChild(&#x27;editarIntereses&#x27;) editarIntereses: TemplateRef&lt;any&gt;;
   formProfile: FormGroup;
   usuario: any;
-  idiomas: any
+  idiomas: any;
+  alert &#x3D; Swal.mixin({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+    stopKeydownPropagation: true,
+    customClass: {
+      confirmButton: &#x27;btn btn-danger&#x27;,
+      cancelButton: &#x27;btn btn-light&#x27;,
+    },
+    buttonsStyling: false,
+  });
+    allUsuarios: any;
 
   /**
    Constructor de la clase
@@ -831,8 +1235,12 @@ export class ProfileComponent implements OnInit{
     private _idiomasService: IdiomasService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private alertsService: AlertsService
-  ) {}
+    private alertsService: AlertsService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+  ) {
+    super();
+  }
 
   /**
    Método que inicializa la vista
@@ -841,12 +1249,17 @@ export class ProfileComponent implements OnInit{
     this.crearFormulario();
     this._usuarioService.getDatosUsuario().subscribe((data: any) &#x3D;&gt; {
       this.usuario &#x3D; data;
+      console.log(this.usuario);
       this.cargarFormulario();
-    })
+    });
     this._idiomasService.getIdiomas().subscribe((data: any) &#x3D;&gt; {
       this.idiomas &#x3D; data;
-    })
+    });
+        this._usuarioService.getAll().subscribe((data) &#x3D;&gt; {
+      this.allUsuarios &#x3D; data;
+    });
   }
+
 
   /**
    Método que inicializa el formulario reactivo
@@ -855,76 +1268,116 @@ export class ProfileComponent implements OnInit{
     this.formProfile &#x3D; this.formBuilder.group({
       tlf: [
         &#x27;&#x27;,
-        [
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ],
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
       ],
-      idiomaId: [
-        null,
-        [
-          Validators.required
-        ],
-      ],
+      idiomaId: [null, [Validators.required]],
       email: [
         &#x27;&#x27;,
         [
           Validators.email,
           Validators.pattern(
-            /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
+            /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
           ),
         ],
-      ]
+      ],
     });
   }
 
   /**
    Método que carga los datos en el formulario
    **/
-  cargarFormulario(){
+  cargarFormulario() {
     this.formProfile.setValue({
       tlf: this.usuario?.telefono,
       email: this.usuario?.email,
-      idiomaId: this.usuario?.idiomaId
-    })
+      idiomaId: this.usuario?.idiomaId,
+    });
   }
 
   /**
    Método que guarda los cambios en los datos del usuario
    @param formProfile {FormBuilder} Datos del formulario reactivo
    **/
-  async cambiarDatosUsuario(formProfile: FormGroup){
-    let respuesta &#x3D; await this.alertsService.askConfirmation(&#x27;Guardar cambios&#x27;, &#x27;¿Estas seguro de querer guardar estos cambios?&#x27;);
-    if(respuesta){
-      let controles:any &#x3D; Object.keys(this.formProfile.controls);
-      let datos:any &#x3D; {};
-      Object.values(this.formProfile.controls).forEach((control, index) &#x3D;&gt; {
-        if(controles[index] &#x3D;&#x3D; &quot;idiomaId&quot;){
-          datos.idioma &#x3D; { idiomaId: control.value };
-        }
-        datos[controles[index]] &#x3D; control.value;
-      });
-      // console.log(datos);
-      this._usuarioService.saveChanges(datos).subscribe((data: any) &#x3D;&gt; {
-        this.alertsService.showSuccessAlert(&#x27;Guardar cambios&#x27;, &#x27;Cambios guardados exitosamente&#x27;);
-      }, error &#x3D;&gt; {
-        this.alertsService.showInfoAlert(&#x27;Guardar cambios&#x27;, &#x27;No se han podido guardar los cambios&#x27;);
-      });
-    }
+  async cambiarDatosUsuario(formProfile: FormGroup) {
+    this.confirmationService.confirm({
+      message: &#x60;${this.resources.saveMessage}&#x60;,
+      header: &#x60;${this.resources.saveConfirmation}&#x60;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      acceptButtonStyleClass: &#x27;p-button-text p-button-text&#x27;,
+      rejectButtonStyleClass: &#x27;p-button-danger p-button-text&#x27;,
+      acceptLabel: &#x60;${this.resources.yes}&#x60;,
+      rejectLabel: &#x60;${this.resources.no}&#x60;,
+      acceptIcon: &#x27;none&#x27;,
+      rejectIcon: &#x27;none&#x27;,
+      accept: () &#x3D;&gt; {
+        let controles: any &#x3D; Object.keys(this.formProfile.controls);
+        let datos: any &#x3D; {};
+        Object.values(this.formProfile.controls).forEach((control, index) &#x3D;&gt; {
+          if (controles[index] &#x3D;&#x3D; &#x27;idiomaId&#x27;) {
+            datos.idioma &#x3D; { idiomaId: control.value };
+          }
+          datos[controles[index]] &#x3D; control.value;
+        });
+        this._usuarioService.saveChanges(datos).subscribe(
+          (data: any) &#x3D;&gt; {
+            this._usuarioService.setUser(datos);
+            this.messageService.add({
+              severity: &#x27;success&#x27;,
+              summary: &#x60;${this.resources.changesSaved}&#x60;,
+              detail: &#x60;${this.resources.saveInfo}&#x60;,
+            });
+          },
+          (error) &#x3D;&gt; {
+            this.messageService.add({
+              severity: &#x27;error&#x27;,
+              summary: &#x60;${this.resources.saveChanges}&#x60;,
+              detail: &#x60;${this.resources.notSaveInfo}&#x60;,
+            });
+          },
+        );
+      },
+      reject: () &#x3D;&gt; {
+        this.messageService.add({
+          severity: &#x27;info&#x27;,
+          summary: &#x60;${this.resources.saveChanges}&#x60;,
+          detail: &#x60;${this.resources.notSaveInfo}&#x60;,
+        });
+      },
+    });
+    // let respuesta &#x3D; await this.alertsService.askConfirmation(&#x27;Guardar cambios&#x27;, &#x27;¿Estas seguro de querer guardar estos cambios?&#x27;);
+    // if(respuesta){
+    //   let controles:any &#x3D; Object.keys(this.formProfile.controls);
+    //   let datos:any &#x3D; {};
+    //   Object.values(this.formProfile.controls).forEach((control, index) &#x3D;&gt; {
+    //     if(controles[index] &#x3D;&#x3D; &quot;idiomaId&quot;){
+    //       datos.idioma &#x3D; { idiomaId: control.value };
+    //     }
+    //     datos[controles[index]] &#x3D; control.value;
+    //   });
+    //   // console.log(datos);
+    //   this._usuarioService.saveChanges(datos).subscribe((data: any) &#x3D;&gt; {
+    //     console.log(datos);
+    //     this._usuarioService.setUser(datos);
+    //     this.alertsService.showSuccessAlert(&#x27;Guardar cambios&#x27;, &#x27;Cambios guardados exitosamente&#x27;);
+    //   }, error &#x3D;&gt; {
+    //     this.alertsService.showInfoAlert(&#x27;Guardar cambios&#x27;, &#x27;No se han podido guardar los cambios&#x27;);
+    //   });
   }
 
   /**
    Método que muestra el modal para modificar intereses
    **/
-  mostrarModalIntereses(){
-    this.modalService.open(this.editarIntereses, {size: &#x27;lg&#x27;, backdrop: &#x27;static&#x27;});
+  mostrarModalIntereses() {
+    this.modalService.open(this.editarIntereses, {
+      size: &#x27;lg&#x27;,
+      backdrop: &#x27;static&#x27;,
+    });
   }
 
   /**
    Cerrar el modal de modificación de intereses
    **/
-  cerrarModalIntereses(){
+  cerrarModalIntereses() {
     this.modalService.dismissAll(this.editarIntereses);
   }
 
@@ -938,63 +1391,131 @@ export class ProfileComponent implements OnInit{
 
     if (control.invalid &amp;&amp; control.touched) {
       if (control.errors?.[&#x27;required&#x27;]) {
-        return &#x27;Este campo es requerido.&#x27;;
+        return &#x60;${this.resources.categoryRequired}&#x60;;
       }
 
       if (control.errors?.[&#x27;minlength&#x27;]) {
         const minLength &#x3D; control.errors[&#x27;minlength&#x27;].requiredLength;
-        return &#x60;El valor mínimo es de ${minLength} caracteres.&#x60;;
+        return &#x60;${this.resources.minChar} ${minLength}&#x60;;
       }
 
       if (control.errors?.[&#x27;maxlength&#x27;]) {
         const maxLength &#x3D; control.errors[&#x27;maxlength&#x27;].requiredLength;
-        return &#x60;El valor máximo es de ${maxLength} caracteres.&#x60;;
+        return &#x60;${this.resources.maxChar} ${maxLength}&#x60;;
       }
 
       // Validación adicional para el campo de nombreCat
       if (campo &#x3D;&#x3D;&#x3D; &#x27;email&#x27; &amp;&amp; control.errors?.[&#x27;pattern&#x27;]) {
-        return &#x60;El formato del correo electrónico debe ser ejemplo@ejemplo.com&#x60;;
+        return &#x60;${this.resources.emailRequired}&#x60;;
       }
 
       // Validación adicional para el campo de descripcion
       if (campo &#x3D;&#x3D;&#x3D; &#x27;descripcion&#x27; &amp;&amp; control.errors?.[&#x27;minlength&#x27;]) {
         const minLength &#x3D; control.errors[&#x27;minlength&#x27;].requiredLength;
-        return &#x60;La descripción debe tener al menos ${minLength} caracteres.&#x60;;
+        return &#x60;${this.resources.minChar} ${minLength}&#x60;;
       }
 
       // Si no se encuentra ningún error específico, devuelve el mensaje genérico
-      return &#x27;El valor ingresado no es válido.&#x27;;
+      return &#x60;${this.resources.notValidValue}&#x60;;
     }
 
     return null;
   }
 
+  /**
+   * Método para eliminar una cuenta de un usuario
+   * @param userId
+   */
+  eliminarCuenta(userId: number) {
+    this.confirmationService.confirm({
+      message: &#x60;${this.resources.deleteAccountMessage}&#x60;,
+      header: &#x60;${this.resources.deleteAccountHeader}&#x60;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      acceptButtonStyleClass: &#x27;p-button-danger p-button-text&#x27;,
+      rejectButtonStyleClass: &#x27;p-button-text p-button-text&#x27;,
+      acceptLabel: &#x60;${this.resources.yes}&#x60;,
+      rejectLabel: &#x60;${this.resources.no}&#x60;,
+      acceptIcon: &#x27;none&#x27;,
+      rejectIcon: &#x27;none&#x27;,
+      accept: () &#x3D;&gt; {
+        this._usuarioService.deleteUser(userId).subscribe((data) &#x3D;&gt; {
+            this.messageService.add({
+              severity: &#x27;success&#x27;,
+              summary: &#x60;${this.resources.accountDeleted}&#x60;,
+              detail: &#x60;${this.resources.accountDeletedInfo}&#x60;,
+            });
+        });
+      },
+      reject: () &#x3D;&gt; {
+        this.messageService.add({
+          severity: &#x27;info&#x27;,
+          summary: &#x60;${this.resources.warning}&#x60;,
+          detail: &#x60;${this.resources.accountNotDeleted}&#x60;,
+        });
+      },
+    });
+  }
+  esAdminUnico() {
+  if (!this.allUsuarios) {
+    // Si los datos aún no están disponibles, puedes optar por una acción, como retornar false
+    // o incluso mejor, deshabilitar el botón que depende de esta condición hasta que la información esté disponible.
+    return false;
+  }
+
+  let adminCount &#x3D; 0;
+  let esAdmin &#x3D; false;
+
+  this.allUsuarios.forEach(usuario &#x3D;&gt; {
+    const tieneRolAdmin &#x3D; usuario.roles.some(rol &#x3D;&gt; rol.id &#x3D;&#x3D;&#x3D; 1); // Verifica si el usuario tiene rol de admin
+    if (tieneRolAdmin) {
+      adminCount++; // Incrementa por cada admin encontrado
+    }
+    // Considera usar usuario.userId si el backend envía userId en lugar de id
+    if (usuario.userId &#x3D;&#x3D;&#x3D; this.usuario?.id &amp;&amp; tieneRolAdmin) {
+      esAdmin &#x3D; true; // Verdadero si el usuario específico es admin
+    }
+  });
+
+  return esAdmin &amp;&amp; adminCount &#x3D;&#x3D;&#x3D; 1; // Verdad si es admin y es el único admin
+}
+
+  infoAdmin(){
+    this.messageService.add({
+      severity: &#x27;info&#x27;,
+      summary: &#x60;Atención!&#x60;,
+      detail: &#x60;Eres el unico admin&#x60;,
+    });
+  }
+
+
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;main class&#x3D;&quot;p-5&quot;&gt;
   &lt;section class&#x3D;&quot;d-flex&quot;&gt;
     &lt;div class&#x3D;&quot;d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4&quot;&gt;
       &lt;div class&#x3D;&quot;rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center&quot;&gt;
-        &lt;span class&#x3D;&quot;text-white h1&quot;&gt;{{(usuario?.nombre + &#x27; &#x27; + usuario?.apellidos) | inicialesNombre}}&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-white h1&quot;&gt;{{
+          usuario?.nombre + &quot; &quot; + usuario?.apellidos | inicialesNombre
+          }}&lt;/span&gt;
       &lt;/div&gt;
       &lt;div&gt;
         &lt;ol class&#x3D;&quot;list-group list-group-flush&quot;&gt;
           &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-between align-items-start py-3&quot;&gt;
             &lt;div class&#x3D;&quot;ms-2 me-auto&quot;&gt;
-              &lt;span class&#x3D;&quot;fw-bold&quot;&gt;{{usuario?.nombre}} &lt;/span&gt;
-              {{usuario?.apellidos}}
+              &lt;span class&#x3D;&quot;fw-bold&quot;&gt;{{ usuario?.nombre }} &lt;/span&gt;
+              {{ usuario?.apellidos }}
             &lt;/div&gt;
           &lt;/li&gt;
           &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-center align-items-center py-3&quot;&gt;
             &lt;span class&#x3D;&quot;fa-solid fa-user me-3&quot;&gt;&lt;/span&gt;
-            {{usuario?.usuario}}
+            {{ usuario?.usuario }}
           &lt;/li&gt;
           &lt;li class&#x3D;&quot;list-group-item d-flex justify-content-center align-items-start py-3&quot;&gt;
             &lt;span class&#x3D;&quot;fa-solid fa-cake-candles me-3&quot;&gt;&lt;/span&gt;
-            {{usuario?.fechaNacimiento |  date:&#x27;dd MMM yyyy&#x27;:&#x27;&#x27;:&#x27;es&#x27;}}
+            {{ usuario?.fechaNacimiento | date: &quot;dd MMM yyyy&quot; : &quot;&quot; : &quot;es&quot; }}
           &lt;/li&gt;
         &lt;/ol&gt;
       &lt;/div&gt;
@@ -1003,38 +1524,61 @@ export class ProfileComponent implements OnInit{
       &lt;form class&#x3D;&quot;col-12&quot; [formGroup]&#x3D;&quot;formProfile&quot; (ngSubmit)&#x3D;&quot;cambiarDatosUsuario(formProfile)&quot;&gt;
         &lt;div class&#x3D;&quot;card rounded-4 col-12&quot;&gt;
           &lt;div class&#x3D;&quot;card-header bgGeneral rounded-top-3 py-3&quot;&gt;
-            &lt;h5 class&#x3D;&quot;m-0&quot;&gt;Datos personales&lt;/h5&gt;
+            &lt;h5 class&#x3D;&quot;m-0&quot;&gt;{{ resources.personalData }}&lt;/h5&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;card-body d-flex justify-content-between col-12 py-3&quot;&gt;
             &lt;div class&#x3D;&quot;col-12&quot;&gt;
               &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
-                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Email&lt;/label&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;{{
+                  resources.email
+                  }}&lt;/label&gt;
                 &lt;div class&#x3D;&quot;col-10&quot;&gt;
-                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;email&quot; [class.is-invalid]&#x3D;&quot;validar(&#x27;email&#x27;)&quot;&gt;
-                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;email&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{validar(&#x27;email&#x27;)}}&lt;/small&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;email&quot;
+                    [class.is-invalid]&#x3D;&quot;validar(&#x27;email&#x27;)&quot; /&gt;
+                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;email&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{ validar(&quot;email&quot;) }}&lt;/small&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
-                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Teléfono&lt;/label&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;{{
+                  resources.phone
+                  }}&lt;/label&gt;
                 &lt;div class&#x3D;&quot;col-10&quot;&gt;
-                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; maxlength&#x3D;&quot;9&quot; formControlName&#x3D;&quot;tlf&quot; [class.is-invalid]&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot;&gt;
-                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{validar(&#x27;tlf&#x27;)}}&lt;/small&gt;
+                  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; maxlength&#x3D;&quot;9&quot; formControlName&#x3D;&quot;tlf&quot;
+                    [class.is-invalid]&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot; /&gt;
+                  &lt;small *ngIf&#x3D;&quot;validar(&#x27;tlf&#x27;)&quot; class&#x3D;&quot;error d-block col-12&quot;&gt;{{
+                    validar(&quot;tlf&quot;)
+                    }}&lt;/small&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;d-flex col-12 px-4 py-3&quot;&gt;
-                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;Idioma&lt;/label&gt;
+                &lt;label class&#x3D;&quot;card-title ms-2 pt-2 col-2 fw-bold&quot;&gt;{{
+                  resources.lang
+                  }}&lt;/label&gt;
                 &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;idiomaId&quot;&gt;
-                  &lt;option
-                    *ngFor&#x3D;&quot;let idioma of idiomas&quot;
-                    [value]&#x3D;&quot;idioma.idiomaId&quot;&gt;
-                    {{idioma.titulo}}
+                  &lt;option *ngFor&#x3D;&quot;let idioma of idiomas&quot; [value]&#x3D;&quot;idioma.idiomaId&quot;&gt;
+                    {{ idioma.titulo }}
                   &lt;/option&gt;
                 &lt;/select&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;card-footer py-3 d-flex justify-content-end&quot;&gt;
-            &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill w-25 py-2&quot; type&#x3D;&quot;submit&quot; [attr.disabled]&#x3D;&quot;formProfile.invalid ? true : null&quot;&gt;Guardar cambios&lt;/button&gt;
+            &lt;div class&#x3D;&quot;button-container&quot;&gt;
+              &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill py-2&quot; type&#x3D;&quot;submit&quot;
+                [attr.disabled]&#x3D;&quot;formProfile.invalid ? true : null&quot;&gt;
+                {{ resources.saveChanges }}
+              &lt;/button&gt;
+              &lt;button class&#x3D;&quot;btn cursor-pointer rounded-pill py-2 ms-2&quot; type&#x3D;&quot;button&quot; *ngIf&#x3D;&quot;!esAdminUnico()&quot;
+                (click)&#x3D;&quot;eliminarCuenta(usuario?.id)&quot;&gt;
+                {{ resources.deleteAcc }}
+              &lt;/button&gt;
+                            &lt;button class&#x3D;&quot;btn rounded-pill py-2 ms-2 btn-outline-secondary&quot; type&#x3D;&quot;button&quot; *ngIf&#x3D;&quot;esAdminUnico()&quot;&gt;
+                &lt;i class&#x3D;&quot;fa-sharp cursor-pointer fa-solid fa-circle-info me-2&quot; (click)&#x3D;&quot;infoAdmin()&quot;  pTooltip&#x3D;&quot;{{resources.onlyAdmin}}&quot; tooltipPosition&#x3D;&quot;top&quot;&gt;&lt;/i&gt;
+
+                {{ resources.deleteAcc }}
+              &lt;/button&gt;
+
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/form&gt;
@@ -1043,27 +1587,33 @@ export class ProfileComponent implements OnInit{
   &lt;section class&#x3D;&quot;py-4 pe-4&quot;&gt;
     &lt;div class&#x3D;&quot;card rounded-4 col-12&quot;&gt;
       &lt;div class&#x3D;&quot;card-header bgGeneral rounded-top-3 py-3&quot;&gt;
-        &lt;h5 class&#x3D;&quot;m-0&quot;&gt;Mis intereses&lt;/h5&gt;
+        &lt;h5 class&#x3D;&quot;m-0&quot;&gt;{{ resources.interests }}&lt;/h5&gt;
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;card-body d-flex col-12 py-4 flex-wrap&quot;&gt;
-        &lt;span class&#x3D;&quot;badge bg-secondary fs-6 mx-2 bgGeneral&quot; *ngFor&#x3D;&quot;let interes of usuario?.intereses&quot;&gt;{{interes.titulo}}&lt;/span&gt;
+        &lt;span class&#x3D;&quot;badge bg-secondary fs-6 mx-2 bgGeneral&quot; *ngFor&#x3D;&quot;let interes of usuario?.intereses&quot;&gt;{{
+          interes.titulo }}&lt;/span&gt;
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;card-footer py-3 d-flex justify-content-end&quot;&gt;
-        &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill w-20 py-2&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;mostrarModalIntereses()&quot;&gt;Cambiar mis intereses&lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn bgGeneral rounded-pill w-20 py-2&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;mostrarModalIntereses()&quot;&gt;
+          {{ resources.changeInterests }}
+        &lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/section&gt;
 &lt;/main&gt;
-&lt;div class&#x3D;&quot;footer-padding&quot;&gt;
-&lt;/div&gt;
+&lt;div class&#x3D;&quot;footer-padding&quot;&gt;&lt;/div&gt;
+&lt;p-toast [breakpoints]&#x3D;&quot;{
+    &#x27;700px&#x27;: { width: &#x27;100%&#x27;, right: &#x27;0&#x27;, left: &#x27;0&#x27;, padding: &#x27;0 10px&#x27; }
+  }&quot;&gt;&lt;/p-toast&gt;
+&lt;p-confirmDialog&gt;&lt;/p-confirmDialog&gt;
 &lt;ng-template #editarIntereses&gt;
-  &lt;app-editar-intereses [interesesUsuario]&#x3D;&quot;usuario?.intereses&quot; (cerrar)&#x3D;&quot;cerrarModalIntereses()&quot;&gt;&lt;/app-editar-intereses&gt;
+  &lt;app-editar-intereses [interesesUsuario]&#x3D;&quot;usuario?.intereses&quot;
+    (cerrar)&#x3D;&quot;cerrarModalIntereses()&quot;&gt;&lt;/app-editar-intereses&gt;
 &lt;/ng-template&gt;
-
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./profile.component.css</code>
                 </p>
@@ -1073,6 +1623,18 @@ export class ProfileComponent implements OnInit{
   border: red;
 }
 
+.error{
+  font-size: .7rem;
+  color: var(--primary-color);
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
 .profileIcon{
   width: 150px;
   height: 150px;
@@ -1087,15 +1649,64 @@ export class ProfileComponent implements OnInit{
   height: 100%;
 }
 
-.profile-data li{
+@media screen and (max-width: 768px) {
+  .profile-data, .profile-form, .profile-form &gt; form, .profile-form &gt; form &gt; div {
+    width: 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  main{
+    padding: 1rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  label, .btn.bgGeneral.rounded-pill.w-20.py-2 {
+    width: 100%;
+  }
+
+  span {
+    margin: 5px;
+  }
+
+  .d-flex {
+    flex-direction: column;
+  }
+
+  section{
+    padding-right: 0 !important;
+  }
+
+  .py-4.pe-4 {
+    padding-left: 0;
+  }
+
+  .profile-data   {
+    margin-bottom: 20px !important;
+  }
+
+  .footer-padding {
+    display: none !important;
+  }
+
+  .card-footer .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card-footer button {
+    width: 48%;
+  }
+
+  .fa-solid {
+    display: none;
+  }
 
 }
-
-
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -1120,8 +1731,8 @@ export class ProfileComponent implements OnInit{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><main class="p-5">  <section class="d-flex">    <div class="d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4">      <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center">        <span class="text-white h1">{{(usuario?.nombre + \' \' + usuario?.apellidos) | inicialesNombre}}</span>      </div>      <div>        <ol class="list-group list-group-flush">          <li class="list-group-item d-flex justify-content-between align-items-start py-3">            <div class="ms-2 me-auto">              <span class="fw-bold">{{usuario?.nombre}} </span>              {{usuario?.apellidos}}            </div>          </li>          <li class="list-group-item d-flex justify-content-center align-items-center py-3">            <span class="fa-solid fa-user me-3"></span>            {{usuario?.usuario}}          </li>          <li class="list-group-item d-flex justify-content-center align-items-start py-3">            <span class="fa-solid fa-cake-candles me-3"></span>            {{usuario?.fechaNacimiento |  date:\'dd MMM yyyy\':\'\':\'es\'}}          </li>        </ol>      </div>    </div>    <div class="px-4 profile-form col-9">      <form class="col-12" [formGroup]="formProfile" (ngSubmit)="cambiarDatosUsuario(formProfile)">        <div class="card rounded-4 col-12">          <div class="card-header bgGeneral rounded-top-3 py-3">            <h5 class="m-0">Datos personales</h5>          </div>          <div class="card-body d-flex justify-content-between col-12 py-3">            <div class="col-12">              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Email</label>                <div class="col-10">                  <input type="text" class="form-control" formControlName="email" [class.is-invalid]="validar(\'email\')">                  <small *ngIf="validar(\'email\')" class="error d-block col-12">{{validar(\'email\')}}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Teléfono</label>                <div class="col-10">                  <input type="text" class="form-control" maxlength="9" formControlName="tlf" [class.is-invalid]="validar(\'tlf\')">                  <small *ngIf="validar(\'tlf\')" class="error d-block col-12">{{validar(\'tlf\')}}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">Idioma</label>                <select class="form-select" formControlName="idiomaId">                  <option                    *ngFor="let idioma of idiomas"                    [value]="idioma.idiomaId">                    {{idioma.titulo}}                  </option>                </select>              </div>            </div>          </div>          <div class="card-footer py-3 d-flex justify-content-end">            <button class="btn bgGeneral rounded-pill w-25 py-2" type="submit" [attr.disabled]="formProfile.invalid ? true : null">Guardar cambios</button>          </div>        </div>      </form>    </div>  </section>  <section class="py-4 pe-4">    <div class="card rounded-4 col-12">      <div class="card-header bgGeneral rounded-top-3 py-3">        <h5 class="m-0">Mis intereses</h5>      </div>      <div class="card-body d-flex col-12 py-4 flex-wrap">        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">{{interes.titulo}}</span>      </div>      <div class="card-footer py-3 d-flex justify-content-end">        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">Cambiar mis intereses</button>      </div>    </div>  </section></main><div class="footer-padding"></div><ng-template #editarIntereses>  <app-editar-intereses [interesesUsuario]="usuario?.intereses" (cerrar)="cerrarModalIntereses()"></app-editar-intereses></ng-template></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+        var COMPONENT_TEMPLATE = '<div><main class="p-5">  <section class="d-flex">    <div class="d-flex flex-column justify-content-center align-items-center py-4 profile-data col-3 rounded-4">      <div class="rounded-circle profileIcon bgGeneral d-flex justify-content-center align-items-center">        <span class="text-white h1">{{          usuario?.nombre + " " + usuario?.apellidos | inicialesNombre          }}</span>      </div>      <div>        <ol class="list-group list-group-flush">          <li class="list-group-item d-flex justify-content-between align-items-start py-3">            <div class="ms-2 me-auto">              <span class="fw-bold">{{ usuario?.nombre }} </span>              {{ usuario?.apellidos }}            </div>          </li>          <li class="list-group-item d-flex justify-content-center align-items-center py-3">            <span class="fa-solid fa-user me-3"></span>            {{ usuario?.usuario }}          </li>          <li class="list-group-item d-flex justify-content-center align-items-start py-3">            <span class="fa-solid fa-cake-candles me-3"></span>            {{ usuario?.fechaNacimiento | date: "dd MMM yyyy" : "" : "es" }}          </li>        </ol>      </div>    </div>    <div class="px-4 profile-form col-9">      <form class="col-12" [formGroup]="formProfile" (ngSubmit)="cambiarDatosUsuario(formProfile)">        <div class="card rounded-4 col-12">          <div class="card-header bgGeneral rounded-top-3 py-3">            <h5 class="m-0">{{ resources.personalData }}</h5>          </div>          <div class="card-body d-flex justify-content-between col-12 py-3">            <div class="col-12">              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{                  resources.email                  }}</label>                <div class="col-10">                  <input type="text" class="form-control" formControlName="email"                    [class.is-invalid]="validar(\'email\')" />                  <small *ngIf="validar(\'email\')" class="error d-block col-12">{{ validar("email") }}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{                  resources.phone                  }}</label>                <div class="col-10">                  <input type="text" class="form-control" maxlength="9" formControlName="tlf"                    [class.is-invalid]="validar(\'tlf\')" />                  <small *ngIf="validar(\'tlf\')" class="error d-block col-12">{{                    validar("tlf")                    }}</small>                </div>              </div>              <div class="d-flex col-12 px-4 py-3">                <label class="card-title ms-2 pt-2 col-2 fw-bold">{{                  resources.lang                  }}</label>                <select class="form-select" formControlName="idiomaId">                  <option *ngFor="let idioma of idiomas" [value]="idioma.idiomaId">                    {{ idioma.titulo }}                  </option>                </select>              </div>            </div>          </div>          <div class="card-footer py-3 d-flex justify-content-end">            <div class="button-container">              <button class="btn bgGeneral rounded-pill py-2" type="submit"                [attr.disabled]="formProfile.invalid ? true : null">                {{ resources.saveChanges }}              </button>              <button class="btn cursor-pointer rounded-pill py-2 ms-2" type="button" *ngIf="!esAdminUnico()"                (click)="eliminarCuenta(usuario?.id)">                {{ resources.deleteAcc }}              </button>                            <button class="btn rounded-pill py-2 ms-2 btn-outline-secondary" type="button" *ngIf="esAdminUnico()">                <i class="fa-sharp cursor-pointer fa-solid fa-circle-info me-2" (click)="infoAdmin()"  pTooltip="{{resources.onlyAdmin}}" tooltipPosition="top"></i>                {{ resources.deleteAcc }}              </button>            </div>          </div>        </div>      </form>    </div>  </section>  <section class="py-4 pe-4">    <div class="card rounded-4 col-12">      <div class="card-header bgGeneral rounded-top-3 py-3">        <h5 class="m-0">{{ resources.interests }}</h5>      </div>      <div class="card-body d-flex col-12 py-4 flex-wrap">        <span class="badge bg-secondary fs-6 mx-2 bgGeneral" *ngFor="let interes of usuario?.intereses">{{          interes.titulo }}</span>      </div>      <div class="card-footer py-3 d-flex justify-content-end">        <button class="btn bgGeneral rounded-pill w-20 py-2" type="button" (click)="mostrarModalIntereses()">          {{ resources.changeInterests }}        </button>      </div>    </div>  </section></main><div class="footer-padding"></div><p-toast [breakpoints]="{    \'700px\': { width: \'100%\', right: \'0\', left: \'0\', padding: \'0 10px\' }  }"></p-toast><p-confirmDialog></p-confirmDialog><ng-template #editarIntereses>  <app-editar-intereses [interesesUsuario]="usuario?.intereses"    (cerrar)="cerrarModalIntereses()"></app-editar-intereses></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarEventoModalComponent', 'selector': 'app-editar-evento-modal'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PoliticaPrivacidadComponent', 'selector': 'app-politica-privacidad'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
 </script>
@@ -1172,6 +1783,19 @@ export class ProfileComponent implements OnInit{
             var COMPODOC_CURRENT_PAGE_URL = 'ProfileComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

@@ -43,7 +43,9 @@
                placeholder="{{resources.email}}"
                [class.is-invalid]="!validar('email')"
         />
-        <small *ngIf="!validar('email')" class="error">{{resources.emailRequired}}</small>
+        <small *ngIf="!validar('email') && forma.get('email').errors && !forma.get('email')?.errors['emailExiste']" class="error">{{resources.emailRequired}}</small>
+        <small *ngIf="forma.get('email').errors && forma.get('email')?.errors['emailExiste']" class="error">{{resources.emailExiste}}</small>
+
       </div>
       <div class="input-group ps-lg-1">
         <label for="iUsuario">{{ resources.username }}</label>

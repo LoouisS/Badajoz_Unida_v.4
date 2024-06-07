@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   CesionImagenComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -69,13 +125,20 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+    </p>
 
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
+
 
 
 
@@ -91,6 +154,8 @@
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>app-cesion-imagen</code></td>
             </tr>
+
+
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -115,10 +180,29 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#localeId" >localeId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resources" >resources</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -180,7 +264,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -191,7 +275,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -199,7 +283,7 @@
         </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -217,7 +301,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:17</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -238,13 +322,13 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
         </table>
 </section>
-    <section>
+    <section data-compodoc="block-outputs">
     <h3 id="outputs">Outputs</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -262,7 +346,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:18</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -283,7 +367,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:19</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -291,7 +375,7 @@
 </section>
 
 
-    <section>
+    <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -314,23 +398,23 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:33</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:35</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que emite una señal para cerrar el modal</p>
+                        <div class="io-description"><p>Método que emite una señal para cerrar el modal</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -353,25 +437,103 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:26</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/components/modals/cesion-imagen/cesion-imagen.component.ts:28</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método que inicializa el proceso de registro de un usuario en un evento</p>
+                        <div class="io-description"><p>Método que inicializa el proceso de registro de un usuario en un evento</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localeId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>localeId</b></span>
+                        <a href="#localeId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:7</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resources</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:6</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
         </tbody>
     </table>
 </section>
@@ -379,21 +541,23 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, EventEmitter, Input, Output} from &#x27;@angular/core&#x27;;
+import { LocalizedComponent } from &#x27;src/app/config/localize.component&#x27;;
 
 @Component({
   selector: &#x27;app-cesion-imagen&#x27;,
   templateUrl: &#x27;./cesion-imagen.component.html&#x27;,
   styleUrls: [&#x27;./cesion-imagen.component.css&#x27;]
 })
-export class CesionImagenComponent {
+export class CesionImagenComponent extends LocalizedComponent {
   @Input(&#x27;usuario&#x27;) usuario: any;
   @Input(&#x27;evento&#x27;) evento: any;
   @Output() cerrarCesionImagen: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
   @Output() inscribirUsuario: EventEmitter&lt;any&gt; &#x3D; new EventEmitter&lt;any&gt;();
 
   constructor() {
+    super();
   }
 
   /**
@@ -414,66 +578,57 @@ export class CesionImagenComponent {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-content&quot;&gt;
   &lt;div class&#x3D;&quot;modal-header bgGeneral&quot;&gt;
-    &lt;h1 class&#x3D;&quot;modal-title fs-5&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;Declaración de Cesión de Imagen&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;modal-title fs-5&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;{{resources.cesionImagen}}&lt;/h1&gt;
     &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; data-bs-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot; (click)&#x3D;&quot;cerrarModal()&quot;&gt;&lt;/button&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;modal-body w-100 px-5&quot;&gt;
     &lt;p&gt;
-      Estimado {{usuario}},
+      {{resources.estimated}} {{usuario}},
     &lt;/p&gt;
     &lt;p&gt;
-      Gracias por tu interés en participar en nuestro evento organizado por &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;. Para garantizar
-      la transparencia y cumplir con las leyes de España relacionadas con la cesión de imagen, requerimos tu consentimiento
-      expreso para capturar y utilizar tu imagen durante el evento. Por favor, lee atentamente la siguiente declaración y selecciona
-      la opción correspondiente para aceptar o cancelar tu inscripción.
+      {{resources.thanksForParticipating}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;.{{resources.ph1}}
     &lt;/p&gt;
     &lt;p&gt;
-      Declaración de Cesión de Imagen:
+      {{resources.cesionImagen}}:
     &lt;/p&gt;
     &lt;p&gt;
-      Yo, {{usuario}}, reconozco y acepto los siguientes términos y condiciones:
+      {{resources.me}}, {{usuario}}, {{resources.reconozcoAcepto}}:
     &lt;/p&gt;
     &lt;ul&gt;
       &lt;li&gt;
-        Autorizo a &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; a capturar, grabar, fotografiar y utilizar mi imagen durante el evento
-        {{evento?.nombre}}, que se llevará a cabo en {{evento?.localizacion}} en {{evento?.fechaHora | date:&#x27;dd MMM yyyy&#x27;:&#x27;&#x27;:&#x27;es&#x27;}}.
+        {{resources.autorizo}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; {{resources.ph2}}
+        {{evento?.nombre}}, {{resources.aCabo}} {{resources.en}} {{evento?.localizacion}} {{resources.en}} {{evento?.fechaHora | date:&#x27;dd MMM yyyy&#x27;:&#x27;&#x27;:&#x27;es&#x27;}}.
       &lt;/li&gt;
       &lt;li&gt;
-        Acepto que &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; tenga todos los derechos exclusivos sobre las imágenes capturadas, incluyendo el derecho de
-        uso, reproducción, distribución, exhibición, y cualquier otro uso relacionado con los fines promocionales y de divulgación
-        de la organización, ya sea en medios impresos, digitales, redes sociales, publicaciones, sitios web o cualquier otro medio de difusión.
+        {{resources.accept}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; {{resources.ph3}}
       &lt;/li&gt;
       &lt;li&gt;
-        Entiendo que las imágenes pueden ser compartidas con terceros, como socios colaboradores, patrocinadores, medios de comunicación u
-        otras organizaciones, siempre con el propósito de promover las actividades de &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;.
+        {{resources.ph4}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;.
       &lt;/li&gt;
       &lt;li&gt;
-        Acepto que la cesión de mi imagen es voluntaria y que no recibiré compensación económica alguna por su uso,
-        a menos que exista un acuerdo previo y por escrito con &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; que especifique lo contrario.
+        {{resources.ph5}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; {{resources.ph6}}
       &lt;/li&gt;
       &lt;li&gt;
-        Reconozco que &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; tomará todas las precauciones razonables para proteger mi privacidad, y que no se utilizará mi imagen
-        de manera ofensiva, difamatoria o que pueda perjudicar mi reputación o derechos legales.
+        {{resources.reconozco}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt; {{resources.ph7}}
       &lt;/li&gt;
       &lt;li&gt;
-        Entiendo que tengo el derecho de revocar mi consentimiento en cualquier momento, notificándolo por escrito a &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;, aunque
-        dicha revocación no afectará a las imágenes ya utilizadas con anterioridad a la revocación.
+        {{resources.ph8}} &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Badajoz Unida&lt;/span&gt;, {{resources.ph9}}
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
-    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn button rounded-pill px-3 py-2 customBtn&quot; (click)&#x3D;&quot;registrarUsuario()&quot;&gt;Aceptar&lt;/button&gt;
-    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn button rounded-pill px-3 py-2 customBtn&quot; (click)&#x3D;&quot;cerrarModal()&quot;&gt;Cancelar&lt;/button&gt;
+    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn button rounded-pill px-3 py-2 customBtn&quot; (click)&#x3D;&quot;registrarUsuario()&quot;&gt;{{resources.acceptDoc}}&lt;/button&gt;
+    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn button rounded-pill px-3 py-2 customBtn&quot; (click)&#x3D;&quot;cerrarModal()&quot;&gt;{{resources.cancelDoc}}&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./cesion-imagen.component.css</code>
                 </p>
@@ -502,7 +657,7 @@ export class CesionImagenComponent {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -527,8 +682,8 @@ export class CesionImagenComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="modal-content">  <div class="modal-header bgGeneral">    <h1 class="modal-title fs-5" id="exampleModalLabel">Declaración de Cesión de Imagen</h1>    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>  </div>  <div class="modal-body w-100 px-5">    <p>      Estimado {{usuario}},    </p>    <p>      Gracias por tu interés en participar en nuestro evento organizado por <span class="fw-bold">Badajoz Unida</span>. Para garantizar      la transparencia y cumplir con las leyes de España relacionadas con la cesión de imagen, requerimos tu consentimiento      expreso para capturar y utilizar tu imagen durante el evento. Por favor, lee atentamente la siguiente declaración y selecciona      la opción correspondiente para aceptar o cancelar tu inscripción.    </p>    <p>      Declaración de Cesión de Imagen:    </p>    <p>      Yo, {{usuario}}, reconozco y acepto los siguientes términos y condiciones:    </p>    <ul>      <li>        Autorizo a <span class="fw-bold">Badajoz Unida</span> a capturar, grabar, fotografiar y utilizar mi imagen durante el evento        {{evento?.nombre}}, que se llevará a cabo en {{evento?.localizacion}} en {{evento?.fechaHora | date:\'dd MMM yyyy\':\'\':\'es\'}}.      </li>      <li>        Acepto que <span class="fw-bold">Badajoz Unida</span> tenga todos los derechos exclusivos sobre las imágenes capturadas, incluyendo el derecho de        uso, reproducción, distribución, exhibición, y cualquier otro uso relacionado con los fines promocionales y de divulgación        de la organización, ya sea en medios impresos, digitales, redes sociales, publicaciones, sitios web o cualquier otro medio de difusión.      </li>      <li>        Entiendo que las imágenes pueden ser compartidas con terceros, como socios colaboradores, patrocinadores, medios de comunicación u        otras organizaciones, siempre con el propósito de promover las actividades de <span class="fw-bold">Badajoz Unida</span>.      </li>      <li>        Acepto que la cesión de mi imagen es voluntaria y que no recibiré compensación económica alguna por su uso,        a menos que exista un acuerdo previo y por escrito con <span class="fw-bold">Badajoz Unida</span> que especifique lo contrario.      </li>      <li>        Reconozco que <span class="fw-bold">Badajoz Unida</span> tomará todas las precauciones razonables para proteger mi privacidad, y que no se utilizará mi imagen        de manera ofensiva, difamatoria o que pueda perjudicar mi reputación o derechos legales.      </li>      <li>        Entiendo que tengo el derecho de revocar mi consentimiento en cualquier momento, notificándolo por escrito a <span class="fw-bold">Badajoz Unida</span>, aunque        dicha revocación no afectará a las imágenes ya utilizadas con anterioridad a la revocación.      </li>    </ul>  </div>  <div class="modal-footer">    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="registrarUsuario()">Aceptar</button>    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()">Cancelar</button>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+        var COMPONENT_TEMPLATE = '<div><div class="modal-content">  <div class="modal-header bgGeneral">    <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.cesionImagen}}</h1>    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>  </div>  <div class="modal-body w-100 px-5">    <p>      {{resources.estimated}} {{usuario}},    </p>    <p>      {{resources.thanksForParticipating}} <span class="fw-bold">Badajoz Unida</span>.{{resources.ph1}}    </p>    <p>      {{resources.cesionImagen}}:    </p>    <p>      {{resources.me}}, {{usuario}}, {{resources.reconozcoAcepto}}:    </p>    <ul>      <li>        {{resources.autorizo}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph2}}        {{evento?.nombre}}, {{resources.aCabo}} {{resources.en}} {{evento?.localizacion}} {{resources.en}} {{evento?.fechaHora | date:\'dd MMM yyyy\':\'\':\'es\'}}.      </li>      <li>        {{resources.accept}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph3}}      </li>      <li>        {{resources.ph4}} <span class="fw-bold">Badajoz Unida</span>.      </li>      <li>        {{resources.ph5}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph6}}      </li>      <li>        {{resources.reconozco}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph7}}      </li>      <li>        {{resources.ph8}} <span class="fw-bold">Badajoz Unida</span>, {{resources.ph9}}      </li>    </ul>  </div>  <div class="modal-footer">    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="registrarUsuario()">{{resources.acceptDoc}}</button>    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()">{{resources.cancelDoc}}</button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarEventoModalComponent', 'selector': 'app-editar-evento-modal'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PoliticaPrivacidadComponent', 'selector': 'app-politica-privacidad'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'CesionImagenComponent'};
 </script>
@@ -579,6 +734,19 @@ export class CesionImagenComponent {
             var COMPODOC_CURRENT_PAGE_URL = 'CesionImagenComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

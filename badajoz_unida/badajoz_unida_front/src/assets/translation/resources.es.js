@@ -228,7 +228,11 @@ export const resources = {
   'user': 'Usuario',
   'collaborator': 'Colaborador',
   'interestChanged': 'Intereses modificados correctamente',
-
+  'start': 'Inicio',
+  'end': 'Fin',
+  'onlyAdmin': 'Eres el único administrador, no puedes eliminarte',
+  'privacyPolicyAndCookies': 'Política de privacidad y cookies',
+  'emailExistent': 'ya existe un usuario con ese email',
 
 
 

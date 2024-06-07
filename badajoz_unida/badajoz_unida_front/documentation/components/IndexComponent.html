@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   IndexComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -69,13 +125,20 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+    </p>
 
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
+
 
 
 
@@ -91,6 +154,8 @@
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>app-index</code></td>
             </tr>
+
+
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -115,6 +180,38 @@
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#localeId" >localeId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resources" >resources</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
 
 
 
@@ -122,12 +219,91 @@
 
 
 
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localeId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>localeId</b></span>
+                        <a href="#localeId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:7</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resources"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>resources</b></span>
+                        <a href="#resources"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Resources</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/LocalizedComponent.html" target="_self" >LocalizedComponent</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/LocalizedComponent.html#source" target="_self" >LocalizedComponent:6</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { LocalizedComponent } from &#x27;src/app/config/localize.component&#x27;;
 
 @Component({
   selector: &#x27;app-index&#x27;,
@@ -138,17 +314,17 @@
 /**
  Vista del componente inicial o home
  **/
-export class IndexComponent {
+export class IndexComponent extends LocalizedComponent{
 
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;portada d-flex align-items-center justify-content-around fadeIn animated&quot;&gt;
   &lt;div class&#x3D;&quot;degradado&quot;&gt;&lt;/div&gt;
   &lt;div class&#x3D;&quot; mensaje px-5&quot;&gt;
-    &lt;span class&#x3D;&quot;d-block&quot;&gt;Bienvenido a&lt;/span&gt;
+    &lt;span class&#x3D;&quot;d-block&quot;&gt;{{ resources.welcomeTo }}&lt;/span&gt;
     &lt;span&gt;Badajoz Unida&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;logo&quot;&gt;
@@ -158,45 +334,40 @@ export class IndexComponent {
 &lt;div class&#x3D;&quot;px-lg-5 my-lg-5 fadeIn animated&quot;&gt;
   &lt;div class&#x3D;&quot;bienvenida px-3 px-lg-5 py-4 rounded-2&quot;&gt;
     &lt;p&gt;
-      Nos complace darte la bienvenida a esta plataforma única que busca reunir y celebrar la diversidad cultural de
-      nuestra comunidad. Sabemos que cada persona tiene su propia historia, tradiciones y costumbres, y queremos fomentar un
-      ambiente donde todos se sientan valorados y respetados.
+      {{resources.homeIntro1}}
     &lt;/p&gt;
     &lt;p&gt;
-      Nuestra intención es conectar a nuestra población venga de donde venga, creando eventos que permitan
-      compartir experiencias, fortalecer la comprensión mutua y construir lazos de amistad. Queremos ofrecer un espacio donde
-      todos puedan aprender unos de otros, disfrutar de la riqueza cultural y celebrar la diversidad que enriquece nuestra sociedad.
+      {{ resources.homeIntro2}}
     &lt;/p&gt;
     &lt;p&gt;
-      Aquí encontrarás una amplia variedad de eventos: desde festivales culturales y ferias de comida hasta talleres educativos y
-      actividades recreativas. Queremos que te sientas parte activa de esta comunidad
+      {{ resources.homeIntro3 }}
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;footer-padding enlaces px-5 pt-5&quot;&gt;
-  &lt;h1 class&#x3D;&quot;d-flex justify-content-center&quot;&gt;Recorre todos los rincones de nuestra página web&lt;/h1&gt;
+  &lt;h1 class&#x3D;&quot;d-flex justify-content-center&quot;&gt;{{ resources.visitCorners }}&lt;/h1&gt;
   &lt;div class&#x3D;&quot;d-flex justify-content-around mt-5 paginas&quot;&gt;
     &lt;div class&#x3D;&quot;rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0&quot; [routerLink]&#x3D;&quot;[&#x27;/eventos&#x27;]&quot;&gt;
       &lt;span class&#x3D;&quot;fa-regular fa-calendar&quot;&gt;&lt;/span&gt;
-      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;Eventos&lt;/h2&gt;
-      &lt;p class&#x3D;&quot;px-4&quot;&gt;Apúntate a cualquiera de los eventos que tenemos disponibles&lt;/p&gt;
+      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;{{resources.events}}&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;px-4&quot;&gt;{{resources.eventsInfo}}&lt;/p&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0&quot; [routerLink]&#x3D;&quot;[&#x27;/mis-eventos&#x27;]&quot;&gt;
       &lt;span class&#x3D;&quot;fa-regular fa-calendar-check&quot;&gt;&lt;/span&gt;
-      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;Mis eventos&lt;/h2&gt;
-      &lt;p class&#x3D;&quot;px-4&quot;&gt;Gestiona y mira los eventos a los que te has apuntado&lt;/p&gt;
+      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;{{resources.myEvents}}&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;px-4&quot;&gt;{{resources.myEventsInfo}}&lt;/p&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0&quot; [routerLink]&#x3D;&quot;[&#x27;/perfil&#x27;]&quot;&gt;
       &lt;span class&#x3D;&quot;fa-solid fa-user&quot;&gt;&lt;/span&gt;
-      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;Perfil&lt;/h2&gt;
-      &lt;p &gt;Gestiona y actualiza tus datos&lt;/p&gt;
+      &lt;h2 class&#x3D;&quot;mt-2&quot;&gt;{{resources.profile}}&lt;/h2&gt;
+      &lt;p &gt;{{resources.profileInfo}}&lt;/p&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./index.component.css</code>
                 </p>
@@ -294,15 +465,56 @@ span.fa-regular, span.fa-solid{
 }
 
 @media screen and (min-width: 100px) and (max-width: 768px) {
-  .paginas{
+
+  .paginas {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 140px;
   }
+
+  h1 {
+    text-align: center;
+  }
+
+  .paginas &gt; div {
+    margin-bottom: 20px;
+    height: 128px;
+  }
+
+  .enlaces &gt; div &gt; div {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .enlaces &gt; div &gt; div::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform .5s ease;
+  }
+
+  .enlaces &gt; div &gt; div:hover::before {
+    transform: translateX(-20px);
+  }
+
+  .enlaces &gt; div &gt; div:hover p {
+    opacity: 1;
+  }
+
+  .enlaces p {
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
+
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -327,8 +539,8 @@ span.fa-regular, span.fa-solid{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="portada d-flex align-items-center justify-content-around fadeIn animated">  <div class="degradado"></div>  <div class=" mensaje px-5">    <span class="d-block">Bienvenido a</span>    <span>Badajoz Unida</span>  </div>  <div class="logo">    <img src="../../../../assets/header_logo.png" alt="logo" />  </div></div><div class="px-lg-5 my-lg-5 fadeIn animated">  <div class="bienvenida px-3 px-lg-5 py-4 rounded-2">    <p>      Nos complace darte la bienvenida a esta plataforma única que busca reunir y celebrar la diversidad cultural de      nuestra comunidad. Sabemos que cada persona tiene su propia historia, tradiciones y costumbres, y queremos fomentar un      ambiente donde todos se sientan valorados y respetados.    </p>    <p>      Nuestra intención es conectar a nuestra población venga de donde venga, creando eventos que permitan      compartir experiencias, fortalecer la comprensión mutua y construir lazos de amistad. Queremos ofrecer un espacio donde      todos puedan aprender unos de otros, disfrutar de la riqueza cultural y celebrar la diversidad que enriquece nuestra sociedad.    </p>    <p>      Aquí encontrarás una amplia variedad de eventos: desde festivales culturales y ferias de comida hasta talleres educativos y      actividades recreativas. Queremos que te sientas parte activa de esta comunidad    </p>  </div></div><div class="footer-padding enlaces px-5 pt-5">  <h1 class="d-flex justify-content-center">Recorre todos los rincones de nuestra página web</h1>  <div class="d-flex justify-content-around mt-5 paginas">    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/eventos\']">      <span class="fa-regular fa-calendar"></span>      <h2 class="mt-2">Eventos</h2>      <p class="px-4">Apúntate a cualquiera de los eventos que tenemos disponibles</p>    </div>    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/mis-eventos\']">      <span class="fa-regular fa-calendar-check"></span>      <h2 class="mt-2">Mis eventos</h2>      <p class="px-4">Gestiona y mira los eventos a los que te has apuntado</p>    </div>    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/perfil\']">      <span class="fa-solid fa-user"></span>      <h2 class="mt-2">Perfil</h2>      <p >Gestiona y actualiza tus datos</p>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'ProfileComponent', 'selector': 'app-profile'}];
+        var COMPONENT_TEMPLATE = '<div><div class="portada d-flex align-items-center justify-content-around fadeIn animated">  <div class="degradado"></div>  <div class=" mensaje px-5">    <span class="d-block">{{ resources.welcomeTo }}</span>    <span>Badajoz Unida</span>  </div>  <div class="logo">    <img src="../../../../assets/header_logo.png" alt="logo" />  </div></div><div class="px-lg-5 my-lg-5 fadeIn animated">  <div class="bienvenida px-3 px-lg-5 py-4 rounded-2">    <p>      {{resources.homeIntro1}}    </p>    <p>      {{ resources.homeIntro2}}    </p>    <p>      {{ resources.homeIntro3 }}    </p>  </div></div><div class="footer-padding enlaces px-5 pt-5">  <h1 class="d-flex justify-content-center">{{ resources.visitCorners }}</h1>  <div class="d-flex justify-content-around mt-5 paginas">    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/eventos\']">      <span class="fa-regular fa-calendar"></span>      <h2 class="mt-2">{{resources.events}}</h2>      <p class="px-4">{{resources.eventsInfo}}</p>    </div>    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/mis-eventos\']">      <span class="fa-regular fa-calendar-check"></span>      <h2 class="mt-2">{{resources.myEvents}}</h2>      <p class="px-4">{{resources.myEventsInfo}}</p>    </div>    <div class="rounded-pill d-flex flex-column align-items-center justify-content-center col-10 col-lg-3 py-4 my-2 my-md-0" [routerLink]="[\'/perfil\']">      <span class="fa-solid fa-user"></span>      <h2 class="mt-2">{{resources.profile}}</h2>      <p >{{resources.profileInfo}}</p>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'CardsComponent', 'selector': 'app-cards'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CesionImagenComponent', 'selector': 'app-cesion-imagen'},{'name': 'CrearCategoriaComponent', 'selector': 'app-crear-categoria'},{'name': 'CrearEventoModalComponent', 'selector': 'app-crear-evento-modal'},{'name': 'CrearInteresComponent', 'selector': 'app-crear-interes'},{'name': 'EditarEventoModalComponent', 'selector': 'app-editar-evento-modal'},{'name': 'EditarInteresesComponent', 'selector': 'app-editar-intereses'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventosTableComponent', 'selector': 'app-eventos-table'},{'name': 'EventsComponent', 'selector': 'app-events'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormLoginComponent', 'selector': 'app-form-login'},{'name': 'FormRegisterComponent', 'selector': 'app-form-register'},{'name': 'GestionCategoriasComponent', 'selector': 'app-gestion-categorias'},{'name': 'GestionCategoriasTableComponent', 'selector': 'app-gestion-categorias-table'},{'name': 'GestionEventosComponent', 'selector': 'app-gestion-eventos'},{'name': 'GestionInteresesComponent', 'selector': 'app-gestion-intereses'},{'name': 'GestionInteresesTableComponent', 'selector': 'app-gestion-intereses-table'},{'name': 'GestionUsuariosComponent', 'selector': 'app-gestion-usuarios'},{'name': 'GestionUsuariosTableComponent', 'selector': 'app-gestion-usuarios-table'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndexComponent', 'selector': 'app-index'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'MyEventsComponent', 'selector': 'app-my-events'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PoliticaPrivacidadComponent', 'selector': 'app-politica-privacidad'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [{'name': 'NoImageDirective', 'selector': '[appNoImage]'}];
     var ACTUAL_COMPONENT = {'name': 'IndexComponent'};
 </script>
@@ -379,6 +591,19 @@ span.fa-regular, span.fa-solid{
             var COMPODOC_CURRENT_PAGE_URL = 'IndexComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

@@ -78,7 +78,7 @@
                 {{ resources.deleteAcc }}
               </button>
                             <button class="btn rounded-pill py-2 ms-2 btn-outline-secondary" type="button" *ngIf="esAdminUnico()">
-                              <i class="fa-sharp cursor-pointer fa-solid fa-circle-info me-2" (click)="infoAdmin()"  pTooltip="Eres el único admin" tooltipPosition="top"></i>
+                <i class="fa-sharp cursor-pointer fa-solid fa-circle-info me-2" (click)="infoAdmin()"  pTooltip="{{resources.onlyAdmin}}" tooltipPosition="top"></i>
 
                 {{ resources.deleteAcc }}
               </button>

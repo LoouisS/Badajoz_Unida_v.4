@@ -218,5 +218,10 @@ export abstract class Resources {
   public static user: string = null;
   public static collaborator: string = null;
   public static interestChanged: string = null;
+  public static start : string = null;
+  public static end : string = null;
+  public static onlyAdmin: string = null;
+  public static privacyPolicyAndCookies: string = null;
+  public static emailExiste: string = null;
 
 }

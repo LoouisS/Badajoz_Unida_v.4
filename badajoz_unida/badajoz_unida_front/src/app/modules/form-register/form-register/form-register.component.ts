@@ -165,6 +165,9 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
             /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
           ),
         ],
+        [
+          this._asyncValidator.usuarioEmailExiste(),
+        ],
       ],
       password: [
         '',
@@ -259,13 +262,14 @@ export class FormRegisterComponent extends LocalizedComponent implements OnInit,
         }
       },
       async (errorServicio: any) => {
-        console.log('he fallado');
-        console.log(errorServicio);
         this.messageService.add({
           severity: 'error',
           summary:`${this.resources.registerError}`,
-          detail:`${this.resources.userExists}`,
+          detail:`${this.resources.problemOcurredDetail}`,
         });
+        setTimeout(() => {
+  this.router.navigate(['/auth']);
+}, 2000);
       }
     );
   }

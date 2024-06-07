@@ -179,6 +179,7 @@ export class EventosTableComponent extends LocalizedComponent implements OnInit,
   limpiarFiltros() {
   // Resetear el formulario
   this.formFilter.reset();
+  console.log('Formulario después de resetear', this.formFilter.value);
  this.eventoService.getAllEventos().subscribe((data) => {
       this.eventos = data;
       this.cargarTabla();

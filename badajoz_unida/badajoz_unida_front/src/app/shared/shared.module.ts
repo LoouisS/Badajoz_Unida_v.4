@@ -10,6 +10,7 @@ import {DirectivesModule} from "../directives/directives.module";
 import { LoadingComponent } from './loading/loading.component';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
+import { PoliticaPrivacidadComponent } from '../components/modals/politica-privacidad/politica-privacidad.component';
 
 
 
@@ -19,7 +20,8 @@ import { TooltipModule } from 'primeng/tooltip';
     FooterComponent,
     CardsComponent,
     CarouselComponent,
-    LoadingComponent
+    LoadingComponent,
+    PoliticaPrivacidadComponent
   ],
   imports: [
     CommonModule,

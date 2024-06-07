@@ -4,8 +4,9 @@
  @author Juan Daniel Carvajal <juandanielcarvajalmontes.guadalupe@alumnado.fundacionloyola.net>
  **/
 
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalizedComponent } from 'src/app/config/localize.component';
 
 @Component({
@@ -31,8 +32,10 @@ export class FooterComponent extends LocalizedComponent implements OnInit {
 
   anio!: number;
   @Output() tamanoFooter: EventEmitter<number> = new EventEmitter<number>();
+  @ViewChild('politica') politicaPrivacidad: TemplateRef<any>;
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private modalService: NgbModal) {
     super()
   }
 
@@ -54,6 +57,19 @@ export class FooterComponent extends LocalizedComponent implements OnInit {
     const regex = new RegExp('^/eventos/\\d+$');
     return this.routesMap[this.router.url] === true && !regex.test(this.router.url);
   }
+
+    mostrarModal() {
+    this.modalService.open(this.politicaPrivacidad, {
+      size: 'lg',
+      backdrop: 'static',
+    });
+  }
+
+    cerrarModal() {
+    this.modalService.dismissAll(this.politicaPrivacidad);
+  }
+
+
 
 
 }

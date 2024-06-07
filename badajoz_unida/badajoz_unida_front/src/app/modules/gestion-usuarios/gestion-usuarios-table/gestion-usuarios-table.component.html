@@ -57,10 +57,10 @@
         <th class="col-1">Id</th>
         <th class="col-2">{{ resources.nombre }}</th>
         <th class="col-2">{{ resources.surname }}</th>
-        <th class="col-2">{{ resources.username }}</th>
-        <th class="col-1">Email</th>
-        <th class="col-1">{{ resources.phone }}</th>
-        <th class="col-1">{{ resources.birthdate }}</th>
+        <th class="col-2 d-none d-md-table-cell">{{ resources.username }}</th>
+        <th class="col-1 d-none d-md-table-cell">Email</th>
+        <th class="col-1 d-none d-md-table-cell">{{ resources.phone }}</th>
+        <th class="col-1 d-none d-md-table-cell">{{ resources.birthdate }}</th>
         <th class="col-1"></th>
       </tr>
     </thead>
@@ -93,10 +93,10 @@
         <td class="col-1">{{ user?.userId }}</td>
         <td class="col-2">{{ user?.nombre }}</td>
         <td class="col-2">{{ user?.apellidos }}</td>
-        <td class="col-2">{{ user?.nombreUsuario }}</td>
-        <td class="col-1">{{ user?.email }}</td>
-        <td class="col-1">{{ user?.tlf }}</td>
-        <td class="col-1">{{ user?.fchNacimiento | date: "dd/MM/yyyy" }}</td>
+        <td class="col-2 d-none d-md-table-cell">{{ user?.nombreUsuario }}</td>
+        <td class="col-1 d-none d-md-table-cell">{{ user?.email }}</td>
+        <td class="col-1 d-none d-md-table-cell">{{ user?.tlf }}</td>
+        <td class="col-1 d-none d-md-table-cell">{{ user?.fchNacimiento | date: "dd/MM/yyyy" }}</td>
         <td class="text-end px-0">
           <div class="dropdown">
             <button class="btn btn-link" id="dropdownPrivilegioMenuLink" role="button" data-bs-toggle="dropdown"

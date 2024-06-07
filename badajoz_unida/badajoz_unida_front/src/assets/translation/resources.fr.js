@@ -229,6 +229,11 @@ export const resources = {
   'user': 'Util',
   'collaborator': 'Collaborateur',
   'interestChanged': 'Intérêts modifiés correctement',
+  'start': 'Début',
+  'end': 'Fin',
+  'onlyAdmin': 'Vous êtes le seul administrateur, vous ne pouvez pas vous supprimer',
+  'privacyPolicyAndCookies': 'Politique de confidentialité et cookies',
+  'emailExiste':'Il y a déjà un utilisateur avec cet email',
 }
 
 

@@ -1,46 +1,93 @@
 <div class="modal-content">
   <div class="modal-header bgGeneral">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.cesionImagen}}</h1>
+    <h1 class="modal-title fs-5" id="exampleModalLabel">{{resources.privacyPolicyAndCookies}}</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
   </div>
   <div class="modal-body w-100 px-5">
-    <p>
-      {{resources.estimated}} {{usuario}},
-    </p>
-    <p>
-      {{resources.thanksForParticipating}} <span class="fw-bold">Badajoz Unida</span>.{{resources.ph1}}
-    </p>
-    <p>
-      {{resources.cesionImagen}}:
-    </p>
-    <p>
-      {{resources.me}}, {{usuario}}, {{resources.reconozcoAcepto}}:
-    </p>
-    <ul>
-      <li>
-        {{resources.autorizo}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph2}}
-        {{evento?.nombre}}, {{resources.aCabo}} {{resources.en}} {{evento?.localizacion}} {{resources.en}} {{evento?.fechaHora | date:'dd MMM yyyy':'':'es'}}.
-      </li>
-      <li>
-        {{resources.accept}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph3}}
-      </li>
-      <li>
-        {{resources.ph4}} <span class="fw-bold">Badajoz Unida</span>.
-      </li>
-      <li>
-        {{resources.ph5}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph6}}
-      </li>
-      <li>
-        {{resources.reconozco}} <span class="fw-bold">Badajoz Unida</span> {{resources.ph7}}
-      </li>
-      <li>
-        {{resources.ph8}} <span class="fw-bold">Badajoz Unida</span>, {{resources.ph9}}
-      </li>
-    </ul>
-  </div>
+    <h3>{{resources.welcomeTo}} Badajoz Unida</h3>
+    <main>
+        <section id="responsable">
+            <p><strong>Responsables:</strong> Nacho Acedo / Guillermo Sanchez</p>
+            <p><strong>NIF/CIF:</strong> 80241387E / 08898699E</p>
+            <p><strong>Correo Electrónico:</strong> nacedo.dev@gmail.com / guillesb112@gmail.com</p>
+        </section>
+        <section id="datos-personales">
+            <h2>Datos Personales que Recogemos</h2>
+            <p>Cuando visitas nuestro sitio, podemos recoger diferentes tipos de información para mejorar tu experiencia en nuestra plataforma:</p>
+            <ul>
+                <li>Datos Identificativos: como tu nombre, correo electrónico, dirección, etc., principalmente desde nuestros formularios de contacto.</li>
+                <li>Datos de Conexión y Navegación: como tu dirección IP, qué páginas visitas y qué recursos usas en nuestro sitio.</li>
+            </ul>
+        </section>
+
+        <section id="finalidades">
+            <h2>Finalidades del Tratamiento</h2>
+            <p>Utilizamos la información recogida por varios motivos:</p>
+            <ul>
+                <li>Para proveer, operar y mantener nuestro sitio web</li>
+                <li>Para mejorar, personalizar y expandir nuestro sitio web</li>
+                <li>Para entender y analizar cómo utilizas nuestro sitio web</li>
+                <li>Para desarrollar nuevos productos, servicios, características y funcionalidades</li>
+            </ul>
+        </section>
+
+        <section id="legitimacion">
+            <h2>Legitimación para el Tratamiento de Datos</h2>
+            <p>El tratamiento de tus datos personales puede estar basado en:</p>
+            <ul>
+                <li>Tu consentimiento explícito que nos proporcionas activamente.</li>
+                <li>La necesidad de ejecutar un contrato en el que eres parte.</li>
+                <li>Nuestros intereses legítimos, que no se ven superados por tus derechos.</li>
+            </ul>
+        </section>
+
+        <section id="destinatarios">
+            <h2>Destinatarios de tus Datos</h2>
+            <p>Tus datos pueden ser compartidos con:</p>
+            <ul>
+                <li>Proveedores de servicios tecnológicos y de análisis.</li>
+                <li>Entidades reguladoras u otras autoridades cuando esté requerido por ley.</li>
+            </ul>
+        </section>
+
+        <section id="derechos">
+            <h2>Derechos de los Usuarios</h2>
+            <p>Tienes derecho a:</p>
+            <ul>
+                <li>Acceder, rectificar o eliminar los datos que tenemos sobre ti.</li>
+                <li>Limitar o oponerte al tratamiento de tus datos.</li>
+                <li>Solicitar la portabilidad de tus datos.</li>
+            </ul>
+            <p>Para ejercer cualquier derecho, puedes contactarnos directamente a través de [Email].</p>
+        </section>
+
+        <section id="cookies">
+            <h2>Política de Cookies</h2>
+            <p>Utilizamos cookies para mejorar tu experiencia en nuestro sitio. Las cookies nos ayudan a recordar tus preferencias y recoger datos analíticos. Puedes ajustar tus preferencias de cookies desde tu navegador.</p>
+        </section>
+
+        <section id="seguridad">
+            <h2>Medidas de Seguridad</h2>
+            <p>Tomamos la seguridad de tus datos con seriedad y usamos medidas razonables y adecuadas para protegerlos.</p>
+        </section>
+
+        <section id="cambios">
+            <h2>Cambios en la Política de Privacidad</h2>
+            <p> Nos reservamos el derecho de hacer cambios a esta política. Los cambios importantes se comunicarán a través de nuestro sitio web o por email.</p>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>Para más información, puedes contactarnos via:</p>
+            <ul>
+                <li>Email: nacedo.dev@gmail.com / guillesb112@gmail.com</li>
+                <li>Teléfono: [Teléfono]</li>
+                <li>Dirección: [Dirección Completa]</li>
+            </ul>
+        </section>
+    </main>
   <div class="modal-footer">
-    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="registrarUsuario()">{{resources.acceptDoc}}</button>
-    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()">{{resources.cancelDoc}}</button>
+    <button type="submit" class="btn button rounded-pill px-3 py-2 customBtn" (click)="cerrarModal()" >{{resources.acceptDoc}}</button>
   </div>
 </div>
 

@@ -91,8 +91,7 @@ div.detalles {
 
 @media (max-width: 576px) {
   .cover {
-    min-height: 200px;
-    max-height: 30vh;
+    min-height: 250px;
   }
 
   .cover h1 {
@@ -105,7 +104,7 @@ div.detalles {
 
   .cover button, .no-participar-btn {
     position: fixed;
-    bottom: 60px;
+    bottom: 110px;
     left: 50%;
     transform: translateX(-50%);
     width: 150px;

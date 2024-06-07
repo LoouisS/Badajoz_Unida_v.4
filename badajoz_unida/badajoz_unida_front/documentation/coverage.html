@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">badajoz-unida documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">badajoz-unida documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -50,7 +101,7 @@
 
 
 <ol class="breadcrumb">
-    <li>Documentation coverage</li>
+    <li class="breadcrumb-item">Documentation coverage</li>
 </ol>
 
 <div>
@@ -86,9 +137,9 @@
             </td>
             <td>component</td>
             <td>CesionImagenComponent</td>
-            <td align="right" data-sort="25">
-                <span class="coverage-percent">25 %</span>
-                <span class="coverage-count">(2/8)</span>
+            <td align="right" data-sort="20">
+                <span class="coverage-percent">20 %</span>
+                <span class="coverage-count">(2/10)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -98,9 +149,9 @@
             </td>
             <td>component</td>
             <td>CrearCategoriaComponent</td>
-            <td align="right" data-sort="46">
-                <span class="coverage-percent">46 %</span>
-                <span class="coverage-count">(6/13)</span>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(6/15)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -110,9 +161,9 @@
             </td>
             <td>component</td>
             <td>CrearEventoModalComponent</td>
-            <td align="right" data-sort="45">
-                <span class="coverage-percent">45 %</span>
-                <span class="coverage-count">(14/31)</span>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(14/35)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -122,9 +173,21 @@
             </td>
             <td>component</td>
             <td>CrearInteresComponent</td>
-            <td align="right" data-sort="42">
-                <span class="coverage-percent">42 %</span>
-                <span class="coverage-count">(6/14)</span>
+            <td align="right" data-sort="37">
+                <span class="coverage-percent">37 %</span>
+                <span class="coverage-count">(6/16)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/EditarEventoModalComponent.html">src/app/components/modals/editar-evento-modal/editar-evento-modal.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>EditarEventoModalComponent</td>
+            <td align="right" data-sort="37">
+                <span class="coverage-percent">37 %</span>
+                <span class="coverage-count">(13/35)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -134,9 +197,81 @@
             </td>
             <td>component</td>
             <td>EditarInteresesComponent</td>
-            <td align="right" data-sort="50">
-                <span class="coverage-percent">50 %</span>
-                <span class="coverage-count">(6/12)</span>
+            <td align="right" data-sort="42">
+                <span class="coverage-percent">42 %</span>
+                <span class="coverage-count">(6/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/PoliticaPrivacidadComponent.html">src/app/components/modals/politica-privacidad/politica-privacidad.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>PoliticaPrivacidadComponent</td>
+            <td align="right" data-sort="20">
+                <span class="coverage-percent">20 %</span>
+                <span class="coverage-count">(2/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/WeatherComponent.html">src/app/components/weather/weather.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>WeatherComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#CONFIG">src/app/config/config.ts</a>
+            </td>
+            <td>variable</td>
+            <td>CONFIG</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/LocaleHelper.html">src/app/config/locale-helper.ts</a>
+            </td>
+            <td>class</td>
+            <td>LocaleHelper</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/LocalizedComponent.html">src/app/config/localize.component.ts</a>
+            </td>
+            <td>class</td>
+            <td>LocalizedComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#ROLES_USUARIO">src/app/config/security.ts</a>
+            </td>
+            <td>variable</td>
+            <td>ROLES_USUARIO</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="good">
@@ -149,6 +284,18 @@
             <td align="right" data-sort="75">
                 <span class="coverage-percent">75 %</span>
                 <span class="coverage-count">(3/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#environment">src/app/environments/environment.ts</a>
+            </td>
+            <td>variable</td>
+            <td>environment</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="low">
@@ -175,16 +322,16 @@
                 <span class="coverage-count">(0/8)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/AuthComponent.html">src/app/modules/auth/auth/auth.component.ts</a>
             </td>
             <td>component</td>
             <td>AuthComponent</td>
-            <td align="right" data-sort="66">
-                <span class="coverage-percent">66 %</span>
-                <span class="coverage-count">(4/6)</span>
+            <td align="right" data-sort="50">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(4/8)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -194,33 +341,33 @@
             </td>
             <td>component</td>
             <td>EventComponent</td>
-            <td align="right" data-sort="50">
-                <span class="coverage-percent">50 %</span>
-                <span class="coverage-count">(8/16)</span>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(8/20)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/EventsComponent.html">src/app/modules/events/events/events.component.ts</a>
             </td>
             <td>component</td>
             <td>EventsComponent</td>
-            <td align="right" data-sort="66">
-                <span class="coverage-percent">66 %</span>
-                <span class="coverage-count">(2/3)</span>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(2/5)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/FormLoginComponent.html">src/app/modules/form-login/form-login/form-login.component.ts</a>
             </td>
             <td>component</td>
             <td>FormLoginComponent</td>
-            <td align="right" data-sort="58">
-                <span class="coverage-percent">58 %</span>
-                <span class="coverage-count">(7/12)</span>
+            <td align="right" data-sort="46">
+                <span class="coverage-percent">46 %</span>
+                <span class="coverage-count">(7/15)</span>
             </td>
         </tr>
         <tr class="good">
@@ -230,9 +377,9 @@
             </td>
             <td>component</td>
             <td>FormRegisterComponent</td>
-            <td align="right" data-sort="62">
-                <span class="coverage-percent">62 %</span>
-                <span class="coverage-count">(17/27)</span>
+            <td align="right" data-sort="58">
+                <span class="coverage-percent">58 %</span>
+                <span class="coverage-count">(17/29)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -242,9 +389,9 @@
             </td>
             <td>component</td>
             <td>GestionCategoriasTableComponent</td>
-            <td align="right" data-sort="38">
-                <span class="coverage-percent">38 %</span>
-                <span class="coverage-count">(7/18)</span>
+            <td align="right" data-sort="33">
+                <span class="coverage-percent">33 %</span>
+                <span class="coverage-count">(7/21)</span>
             </td>
         </tr>
         <tr class="low">
@@ -266,21 +413,21 @@
             </td>
             <td>component</td>
             <td>EventosTableComponent</td>
-            <td align="right" data-sort="50">
-                <span class="coverage-percent">50 %</span>
-                <span class="coverage-count">(13/26)</span>
+            <td align="right" data-sort="43">
+                <span class="coverage-percent">43 %</span>
+                <span class="coverage-count">(13/30)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/GestionEventosComponent.html">src/app/modules/gestion-eventos/gestion-eventos/gestion-eventos.component.ts</a>
             </td>
             <td>component</td>
             <td>GestionEventosComponent</td>
-            <td align="right" data-sort="57">
-                <span class="coverage-percent">57 %</span>
-                <span class="coverage-count">(4/7)</span>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(4/10)</span>
             </td>
         </tr>
         <tr class="low">
@@ -302,9 +449,9 @@
             </td>
             <td>component</td>
             <td>GestionInteresesTableComponent</td>
-            <td align="right" data-sort="36">
-                <span class="coverage-percent">36 %</span>
-                <span class="coverage-count">(7/19)</span>
+            <td align="right" data-sort="31">
+                <span class="coverage-percent">31 %</span>
+                <span class="coverage-count">(7/22)</span>
             </td>
         </tr>
         <tr class="low">
@@ -326,9 +473,9 @@
             </td>
             <td>component</td>
             <td>GestionUsuariosTableComponent</td>
-            <td align="right" data-sort="40">
-                <span class="coverage-percent">40 %</span>
-                <span class="coverage-count">(6/15)</span>
+            <td align="right" data-sort="31">
+                <span class="coverage-percent">31 %</span>
+                <span class="coverage-count">(6/19)</span>
             </td>
         </tr>
         <tr class="low">
@@ -343,16 +490,16 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="medium">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/HomeComponent.html">src/app/modules/home/home/home.component.ts</a>
             </td>
             <td>component</td>
             <td>HomeComponent</td>
-            <td align="right" data-sort="50">
-                <span class="coverage-percent">50 %</span>
-                <span class="coverage-count">(2/4)</span>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(2/8)</span>
             </td>
         </tr>
         <tr class="low">
@@ -364,31 +511,31 @@
             <td>IndexComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/1)</span>
+                <span class="coverage-count">(0/3)</span>
             </td>
         </tr>
-        <tr class="medium">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/MyEventsComponent.html">src/app/modules/my-events/my-events/my-events.component.ts</a>
             </td>
             <td>component</td>
             <td>MyEventsComponent</td>
-            <td align="right" data-sort="33">
-                <span class="coverage-percent">33 %</span>
-                <span class="coverage-count">(2/6)</span>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(2/8)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/ProfileComponent.html">src/app/modules/profile/profile/profile.component.ts</a>
             </td>
             <td>component</td>
             <td>ProfileComponent</td>
-            <td align="right" data-sort="61">
-                <span class="coverage-percent">61 %</span>
-                <span class="coverage-count">(8/13)</span>
+            <td align="right" data-sort="45">
+                <span class="coverage-percent">45 %</span>
+                <span class="coverage-count">(9/20)</span>
             </td>
         </tr>
         <tr class="low">
@@ -413,6 +560,18 @@
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Resources.html">src/app/resources.ts</a>
+            </td>
+            <td>class</td>
+            <td>Resources</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/225)</span>
             </td>
         </tr>
         <tr class="low">
@@ -499,16 +658,16 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
-        <tr class="good">
+        <tr class="medium">
             <td>
                 <!-- miscellaneous -->
                 <a href="./guards/LoginGuard.html">src/app/security/services/guards/login.guard.ts</a>
             </td>
             <td>guard</td>
             <td>LoginGuard</td>
-            <td align="right" data-sort="66">
-                <span class="coverage-percent">66 %</span>
-                <span class="coverage-count">(2/3)</span>
+            <td align="right" data-sort="50">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(2/4)</span>
             </td>
         </tr>
         <tr class="medium">
@@ -566,9 +725,9 @@
             </td>
             <td>injectable</td>
             <td>AlertsService</td>
-            <td align="right" data-sort="50">
-                <span class="coverage-percent">50 %</span>
-                <span class="coverage-count">(3/6)</span>
+            <td align="right" data-sort="37">
+                <span class="coverage-percent">37 %</span>
+                <span class="coverage-count">(3/8)</span>
             </td>
         </tr>
         <tr class="good">
@@ -578,9 +737,9 @@
             </td>
             <td>injectable</td>
             <td>CategoriasService</td>
-            <td align="right" data-sort="75">
-                <span class="coverage-percent">75 %</span>
-                <span class="coverage-count">(9/12)</span>
+            <td align="right" data-sort="69">
+                <span class="coverage-percent">69 %</span>
+                <span class="coverage-count">(9/13)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -614,9 +773,21 @@
             </td>
             <td>injectable</td>
             <td>InteresesService</td>
-            <td align="right" data-sort="63">
-                <span class="coverage-percent">63 %</span>
-                <span class="coverage-count">(7/11)</span>
+            <td align="right" data-sort="58">
+                <span class="coverage-percent">58 %</span>
+                <span class="coverage-count">(7/12)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/LanguageService.html">src/app/services/language.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>LanguageService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="good">
@@ -626,9 +797,9 @@
             </td>
             <td>injectable</td>
             <td>UsuariosService</td>
-            <td align="right" data-sort="66">
-                <span class="coverage-percent">66 %</span>
-                <span class="coverage-count">(6/9)</span>
+            <td align="right" data-sort="53">
+                <span class="coverage-percent">53 %</span>
+                <span class="coverage-count">(7/13)</span>
             </td>
         </tr>
         <tr class="good">
@@ -643,40 +814,64 @@
                 <span class="coverage-count">(5/7)</span>
             </td>
         </tr>
-        <tr class="medium">
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ValidadorService.html">src/app/services/validators/validador-service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ValidadorService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/WeatherService.html">src/app/services/weather.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>WeatherService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/CardsComponent.html">src/app/shared/cards/cards.component.ts</a>
             </td>
             <td>component</td>
             <td>CardsComponent</td>
-            <td align="right" data-sort="28">
-                <span class="coverage-percent">28 %</span>
-                <span class="coverage-count">(2/7)</span>
+            <td align="right" data-sort="22">
+                <span class="coverage-percent">22 %</span>
+                <span class="coverage-count">(2/9)</span>
             </td>
         </tr>
-        <tr class="medium">
+        <tr class="good">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/CarouselComponent.html">src/app/shared/carousel/carousel.component.ts</a>
             </td>
             <td>component</td>
             <td>CarouselComponent</td>
-            <td align="right" data-sort="40">
-                <span class="coverage-percent">40 %</span>
-                <span class="coverage-count">(4/10)</span>
+            <td align="right" data-sort="53">
+                <span class="coverage-percent">53 %</span>
+                <span class="coverage-count">(8/15)</span>
             </td>
         </tr>
-        <tr class="medium">
+        <tr class="low">
             <td>
                 <!-- miscellaneous -->
                 <a href="./components/FooterComponent.html">src/app/shared/footer/footer.component.ts</a>
             </td>
             <td>component</td>
             <td>FooterComponent</td>
-            <td align="right" data-sort="40">
-                <span class="coverage-percent">40 %</span>
-                <span class="coverage-count">(2/5)</span>
+            <td align="right" data-sort="15">
+                <span class="coverage-percent">15 %</span>
+                <span class="coverage-count">(2/13)</span>
             </td>
         </tr>
         <tr class="low">
@@ -698,9 +893,9 @@
             </td>
             <td>component</td>
             <td>NavBarComponent</td>
-            <td align="right" data-sort="44">
-                <span class="coverage-percent">44 %</span>
-                <span class="coverage-count">(4/9)</span>
+            <td align="right" data-sort="30">
+                <span class="coverage-percent">30 %</span>
+                <span class="coverage-count">(4/13)</span>
             </td>
         </tr>
     </tbody>
@@ -741,6 +936,19 @@
             var COMPODOC_CURRENT_PAGE_URL = 'coverage.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
