@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 -- Base de datos: `db_badajoz_unida`
 --
 
+USE `db_badajoz_unida`;
+
 -- --------------------------------------------------------
 
 --
